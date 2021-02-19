@@ -1,4 +1,4 @@
-import Gisapia from './Gisapia.js'
+import Gisapia from './characters/Gisapia.js'
 
 export default class CharsFactory {
   constructor() {

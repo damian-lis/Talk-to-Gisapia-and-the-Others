@@ -1,4 +1,5 @@
 import SelectCharUI from './SelectCharUI.js'
+import CharsFactory from './CharsFactory.js'
 import Memory from './Memory.js'
 
 const selectCharUi = new SelectCharUI('body')
@@ -6,8 +7,10 @@ const charsFactory = new CharsFactory()
 const memory = new Memory()
 
 selectCharUi.subscribe((charName) => {
-  const character = charsFactory.getCharacter(charName)
+  const character = charsFactory.getChar(charName)
   memory.setSelectedChar(character)
+
+  console.log(memory)
 })
 
 const startTalkingBtn = document.querySelector('#start-talking')
