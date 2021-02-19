@@ -29,6 +29,8 @@ const handleCharTalking = () => {
 
 startTalkingBtn.addEventListener('click', handleCharTalking)
 
-inputPanelUI.subscribe((userMessage) => {
+const handleUserTalking = (userMessage) => {
   memory.setUserMessage(userMessage)
-})
+}
+
+inputPanelUI.subscribe(handleUserTalking)
