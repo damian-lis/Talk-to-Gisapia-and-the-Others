@@ -2,9 +2,11 @@ import SelectCharUI from './SelectCharUI.js'
 import Memory from './Memory.js'
 
 const selectCharUi = new SelectCharUI('body')
+const charsFactory = new CharsFactory()
 const memory = new Memory()
 
-selectCharUi.subscribe((character) => {
+selectCharUi.subscribe((charName) => {
+  const character = charsFactory.getCharacter(charName)
   memory.setSelectedChar(character)
 })
 

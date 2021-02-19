@@ -5,8 +5,8 @@ export default class CharsFactory {
     this.gisapia = new Gisapia()
   }
 
-  getChar(character) {
-    switch (character) {
+  getChar(charName) {
+    switch (charName) {
       case 'Gisapia':
         return this.gisapia
     }
