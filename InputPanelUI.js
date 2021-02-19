@@ -4,7 +4,7 @@ export default class InputPanelUI {
     this.createInput(root)
     this.createButton(root)
     this.attachToContainer(container, root)
-    this.inputText = ''
+    this.inputMessage = ''
     this.subscribers = []
   }
 
@@ -17,15 +17,16 @@ export default class InputPanelUI {
     const input = document.createElement('input')
 
     input.addEventListener('change', (e) => {
-      this.inputText = e.target.value
+      this.inputMessage = e.target.value
     })
     root.appendChild(input)
   }
 
   createButton(root) {
     const button = document.createElement('button')
+    button.textContent = 'Porozmawiaj'
     button.addEventListener('click', () => {
-      this.subscribers.forEach((s) => s(this.inputText))
+      this.subscribers.forEach((s) => s(this.inputMessage))
     })
 
     root.appendChild(button)

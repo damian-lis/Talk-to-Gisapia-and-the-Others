@@ -1,10 +1,12 @@
+import Memory from './Memory.js'
 import SelectCharUI from './SelectCharUI.js'
 import CharsFactory from './CharsFactory.js'
-import Memory from './Memory.js'
+import InputPanelUI from './InputPanelUI.js'
 
+const memory = new Memory()
 const selectCharUi = new SelectCharUI('body')
 const charsFactory = new CharsFactory()
-const memory = new Memory()
+const inputPanelUI = new InputPanelUI('.messenger-input-container')
 
 selectCharUi.subscribe((charName) => {
   const character = charsFactory.getChar(charName)
@@ -16,11 +18,15 @@ selectCharUi.subscribe((charName) => {
 const startTalkingBtn = document.querySelector('#start-talking')
 
 const handleCharTalking = () => {
-  const character = memory.getCharacter()
+  const character = memory.getChar()
 
   if (!character) {
     return alert('Wybierz rozmówcę!')
   }
 }
 
-startTalkingBtn.addEventListener('click', handleCharTalking())
+startTalkingBtn.addEventListener('click', handleCharTalking)
+
+inputPanelUI.subscribe((userMessage) => {
+  memory.setUserMessage(userMessage)
+})
