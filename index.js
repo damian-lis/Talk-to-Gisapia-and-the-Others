@@ -15,10 +15,12 @@ selectCharUi.subscribe((charName) => {
 
 const startTalkingBtn = document.querySelector('#start-talking')
 
-startTalkingBtn.addEventListener('click', () => {
+const handleCharTalking = () => {
   const character = memory.getCharacter()
 
   if (!character) {
     return alert('Wybierz rozmówcę!')
   }
-})
+}
+
+startTalkingBtn.addEventListener('click', handleCharTalking())
