@@ -1,23 +1,23 @@
 export default class Memory {
   constructor() {
-    this.step = 0
+    this.conversationStep = 0
     this.character = null
     this.userMessage = null
   }
 
-  increaseStep() {
-    this.step++
+  increaseConversationStep() {
+    this.conversationStep++
   }
 
-  getStep() {
-    return this.step
+  getConversationStep() {
+    return this.conversationStep
   }
 
   setSelectedChar(character) {
     this.character = character
   }
 
-  getCharacter() {
+  getChar() {
     return this.character
   }
 
