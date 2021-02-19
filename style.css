@@ -1,0 +1,38 @@
+:root {
+  --mainSize: 5px;
+}
+
+.messenger {
+  height: 500px;
+  width: 300px;
+
+  background-color: red;
+  position: relative;
+}
+
+.messenger-inner {
+  position: absolute;
+  top: var(--mainSize);
+  bottom: var(--mainSize);
+  left: var(--mainSize);
+  right: var(--mainSize);
+  background-color: green;
+}
+
+.messenger-screen-container {
+  position: absolute;
+  top: var(--mainSize);
+  left: var(--mainSize);
+  right: var(--mainSize);
+  height: 80%;
+  background-color: purple;
+}
+
+.messenger-input-container {
+  position: absolute;
+  bottom: var(--mainSize);
+  left: var(--mainSize);
+  right: var(--mainSize);
+  height: 20%;
+  background-color: orange;
+}
