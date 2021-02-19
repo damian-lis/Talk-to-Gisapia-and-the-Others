@@ -1,4 +1,4 @@
-export class SelectCharUI {
+export default class SelectCharUI {
   constructor(container) {
     const root = this.createRoot()
     this.createCharacters(root)
@@ -12,9 +12,9 @@ export class SelectCharUI {
   }
 
   createCharacters(root) {
-    root.appendChild(this.createCharacter('Gisapia', 'gisapia'))
-    root.appendChild(this.createCharacter('Ted', 'ted'))
-    root.appendChild(this.createCharacter('Jessica', 'jessica'))
+    root.appendChild(this.createCharacter('Gisapia'))
+    root.appendChild(this.createCharacter('Ted'))
+    root.appendChild(this.createCharacter('Jessica'))
   }
 
   attachToContainer(container, root) {
@@ -31,11 +31,11 @@ export class SelectCharUI {
     btn.classList.add('active')
   }
 
-  createCharacter(name, selector) {
+  createCharacter(name) {
     const character = document.createElement('div')
     character.textContent = name
     character.addEventListener('click', () => {
-      this.subscribers.forEach((s) => s(selector))
+      this.subscribers.forEach((s) => s(name))
       this.removeActive()
       this.addActive(character)
     })
