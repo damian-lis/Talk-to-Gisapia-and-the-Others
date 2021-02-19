@@ -2,11 +2,13 @@ import Memory from './Memory.js'
 import SelectCharUI from './SelectCharUI.js'
 import CharsFactory from './CharsFactory.js'
 import InputPanelUI from './InputPanelUI.js'
+import Screen from './Screen.js'
 
 const memory = new Memory()
 const selectCharUi = new SelectCharUI('body')
 const charsFactory = new CharsFactory()
 const inputPanelUI = new InputPanelUI('.messenger-input-container')
+const screen = new Screen('.messenger-screen-container')
 
 selectCharUi.subscribe((charName) => {
   const character = charsFactory.getChar(charName)

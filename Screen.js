@@ -1,7 +1,13 @@
 export default class Screen {
   constructor(container) {
-    this.screen = document.createElement('div')
-    this.attachToContainer(container, screen)
+    this.screen = this.createScreen()
+    this.attachToContainer(container, this.screen)
+  }
+
+  createScreen() {
+    const screen = document.createElement('div')
+    screen.classList.add('screen')
+    return screen
   }
 
   attachMessageContainer(messageContainer) {

@@ -35,4 +35,11 @@
   right: var(--mainSize);
   height: 20%;
   background-color: orange;
+  padding: var(--mainSize);
+}
+
+.screen {
+  height: 100%;
+  width: 100%;
+  background-color: blue;
 }
