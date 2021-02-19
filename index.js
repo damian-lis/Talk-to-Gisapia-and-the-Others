@@ -6,6 +6,14 @@ const memory = new Memory()
 
 selectCharUi.subscribe((character) => {
   memory.setSelectedChar(character)
+})
 
-  console.log(memory)
+const startTalkingBtn = document.querySelector('#start-talking')
+
+startTalkingBtn.addEventListener('click', () => {
+  const character = memory.getCharacter()
+
+  if (!character) {
+    return alert('Wybierz rozmówcę!')
+  }
 })
