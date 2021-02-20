@@ -1,7 +1,7 @@
 export default class SelectCharUI {
   constructor(container) {
     const root = this.createRoot()
-    this.createCharacters(root)
+    this.createButtons(root)
     this.attachToContainer(container, root)
     this.subscribers = []
   }
@@ -11,35 +11,35 @@ export default class SelectCharUI {
     return root
   }
 
-  createCharacters(root) {
-    root.appendChild(this.createCharacter('Gisapia'))
-    root.appendChild(this.createCharacter('Ted'))
-    root.appendChild(this.createCharacter('Jessica'))
+  createButtons(root) {
+    root.appendChild(this.createButton('Gisapia'))
+    root.appendChild(this.createButton('Ted'))
+    root.appendChild(this.createButton('Jessica'))
   }
 
   attachToContainer(container, root) {
     document.querySelector(container).appendChild(root)
   }
 
-  removeActive() {
-    document.querySelectorAll('button').forEach((button) => {
-      button.classList.remove('active')
-    })
-  }
+  // removeActive() {
+  //   document.querySelectorAll('button').forEach((button) => {
+  //     button.classList.remove('active')
+  //   })
+  // }
 
-  addActive(btn) {
-    btn.classList.add('active')
-  }
+  // addActive(btn) {
+  //   btn.classList.add('active')
+  // }
 
-  createCharacter(name) {
-    const character = document.createElement('div')
-    character.textContent = name
-    character.addEventListener('click', () => {
+  createButton(name) {
+    const button = document.createElement('button')
+    button.textContent = name
+    button.addEventListener('click', () => {
       this.subscribers.forEach((s) => s(name))
-      this.removeActive()
-      this.addActive(character)
+      // this.removeActive()
+      // this.addActive(button)
     })
-    return character
+    return button
   }
 
   subscribe(subscriber) {
