@@ -19,7 +19,7 @@ selectCharUi.subscribe((charName) => {
 
 const startTalkingBtn = document.querySelector('#start-talking')
 
-const handleCharTalking = () => {
+const handleCharTalking = async () => {
   const character = memory.getChar()
 
   if (!character) {
@@ -34,9 +34,13 @@ const handleCharTalking = () => {
   const numberOfQuestions = charQuestions.length
 
   for (let i = 0; i < numberOfQuestions; i++) {
+    await character.mustThink(1000)
+    await screen.showTyping(2000)
+    await character.mustThink(1000)
+
     const charMessage = charQuestions[i]
     const messageWrapped = messageWrapper(charMessage)
-    screen.attachMessageContainer(messageWrapped)
+    screen.attachToScreen(messageWrapped)
   }
 }
 
@@ -45,7 +49,7 @@ startTalkingBtn.addEventListener('click', handleCharTalking)
 const handleUserTalking = (userMessage) => {
   memory.setUserMessage(userMessage)
   const messageWrapped = messageWrapper(userMessage)
-  screen.attachMessageContainer(messageWrapped)
+  screen.attachToScreen(messageWrapped)
 
   memory.increaseConversationStep()
   handleCharTalking()

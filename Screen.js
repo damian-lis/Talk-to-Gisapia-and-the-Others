@@ -1,7 +1,7 @@
 export default class Screen {
   constructor(container) {
     this.screen = this.createScreen()
-    this.attachToContainer(container, this.screen)
+    this.attachToContainer(container)
   }
 
   createScreen() {
@@ -10,11 +10,31 @@ export default class Screen {
     return screen
   }
 
-  attachMessageContainer(messageContainer) {
-    this.screen.appendChild(messageContainer)
+  attachToScreen(element) {
+    this.screen.appendChild(element)
   }
 
-  attachToContainer(container, screen) {
-    document.querySelector(container).appendChild(screen)
+  attachToContainer(container) {
+    document.querySelector(container).appendChild(this.screen)
+  }
+
+  createLoader() {
+    const loader = document.createElement('div')
+    loader.classList.add('loader')
+    return loader
+  }
+
+  removeLoader(loader) {
+    console.log('removeLoader')
+    loader.remove()
+  }
+
+  conversationDelay() {}
+
+  showTyping(time) {
+    const loader = this.createLoader()
+    this.attachToScreen(loader)
+    setTimeout(() => this.removeLoader(loader), time)
+    return new Promise((resolve) => setTimeout(resolve, time))
   }
 }

@@ -7,4 +7,8 @@ export default class Gisapia {
   getQuestions(category) {
     return this.questions[category]
   }
+
+  mustThink(time) {
+    return new Promise((resolve) => setTimeout(resolve, time))
+  }
 }
