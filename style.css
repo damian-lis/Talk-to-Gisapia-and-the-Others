@@ -44,9 +44,16 @@
   background-color: blue;
 }
 
-.messageWrapped {
-  background-color: red;
+.messageWrapper {
   margin-bottom: 10px;
+}
+
+.messageWrapper-Gisapia {
+  background-color: red;
+}
+
+.messageWrapper-user {
+  background-color: #fff;
 }
 
 .loader {

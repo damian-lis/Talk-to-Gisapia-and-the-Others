@@ -39,7 +39,7 @@ const handleCharTalking = async () => {
     await character.mustThink(1000)
 
     const charMessage = charQuestions[i]
-    const messageWrapped = messageWrapper(charMessage)
+    const messageWrapped = messageWrapper(charMessage, character.name)
     screen.attachToScreen(messageWrapped)
   }
 }
@@ -48,7 +48,7 @@ startTalkingBtn.addEventListener('click', handleCharTalking)
 
 const handleUserTalking = (userMessage) => {
   memory.setUserMessage(userMessage)
-  const messageWrapped = messageWrapper(userMessage)
+  const messageWrapped = messageWrapper(userMessage, 'user')
   screen.attachToScreen(messageWrapped)
 
   memory.increaseConversationStep()
