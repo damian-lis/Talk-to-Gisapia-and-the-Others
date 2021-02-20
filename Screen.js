@@ -29,8 +29,6 @@ export default class Screen {
     loader.remove()
   }
 
-  conversationDelay() {}
-
   showTyping(time) {
     const loader = this.createLoader()
     this.attachToScreen(loader)
