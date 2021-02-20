@@ -14,8 +14,6 @@ const screen = new Screen('.messenger-screen-container')
 selectCharUi.subscribe((charName) => {
   const character = charsFactory.getChar(charName)
   memory.setSelectedChar(character)
-
-  console.log(memory)
 })
 
 const startTalkingBtn = document.querySelector('#start-talking')

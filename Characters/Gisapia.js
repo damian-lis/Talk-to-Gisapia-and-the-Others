@@ -1,5 +1,6 @@
 export default class Gisapia {
-  constructor() {
+  constructor(questions) {
     this.memory = {}
+    this.questions = questions ? questions : {}
   }
 }
