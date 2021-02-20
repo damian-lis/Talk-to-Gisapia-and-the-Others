@@ -29,4 +29,8 @@ export default class Memory {
   getUserMessage() {
     return this.userMessage
   }
+
+  getRightCategory(step) {
+    return this.categories[step]
+  }
 }

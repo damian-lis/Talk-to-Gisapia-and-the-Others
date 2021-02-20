@@ -27,6 +27,9 @@ const handleCharTalking = () => {
   }
 
   const conversationStep = memory.getConversationStep()
+  const category = memory.getRightCategory(conversationStep)
+
+  console.log(category)
 }
 
 startTalkingBtn.addEventListener('click', handleCharTalking)
