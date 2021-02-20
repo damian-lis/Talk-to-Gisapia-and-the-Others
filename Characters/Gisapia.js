@@ -3,4 +3,8 @@ export default class Gisapia {
     this.memory = {}
     this.questions = questions ? questions : {}
   }
+
+  getQuestions(category) {
+    return this.questions[category]
+  }
 }

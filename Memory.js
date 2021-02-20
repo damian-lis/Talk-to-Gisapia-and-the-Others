@@ -33,4 +33,8 @@ export default class Memory {
   getRightCategory(step) {
     return this.categories[step]
   }
+
+  setNumberOfQuestion(number) {
+    this.numberOfQuestion = number
+  }
 }

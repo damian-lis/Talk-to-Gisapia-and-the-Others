@@ -28,8 +28,16 @@ const handleCharTalking = () => {
 
   const conversationStep = memory.getConversationStep()
   const category = memory.getRightCategory(conversationStep)
+  const charQuestions = character.getQuestions(category)
 
-  console.log(category)
+  if (!charQuestions) return
+  const numberOfQuestions = charQuestions.length
+
+  for (let i = 0; i < numberOfQuestions; i++) {
+    const charMessage = charQuestions[i]
+    const messageWrapped = messageWrapper(charMessage)
+    screen.attachMessageContainer(messageWrapped)
+  }
 }
 
 startTalkingBtn.addEventListener('click', handleCharTalking)
@@ -38,6 +46,9 @@ const handleUserTalking = (userMessage) => {
   memory.setUserMessage(userMessage)
   const messageWrapped = messageWrapper(userMessage)
   screen.attachMessageContainer(messageWrapped)
+
+  memory.increaseConversationStep()
+  handleCharTalking()
 }
 
 inputPanelUI.subscribe(handleUserTalking)
