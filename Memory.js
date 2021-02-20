@@ -1,8 +1,9 @@
 export default class Memory {
-  constructor() {
-    this.conversationStep = 0
+  constructor(categories, step) {
+    this.conversationStep = step ? step : 0
     this.character = null
     this.userMessage = null
+    this.categories = categories ? categories : []
   }
 
   increaseConversationStep() {
