@@ -6,20 +6,25 @@ import Screen from './Screen.js'
 import messageWrapper from './helpers/messageWrapper.js'
 import categories from './seeds/categories.js'
 
+const selectCharUISettings = {
+  container: '.selectCharUI-container',
+  charNames: ['Gisapia', 'Ted', 'Jessica'],
+}
+
 const memory = new Memory(categories)
-const selectCharUi = new SelectCharUI('body')
+const selectCharUi = new SelectCharUI(selectCharUISettings)
 const charsFactory = new CharsFactory()
 const inputPanelUI = new InputPanelUI('.messenger-input-container')
 const screen = new Screen('.messenger-screen-container')
 
 selectCharUi.subscribe((charName) => {
+  selectCharUi.deleteButton('charButton')
   const character = charsFactory.getChar(charName)
   memory.setSelectedChar(character)
-})
-
-const startTalkingBtn = document.querySelector('#start-talking')
+}, 'selectChar')
 
 const handleCharTalking = async () => {
+  selectCharUi.deleteButton('startButton')
   const character = memory.getChar()
 
   if (!character) {
@@ -44,7 +49,9 @@ const handleCharTalking = async () => {
   }
 }
 
-startTalkingBtn.addEventListener('click', handleCharTalking)
+// startTalkingBtn.addEventListener('click', handleCharTalking)
+
+selectCharUi.subscribe(handleCharTalking, 'charTalking')
 
 const handleUserTalking = (userMessage) => {
   memory.setUserMessage(userMessage)

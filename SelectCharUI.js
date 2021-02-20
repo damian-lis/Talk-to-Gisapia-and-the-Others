@@ -1,48 +1,47 @@
 export default class SelectCharUI {
-  constructor(container) {
-    const root = this.createRoot()
-    this.createButtons(root)
-    this.attachToContainer(container, root)
-    this.subscribers = []
+  constructor({ container, charNames }) {
+    this.charButtons = this.createButtons(charNames, 'selectChar')
+    this.startButton = this.createButton('Porozmawiaj!', 'charTalking')
+    this.attachToContainer(container, ...this.charButtons, this.startButton)
+    this.subscribers = {}
   }
 
-  createRoot() {
-    const root = document.createElement('div')
-    return root
+  createButtons(charNames, type) {
+    const buttons = []
+    charNames.map((character) =>
+      buttons.push(this.createButton(character, type))
+    )
+    return buttons
   }
 
-  createButtons(root) {
-    root.appendChild(this.createButton('Gisapia'))
-    root.appendChild(this.createButton('Ted'))
-    root.appendChild(this.createButton('Jessica'))
+  attachToContainer(container, ...elements) {
+    console.log(elements)
+    const parent = document.querySelector(container)
+    elements.map((element) => parent.appendChild(element))
   }
 
-  attachToContainer(container, root) {
-    document.querySelector(container).appendChild(root)
+  deleteButton(buttonName) {
+    switch (buttonName) {
+      case 'charButton':
+        return this.charButtons.map((button) => button.remove())
+
+      case 'startButton':
+        return this.startButton.remove()
+    }
   }
 
-  // removeActive() {
-  //   document.querySelectorAll('button').forEach((button) => {
-  //     button.classList.remove('active')
-  //   })
-  // }
-
-  // addActive(btn) {
-  //   btn.classList.add('active')
-  // }
-
-  createButton(name) {
-    const button = document.createElement('button')
+  createButton(name, type) {
+    let button
+    button = document.createElement('button')
     button.textContent = name
     button.addEventListener('click', () => {
-      this.subscribers.forEach((s) => s(name))
-      // this.removeActive()
-      // this.addActive(button)
+      this.subscribers[type](name)
     })
     return button
   }
 
-  subscribe(subscriber) {
-    this.subscribers.push(subscriber)
+  subscribe(subscriber, name) {
+    this.subscribers[name] = subscriber
+    console.log(this.subscribers)
   }
 }
