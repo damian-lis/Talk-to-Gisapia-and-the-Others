@@ -1,8 +1,9 @@
 export default class InputPanelUI {
   constructor(container) {
     const root = this.createRoot()
-    this.createInput(root)
-    this.createButton(root)
+    this.input = this.createInput()
+    this.button = this.createButton()
+    this.appendToRoot(root, this.input, this.button)
     this.attachToContainer(container, root)
     this.inputMessage = ''
     this.subscribers = []
@@ -13,13 +14,13 @@ export default class InputPanelUI {
     return root
   }
 
-  createInput(root) {
+  createInput() {
     const input = document.createElement('input')
-
     input.addEventListener('change', (e) => {
       this.inputMessage = e.target.value
     })
-    root.appendChild(input)
+
+    return input
   }
 
   createButton(root) {
@@ -29,12 +30,18 @@ export default class InputPanelUI {
       this.subscribers.forEach((s) => s(this.inputMessage))
     })
 
-    root.appendChild(button)
+    return button
+  }
+
+  appendToRoot(root, ...elements) {
+    elements.map((element) => root.appendChild(element))
   }
 
   attachToContainer(container, root) {
     document.querySelector(container).appendChild(root)
   }
+
+  deactivatePanel() {}
 
   subscribe(subscriber) {
     this.subscribers.push(subscriber)
