@@ -9,8 +9,10 @@
 .messenger {
   height: 500px;
   width: 300px;
-  background-color: red;
+  border: 2px solid #000;
+  border-radius: var(--mainSize);
   padding: var(--mainSize);
+  background-color: pink;
 }
 
 .messenger-inner {
@@ -18,7 +20,7 @@
 }
 
 .messenger-screen-container {
-  height: 80%;
+  height: 90%;
   overflow-y: scroll;
 }
 
@@ -27,28 +29,45 @@
 }
 
 .messenger-input-container {
-  height: 20%;
+  height: 10%;
   background-color: orange;
   padding: var(--mainSize);
 }
 
 .screen {
+  border: 1px solid #000;
+  border-radius: var(--mainSize);
   min-height: 100%;
   width: 100%;
   padding: var(--mainSize);
-  /* background-color: blue; */
+  background-color: #fff;
 }
 
-.messageWrapper {
+.message-wrapper {
   margin-bottom: 10px;
+  padding: 0 15px;
+  display: flex;
 }
 
-.messageWrapper-Gisapia {
+.message-inner {
   background-color: red;
 }
 
-.messageWrapper-user {
-  background-color: #fff;
+.message-inner-Gisapia,
+.message-inner-user {
+  padding: 5px;
+  border-radius: 5px;
+  /* display: inline-block; */
+}
+
+.message-inner-user {
+  background-color: #0078ff;
+  margin-left: auto;
+}
+
+.message-inner-Gisapia {
+  background-color: #00c6ff;
+  margin-right: auto;
 }
 
 .loader {
