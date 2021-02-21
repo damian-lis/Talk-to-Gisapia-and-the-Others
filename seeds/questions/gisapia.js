@@ -1,7 +1,9 @@
 export default {
   introduce: [
-    'Cześć, bardzo mi miło, ze chcesz ze mną porozmawiać',
-    'Powiedz mi jak się nazywasz?',
+    'Cześć!',
+    'jestem Gisapia',
+    'bardzo mi miło, ze chcesz ze mną porozmawiać',
+    'powiedz mi jak się nazywasz?',
   ],
   origin: [
     'Masz bardzo fajne imię!',
