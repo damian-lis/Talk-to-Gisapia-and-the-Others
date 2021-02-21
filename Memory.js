@@ -1,9 +1,15 @@
-export default class Memory {
-  constructor(categories, step) {
-    this.conversationStep = step ? step : 0
-    this.character = null
-    this.userMessage = null
-    this.categories = categories ? categories : []
+import categories from './seeds/categories.js'
+
+class Memory {
+  constructor() {
+    if (Memory.instance == null) {
+      this.conversationStep = 0
+      this.character = null
+      this.userMessage = null
+      this.categories = categories ? categories : []
+      Memory.instance = this
+    }
+    return Memory.instance
   }
 
   increaseConversationStep() {
@@ -38,3 +44,7 @@ export default class Memory {
     this.numberOfQuestion = number
   }
 }
+
+const memory = new Memory()
+
+export default memory

@@ -1,4 +1,4 @@
-import Memory from './Memory.js'
+import memory from './Memory.js'
 import SelectCharUI from './SelectCharUI.js'
 import CharsFactory from './CharsFactory.js'
 import InputPanelUI from './InputPanelUI.js'
@@ -11,7 +11,7 @@ const selectCharUISettings = {
   charNames: ['Gisapia', 'Ted', 'Jessica'],
 }
 
-const memory = new Memory(categories)
+// const memory = new Memory(categories)
 const selectCharUi = new SelectCharUI(selectCharUISettings)
 const charsFactory = new CharsFactory()
 const inputPanelUI = new InputPanelUI('.messenger-input-container')
