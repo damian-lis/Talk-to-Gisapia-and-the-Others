@@ -57,6 +57,8 @@ const handleCharTalking = async () => {
     const messageWrapped = messageWrapper(charMessage, character.name)
     screen.attachToScreen(messageWrapped)
   }
+
+  inputPanelUI.activatePanel()
 }
 
 selectCharUi.subscribe(handleCharTalking, 'charTalking')
@@ -68,6 +70,7 @@ const handleUserTalking = (userMessage) => {
   screen.attachToScreen(messageWrapped)
 
   memory.increaseConversationStep()
+  inputPanelUI.deactivatePanel()
   handleCharTalking()
 }
 

@@ -16,6 +16,7 @@ export default class InputPanelUI {
 
   createInput() {
     const input = document.createElement('input')
+    input.disabled = true
     input.addEventListener('change', (e) => {
       this.inputMessage = e.target.value
     })
@@ -23,9 +24,10 @@ export default class InputPanelUI {
     return input
   }
 
-  createButton(root) {
+  createButton() {
     const button = document.createElement('button')
     button.textContent = 'Porozmawiaj'
+    button.disabled = true
     button.addEventListener('click', () => {
       this.subscribers.forEach((s) => s(this.inputMessage))
     })
@@ -41,7 +43,21 @@ export default class InputPanelUI {
     document.querySelector(container).appendChild(root)
   }
 
-  deactivatePanel() {}
+  deactivatePanel() {
+    this.input.disabled = true
+    this.button.disabled = true
+    this.clearInput()
+  }
+
+  activatePanel() {
+    this.input.disabled = false
+    this.button.disabled = false
+  }
+
+  clearInput() {
+    this.input.value = ''
+    this.inputMessage = ''
+  }
 
   subscribe(subscriber) {
     this.subscribers.push(subscriber)
