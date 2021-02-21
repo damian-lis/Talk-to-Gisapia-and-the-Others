@@ -19,8 +19,13 @@ const screen = new Screen('.messenger-screen-container')
 
 //Start part
 const handleStartPart = (charName) => {
+  if (charName !== 'Gisapia') {
+    return alert('Ta postać na razie jest niedostępna. Wybierz inną!')
+  }
+
   selectCharUi.deleteButton('charButton')
   const character = charsFactory.getChar(charName)
+  console.log(character)
   memory.setSelectedChar(character)
 }
 
@@ -28,12 +33,13 @@ selectCharUi.subscribe(handleStartPart, 'selectChar')
 
 //Character talking
 const handleCharTalking = async () => {
-  selectCharUi.deleteButton('startButton')
   const character = memory.getChar()
 
   if (!character) {
     return alert('Wybierz rozmówcę!')
   }
+
+  selectCharUi.deleteButton('startButton')
 
   const conversationStep = memory.getConversationStep()
   const category = memory.getRightCategory(conversationStep)
