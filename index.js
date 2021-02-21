@@ -14,6 +14,7 @@ const charsFactory = new CharsFactory()
 const inputPanelUI = new InputPanelUI('.messenger-input-container')
 const screen = new Screen('.messenger-screen-container')
 
+//Wydzielić do helpers
 const showMessenger = () => {
   const messenger = document.querySelector('.messenger')
   messenger.classList.add('fallFromAbove')
@@ -42,20 +43,14 @@ const handleCharTalking = async () => {
   }
 
   showMessenger()
-
   selectCharUi.deleteButton('startButton')
 
   const conversationStep = memory.getConversationStep()
-  const category = memory.getRightCategory(conversationStep)
+  const category = memory.getCategory(conversationStep)
   const charQuestions = character.getQuestions(category)
-
   if (!charQuestions) return
-  const numberOfQuestions = charQuestions.length
 
-  for (let i = 0; i < numberOfQuestions; i++) {
-    const lastMessage = numberOfQuestions - 1 === i
-    console.log(lastMessage)
-
+  for (let i = 0; i < numberOfQuestions.length; i++) {
     await character.mustThink(1000)
     await screen.showTyping(2000)
     await character.mustThink(1000)

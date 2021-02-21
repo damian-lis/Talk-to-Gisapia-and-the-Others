@@ -36,7 +36,7 @@ class Memory {
     return this.userMessage
   }
 
-  getRightCategory(step) {
+  getCategory(step) {
     return this.categories[step]
   }
 
