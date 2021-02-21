@@ -1,6 +1,7 @@
 export default class Gisapia {
   constructor(questions) {
     this.name = 'Gisapia'
+    this.avatar = '/images/gisapia.jpg'
     this.memory = {}
     this.questions = questions ? questions : {}
   }
