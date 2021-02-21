@@ -15,7 +15,6 @@ export default class SelectCharUI {
   }
 
   attachToContainer(container, ...elements) {
-    console.log(elements)
     const parent = document.querySelector(container)
     elements.map((element) => parent.appendChild(element))
   }
@@ -42,6 +41,5 @@ export default class SelectCharUI {
 
   subscribe(subscriber, name) {
     this.subscribers[name] = subscriber
-    console.log(this.subscribers)
   }
 }

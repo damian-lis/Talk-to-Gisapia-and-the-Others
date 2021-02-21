@@ -38,19 +38,21 @@ selectCharUi.subscribe(handleStartPart, 'selectChar')
 const handleCharTalking = async () => {
   const character = memory.getChar()
 
+  console.log(character)
+
   if (!character) {
     return alert('Wybierz rozmówcę!')
   }
+  selectCharUi.deleteButton('startButton')
 
   showMessenger()
-  selectCharUi.deleteButton('startButton')
 
   const conversationStep = memory.getConversationStep()
   const category = memory.getCategory(conversationStep)
   const charQuestions = character.getQuestions(category)
   if (!charQuestions) return
 
-  for (let i = 0; i < numberOfQuestions.length; i++) {
+  for (let i = 0; i < charQuestions.length; i++) {
     await character.mustThink(1000)
     await screen.showTyping(2000)
     await character.mustThink(1000)
