@@ -1,10 +1,10 @@
 export default class InputPanelUI {
   constructor(container) {
-    const root = this.createRoot()
+    // const root = this.createRoot()
     this.input = this.createInput()
     this.button = this.createButton()
-    this.appendToRoot(root, this.input, this.button)
-    this.attachToContainer(container, root)
+    // this.appendToRoot(root, this.input, this.button)
+    this.attachToContainer(container, this.input, this.button)
     this.inputMessage = ''
     this.subscribers = []
   }
@@ -26,7 +26,7 @@ export default class InputPanelUI {
 
   createButton() {
     const button = document.createElement('button')
-    button.textContent = 'Porozmawiaj'
+    button.textContent = 'Wyślij'
     button.disabled = true
     button.addEventListener('click', () => {
       this.subscribers.forEach((s) => s(this.inputMessage))
@@ -39,8 +39,11 @@ export default class InputPanelUI {
     elements.map((element) => root.appendChild(element))
   }
 
-  attachToContainer(container, root) {
-    document.querySelector(container).appendChild(root)
+  attachToContainer(container, ...elements) {
+    elements.map((element) =>
+      document.querySelector(container).appendChild(element)
+    )
+    // document.querySelector(container).appendChild(root)
   }
 
   deactivatePanel() {

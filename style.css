@@ -7,6 +7,12 @@ body {
   font-size: 16px;
 }
 
+button,
+input {
+  outline-style: none;
+  border: none;
+}
+
 ::-webkit-scrollbar {
   width: 0px;
 }
@@ -15,10 +21,18 @@ body {
   --mainSize: 5px;
 }
 
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .messenger {
   height: 500px;
   width: 300px;
-  border: 2px solid #000;
+  border: 1px solid #000;
   border-radius: var(--mainSize);
   padding: var(--mainSize);
   background-color: pink;
@@ -29,18 +43,30 @@ body {
 }
 
 .messenger-screen-container {
-  height: 90%;
+  height: 92%;
   overflow-y: scroll;
 }
 
 .messenger-input-container {
-  height: 10%;
-  background-color: orange;
-  padding: var(--mainSize);
+  height: 7%;
+  padding-top: var(--mainSize);
+  display: flex;
+  justify-content: space-between;
+}
+
+.messenger-input-container input {
+  height: 100%;
+  width: 77%;
+  border-radius: 5px;
+}
+
+.messenger-input-container button {
+  width: 20%;
+  height: 100%;
+  border-radius: 5px;
 }
 
 .screen {
-  border: 1px solid #000;
   border-radius: var(--mainSize);
   min-height: 100%;
   width: 100%;
