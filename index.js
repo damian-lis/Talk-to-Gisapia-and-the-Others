@@ -17,12 +17,16 @@ const charsFactory = new CharsFactory()
 const inputPanelUI = new InputPanelUI('.messenger-input-container')
 const screen = new Screen('.messenger-screen-container')
 
-selectCharUi.subscribe((charName) => {
+//Start part
+const handleStartPart = (charName) => {
   selectCharUi.deleteButton('charButton')
   const character = charsFactory.getChar(charName)
   memory.setSelectedChar(character)
-}, 'selectChar')
+}
 
+selectCharUi.subscribe(handleStartPart, 'selectChar')
+
+//Character talking
 const handleCharTalking = async () => {
   selectCharUi.deleteButton('startButton')
   const character = memory.getChar()
@@ -49,10 +53,9 @@ const handleCharTalking = async () => {
   }
 }
 
-// startTalkingBtn.addEventListener('click', handleCharTalking)
-
 selectCharUi.subscribe(handleCharTalking, 'charTalking')
 
+//User talking
 const handleUserTalking = (userMessage) => {
   memory.setUserMessage(userMessage)
   const messageWrapped = messageWrapper(userMessage, 'user')
