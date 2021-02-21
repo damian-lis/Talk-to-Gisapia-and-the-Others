@@ -3,8 +3,6 @@ import SelectCharUI from './SelectCharUI.js'
 import CharsFactory from './CharsFactory.js'
 import InputPanelUI from './InputPanelUI.js'
 import Screen from './Screen.js'
-import messageWrapper from './helpers/messageWrapper.js'
-import categories from './seeds/categories.js'
 
 const selectCharUISettings = {
   container: '.selectCharUI-container',
@@ -49,13 +47,20 @@ const handleCharTalking = async () => {
   const numberOfQuestions = charQuestions.length
 
   for (let i = 0; i < numberOfQuestions; i++) {
+    const lastMessage = numberOfQuestions - 1 === i
+    console.log(lastMessage)
+
     await character.mustThink(1000)
     await screen.showTyping(2000)
     await character.mustThink(1000)
 
     const charMessage = charQuestions[i]
-    const messageWrapped = messageWrapper(charMessage, character.name)
-    screen.attachToScreen(messageWrapped)
+
+    const messageContainer = screen.createMessageContainer()
+    const message = screen.createMessage(charMessage, character.name)
+    const avatar = screen.createAvatar(character.avatar)
+    screen.attachToMessageContainer(messageContainer, message, avatar)
+    screen.attachToScreen(messageContainer)
   }
 
   inputPanelUI.activatePanel()
@@ -66,8 +71,11 @@ selectCharUi.subscribe(handleCharTalking, 'charTalking')
 //User talking
 const handleUserTalking = (userMessage) => {
   memory.setUserMessage(userMessage)
-  const messageWrapped = messageWrapper(userMessage, 'user')
-  screen.attachToScreen(messageWrapped)
+
+  const messageContainer = screen.createMessageContainer()
+  const message = screen.createMessage(userMessage, 'user')
+  screen.attachToMessageContainer(messageContainer, message)
+  screen.attachToScreen(messageContainer)
 
   memory.increaseConversationStep()
   inputPanelUI.deactivatePanel()

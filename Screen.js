@@ -2,6 +2,33 @@ export default class Screen {
   constructor(container) {
     this.screen = this.createScreen()
     this.attachToContainer(container)
+    this.messages = []
+  }
+
+  createMessageContainer() {
+    const messageContainer = document.createElement('div')
+    messageContainer.classList.add('message-container')
+    return messageContainer
+  }
+
+  createMessage(text, whoTalking) {
+    const message = document.createElement('p')
+    message.innerText = text
+    message.classList.add('message')
+    message.classList.add(`message-${whoTalking}`)
+    return message
+  }
+
+  createAvatar(imagePath) {
+    const avatar = document.createElement('img')
+    avatar.src = imagePath
+    avatar.classList.add('character-avatar')
+    return avatar
+  }
+
+  attachToMessageContainer(container, ...elements) {
+    console.log(elements)
+    elements.map((element) => container.appendChild(element))
   }
 
   createScreen() {
