@@ -9,11 +9,15 @@ const selectCharUISettings = {
   charNames: ['Gisapia', 'Ted', 'Jessica'],
 }
 
-// const memory = new Memory(categories)
 const selectCharUi = new SelectCharUI(selectCharUISettings)
 const charsFactory = new CharsFactory()
 const inputPanelUI = new InputPanelUI('.messenger-input-container')
 const screen = new Screen('.messenger-screen-container')
+
+const showMessenger = () => {
+  const messenger = document.querySelector('.messenger')
+  messenger.classList.add('fallFromAbove')
+}
 
 //Start part
 const handleStartPart = (charName) => {
@@ -36,6 +40,8 @@ const handleCharTalking = async () => {
   if (!character) {
     return alert('Wybierz rozmówcę!')
   }
+
+  showMessenger()
 
   selectCharUi.deleteButton('startButton')
 

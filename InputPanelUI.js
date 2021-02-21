@@ -1,9 +1,8 @@
 export default class InputPanelUI {
   constructor(container) {
-    // const root = this.createRoot()
     this.input = this.createInput()
     this.button = this.createButton()
-    // this.appendToRoot(root, this.input, this.button)
+
     this.attachToContainer(container, this.input, this.button)
     this.inputMessage = ''
     this.subscribers = []

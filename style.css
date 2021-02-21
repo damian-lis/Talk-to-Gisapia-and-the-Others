@@ -30,12 +30,27 @@ body {
 }
 
 .messenger {
+  /* display: none; */
   height: 500px;
   width: 300px;
   border: 1px solid #000;
   border-radius: var(--mainSize);
   padding: var(--mainSize);
-  background-color: pink;
+  background-color: #6a0dad;
+
+  margin-top: -1270px;
+}
+
+.fallFromAbove {
+  animation: fallFromAbove 2s forwards;
+}
+
+@keyframes fallFromAbove {
+  100% {
+    display: block;
+    margin-top: 0;
+    background-color: red;
+  }
 }
 
 .messenger-inner {
