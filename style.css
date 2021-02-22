@@ -57,6 +57,7 @@ body {
 }
 
 .messenger-screen-container {
+  border-radius: var(--mainSize);
   height: 92%;
   overflow-y: scroll;
 }
@@ -81,7 +82,6 @@ body {
 }
 
 .screen {
-  border-radius: var(--mainSize);
   min-height: 100%;
   width: 100%;
   padding: 10px;
