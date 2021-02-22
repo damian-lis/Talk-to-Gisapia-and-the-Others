@@ -30,9 +30,9 @@ const countTypingQuantity = (number) => {
   let result
   if (number < 20) {
     result = 1
-  } else if (number < 50) {
+  } else if (number < 80) {
     result = 2
-  } else if (number >= 50) {
+  } else if (number >= 80) {
     result = 3
   }
 
@@ -78,9 +78,10 @@ const handleCharTalking = async () => {
       if (i >= 1) {
         const timeForReduceTyping = 100 * Math.floor(Math.random() * 10 + 5)
 
-        timeForTyping =
-          timeForTyping - timeForReduceTyping < 500 ? 1000 : timeForReduceTyping
+        timeForTyping = timeForTyping - timeForReduceTyping
       }
+
+      timeForTyping = timeForTyping < 1000 ? 1000 : timeForTyping
 
       await character.mustThink(500)
       await screen.showTyping(timeForTyping)
@@ -100,6 +101,8 @@ selectCharUi.subscribe(handleCharTalking, 'charTalking')
 
 //User talking
 const handleUserTalking = (userMessage) => {
+  if (userMessage === '') return alert('Musisz coś wpisać!')
+
   memory.setUserMessage(userMessage)
 
   const messageContainer = screen.createMessageContainer()
