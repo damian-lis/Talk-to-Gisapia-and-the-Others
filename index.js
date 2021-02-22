@@ -20,6 +20,21 @@ const showMessenger = () => {
   messenger.classList.add('fallFromAbove')
 }
 
+const countTimeForTyping = (number, speed) => {
+  const result = number * speed
+  return result > 2000 ? 2000 : result
+}
+
+const countTypingQuantity = (number) => {
+  let result
+  if (number < 20) {
+    result = 1
+  } else if (number >= 20) {
+    result = 2
+  }
+  return result
+}
+
 //Start part
 const handleStartPart = (charName) => {
   if (charName !== 'Gisapia') {
@@ -28,7 +43,6 @@ const handleStartPart = (charName) => {
 
   selectCharUi.deleteButton('charButton')
   const character = charsFactory.getChar(charName)
-  console.log(character)
   memory.setSelectedChar(character)
 }
 
@@ -37,8 +51,6 @@ selectCharUi.subscribe(handleStartPart, 'selectChar')
 //Character talking
 const handleCharTalking = async () => {
   const character = memory.getChar()
-
-  console.log(character)
 
   if (!character) {
     return alert('Wybierz rozmówcę!')
@@ -53,11 +65,20 @@ const handleCharTalking = async () => {
   if (!charQuestions) return
 
   for (let i = 0; i < charQuestions.length; i++) {
-    await character.mustThink(1000)
-    await screen.showTyping(2000)
-    await character.mustThink(1000)
-
     const charMessage = charQuestions[i]
+
+    let timeForTyping = countTimeForTyping(charMessage.length, 80)
+    const typingQuantity = countTypingQuantity(charMessage.length)
+
+    for (let i = 0; i < typingQuantity; i++) {
+      if (i === 1) {
+        timeForTyping = timeForTyping - 100 * Math.floor(Math.random() * 15 + 5)
+        console.log(timeForTyping)
+      }
+
+      await character.mustThink(1000)
+      await screen.showTyping(timeForTyping)
+    }
 
     const messageContainer = screen.createMessageContainer()
     const message = screen.createMessage(charMessage, character.name)
@@ -86,3 +107,5 @@ const handleUserTalking = (userMessage) => {
 }
 
 inputPanelUI.subscribe(handleUserTalking)
+
+//Dodaj tą zaleznosc od dlugosci tekstu
