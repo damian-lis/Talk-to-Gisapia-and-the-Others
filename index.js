@@ -22,16 +22,20 @@ const showMessenger = () => {
 
 const countTimeForTyping = (number, speed) => {
   const result = number * speed
-  return result > 2000 ? 2000 : result
+
+  return result > 2500 ? 2500 : result < 1000 ? 1000 : result
 }
 
 const countTypingQuantity = (number) => {
   let result
   if (number < 20) {
     result = 1
-  } else if (number >= 20) {
+  } else if (number < 50) {
     result = 2
+  } else if (number >= 50) {
+    result = 3
   }
+
   return result
 }
 
@@ -71,12 +75,14 @@ const handleCharTalking = async () => {
     const typingQuantity = countTypingQuantity(charMessage.length)
 
     for (let i = 0; i < typingQuantity; i++) {
-      if (i === 1) {
-        timeForTyping = timeForTyping - 100 * Math.floor(Math.random() * 15 + 5)
-        console.log(timeForTyping)
+      if (i >= 1) {
+        const timeForReduceTyping = 100 * Math.floor(Math.random() * 10 + 5)
+
+        timeForTyping =
+          timeForTyping - timeForReduceTyping < 500 ? 1000 : timeForReduceTyping
       }
 
-      await character.mustThink(1000)
+      await character.mustThink(500)
       await screen.showTyping(timeForTyping)
     }
 
