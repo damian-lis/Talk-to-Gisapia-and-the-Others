@@ -38,6 +38,7 @@ export default class Screen {
   }
 
   attachToScreen(element) {
+    this.screen.scroll(0, 1000)
     this.screen.appendChild(element)
   }
 
@@ -46,13 +47,19 @@ export default class Screen {
   }
 
   createLoader() {
-    const loader = document.createElement('div')
-    loader.classList.add('loader')
-    return loader
+    const circleContainer = document.createElement('div')
+    circleContainer.setAttribute('id', 'circle-container')
+    for (let i = 0; i < 3; i++) {
+      const circle = document.createElement('div')
+      circle.classList.add('circle')
+      circle.setAttribute('id', `ball-${i + 1}`)
+      circleContainer.appendChild(circle)
+    }
+
+    return circleContainer
   }
 
   removeLoader(loader) {
-    console.log('removeLoader')
     loader.remove()
   }
 
