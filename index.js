@@ -50,9 +50,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const messageCollection = character.getMessagesCollection(category)
     let charMessages = messageCollection.messages
 
+    console.log(character)
+
     if (memory.getIsListening()) {
       character.addToMemoryAboutUser(userMessage, category)
-      messageCollection.answers.addedToMemory[0] += ` ${userMessage}`
+      if (conversationStep === 1) {
+        messageCollection.answers.addedToMemory[0] = ` ${userMessage}  ${messageCollection.answers.addedToMemory[0]}`
+      } else {
+        messageCollection.answers.addedToMemory[0] += ` ${userMessage}`
+      }
+
       charMessages = messageCollection.answers.addedToMemory
       memory.setUserMessage('')
       memory.setIsCallAgain(true)
@@ -66,7 +73,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (elementFromMemory) {
           character.addToMemoryAboutUser(elementFromMemory, category)
-          messageCollection.answers.isInMemory[0] += ` ${elementFromMemory}`
+          if (conversationStep === 1) {
+            messageCollection.answers.isInMemory[0] = `${elementFromMemory}  ${messageCollection.answers.isInMemory[0]}`
+          } else {
+            messageCollection.answers.isInMemory[0] += ` ${elementFromMemory}`
+          }
+
           charMessages = messageCollection.answers.isInMemory
           memory.setUserMessage('')
           memory.setIsCallAgain(true)
