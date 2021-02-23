@@ -44,14 +44,39 @@ document.addEventListener('DOMContentLoaded', function () {
   //Character talking
   const handleCharTalking = async () => {
     const character = memory.getChar()
-
     const conversationStep = memory.getConversationStep()
     const category = memory.getCategory(conversationStep)
-    const charQuestions = character.getQuestions(category)
-    if (!charQuestions) return
+    const userMessage = memory.getUserMessage()
+    const messageCollection = character.getMessagesCollection(category)
+    let charMessages = messageCollection.messages
 
-    for (let i = 0; i < charQuestions.length; i++) {
-      const charMessage = charQuestions[i]
+    if (memory.getIsListening()) {
+      character.addToMemoryAboutUser(userMessage, category)
+      charMessages = messageCollection.answers.addedToMemory
+      memory.setUserMessage('')
+      memory.setIsCallAgain(true)
+      memory.setIsListening(false)
+    } else {
+      if (userMessage) {
+        const elementFromMemory = character.checkUserMessageInMemory(
+          userMessage,
+          category
+        )
+
+        if (elementFromMemory.length) {
+          character.addToMemoryAboutUser(elementFromMemory, category)
+          charMessages = messageCollection.answers.isInMemory
+          memory.setUserMessage('')
+          memory.setIsCallAgain(true)
+        } else {
+          charMessages = messageCollection.answers.isNotInMemory
+          memory.setIsListening(true)
+        }
+      }
+    }
+
+    for (let i = 0; i < charMessages.length; i++) {
+      const charMessage = charMessages[i]
 
       let timeForTyping = countTimeForTyping(charMessage.length, 80)
       const typingQuantity = countTypingQuantity(charMessage.length)
@@ -77,10 +102,16 @@ document.addEventListener('DOMContentLoaded', function () {
       screen.attachToScreen(messageContainer)
     }
 
+    if (memory.getIsCallAgain()) {
+      memory.setIsCallAgain(false)
+      memory.increaseConversationStep()
+      return handleCharTalking()
+    }
+
     inputPanelUI.activatePanel()
   }
 
-  selectCharUi.subscribe(checkedSelectedChar, 'charTalking')
+  selectCharUi.subscribe(checkSelectedChar, 'charTalking')
 
   //User talking
   const handleUserTalking = (userMessage) => {
@@ -91,7 +122,6 @@ document.addEventListener('DOMContentLoaded', function () {
     screen.attachToMessageContainer(messageContainer, message)
     screen.attachToScreen(messageContainer)
 
-    memory.increaseConversationStep()
     inputPanelUI.deactivatePanel()
     handleCharTalking()
   }
