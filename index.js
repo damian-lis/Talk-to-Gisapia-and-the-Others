@@ -18,29 +18,32 @@ document.addEventListener('DOMContentLoaded', function () {
   const inputPanelUI = new InputPanelUI('.messenger-input-container')
   const screen = new Screen('.messenger-screen-container')
 
-  //Start part
-  const handleStartPart = (charName) => {
-    if (charName !== 'Gisapia') {
+  //Select character part
+  const handleSelectChar = (charName) => {
+    if (charName !== 'Gisapia')
       return alert('Ta postać na razie jest niedostępna. Wybierz inną!')
-    }
 
     selectCharUi.deleteButton('charButton')
     const character = charsFactory.getChar(charName)
     memory.setSelectedChar(character)
   }
 
-  selectCharUi.subscribe(handleStartPart, 'selectChar')
+  selectCharUi.subscribe(handleSelectChar, 'selectChar')
+
+  const checkedSelectedChar = () => {
+    const character = memory.getChar()
+
+    if (!character) return alert('Wybierz rozmówcę!')
+
+    selectCharUi.deleteButton('startButton')
+
+    showMessenger()
+    handleCharTalking()
+  }
 
   //Character talking
   const handleCharTalking = async () => {
     const character = memory.getChar()
-
-    if (!character) {
-      return alert('Wybierz rozmówcę!')
-    }
-    selectCharUi.deleteButton('startButton')
-
-    showMessenger()
 
     const conversationStep = memory.getConversationStep()
     const category = memory.getCategory(conversationStep)
@@ -69,6 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const messageContainer = screen.createMessageContainer()
       const message = screen.createMessage(charMessage, character.name)
       const avatar = screen.createAvatar(character.avatar)
+
       screen.attachToMessageContainer(messageContainer, message, avatar)
       screen.attachToScreen(messageContainer)
     }
@@ -76,12 +80,10 @@ document.addEventListener('DOMContentLoaded', function () {
     inputPanelUI.activatePanel()
   }
 
-  selectCharUi.subscribe(handleCharTalking, 'charTalking')
+  selectCharUi.subscribe(checkedSelectedChar, 'charTalking')
 
   //User talking
   const handleUserTalking = (userMessage) => {
-    if (userMessage === '') return alert('Musisz coś wpisać!')
-
     memory.setUserMessage(userMessage)
 
     const messageContainer = screen.createMessageContainer()

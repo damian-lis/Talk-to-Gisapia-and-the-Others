@@ -18,7 +18,7 @@ export default class InputPanelUI {
           this.inputMessage = e.target.value
         } else {
           if (e.key === 'Enter') {
-            console.log(this.inputMessage)
+            if (this.inputMessage === '') return alert('Musisz coś wpisać!')
             this.subscribers.forEach((s) => s(this.inputMessage))
           }
         }
@@ -34,6 +34,7 @@ export default class InputPanelUI {
     button.disabled = true
 
     button.addEventListener('click', () => {
+      if (this.inputMessage === '') return alert('Musisz coś wpisać!')
       this.subscribers.forEach((s) => s(this.inputMessage))
     })
 
