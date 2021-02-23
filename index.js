@@ -3,6 +3,9 @@ import SelectCharUI from './SelectCharUI.js'
 import CharsFactory from './CharsFactory.js'
 import InputPanelUI from './InputPanelUI.js'
 import Screen from './Screen.js'
+import showMessenger from './helpers/showMessenger.js'
+import countTimeForTyping from './helpers/countTimeForTyping.js'
+import countTypingQuantity from './helpers/countTypingQuantity.js'
 
 const selectCharUISettings = {
   container: '.selectCharUI-container',
@@ -13,31 +16,6 @@ const selectCharUi = new SelectCharUI(selectCharUISettings)
 const charsFactory = new CharsFactory()
 const inputPanelUI = new InputPanelUI('.messenger-input-container')
 const screen = new Screen('.messenger-screen-container')
-
-//Wydzielić do helpers
-const showMessenger = () => {
-  const messenger = document.querySelector('.messenger')
-  messenger.classList.add('fallFromAbove')
-}
-
-const countTimeForTyping = (number, speed) => {
-  const result = number * speed
-
-  return result > 2500 ? 2500 : result < 1000 ? 1000 : result
-}
-
-const countTypingQuantity = (number) => {
-  let result
-  if (number < 20) {
-    result = 1
-  } else if (number < 80) {
-    result = 2
-  } else if (number >= 80) {
-    result = 3
-  }
-
-  return result
-}
 
 //Start part
 const handleStartPart = (charName) => {
@@ -116,5 +94,3 @@ const handleUserTalking = (userMessage) => {
 }
 
 inputPanelUI.subscribe(handleUserTalking)
-
-//Dodaj tą zaleznosc od dlugosci tekstu
