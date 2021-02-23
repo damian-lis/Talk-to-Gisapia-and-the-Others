@@ -13,7 +13,7 @@ export default class Character {
   }
 
   checkUserMessageInMemory(message, category) {
-    return this.memory[category].filter((word) => message.includes(word))
+    return this.memory[category].find((word) => message.includes(word))
   }
 
   addToMemoryAboutUser(word, category) {

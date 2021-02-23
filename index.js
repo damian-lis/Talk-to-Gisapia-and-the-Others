@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (memory.getIsListening()) {
       character.addToMemoryAboutUser(userMessage, category)
+      messageCollection.answers.addedToMemory[0] += ` ${userMessage}`
       charMessages = messageCollection.answers.addedToMemory
       memory.setUserMessage('')
       memory.setIsCallAgain(true)
@@ -63,8 +64,9 @@ document.addEventListener('DOMContentLoaded', function () {
           category
         )
 
-        if (elementFromMemory.length) {
+        if (elementFromMemory) {
           character.addToMemoryAboutUser(elementFromMemory, category)
+          messageCollection.answers.isInMemory[0] += ` ${elementFromMemory}`
           charMessages = messageCollection.answers.isInMemory
           memory.setUserMessage('')
           memory.setIsCallAgain(true)
