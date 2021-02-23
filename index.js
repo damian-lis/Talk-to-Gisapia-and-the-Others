@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   selectCharUi.subscribe(handleSelectChar, 'selectChar')
 
-  const checkedSelectedChar = () => {
+  const checkSelectedChar = () => {
     const character = memory.getChar()
 
     if (!character) return alert('Wybierz rozmówcę!')
