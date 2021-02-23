@@ -2,22 +2,27 @@ export default class InputPanelUI {
   constructor(container) {
     this.input = this.createInput()
     this.button = this.createButton()
-
     this.attachToContainer(container, this.input, this.button)
     this.inputMessage = ''
     this.subscribers = []
   }
 
-  createRoot() {
-    const root = document.createElement('div')
-    return root
-  }
-
   createInput() {
     const input = document.createElement('input')
     input.disabled = true
-    input.addEventListener('change', (e) => {
-      this.inputMessage = e.target.value
+
+    const events = ['input', 'keypress']
+    events.map((event) => {
+      input.addEventListener(event, (e) => {
+        if (event === 'input') {
+          this.inputMessage = e.target.value
+        } else {
+          if (e.key === 'Enter') {
+            console.log(this.inputMessage)
+            this.subscribers.forEach((s) => s(this.inputMessage))
+          }
+        }
+      })
     })
 
     return input
@@ -27,6 +32,7 @@ export default class InputPanelUI {
     const button = document.createElement('button')
     button.textContent = 'Wyślij'
     button.disabled = true
+
     button.addEventListener('click', () => {
       this.subscribers.forEach((s) => s(this.inputMessage))
     })
@@ -42,7 +48,6 @@ export default class InputPanelUI {
     elements.map((element) =>
       document.querySelector(container).appendChild(element)
     )
-    // document.querySelector(container).appendChild(root)
   }
 
   deactivatePanel() {
