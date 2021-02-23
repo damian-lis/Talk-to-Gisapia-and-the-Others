@@ -5,5 +5,9 @@ export default class Gisapia extends Character {
     super(questions)
     this.name = 'Gisapia'
     this.avatar = '/images/gisapia.jpg'
+    this.memory = {
+      introduce: ['Damian', 'Kasia'],
+      origin: ['Wałbrzych', 'Wrocław'],
+    }
   }
 }
