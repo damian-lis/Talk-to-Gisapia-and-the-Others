@@ -7,6 +7,8 @@ class Memory {
       this.character = null
       this.userMessage = null
       this.categories = categories ? categories : []
+      this.isCallAgain = false
+      this.isListening = false
       Memory.instance = this
     }
     return Memory.instance
@@ -42,6 +44,22 @@ class Memory {
 
   setNumberOfQuestion(number) {
     this.numberOfQuestion = number
+  }
+
+  setIsCallAgain(value) {
+    this.isCallAgain = value
+  }
+
+  getIsCallAgain() {
+    return this.isCallAgain
+  }
+
+  setIsListening(value) {
+    this.isListening = value
+  }
+
+  getIsListening() {
+    return this.isListening
   }
 }
 
