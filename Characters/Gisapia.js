@@ -7,7 +7,7 @@ export default class Gisapia extends Character {
     this.avatar = '/images/gisapia.jpg'
     this.memory = {
       introduce: ['Damian', 'Kasia'],
-      origin: ['Wałbrzych', 'Wrocław'],
+      origin: ['Wałbrzych', 'Wrocław', 'Wrocławia', 'Wałbrzycha'],
     }
   }
 }
