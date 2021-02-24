@@ -21,4 +21,8 @@ export default class Character {
   addToMemoryAboutUser(word, category) {
     this.memoryAboutUser[category] = word
   }
+
+  setUpperLetter(message) {
+    return message.charAt(0).toUpperCase() + message.slice(1)
+  }
 }
