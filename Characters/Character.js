@@ -25,4 +25,16 @@ export default class Character {
   setUpperLetter(message) {
     return message.charAt(0).toUpperCase() + message.slice(1)
   }
+
+  addUserMessageToAnswer(message, category, where) {
+    switch (where) {
+      case 'start':
+        return (this.messages[category].answers.addedToMemory[0] =
+          message + ' ' + this.messages[category].answers.addedToMemory[0])
+      case 'end':
+        return (this.messages[
+          category
+        ].answers.addedToMemory[0] += ` ${message}`)
+    }
+  }
 }

@@ -56,9 +56,11 @@ document.addEventListener('DOMContentLoaded', function () {
       userMessage = character.setUpperLetter(userMessage)
       character.addToMemoryAboutUser(userMessage, category)
       if (conversationStep === 1) {
-        messageCollection.answers.addedToMemory[0] = ` ${userMessage}  ${messageCollection.answers.addedToMemory[0]}`
+        character.addUserMessageToAnswer(userMessage, category, 'start')
+        // messageCollection.answers.addedToMemory[0] = ` ${userMessage}  ${messageCollection.answers.addedToMemory[0]}`
       } else {
-        messageCollection.answers.addedToMemory[0] += ` ${userMessage}`
+        // messageCollection.answers.addedToMemory[0] += ` ${userMessage}`
+        character.addUserMessageToAnswer(userMessage, category, 'end')
       }
 
       charMessages = messageCollection.answers.addedToMemory
