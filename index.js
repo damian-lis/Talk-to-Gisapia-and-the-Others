@@ -4,8 +4,6 @@ import CharsFactory from './CharsFactory.js'
 import InputPanelUI from './InputPanelUI.js'
 import Screen from './Screen.js'
 import showMessenger from './helpers/showMessenger.js'
-import countTimeForTyping from './helpers/countTimeForTyping.js'
-import countTypingQuantity from './helpers/countTypingQuantity.js'
 
 document.addEventListener('DOMContentLoaded', function () {
   const selectCharUISettings = {
@@ -105,8 +103,8 @@ document.addEventListener('DOMContentLoaded', function () {
     for (let i = 0; i < charMessages.length; i++) {
       const charMessage = charMessages[i]
 
-      let timeForTyping = countTimeForTyping(charMessage.length, 80)
-      const typingQuantity = countTypingQuantity(charMessage.length)
+      let timeForTyping = character.countTimeForTyping(charMessage.length, 80)
+      const typingQuantity = character.countTypingQuantity(charMessage.length)
 
       for (let i = 0; i < typingQuantity; i++) {
         if (i >= 1) {

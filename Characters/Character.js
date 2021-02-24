@@ -26,6 +26,25 @@ export default class Character {
     return message.charAt(0).toUpperCase() + message.slice(1)
   }
 
+  countTypingQuantity(textLength) {
+    let result
+    if (textLength < 20) {
+      result = 1
+    } else if (textLength < 80) {
+      result = 2
+    } else if (textLength >= 80) {
+      result = 3
+    }
+
+    return result
+  }
+
+  countTimeForTyping(textLength, speed) {
+    const result = textLength * speed
+
+    return result > 2500 ? 2500 : result < 1000 ? 1000 : result
+  }
+
   addUserMessageToAnswer(message, category, { where, subcategory }) {
     switch (where) {
       case 'start':
