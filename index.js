@@ -56,11 +56,15 @@ document.addEventListener('DOMContentLoaded', function () {
       userMessage = character.setUpperLetter(userMessage)
       character.addToMemoryAboutUser(userMessage, category)
       if (conversationStep === 1) {
-        character.addUserMessageToAnswer(userMessage, category, 'start')
-        // messageCollection.answers.addedToMemory[0] = ` ${userMessage}  ${messageCollection.answers.addedToMemory[0]}`
+        character.addUserMessageToAnswer(userMessage, category, {
+          where: 'start',
+          subcategory: 'addedToMemory',
+        })
       } else {
-        // messageCollection.answers.addedToMemory[0] += ` ${userMessage}`
-        character.addUserMessageToAnswer(userMessage, category, 'end')
+        character.addUserMessageToAnswer(userMessage, category, {
+          where: 'end',
+          subcategory: 'addedToMemory',
+        })
       }
 
       charMessages = messageCollection.answers.addedToMemory
@@ -77,9 +81,15 @@ document.addEventListener('DOMContentLoaded', function () {
         if (elementFromMemory) {
           character.addToMemoryAboutUser(elementFromMemory, category)
           if (conversationStep === 1) {
-            messageCollection.answers.isInMemory[0] = `${elementFromMemory}  ${messageCollection.answers.isInMemory[0]}`
+            character.addUserMessageToAnswer(elementFromMemory, category, {
+              where: 'start',
+              subcategory: 'isInMemory',
+            })
           } else {
-            messageCollection.answers.isInMemory[0] += ` ${elementFromMemory}`
+            character.addUserMessageToAnswer(elementFromMemory, category, {
+              where: 'end',
+              subcategory: 'isInMemory',
+            })
           }
 
           charMessages = messageCollection.answers.isInMemory
