@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
     handleCharTalking()
   }
 
-  //Character talking
+  //Character talking process
   const handleCharTalking = async () => {
     const character = memory.getChar()
     const conversationStep = memory.getConversationStep()
@@ -48,8 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const messageCollection = character.getMessagesCollection(category)
     let charMessages = messageCollection.messages
 
-    console.log(character)
-
+    //Part when character wants to save new word in his memory
     if (memory.getIsListening()) {
       userMessage = character.setUpperLetter(userMessage)
       character.addToMemoryAboutUser(userMessage, category)
@@ -64,12 +63,13 @@ document.addEventListener('DOMContentLoaded', function () {
           subcategory: 'addedToMemory',
         })
       }
-
       charMessages = messageCollection.answers.addedToMemory
       memory.setUserMessage('')
       memory.setIsCallAgain(true)
       memory.setIsListening(false)
-    } else {
+    }
+    // Part where character checks typed word in his memory
+    else {
       if (userMessage) {
         const elementFromMemory = character.checkUserMessageInMemory(
           userMessage,
@@ -100,6 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
+    //Part about character typing
     for (let i = 0; i < charMessages.length; i++) {
       const charMessage = charMessages[i]
 
@@ -138,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   selectCharUi.subscribe(checkSelectedChar, 'charTalking')
 
-  //User talking
+  //User talking process
   const handleUserTalking = (userMessage) => {
     memory.setUserMessage(userMessage)
 
