@@ -46,13 +46,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const character = memory.getChar()
     const conversationStep = memory.getConversationStep()
     const category = memory.getCategory(conversationStep)
-    const userMessage = memory.getUserMessage()
+    let userMessage = memory.getUserMessage()
     const messageCollection = character.getMessagesCollection(category)
     let charMessages = messageCollection.messages
 
     console.log(character)
 
     if (memory.getIsListening()) {
+      userMessage = userMessage.charAt(0).toUpperCase() + userMessage.slice(1)
       character.addToMemoryAboutUser(userMessage, category)
       if (conversationStep === 1) {
         messageCollection.answers.addedToMemory[0] = ` ${userMessage}  ${messageCollection.answers.addedToMemory[0]}`
