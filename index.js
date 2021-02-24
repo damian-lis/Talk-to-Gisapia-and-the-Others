@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log(character)
 
     if (memory.getIsListening()) {
-      userMessage = userMessage.charAt(0).toUpperCase() + userMessage.slice(1)
+      userMessage = character.setUpperLetter(userMessage)
       character.addToMemoryAboutUser(userMessage, category)
       if (conversationStep === 1) {
         messageCollection.answers.addedToMemory[0] = ` ${userMessage}  ${messageCollection.answers.addedToMemory[0]}`
