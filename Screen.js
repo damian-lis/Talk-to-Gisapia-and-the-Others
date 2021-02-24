@@ -37,9 +37,19 @@ export default class Screen {
     return screen
   }
 
+  scrollMessengerContainer() {
+    const messengerContainer = document.querySelector(
+      '.messenger-screen-container'
+    )
+
+    const valueToScroll =
+      messengerContainer.scrollHeight - messengerContainer.clientHeight
+    messengerContainer.scroll(0, valueToScroll)
+  }
+
   attachToScreen(element) {
-    this.screen.scroll(0, 1000)
     this.screen.appendChild(element)
+    this.scrollMessengerContainer()
   }
 
   attachToContainer(container) {
@@ -66,6 +76,7 @@ export default class Screen {
   showTyping(time) {
     const loader = this.createLoader()
     this.attachToScreen(loader)
+    this.scrollMessengerContainer()
     setTimeout(() => this.removeLoader(loader), time)
     return new Promise((resolve) => setTimeout(resolve, time))
   }
