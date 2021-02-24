@@ -13,7 +13,9 @@ export default class Character {
   }
 
   checkUserMessageInMemory(message, category) {
-    return this.memory[category].find((word) => message.includes(word))
+    return this.memory[category].find((word) =>
+      message.toLowerCase().includes(word.toLowerCase())
+    )
   }
 
   addToMemoryAboutUser(word, category) {
