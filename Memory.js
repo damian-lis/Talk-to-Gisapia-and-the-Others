@@ -1,4 +1,4 @@
-import categories from './seeds/categories.js'
+// import categories from './seeds/categories.js'
 
 class Memory {
   constructor() {
@@ -6,7 +6,7 @@ class Memory {
       this.conversationStep = 0
       this.character = null
       this.userMessage = null
-      this.categories = categories ? categories : []
+      // this.categories = categories ? categories : []
       this.isCallAgain = false
       this.isListening = false
       Memory.instance = this
@@ -14,9 +14,9 @@ class Memory {
     return Memory.instance
   }
 
-  getCategories() {
-    return this.categories
-  }
+  // getCategories() {
+  //   return this.categories
+  // }
 
   increaseConversationStep() {
     this.conversationStep++
@@ -42,9 +42,9 @@ class Memory {
     return this.userMessage
   }
 
-  getCategory(step) {
-    return this.categories[step]
-  }
+  // getCategory(step) {
+  //   return this.categories[step]
+  // }
 
   setNumberOfQuestion(number) {
     this.numberOfQuestion = number

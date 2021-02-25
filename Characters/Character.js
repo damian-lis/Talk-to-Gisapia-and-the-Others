@@ -1,24 +1,46 @@
 export default class Character {
-  constructor(messages) {
-    this.messages = messages
+  constructor(dataSets, memorySets) {
+    this.dataSets = dataSets
+    this.memorySets = memorySets
     this.memoryAboutUser = {}
   }
 
-  getMessagesCollection(category) {
-    return this.messages[category]
+  changeTimeForTyping(timeForTyping) {
+    const timeForReduceTyping = 100 * Math.floor(Math.random() * 10 + 5)
+    const result = timeForTyping - timeForReduceTyping
+
+    return result < 1000 ? 1000 : result
+  }
+
+  getCategory(conversationStep) {
+    return this.dataSets[conversationStep].category
+  }
+
+  getMessages(conversationStep) {
+    return this.dataSets[conversationStep].messages
+  }
+
+  getAllCategories() {
+    let result = []
+    this.dataSets.map((dataSet) => result.push(dataSet.category))
+    return result
+  }
+
+  getAnswers(conversationStep, { type }) {
+    return this.dataSets[conversationStep].answers[type]
   }
 
   mustThink(time) {
     return new Promise((resolve) => setTimeout(resolve, time))
   }
 
-  checkUserMessageInMemory(message, category) {
-    return this.memory[category].find((word) =>
+  checkUserMessageInMemory(category, message) {
+    return this.memorySets[category].find((word) =>
       message.toLowerCase().includes(word.toLowerCase())
     )
   }
 
-  addToMemoryAboutUser(word, category) {
+  addToMemoryAboutUser(category, word) {
     this.memoryAboutUser[category] = word
   }
 
@@ -45,22 +67,23 @@ export default class Character {
     return result > 2500 ? 2500 : result < 1000 ? 1000 : result
   }
 
-  addUserMessageToAnswer(message, category, { where, subcategory }) {
-    switch (where) {
+  addUserMessageToAnswer(message, conversationStep, { place, where }) {
+    switch (place) {
       case 'start':
-        return (this.messages[category].answers[subcategory][0] =
-          message + ' ' + this.messages[category].answers[subcategory][0])
+        return (this.dataSets[conversationStep].answers[where][0] =
+          message + ' ' + this.dataSets[conversationStep].answers[where][0])
       case 'end':
-        return (this.messages[category].answers[
-          subcategory
+        return (this.dataSets[conversationStep].answers[
+          where
         ][0] += ` ${message}`)
     }
   }
 
-  addAboutUserToMessages(currentCategory, categories) {
+  addAboutUserToMessages(categories, conversationStep) {
+    console.log(this.dataSets[conversationStep])
     categories.pop()
     categories.forEach((category, index) => {
-      this.messages[currentCategory].messages[
+      this.dataSets[conversationStep].messages[
         index + 1
       ] += this.memoryAboutUser[category]
     })

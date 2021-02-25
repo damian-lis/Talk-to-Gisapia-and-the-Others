@@ -1,9 +1,10 @@
 import Gisapia from './characters/Gisapia.js'
-import questions from './data/gisapia/dataSets.js'
+import dataSets from './data/gisapia/dataSets.js'
+import memorySets from './data/gisapia/memorySets.js'
 
 export default class CharsFactory {
   constructor() {
-    this.gisapia = new Gisapia(questions)
+    this.gisapia = new Gisapia(dataSets, memorySets)
   }
 
   getChar(charName) {

@@ -41,36 +41,41 @@ document.addEventListener('DOMContentLoaded', function () {
 
   //Character talking process
   const handleCharTalking = async () => {
-    const character = memory.getChar()
-    const conversationStep = memory.getConversationStep()
-    const category = memory.getCategory(conversationStep)
-
     let userMessage = memory.getUserMessage()
+    const conversationStep = memory.getConversationStep()
+    const character = memory.getChar()
+    const category = character.getCategory(conversationStep)
+
     if (category === 'summary') {
-      const categories = memory.getCategories()
-      character.addAboutUserToMessages(category, categories)
+      const dataCategories = character.getAllCategories()
+      character.addAboutUserToMessages(dataCategories, conversationStep)
+      // if (userMessage === 'Wyślij dane') {
+
+      // } else {
+      //   console.log('nie wysyłam danych')
+      // }
     }
 
-    const messageCollection = character.getMessagesCollection(category)
-
-    let charMessages = messageCollection.messages
+    let charMessages = character.getMessages(conversationStep)
 
     //Part when character wants to save new word in his memory
     if (memory.getIsListening()) {
       userMessage = character.setUpperLetter(userMessage)
-      character.addToMemoryAboutUser(userMessage, category)
+      character.addToMemoryAboutUser(category, userMessage)
       if (conversationStep === 1) {
-        character.addUserMessageToAnswer(userMessage, category, {
-          where: 'start',
-          subcategory: 'addedToMemory',
+        character.addUserMessageToAnswer(userMessage, conversationStep, {
+          place: 'start',
+          where: 'addedToMemory',
         })
       } else {
-        character.addUserMessageToAnswer(userMessage, category, {
-          where: 'end',
-          subcategory: 'addedToMemory',
+        character.addUserMessageToAnswer(userMessage, conversationStep, {
+          place: 'end',
+          where: 'addedToMemory',
         })
       }
-      charMessages = messageCollection.answers.addedToMemory
+      charMessages = character.getAnswers(conversationStep, {
+        type: 'addedToMemory',
+      })
       memory.setUserMessage('')
       memory.setIsCallAgain(true)
       memory.setIsListening(false)
@@ -79,29 +84,41 @@ document.addEventListener('DOMContentLoaded', function () {
     else {
       if (userMessage) {
         const elementFromMemory = character.checkUserMessageInMemory(
-          userMessage,
-          category
+          category,
+          userMessage
         )
 
         if (elementFromMemory) {
-          character.addToMemoryAboutUser(elementFromMemory, category)
+          character.addToMemoryAboutUser(category, elementFromMemory)
           if (conversationStep === 1) {
-            character.addUserMessageToAnswer(elementFromMemory, category, {
-              where: 'start',
-              subcategory: 'isInMemory',
-            })
+            character.addUserMessageToAnswer(
+              elementFromMemory,
+              conversationStep,
+              {
+                place: 'start',
+                where: 'isInMemory',
+              }
+            )
           } else {
-            character.addUserMessageToAnswer(elementFromMemory, category, {
-              where: 'end',
-              subcategory: 'isInMemory',
-            })
+            character.addUserMessageToAnswer(
+              elementFromMemory,
+              conversationStep,
+              {
+                place: 'end',
+                where: 'isInMemory',
+              }
+            )
           }
 
-          charMessages = messageCollection.answers.isInMemory
+          charMessages = character.getAnswers(conversationStep, {
+            type: 'isInMemory',
+          })
           memory.setUserMessage('')
           memory.setIsCallAgain(true)
         } else {
-          charMessages = messageCollection.answers.isNotInMemory
+          charMessages = character.getAnswers(conversationStep, {
+            type: 'isNotInMemory',
+          })
           memory.setIsListening(true)
         }
       }
@@ -116,12 +133,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
       for (let i = 0; i < typingQuantity; i++) {
         if (i >= 1) {
-          const timeForReduceTyping = 100 * Math.floor(Math.random() * 10 + 5)
-
-          timeForTyping = timeForTyping - timeForReduceTyping
+          timeForTyping = character.changeTimeForTyping(timeForTyping)
         }
-
-        timeForTyping = timeForTyping < 1000 ? 1000 : timeForTyping
 
         await character.mustThink(500)
         await screen.showTyping(timeForTyping)
