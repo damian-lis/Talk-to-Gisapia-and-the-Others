@@ -48,13 +48,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const character = memory.getChar()
     const category = character.getCategory(conversationStep)
 
-    if (category === 'summary') {
-      const dataCategories = character.getAllCategories()
-      character.addAboutUserToMessages(dataCategories, conversationStep)
+    if (memory.getIsFinish()) {
       if (userMessage === 'zapisz') {
         sendAboutUser(character.getMemoryAboutUser())
-        return hideMessenger()
       }
+      return setTimeout(() => hideMessenger(), 2000)
+    }
+
+    if (category === 'summary') {
+      memory.setIsFinish(true)
+      const dataCategories = character.getAllCategories()
+      character.addAboutUserToMessages(dataCategories, conversationStep)
     }
 
     let charMessages = character.getMessages(conversationStep)

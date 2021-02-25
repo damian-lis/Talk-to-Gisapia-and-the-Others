@@ -6,17 +6,21 @@ class Memory {
       this.conversationStep = 0
       this.character = null
       this.userMessage = null
-      // this.categories = categories ? categories : []
       this.isCallAgain = false
       this.isListening = false
+      this.isFinish = false
       Memory.instance = this
     }
     return Memory.instance
   }
 
-  // getCategories() {
-  //   return this.categories
-  // }
+  setIsFinish(value) {
+    this.isFinish = value
+  }
+
+  getIsFinish() {
+    return this.isFinish
+  }
 
   increaseConversationStep() {
     this.conversationStep++
