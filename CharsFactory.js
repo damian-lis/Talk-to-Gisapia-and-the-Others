@@ -1,5 +1,5 @@
 import Gisapia from './characters/Gisapia.js'
-import questions from './seeds/messages/gisapia.js'
+import questions from './data/gisapia/dataSets.js'
 
 export default class CharsFactory {
   constructor() {

@@ -1,17 +1,16 @@
-import categories from '../categories.js'
-
-export default {
-  [categories[0]]: {
+export default [
+  {
+    category: 'name',
     messages: [
       'Cześć!',
-      // 'Nazywam się Gisapia',
-      // 'Powiedz mi proszę jak mogę się do Ciebie zwracać?',
+      'Nazywam się Gisapia',
+      'Powiedz mi proszę jak mogę się do Ciebie zwracać?',
     ],
     answers: {
       isInMemory: [
         'Tak, kojarzę takie imię jak',
-        // 'Miałam dwóch znajomych, którzy tak się nazywali.',
-        // 'Niestety  zadnym z nich nie utrzymuje juz kontaktu...',
+        'Miałam dwóch znajomych, którzy tak się nazywali.',
+        'Niestety  zadnym z nich nie utrzymuje juz kontaktu...',
       ],
       isNotInMemory: [
         'Niestety nie kojarzę takiego imienia',
@@ -20,7 +19,8 @@ export default {
       addedToMemory: ['Ale super! Ciesze się, ze poznałam nowe imię'],
     },
   },
-  [categories[1]]: {
+  {
+    category: 'origin',
     messages: ['Skąd w ogóle jesteś jezeli mogę wiedzieć?'],
     answers: {
       isInMemory: ['to piękna miejscowość', 'Bla bla'],
@@ -34,7 +34,8 @@ export default {
     },
   },
 
-  [categories[categories.length - 1]]: {
+  {
+    category: 'summary',
     messages: [
       'Okej to co udało mi się zapamiętać odnośnie Ciebie',
       'Masz na imię ',
@@ -44,4 +45,4 @@ export default {
       'Do zobaczenia następnym razem! :)',
     ],
   },
-}
+]
