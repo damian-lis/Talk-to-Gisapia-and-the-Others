@@ -5,6 +5,10 @@ export default class Character {
     this.memoryAboutUser = {}
   }
 
+  getMemoryAboutUser() {
+    return this.memoryAboutUser
+  }
+
   changeTimeForTyping(timeForTyping) {
     const timeForReduceTyping = 100 * Math.floor(Math.random() * 10 + 5)
     const result = timeForTyping - timeForReduceTyping

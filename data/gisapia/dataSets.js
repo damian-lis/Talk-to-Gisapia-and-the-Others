@@ -42,7 +42,8 @@ export default [
       'Pochodzisz z ',
       'Ciesze się, ze mogłam Cię poznać!',
       'Niestety ze względu na inne obowiazki muszę zmykać...',
-      'Do zobaczenia następnym razem! :)',
+      'Jezeli chcesz aby Twoje odpowiedzi trafiły do mojej pamięci na zawsze to napisz proszę "zapisz" :)',
+      'Jezeli nie chcesz to napisz cokolwiek a sobie pójdę :)!',
     ],
   },
 ]

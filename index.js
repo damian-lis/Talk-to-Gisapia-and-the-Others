@@ -4,6 +4,7 @@ import CharsFactory from './CharsFactory.js'
 import InputPanelUI from './InputPanelUI.js'
 import Screen from './Screen.js'
 import showMessenger from './helpers/showMessenger.js'
+import { sendAboutUser } from './actions/dataActions.js'
 
 document.addEventListener('DOMContentLoaded', function () {
   const selectCharUISettings = {
@@ -49,11 +50,9 @@ document.addEventListener('DOMContentLoaded', function () {
     if (category === 'summary') {
       const dataCategories = character.getAllCategories()
       character.addAboutUserToMessages(dataCategories, conversationStep)
-      // if (userMessage === 'Wyślij dane') {
-
-      // } else {
-      //   console.log('nie wysyłam danych')
-      // }
+      if (userMessage === 'zapisz') {
+        sendAboutUser(character.getMemoryAboutUser())
+      }
     }
 
     let charMessages = character.getMessages(conversationStep)
