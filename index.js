@@ -6,6 +6,8 @@ import Screen from './Screen.js'
 import showMessenger from './helpers/showMessenger.js'
 import hideMessenger from './helpers/hideMessenger.js'
 import { sendAboutUser } from './actions/dataActions.js'
+import pageReload from './helpers/pageReload.js'
+import showReloadButton from './helpers/showReloadButton.js'
 
 document.addEventListener('DOMContentLoaded', function () {
   const selectCharUISettings = {
@@ -52,7 +54,10 @@ document.addEventListener('DOMContentLoaded', function () {
       if (userMessage === 'zapisz') {
         sendAboutUser(character.getMemoryAboutUser())
       }
-      return setTimeout(() => hideMessenger(), 2000)
+      return setTimeout(() => {
+        hideMessenger()
+        showReloadButton(pageReload)
+      }, 2000)
     }
 
     if (category === 'summary') {
