@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (memory.getIsListening()) {
       userMessage = character.setUpperLetter(userMessage)
       character.addToMemoryAboutUser(category, userMessage)
-      if (conversationStep === 1) {
+      if (category === 'origin') {
         character.addUserMessageToAnswer(userMessage, conversationStep, {
           place: 'start',
           where: 'addedToMemory',
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (elementFromMemory) {
           character.addToMemoryAboutUser(category, elementFromMemory)
-          if (conversationStep === 1) {
+          if (category === 'origin' || category === 'hobby') {
             character.addUserMessageToAnswer(
               elementFromMemory,
               conversationStep,
