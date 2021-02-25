@@ -44,8 +44,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const character = memory.getChar()
     const conversationStep = memory.getConversationStep()
     const category = memory.getCategory(conversationStep)
+
     let userMessage = memory.getUserMessage()
+    if (category === 'summary') {
+      const categories = memory.getCategories()
+      character.addAboutUserToMessages(category, categories)
+    }
+
     const messageCollection = character.getMessagesCollection(category)
+
     let charMessages = messageCollection.messages
 
     //Part when character wants to save new word in his memory

@@ -14,6 +14,10 @@ class Memory {
     return Memory.instance
   }
 
+  getCategories() {
+    return this.categories
+  }
+
   increaseConversationStep() {
     this.conversationStep++
   }

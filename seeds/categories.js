@@ -1,1 +1,1 @@
-export default ['introduce', 'origin']
+export default ['introduce', 'origin', 'summary']

@@ -56,4 +56,13 @@ export default class Character {
         ][0] += ` ${message}`)
     }
   }
+
+  addAboutUserToMessages(currentCategory, categories) {
+    categories.pop()
+    categories.forEach((category, index) => {
+      this.messages[currentCategory].messages[
+        index + 1
+      ] += this.memoryAboutUser[category]
+    })
+  }
 }
