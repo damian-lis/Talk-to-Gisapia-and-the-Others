@@ -4,6 +4,7 @@ import CharsFactory from './CharsFactory.js'
 import InputPanelUI from './InputPanelUI.js'
 import Screen from './Screen.js'
 import showMessenger from './helpers/showMessenger.js'
+import hideMessenger from './helpers/hideMessenger.js'
 import { sendAboutUser } from './actions/dataActions.js'
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -52,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
       character.addAboutUserToMessages(dataCategories, conversationStep)
       if (userMessage === 'zapisz') {
         sendAboutUser(character.getMemoryAboutUser())
+        return hideMessenger()
       }
     }
 

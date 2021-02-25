@@ -41,14 +41,18 @@ body {
   margin-top: -1270px;
 }
 
-.fallFromAbove {
-  animation: fallFromAbove 2s forwards;
-}
-
 @keyframes fallFromAbove {
   100% {
-    display: block;
     margin-top: 0;
+  }
+}
+
+@keyframes backToTheTop {
+  0% {
+    margin-top: 0;
+  }
+  100% {
+    margin-top: -1270px;
   }
 }
 
