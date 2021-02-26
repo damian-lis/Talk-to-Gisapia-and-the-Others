@@ -1,4 +1,5 @@
-// import categories from './seeds/categories.js'
+import BackgroundAnimation from './animations/BackgroundAnimation.js'
+import GisapiaAnimation from './animations/GisapiaAnimation.js'
 
 class Memory {
   constructor() {
@@ -9,9 +10,19 @@ class Memory {
       this.isCallAgain = false
       this.isListening = false
       this.isFinish = false
+      this.backgroundAnimation = this.backgroundAnimation()
+      this.gisapiaAnimation = this.gisapiaAnimation()
       Memory.instance = this
     }
     return Memory.instance
+  }
+
+  backgroundAnimation() {
+    new BackgroundAnimation()
+  }
+
+  gisapiaAnimation() {
+    new GisapiaAnimation()
   }
 
   setIsFinish(value) {

@@ -1,4 +1,5 @@
 import Character from './Character.js'
+import Animation from '../animations/GisapiaAnimation.js'
 
 export default class Gisapia extends Character {
   constructor(dataSets, memorySets) {
