@@ -27,7 +27,6 @@ export default class Screen {
   }
 
   attachToMessageContainer(container, ...elements) {
-    console.log(elements)
     elements.map((element) => container.appendChild(element))
   }
 
