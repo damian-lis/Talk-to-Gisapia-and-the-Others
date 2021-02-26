@@ -1,4 +1,4 @@
-import { buttons, subscriberTypes } from './data/globalNames.js'
+import { buttons, subscriberTypes } from '../data/globalNames.js'
 
 export default class SelectCharUI {
   constructor(container, charNames) {

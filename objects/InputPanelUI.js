@@ -1,4 +1,4 @@
-import { buttons, communiques } from './data/globalNames.js'
+import { buttons, communiques } from '../data/globalNames.js'
 
 export default class InputPanelUI {
   constructor(container) {
