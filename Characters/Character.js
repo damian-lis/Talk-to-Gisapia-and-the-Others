@@ -16,7 +16,7 @@ export default class Character {
     return result < 1000 ? 1000 : result
   }
 
-  getCategory(conversationStep) {
+  getCurrentCategory(conversationStep) {
     return this.dataSets[conversationStep].category
   }
 
@@ -30,8 +30,8 @@ export default class Character {
     return result
   }
 
-  getAnswers(conversationStep, { type }) {
-    return this.dataSets[conversationStep].answers[type]
+  getAnswers(conversationStep, { from }) {
+    return this.dataSets[conversationStep].answers[from]
   }
 
   mustThink(time) {

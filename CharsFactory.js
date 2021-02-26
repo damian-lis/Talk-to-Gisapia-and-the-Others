@@ -1,6 +1,7 @@
 import Gisapia from './characters/Gisapia.js'
 import dataSets from './data/gisapia/dataSets.js'
 import memorySets from './data/gisapia/memorySets.js'
+import { charNames } from './data/globalNames.js'
 
 export default class CharsFactory {
   constructor() {
@@ -9,7 +10,7 @@ export default class CharsFactory {
 
   getChar(charName) {
     switch (charName) {
-      case 'Gisapia':
+      case charNames.gisapia:
         return this.gisapia
     }
   }

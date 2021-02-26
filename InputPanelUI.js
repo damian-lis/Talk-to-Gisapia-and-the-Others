@@ -1,3 +1,5 @@
+import { buttons, communiques } from './data/globalNames.js'
+
 export default class InputPanelUI {
   constructor(container) {
     this.input = this.createInput()
@@ -18,7 +20,8 @@ export default class InputPanelUI {
           this.inputMessage = e.target.value
         } else {
           if (e.key === 'Enter') {
-            if (this.inputMessage === '') return alert('Musisz coś wpisać!')
+            if (this.inputMessage === '')
+              return alert(communiques.mustToWriteSomething)
             this.subscribers.forEach((s) => s(this.inputMessage))
           }
         }
@@ -30,11 +33,12 @@ export default class InputPanelUI {
 
   createButton() {
     const button = document.createElement('button')
-    button.textContent = 'Wyślij'
+    button.innerText = buttons.names.send
     button.disabled = true
 
     button.addEventListener('click', () => {
-      if (this.inputMessage === '') return alert('Musisz coś wpisać!')
+      if (this.inputMessage === '')
+        return alert(communiques.mustToWriteSomething)
       this.subscribers.forEach((s) => s(this.inputMessage))
     })
 

@@ -1,16 +1,22 @@
+import { buttons, subscriberTypes } from './data/globalNames.js'
+
 export default class SelectCharUI {
-  constructor({ container, charNames }) {
-    this.charButtons = this.createButtons(charNames, 'selectChar')
-    this.startButton = this.createButton('Porozmawiaj!', 'charTalking')
+  constructor(container, charNames) {
+    this.charButtons = this.createButtons(charNames, subscriberTypes.selectChar)
+    this.startButton = this.createButton(
+      buttons.names.letsTalk,
+      subscriberTypes.charTalking
+    )
     this.attachToContainer(container, ...this.charButtons, this.startButton)
     this.subscribers = {}
   }
 
   createButtons(charNames, type) {
     const buttons = []
-    charNames.map((character) =>
-      buttons.push(this.createButton(character, type))
+    Object.entries(charNames).map((charName) =>
+      buttons.push(this.createButton(charName[1], type))
     )
+
     return buttons
   }
 
@@ -19,12 +25,12 @@ export default class SelectCharUI {
     elements.map((element) => parent.appendChild(element))
   }
 
-  deleteButton(buttonName) {
-    switch (buttonName) {
-      case 'charButton':
+  deleteButton(buttonType) {
+    switch (buttonType) {
+      case buttons.types.character:
         return this.charButtons.map((button) => button.remove())
 
-      case 'startButton':
+      case buttons.types.start:
         return this.startButton.remove()
     }
   }

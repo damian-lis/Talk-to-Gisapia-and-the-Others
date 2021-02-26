@@ -8,6 +8,14 @@ import hideMessenger from './helpers/hideMessenger.js'
 import { sendAboutUser } from './actions/dataActions.js'
 import pageReload from './helpers/pageReload.js'
 import showReloadButton from './helpers/showReloadButton.js'
+import {
+  charNames,
+  answerVariants,
+  categories,
+  buttons,
+  communiques,
+  subscriberTypes,
+} from './data/globalNames.js'
 
 document.addEventListener('DOMContentLoaded', function () {
   const selectCharUISettings = {
@@ -15,29 +23,29 @@ document.addEventListener('DOMContentLoaded', function () {
     charNames: ['Gisapia', 'Ted', 'Jessica'],
   }
 
-  const selectCharUi = new SelectCharUI(selectCharUISettings)
+  const selectCharUi = new SelectCharUI('.selectCharUI-container', charNames)
   const charsFactory = new CharsFactory()
   const inputPanelUI = new InputPanelUI('.messenger-input-container')
   const screen = new Screen('.messenger-screen-container')
 
   //Select character part
   const handleSelectChar = (charName) => {
-    if (charName !== 'Gisapia')
-      return alert('Ta postać na razie jest niedostępna. Wybierz inną!')
+    if (charName !== charNames.gisapia)
+      return alert(communiques.characterDoesntExist)
 
-    selectCharUi.deleteButton('charButton')
-    const character = charsFactory.getChar(charName)
-    memory.setSelectedChar(character)
+    selectCharUi.deleteButton(buttons.types.character)
+    const chosenChar = charsFactory.getChar(charName)
+    memory.setSelectedChar(chosenChar)
   }
 
-  selectCharUi.subscribe(handleSelectChar, 'selectChar')
+  selectCharUi.subscribe(handleSelectChar, subscriberTypes.selectChar)
 
   const checkSelectedChar = () => {
-    const character = memory.getChar()
+    const chosenChar = memory.getChar()
 
-    if (!character) return alert('Wybierz rozmówcę!')
+    if (!chosenChar) return alert(communiques.selectChar)
 
-    selectCharUi.deleteButton('startButton')
+    selectCharUi.deleteButton(buttons.types.start)
 
     showMessenger()
     handleCharTalking()
@@ -47,12 +55,12 @@ document.addEventListener('DOMContentLoaded', function () {
   const handleCharTalking = async () => {
     let userMessage = memory.getUserMessage()
     const conversationStep = memory.getConversationStep()
-    const character = memory.getChar()
-    const category = character.getCategory(conversationStep)
+    const chosenChar = memory.getChar()
+    const currentCategory = chosenChar.getCurrentCategory(conversationStep)
 
     if (memory.getIsFinish()) {
       if (userMessage === 'zapisz') {
-        sendAboutUser(character.getMemoryAboutUser())
+        sendAboutUser(chosenChar.getMemoryAboutUser())
       }
       return setTimeout(() => {
         hideMessenger()
@@ -60,31 +68,31 @@ document.addEventListener('DOMContentLoaded', function () {
       }, 2000)
     }
 
-    if (category === 'summary') {
+    if (currentCategory === categories.summary) {
       memory.setIsFinish(true)
-      const dataCategories = character.getAllCategories()
-      character.addAboutUserToMessages(dataCategories, conversationStep)
+      const dataCategories = chosenChar.getAllCategories()
+      chosenChar.addAboutUserToMessages(dataCategories, conversationStep)
     }
 
-    let charMessages = character.getMessages(conversationStep)
+    let charMessages = chosenChar.getMessages(conversationStep)
 
     //Part when character wants to save new word in his memory
     if (memory.getIsListening()) {
-      userMessage = character.setUpperLetter(userMessage)
-      character.addToMemoryAboutUser(category, userMessage)
-      if (category === 'origin') {
-        character.addUserMessageToAnswer(userMessage, conversationStep, {
+      userMessage = chosenChar.setUpperLetter(userMessage)
+      chosenChar.addToMemoryAboutUser(currentCategory, userMessage)
+      if (currentCategory === categories.origin) {
+        chosenChar.addUserMessageToAnswer(userMessage, conversationStep, {
           place: 'start',
-          where: 'addedToMemory',
+          where: answerVariants.isInMemory,
         })
       } else {
-        character.addUserMessageToAnswer(userMessage, conversationStep, {
+        chosenChar.addUserMessageToAnswer(userMessage, conversationStep, {
           place: 'end',
-          where: 'addedToMemory',
+          where: answerVariants.addedToMemory,
         })
       }
-      charMessages = character.getAnswers(conversationStep, {
-        type: 'addedToMemory',
+      charMessages = chosenChar.getAnswers(conversationStep, {
+        from: answerVariants.addedToMemory,
       })
       memory.setUserMessage('')
       memory.setIsCallAgain(true)
@@ -93,41 +101,44 @@ document.addEventListener('DOMContentLoaded', function () {
     // Part where character checks typed word in his memory
     else {
       if (userMessage) {
-        const elementFromMemory = character.checkUserMessageInMemory(
-          category,
+        const elementFromMemory = chosenChar.checkUserMessageInMemory(
+          currentCategory,
           userMessage
         )
 
         if (elementFromMemory) {
-          character.addToMemoryAboutUser(category, elementFromMemory)
-          if (category === 'origin' || category === 'hobby') {
-            character.addUserMessageToAnswer(
+          chosenChar.addToMemoryAboutUser(currentCategory, elementFromMemory)
+          if (
+            currentCategory === categories.origin ||
+            currentCategory === categories.hobby
+          ) {
+            chosenChar.addUserMessageToAnswer(
               elementFromMemory,
               conversationStep,
               {
                 place: 'start',
-                where: 'isInMemory',
+                where: answerVariants.isInMemory,
               }
             )
           } else {
-            character.addUserMessageToAnswer(
+            chosenChar.addUserMessageToAnswer(
               elementFromMemory,
               conversationStep,
               {
                 place: 'end',
-                where: 'isInMemory',
+                where: answerVariants.isInMemory,
               }
             )
           }
 
-          charMessages = character.getAnswers(conversationStep, {
-            type: 'isInMemory',
+          charMessages = chosenChar.getAnswers(conversationStep, {
+            from: answerVariants.isInMemory,
           })
           memory.setUserMessage('')
           memory.setIsCallAgain(true)
         } else {
-          charMessages = character.getAnswers(conversationStep, {
-            type: 'isNotInMemory',
+          charMessages = chosenChar.getAnswers(conversationStep, {
+            from: answerVariants.isNotInMemory,
           })
           memory.setIsListening(true)
         }
@@ -135,24 +146,25 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     //Part about character typing
+
     for (let i = 0; i < charMessages.length; i++) {
       const charMessage = charMessages[i]
 
-      let timeForTyping = character.countTimeForTyping(charMessage.length, 80)
-      const typingQuantity = character.countTypingQuantity(charMessage.length)
+      let timeForTyping = chosenChar.countTimeForTyping(charMessage.length, 80)
+      const typingQuantity = chosenChar.countTypingQuantity(charMessage.length)
 
       for (let i = 0; i < typingQuantity; i++) {
         if (i >= 1) {
-          timeForTyping = character.changeTimeForTyping(timeForTyping)
+          timeForTyping = chosenChar.changeTimeForTyping(timeForTyping)
         }
 
-        await character.mustThink(500)
+        await chosenChar.mustThink(500)
         await screen.showTyping(timeForTyping)
       }
 
       const messageContainer = screen.createMessageContainer()
-      const message = screen.createMessage(charMessage, character.name)
-      const avatar = screen.createAvatar(character.avatar)
+      const message = screen.createMessage(charMessage, chosenChar.name)
+      const avatar = screen.createAvatar(chosenChar.avatar)
 
       screen.attachToMessageContainer(messageContainer, message, avatar)
       screen.attachToScreen(messageContainer)
@@ -167,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function () {
     inputPanelUI.activatePanel()
   }
 
-  selectCharUi.subscribe(checkSelectedChar, 'charTalking')
+  selectCharUi.subscribe(checkSelectedChar, subscriberTypes.charTalking)
 
   //User talking process
   const handleUserTalking = (userMessage) => {

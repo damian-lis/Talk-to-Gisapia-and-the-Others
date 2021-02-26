@@ -57,10 +57,6 @@ class Memory {
     return this.userMessage
   }
 
-  // getCategory(step) {
-  //   return this.categories[step]
-  // }
-
   setNumberOfQuestion(number) {
     this.numberOfQuestion = number
   }
