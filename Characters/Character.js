@@ -1,7 +1,7 @@
 export default class Character {
-  constructor(dataSets, memorySets) {
-    this.dataSets = dataSets
-    this.memorySets = memorySets
+  constructor(scriptTalk, memory) {
+    this.scriptTalk = scriptTalk
+    this.memory = memory
     this.memoryAboutUser = {}
   }
 
@@ -17,35 +17,35 @@ export default class Character {
   }
 
   getCurrentCategory(conversationStep) {
-    return this.dataSets[conversationStep].category
+    return this.scriptTalk[conversationStep].category
   }
 
-  getMessages(conversationStep) {
-    return this.dataSets[conversationStep].messages
+  getScriptMessages(conversationStep) {
+    return this.scriptTalk[conversationStep].messages
   }
 
-  getAllCategories() {
+  getScriptCategories() {
     let result = []
-    this.dataSets.map((dataSet) => result.push(dataSet.category))
+    this.scriptTalk.map((part) => result.push(part.category))
     return result
   }
 
-  getAnswers(conversationStep, { from }) {
-    return this.dataSets[conversationStep].answers[from]
+  getScriptAnswers(conversationStep, { from }) {
+    return this.scriptTalk[conversationStep].answers[from]
   }
 
   mustThink(time) {
     return new Promise((resolve) => setTimeout(resolve, time))
   }
 
-  checkUserMessageInMemory(category, message) {
-    return this.memorySets[category].find((word) =>
+  checkUserMessageInMemory(scriptCategory, message) {
+    return this.memory[scriptCategory].find((word) =>
       message.toLowerCase().includes(word.toLowerCase())
     )
   }
 
-  addToMemoryAboutUser(category, word) {
-    this.memoryAboutUser[category] = word
+  addToMemoryAboutUser(scriptCategory, word) {
+    this.memoryAboutUser[scriptCategory] = word
   }
 
   setUpperLetter(message) {
@@ -74,22 +74,21 @@ export default class Character {
   addUserMessageToAnswer(message, conversationStep, { place, where }) {
     switch (place) {
       case 'start':
-        return (this.dataSets[conversationStep].answers[where][0] =
-          message + ' ' + this.dataSets[conversationStep].answers[where][0])
+        return (this.scriptTalk[conversationStep].answers[where][0] =
+          message + ' ' + this.scriptTalk[conversationStep].answers[where][0])
       case 'end':
-        return (this.dataSets[conversationStep].answers[
+        return (this.scriptTalk[conversationStep].answers[
           where
         ][0] += ` ${message}`)
     }
   }
 
-  addAboutUserToMessages(categories, conversationStep) {
-    console.log(this.dataSets[conversationStep])
-    categories.pop()
-    categories.forEach((category, index) => {
-      this.dataSets[conversationStep].messages[
+  addAboutUserToMessages(scriptCategories, conversationStep) {
+    scriptCategories.pop()
+    scriptCategories.forEach((scriptCategory, index) => {
+      this.scriptTalk[conversationStep].messages[
         index + 1
-      ] += this.memoryAboutUser[category]
+      ] += this.memoryAboutUser[scriptCategory]
     })
   }
 }

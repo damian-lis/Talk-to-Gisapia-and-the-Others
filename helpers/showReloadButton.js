@@ -1,4 +1,4 @@
-import { communiques } from './data/globalNames.js'
+import { communiques } from '../data/globalNames.js'
 
 export default (callback) => {
   const button = document.createElement('button')

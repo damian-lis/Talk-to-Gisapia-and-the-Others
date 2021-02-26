@@ -70,11 +70,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (currentCategory === categories.summary) {
       memory.setIsFinish(true)
-      const dataCategories = chosenChar.getAllCategories()
-      chosenChar.addAboutUserToMessages(dataCategories, conversationStep)
+      const scriptCategories = chosenChar.getScriptCategories()
+      chosenChar.addAboutUserToMessages(scriptCategories, conversationStep)
     }
 
-    let charMessages = chosenChar.getMessages(conversationStep)
+    let charMessages = chosenChar.getScriptMessages(conversationStep)
 
     //Part when character wants to save new word in his memory
     if (memory.getIsListening()) {
@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
           where: answerVariants.addedToMemory,
         })
       }
-      charMessages = chosenChar.getAnswers(conversationStep, {
+      charMessages = chosenChar.getScriptAnswers(conversationStep, {
         from: answerVariants.addedToMemory,
       })
       memory.setUserMessage('')
@@ -131,13 +131,13 @@ document.addEventListener('DOMContentLoaded', function () {
             )
           }
 
-          charMessages = chosenChar.getAnswers(conversationStep, {
+          charMessages = chosenChar.getScriptAnswers(conversationStep, {
             from: answerVariants.isInMemory,
           })
           memory.setUserMessage('')
           memory.setIsCallAgain(true)
         } else {
-          charMessages = chosenChar.getAnswers(conversationStep, {
+          charMessages = chosenChar.getScriptAnswers(conversationStep, {
             from: answerVariants.isNotInMemory,
           })
           memory.setIsListening(true)
