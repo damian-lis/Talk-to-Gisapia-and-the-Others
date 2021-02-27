@@ -1,6 +1,5 @@
 import Gisapia from '../characters/Gisapia.js'
-import scriptTalk from '../data/gisapia/scriptTalk.js'
-import memory from '../data/gisapia/memory.js'
+import { scriptTalk, memory } from '../data/gisapia/index.js'
 import { charNames } from '../data/globalNames.js'
 
 export default class CharsFactory {

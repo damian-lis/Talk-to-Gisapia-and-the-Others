@@ -1,5 +1,4 @@
-import BackgroundAnimation from '../objects/animations/BackgroundAnimation.js'
-import GisapiaAnimation from '../objects/animations/GisapiaAnimation.js'
+import { GisapiaAnimation, BackgroundAnimation } from '../objects/index.js'
 
 class Memory {
   constructor() {

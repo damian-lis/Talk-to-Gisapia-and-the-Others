@@ -1,4 +1,4 @@
-import createElementFn from '../helpers/createElementFn.js'
+import { createElementFn } from '../helpers/index.js'
 
 export default class Screen {
   constructor(container) {

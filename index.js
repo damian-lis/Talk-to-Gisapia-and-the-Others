@@ -1,13 +1,18 @@
-import memory from './objects/Memory.js'
-import SelectCharUI from './objects/SelectCharUI.js'
-import CharsFactory from './objects/CharsFactory.js'
-import InputPanelUI from './objects/InputPanelUI.js'
-import Screen from './objects/Screen.js'
-import showMessenger from './helpers/showMessenger.js'
-import hideMessenger from './helpers/hideMessenger.js'
 import { sendAboutUser } from './actions/dataActions.js'
-import pageReload from './helpers/pageReload.js'
-import showReloadButton from './helpers/showReloadButton.js'
+import {
+  memory,
+  SelectCharUI,
+  CharsFactory,
+  InputPanelUI,
+  Screen,
+} from './objects/index.js'
+
+import {
+  showReloadButton,
+  pageReload,
+  showMessenger,
+  hideMessenger,
+} from '../helpers/index.js'
 import {
   charNames,
   answerVariants,
@@ -18,11 +23,6 @@ import {
 } from './data/globalNames.js'
 
 document.addEventListener('DOMContentLoaded', function () {
-  const selectCharUISettings = {
-    container: '.selectCharUI-container',
-    charNames: ['Gisapia', 'Ted', 'Jessica'],
-  }
-
   const selectCharUi = new SelectCharUI('.selectCharUI-container', charNames)
   const charsFactory = new CharsFactory()
   const inputPanelUI = new InputPanelUI('.messenger-input-container')

@@ -1,5 +1,5 @@
 import { buttons, subscriberTypes } from '../data/globalNames.js'
-import createElementFn from '../helpers/createElementFn.js'
+import { createElementFn } from '../helpers/index.js'
 
 export default class SelectCharUI {
   constructor(container, charNames) {

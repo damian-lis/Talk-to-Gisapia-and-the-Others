@@ -1,4 +1,4 @@
-export default class GisapiaAnimation {
+class GisapiaAnimation {
   constructor() {
     this.gisapiaSVG = this.getSVG()
     this.animation = this.startAnimation()
@@ -80,3 +80,5 @@ export default class GisapiaAnimation {
     return tl
   }
 }
+
+export default GisapiaAnimation

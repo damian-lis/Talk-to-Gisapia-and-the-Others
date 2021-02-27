@@ -1,6 +1,5 @@
 import { buttons, communiques } from '../data/globalNames.js'
-import createElementFn from '../helpers/createElementFn.js'
-import runAlertOrForEachFn from '../helpers/runAlertOrForEachFn.js'
+import { createElementFn, runAlertOrForEachFn } from '../helpers/index.js'
 
 export default class InputPanelUI {
   constructor(container) {
