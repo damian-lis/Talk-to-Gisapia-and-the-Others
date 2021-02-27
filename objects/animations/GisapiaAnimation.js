@@ -1,10 +1,16 @@
+import { setScale } from '../../helpers/index.js'
+
 class GisapiaAnimation {
   constructor() {
-    this.gisapiaSVG = this.getSVG()
+    this.gisapiaObject = this.getObjectContent()
+    this.lips = this.gisapiaObject.querySelector('#lips')
+    this.rightHand = this.gisapiaObject.querySelector('#right-hand')
+    this.hair = this.gisapiaObject.querySelector('#hair')
+    this.eyes = this.gisapiaObject.querySelector('#eyes')
     this.animation = this.startAnimation()
   }
 
-  getSVG() {
+  getObjectContent() {
     return document.querySelector('#gisapiasvg').contentDocument
   }
 
@@ -22,12 +28,8 @@ class GisapiaAnimation {
     const tl = new TimelineMax({
       onComplete: this.lipsAnimation,
     })
-    const lips = this.gisapiaSVG.querySelector('#lips')
-    const scale = () => {
-      return Math.random() * 0.2 + 1
-    }
-    tl.to(lips, 0.1, {
-      scale: scale,
+    tl.to(this.lips, 0.1, {
+      scale: setScale(0.2, 1),
       yoyo: true,
       transformOrigin: '50% 50%',
     })
@@ -36,11 +38,10 @@ class GisapiaAnimation {
 
   rightHandAnimation = () => {
     const tl = new TimelineMax()
-    const rightHand = this.gisapiaSVG.querySelector('#right-hand')
-    tl.set(rightHand, {
+    tl.set(this.rightHand, {
       rotation: -10,
       transformOrigin: '5% 100%',
-    }).to(rightHand, 0.5, {
+    }).to(this.rightHand, 0.5, {
       rotation: 10,
       transformOrigin: '5% 100%',
       yoyo: true,
@@ -54,12 +55,8 @@ class GisapiaAnimation {
     const tl = new TimelineMax({
       onComplete: this.hairAnimation,
     })
-    const hair = this.gisapiaSVG.querySelector('#hair')
-    const scale = () => {
-      return Math.random() * 0.03 + 0.97
-    }
-    tl.to(hair, 1, {
-      scale: scale,
+    tl.to(this.hair, 1, {
+      scale: setScale(0.03, 0.97),
       transformOrigin: '50% 50%',
     })
     return tl
@@ -69,12 +66,8 @@ class GisapiaAnimation {
     const tl = new TimelineMax({
       onComplete: this.eyesAnimation,
     })
-    const eyes = this.gisapiaSVG.querySelector('#eyes')
-    const scale = () => {
-      return Math.random() * 0.05 + 1
-    }
-    tl.to(eyes, 1, {
-      scale: scale,
+    tl.to(this.eyes, 1, {
+      scale: setScale(0.05, 1),
       transformOrigin: '50% 50%',
     })
     return tl
