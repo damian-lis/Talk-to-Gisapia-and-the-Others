@@ -1,4 +1,6 @@
 import { buttons, communiques } from '../data/globalNames.js'
+import createElementFn from '../helpers/createElementFn.js'
+import runAlertOrForEachFn from '../helpers/runAlertOrForEachFn.js'
 
 export default class InputPanelUI {
   constructor(container) {
@@ -10,8 +12,10 @@ export default class InputPanelUI {
   }
 
   createInput() {
-    const input = document.createElement('input')
-    input.disabled = true
+    const input = createElementFn({
+      elementToCreate: 'input',
+      disabled: true,
+    })
 
     const events = ['input', 'keypress']
     events.map((event) => {
@@ -20,9 +24,11 @@ export default class InputPanelUI {
           this.inputMessage = e.target.value
         } else {
           if (e.key === 'Enter') {
-            if (this.inputMessage === '')
-              return alert(communiques.mustToWriteSomething)
-            this.subscribers.forEach((s) => s(this.inputMessage))
+            runAlertOrForEachFn({
+              elements: this.subscribers,
+              alertMessage: communiques.mustToWriteSomething,
+              toSendInFn: this.inputMessage,
+            })
           }
         }
       })
@@ -32,14 +38,18 @@ export default class InputPanelUI {
   }
 
   createButton() {
-    const button = document.createElement('button')
-    button.innerText = buttons.names.send
-    button.disabled = true
+    const button = createElementFn({
+      elementToCreate: 'button',
+      text: buttons.names.send,
+      disabled: true,
+    })
 
     button.addEventListener('click', () => {
-      if (this.inputMessage === '')
-        return alert(communiques.mustToWriteSomething)
-      this.subscribers.forEach((s) => s(this.inputMessage))
+      runAlertOrForEachFn({
+        elements: this.subscribers,
+        alertMessage: communiques.mustToWriteSomething,
+        toSendInFn: this.inputMessage,
+      })
     })
 
     return button

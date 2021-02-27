@@ -1,4 +1,5 @@
 import { buttons, subscriberTypes } from '../data/globalNames.js'
+import createElementFn from '../helpers/createElementFn.js'
 
 export default class SelectCharUI {
   constructor(container, charNames) {
@@ -36,9 +37,7 @@ export default class SelectCharUI {
   }
 
   createButton(name, type) {
-    let button
-    button = document.createElement('button')
-    button.textContent = name
+    const button = createElementFn({ elementToCreate: 'button', text: name })
     button.addEventListener('click', () => {
       this.subscribers[type](name)
     })

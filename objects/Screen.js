@@ -1,3 +1,5 @@
+import createElementFn from '../helpers/createElementFn.js'
+
 export default class Screen {
   constructor(container) {
     this.screen = this.createScreen()
@@ -6,23 +8,30 @@ export default class Screen {
   }
 
   createMessageContainer() {
-    const messageContainer = document.createElement('div')
-    messageContainer.classList.add('message-container')
+    const messageContainer = createElementFn({
+      elementToCreate: 'div',
+      classesName: ['message-container'],
+    })
+
     return messageContainer
   }
 
   createMessage(text, whoTalking) {
-    const message = document.createElement('p')
-    message.innerText = text
-    message.classList.add('message')
-    message.classList.add(`message-${whoTalking}`)
+    const message = createElementFn({
+      elementToCreate: 'p',
+      text,
+      classesName: ['message', `message-${whoTalking}`],
+    })
+
     return message
   }
 
   createAvatar(imagePath) {
-    const avatar = document.createElement('img')
-    avatar.src = imagePath
-    avatar.classList.add('character-avatar')
+    const avatar = createElementFn({
+      elementToCreate: 'img',
+      src: imagePath,
+      classesName: ['character-avatar'],
+    })
     return avatar
   }
 
@@ -31,8 +40,11 @@ export default class Screen {
   }
 
   createScreen() {
-    const screen = document.createElement('div')
-    screen.classList.add('screen')
+    const screen = createElementFn({
+      elementToCreate: 'div',
+      classesName: ['screen'],
+    })
+
     return screen
   }
 
@@ -56,12 +68,17 @@ export default class Screen {
   }
 
   createLoader() {
-    const circleContainer = document.createElement('div')
-    circleContainer.setAttribute('id', 'circle-container')
+    const circleContainer = createElementFn({
+      elementToCreate: 'div',
+      attributes: [{ type: 'id', name: 'circle-container' }],
+    })
+
     for (let i = 0; i < 3; i++) {
-      const circle = document.createElement('div')
-      circle.classList.add('circle')
-      circle.setAttribute('id', `ball-${i + 1}`)
+      const circle = createElementFn({
+        elementToCreate: 'div',
+        attributes: [{ type: 'id', name: `ball-${i + 1}` }],
+        classesName: ['circle'],
+      })
       circleContainer.appendChild(circle)
     }
 
