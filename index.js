@@ -7,12 +7,7 @@ import {
   Screen,
 } from './objects/index.js'
 
-import {
-  showReloadButton,
-  pageReload,
-  showMessenger,
-  hideMessenger,
-} from '../helpers/index.js'
+import { showReloadButton, pageReload, runElement } from '../helpers/index.js'
 import {
   charNames,
   answerVariants,
@@ -47,9 +42,16 @@ document.addEventListener('DOMContentLoaded', function () {
       return selectCharUi.removeActive(selectCharUi.getCharButtons())
     }
 
-    selectCharUi.deleteButton(buttons.types.start)
-
-    showMessenger()
+    runElement([
+      {
+        name: '.selectCharUI-container',
+        animation: 'bottomHide forwards 1s',
+      },
+      {
+        name: '.messenger-container',
+        animation: 'fallFromAbove 2s forwards',
+      },
+    ])
     handleCharTalking()
   }
 
@@ -65,7 +67,12 @@ document.addEventListener('DOMContentLoaded', function () {
         sendAboutUser(chosenChar.getMemoryAboutUser())
       }
       return setTimeout(() => {
-        hideMessenger()
+        runElement([
+          {
+            name: '.messenger-container',
+            animation: 'backToTheTop 2s forwards',
+          },
+        ])
         showReloadButton(pageReload)
       }, 2000)
     }
