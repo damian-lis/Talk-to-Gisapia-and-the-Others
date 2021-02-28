@@ -3,7 +3,8 @@ import { createElementFn } from '../helpers/index.js'
 
 export default class SelectCharUI {
   constructor(charNames, container) {
-    const introduce = this.createHeadline()
+    this.container = container
+    this.headline = this.createHeadline()
     this.charButtons = this.createButtons(charNames, subscriberTypes.selectChar)
     this.startButton = this.createButton(
       buttons.names.letsTalk,
@@ -11,12 +12,21 @@ export default class SelectCharUI {
     )
 
     this.attachToContainer(
-      container,
-      introduce,
+      this.container,
+      this.headline,
       ...this.charButtons,
       this.startButton
     )
     this.subscribers = {}
+  }
+
+  deleteButtons(...buttons) {
+    buttons.map((button) => button.remove())
+  }
+
+  showEndMessage() {
+    this.deleteButtons(...this.charButtons, this.startButton)
+    this.headline.innerText = 'Spawdź swojego maila!'
   }
 
   createHeadline() {
@@ -52,16 +62,6 @@ export default class SelectCharUI {
   setActive(element) {
     this.removeActive(this.charButtons)
     element && element.classList.add('active')
-  }
-
-  deleteButton(buttonType) {
-    switch (buttonType) {
-      case buttons.types.character:
-        return this.charButtons.map((button) => button.remove())
-
-      case buttons.types.start:
-        return this.startButton.remove()
-    }
   }
 
   createButton(name, type) {

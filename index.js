@@ -69,11 +69,15 @@ document.addEventListener('DOMContentLoaded', function () {
       return setTimeout(() => {
         runElement([
           {
+            name: '.selectCharUI-container',
+            animation: 'bottomHide reverse 1s',
+          },
+          {
             name: '.messenger-container',
             animation: 'backToTheTop 2s forwards',
           },
         ])
-        showReloadButton(pageReload)
+        selectCharUi.showEndMessage()
       }, 2000)
     }
 
