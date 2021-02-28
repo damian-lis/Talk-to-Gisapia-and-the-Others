@@ -41,6 +41,19 @@ export default class SelectCharUI {
     elements.map((element) => parent.appendChild(element))
   }
 
+  removeActive(elements) {
+    elements.map((element) => element.classList.remove('active'))
+  }
+
+  getCharButtons() {
+    return this.charButtons
+  }
+
+  setActive(element) {
+    this.removeActive(this.charButtons)
+    element && element.classList.add('active')
+  }
+
   deleteButton(buttonType) {
     switch (buttonType) {
       case buttons.types.character:
@@ -59,6 +72,9 @@ export default class SelectCharUI {
     })
     button.addEventListener('click', () => {
       this.subscribers[type](name)
+      if (type !== subscriberTypes.charTalking) {
+        this.setActive(button)
+      }
     })
     return button
   }

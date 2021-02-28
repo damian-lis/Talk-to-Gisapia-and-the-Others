@@ -215,6 +215,10 @@ body {
   background-color: rgb(212, 103, 0);
 }
 
+.selectChar.active {
+  background-color: red;
+}
+
 #gisapiasvg {
   position: absolute;
   bottom: 0;
