@@ -23,7 +23,7 @@ import {
 } from './data/globalNames.js'
 
 document.addEventListener('DOMContentLoaded', function () {
-  const selectCharUi = new SelectCharUI('.selectCharUI-container', charNames)
+  const selectCharUi = new SelectCharUI(charNames, '.selectCharUI-container')
   const charsFactory = new CharsFactory()
   const inputPanelUI = new InputPanelUI('.messenger-input-container')
   const screen = new Screen('.messenger-screen-container')

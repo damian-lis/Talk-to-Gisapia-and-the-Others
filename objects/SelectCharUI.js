@@ -2,14 +2,29 @@ import { buttons, subscriberTypes } from '../data/globalNames.js'
 import { createElementFn } from '../helpers/index.js'
 
 export default class SelectCharUI {
-  constructor(container, charNames) {
+  constructor(charNames, container) {
+    const introduce = this.createHeadline()
     this.charButtons = this.createButtons(charNames, subscriberTypes.selectChar)
     this.startButton = this.createButton(
       buttons.names.letsTalk,
       subscriberTypes.charTalking
     )
-    this.attachToContainer(container, ...this.charButtons, this.startButton)
+
+    this.attachToContainer(
+      container,
+      introduce,
+      ...this.charButtons,
+      this.startButton
+    )
     this.subscribers = {}
+  }
+
+  createHeadline() {
+    const headline = createElementFn({
+      elementToCreate: 'h1',
+      text: 'Wybierz swojego rozmówcę!',
+    })
+    return headline
   }
 
   createButtons(charNames, type) {
@@ -37,7 +52,11 @@ export default class SelectCharUI {
   }
 
   createButton(name, type) {
-    const button = createElementFn({ elementToCreate: 'button', text: name })
+    const button = createElementFn({
+      elementToCreate: 'button',
+      text: name,
+      classesName: [`${type}`],
+    })
     button.addEventListener('click', () => {
       this.subscribers[type](name)
     })
