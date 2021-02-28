@@ -7,13 +7,11 @@ import {
   Screen,
 } from './objects/index.js'
 
-import { showReloadButton, pageReload, runElement } from '../helpers/index.js'
+import { runElement } from '../helpers/index.js'
 import {
   charNames,
   answerVariants,
   categories,
-  buttons,
-  communiques,
   subscriberTypes,
 } from './data/globalNames.js'
 
@@ -28,14 +26,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const chosenChar = charsFactory.getChar(charName)
     memory.setSelectedChar(chosenChar)
   }
-
   selectCharUi.subscribe(handleSelectChar, subscriberTypes.selectChar)
 
   const checkSelectedChar = () => {
     const chosenChar = memory.getChar()
 
     if (!chosenChar) {
-      return alert(communiques.selectChar)
+      return alert('Wybierz rozmówcę!')
     } else if (chosenChar.name === null) {
       memory.setSelectedChar(null)
       alert('Dostepna w przyszłości')

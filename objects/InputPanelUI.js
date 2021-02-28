@@ -1,4 +1,4 @@
-import { buttons, communiques } from '../data/globalNames.js'
+import { buttons } from '../data/globalNames.js'
 import { createElementFn, runAlertOrForEachFn } from '../helpers/index.js'
 
 export default class InputPanelUI {
@@ -25,7 +25,7 @@ export default class InputPanelUI {
           if (e.key === 'Enter') {
             runAlertOrForEachFn({
               elements: this.subscribers,
-              alertMessage: communiques.mustToWriteSomething,
+              alertMessage: 'Musisz coś napisać!',
               toSendInFn: this.inputMessage,
             })
           }
@@ -46,7 +46,7 @@ export default class InputPanelUI {
     button.addEventListener('click', () => {
       runAlertOrForEachFn({
         elements: this.subscribers,
-        alertMessage: communiques.mustToWriteSomething,
+        alertMessage: 'Musisz coś napisać',
         toSendInFn: this.inputMessage,
       })
     })

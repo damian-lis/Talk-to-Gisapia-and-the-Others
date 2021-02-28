@@ -4,7 +4,10 @@ import { createElementFn } from '../helpers/index.js'
 export default class SelectCharUI {
   constructor(charNames, container) {
     this.container = container
-    this.headline = this.createHeadline()
+    this.headline = createElementFn({
+      elementToCreate: 'h1',
+      text: 'Wybierz swojego rozmówcę!',
+    })
     this.charButtons = this.createButtons(charNames, subscriberTypes.selectChar)
     this.startButton = this.createButton(
       buttons.names.letsTalk,
@@ -20,21 +23,13 @@ export default class SelectCharUI {
     this.subscribers = {}
   }
 
-  deleteButtons(...buttons) {
-    buttons.map((button) => button.remove())
+  deleteElements(...elements) {
+    elements.map((element) => element.remove())
   }
 
   showEndMessage() {
-    this.deleteButtons(...this.charButtons, this.startButton)
+    this.deleteElements(...this.charButtons, this.startButton)
     this.headline.innerText = 'Spawdź swojego maila!'
-  }
-
-  createHeadline() {
-    const headline = createElementFn({
-      elementToCreate: 'h1',
-      text: 'Wybierz swojego rozmówcę!',
-    })
-    return headline
   }
 
   createButtons(charNames, type) {
