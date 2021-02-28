@@ -1,8 +1,7 @@
-import { charNames, answerVariants, categories } from '../globalNames.js'
+import { charNames, answerVariants, scriptCategories } from '../globalNames.js'
 
-export default [
-  {
-    category: categories.name,
+export default {
+  [scriptCategories.name]: {
     messages: [
       'Cześć!',
       `Nazywam się ${charNames.gisapia}`,
@@ -23,8 +22,8 @@ export default [
       ],
     },
   },
-  {
-    category: categories.origin,
+
+  [scriptCategories.origin]: {
     messages: ['Skąd w ogóle jesteś jezeli mogę wiedzieć?'],
     answers: {
       [answerVariants.isInMemory]: ['to piękna miejscowość', 'Bla bla'],
@@ -37,9 +36,7 @@ export default [
       ],
     },
   },
-
-  {
-    category: categories.hobby,
+  [scriptCategories.hobby]: {
     messages: ['Powiedz mi jakie masz hobby?'],
     answers: {
       [answerVariants.isInMemory]: [
@@ -56,9 +53,7 @@ export default [
       ],
     },
   },
-
-  {
-    category: categories.summary,
+  [scriptCategories.summary]: {
     messages: [
       'Okej to co udało mi się zapamiętać odnośnie Ciebie',
       'Masz na imię ',
@@ -70,4 +65,4 @@ export default [
       'Jezeli nie chcesz to napisz cokolwiek a sobie pójdę :)!',
     ],
   },
-]
+}

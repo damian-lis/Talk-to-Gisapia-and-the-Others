@@ -16,12 +16,9 @@ export default class Character {
     return result < 1000 ? 1000 : result
   }
 
-  getCurrentCategory(conversationStep) {
-    return this.scriptTalk[conversationStep].category
-  }
-
-  getScriptMessages(conversationStep) {
-    return this.scriptTalk[conversationStep].messages
+  getScriptMessages(currentCategory) {
+    console.log(currentCategory)
+    return this.scriptTalk[currentCategory].messages
   }
 
   getScriptCategories() {
@@ -30,8 +27,8 @@ export default class Character {
     return result
   }
 
-  getScriptAnswers(conversationStep, { from }) {
-    return this.scriptTalk[conversationStep].answers[from]
+  getScriptAnswers(currentCategory, { from }) {
+    return this.scriptTalk[currentCategory].answers[from]
   }
 
   mustThink(time) {
@@ -71,22 +68,22 @@ export default class Character {
     return result > 2500 ? 2500 : result < 1000 ? 1000 : result
   }
 
-  addUserMessageToAnswer(message, conversationStep, { place, where }) {
+  addUserMessageToAnswer(message, currentCategory, { place, where }) {
     switch (place) {
       case 'start':
-        return (this.scriptTalk[conversationStep].answers[where][0] =
-          message + ' ' + this.scriptTalk[conversationStep].answers[where][0])
+        return (this.scriptTalk[currentCategory].answers[where][0] =
+          message + ' ' + this.scriptTalk[currentCategory].answers[where][0])
       case 'end':
-        return (this.scriptTalk[conversationStep].answers[
+        return (this.scriptTalk[currentCategory].answers[
           where
         ][0] += ` ${message}`)
     }
   }
 
-  addAboutUserToMessages(scriptCategories, conversationStep) {
+  addAboutUserToMessages(scriptCategories, currentCategory) {
     scriptCategories.pop()
     scriptCategories.forEach((scriptCategory, index) => {
-      this.scriptTalk[conversationStep].messages[
+      this.scriptTalk[currentCategory].messages[
         index + 1
       ] += this.memoryAboutUser[scriptCategory]
     })

@@ -11,7 +11,7 @@ import { runElement } from '../helpers/index.js'
 import {
   charNames,
   answerVariants,
-  categories,
+  scriptCategories,
   subscriberTypes,
 } from './data/globalNames.js'
 
@@ -55,9 +55,8 @@ document.addEventListener('DOMContentLoaded', function () {
   //Character talking process
   const handleCharTalking = async () => {
     let userMessage = memory.getUserMessage()
-    const conversationStep = memory.getConversationStep()
+    const currentScriptCategory = memory.getCurrentScriptCategory()
     const chosenChar = memory.getChar()
-    const currentCategory = chosenChar.getCurrentCategory(conversationStep)
 
     if (memory.getIsFinish()) {
       if (userMessage === 'zapisz') {
@@ -78,30 +77,30 @@ document.addEventListener('DOMContentLoaded', function () {
       }, 2000)
     }
 
-    if (currentCategory === categories.summary) {
+    if (currentScriptCategory === scriptCategories.summary) {
       memory.setIsFinish(true)
       const scriptCategories = chosenChar.getScriptCategories()
-      chosenChar.addAboutUserToMessages(scriptCategories, conversationStep)
+      chosenChar.addAboutUserToMessages(scriptCategories, currentScriptCategory)
     }
 
-    let charMessages = chosenChar.getScriptMessages(conversationStep)
+    let charMessages = chosenChar.getScriptMessages(currentScriptCategory)
 
     //Part when character wants to save new word in his memory
     if (memory.getIsListening()) {
       userMessage = chosenChar.setUpperLetter(userMessage)
-      chosenChar.addToMemoryAboutUser(currentCategory, userMessage)
-      if (currentCategory === categories.origin) {
-        chosenChar.addUserMessageToAnswer(userMessage, conversationStep, {
+      chosenChar.addToMemoryAboutUser(currentScriptCategory, userMessage)
+      if (currentScriptCategory === scriptCategories.origin) {
+        chosenChar.addUserMessageToAnswer(userMessage, currentScriptCategory, {
           place: 'start',
           where: answerVariants.isInMemory,
         })
       } else {
-        chosenChar.addUserMessageToAnswer(userMessage, conversationStep, {
+        chosenChar.addUserMessageToAnswer(userMessage, currentScriptCategory, {
           place: 'end',
           where: answerVariants.addedToMemory,
         })
       }
-      charMessages = chosenChar.getScriptAnswers(conversationStep, {
+      charMessages = chosenChar.getScriptAnswers(currentScriptCategory, {
         from: answerVariants.addedToMemory,
       })
       memory.setUserMessage('')
@@ -112,19 +111,22 @@ document.addEventListener('DOMContentLoaded', function () {
     else {
       if (userMessage) {
         const elementFromMemory = chosenChar.checkUserMessageInMemory(
-          currentCategory,
+          currentScriptCategory,
           userMessage
         )
 
         if (elementFromMemory) {
-          chosenChar.addToMemoryAboutUser(currentCategory, elementFromMemory)
+          chosenChar.addToMemoryAboutUser(
+            currentScriptCategory,
+            elementFromMemory
+          )
           if (
-            currentCategory === categories.origin ||
-            currentCategory === categories.hobby
+            currentScriptCategory === scriptCategories.origin ||
+            currentScriptCategory === scriptCategories.hobby
           ) {
             chosenChar.addUserMessageToAnswer(
               elementFromMemory,
-              conversationStep,
+              currentScriptCategory,
               {
                 place: 'start',
                 where: answerVariants.isInMemory,
@@ -133,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
           } else {
             chosenChar.addUserMessageToAnswer(
               elementFromMemory,
-              conversationStep,
+              currentScriptCategory,
               {
                 place: 'end',
                 where: answerVariants.isInMemory,
@@ -141,13 +143,13 @@ document.addEventListener('DOMContentLoaded', function () {
             )
           }
 
-          charMessages = chosenChar.getScriptAnswers(conversationStep, {
+          charMessages = chosenChar.getScriptAnswers(currentScriptCategory, {
             from: answerVariants.isInMemory,
           })
           memory.setUserMessage('')
           memory.setIsCallAgain(true)
         } else {
-          charMessages = chosenChar.getScriptAnswers(conversationStep, {
+          charMessages = chosenChar.getScriptAnswers(currentScriptCategory, {
             from: answerVariants.isNotInMemory,
           })
           memory.setIsListening(true)
@@ -182,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (memory.getIsCallAgain()) {
       memory.setIsCallAgain(false)
-      memory.increaseConversationStep()
+      memory.changeScriptCategory()
       return handleCharTalking()
     }
 
