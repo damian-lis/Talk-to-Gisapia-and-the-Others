@@ -89,7 +89,10 @@ document.addEventListener('DOMContentLoaded', function () {
     if (memory.getIsListening()) {
       userMessage = chosenChar.setUpperLetter(userMessage)
       chosenChar.addToMemoryAboutUser(currentScriptCategory, userMessage)
-      if (currentScriptCategory === scriptCategories.origin) {
+      if (
+        currentScriptCategory === scriptCategories.origin ||
+        currentScriptCategory === scriptCategories.hobby
+      ) {
         chosenChar.addUserMessageToAnswer(userMessage, currentScriptCategory, {
           place: 'start',
           where: answerVariants.isInMemory,
