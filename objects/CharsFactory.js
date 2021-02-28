@@ -1,5 +1,5 @@
-import Gisapia from '../characters/Gisapia.js'
-import NullCharacter from '../characters/NullCharacter.js'
+import Gisapia from '../objects/characters/Gisapia.js'
+import NullCharacter from '../objects/characters/NullCharacter.js'
 import { scriptTalk, memory } from '../data/gisapia/index.js'
 import { charNames } from '../data/globalNames.js'
 
