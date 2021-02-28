@@ -1,0 +1,57 @@
+.selectCharUI {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: space-between;
+  text-align: center;
+  color: rgb(248, 233, 241);
+  background-color: rgba(75, 23, 48, 0.9);
+  border: 3px solid rgb(132, 42, 86);
+  border-radius: 15px;
+}
+
+.selectCharUI h1 {
+  text-transform: uppercase;
+  line-height: 50px;
+  margin-bottom: 20px;
+}
+
+.selectCharUI .selectChar {
+  width: 100px;
+  height: 60px;
+}
+
+.selectCharUI button {
+  padding: 15px;
+  margin: 5px;
+  color: #fff;
+  font-size: 19px;
+  border: 1px solid rgb(132, 42, 86);
+  border-radius: 15px;
+  background-color: rgb(95, 16, 54);
+}
+
+.selectCharUI .charTalking {
+  background-color: rgb(218, 4, 111);
+  text-transform: uppercase;
+  margin-top: 20px;
+  font-family: Comic Sans MS, Comic Sans, cursive;
+}
+
+.selectCharUI .selectChar:hover {
+  background-color: rgb(170, 120, 144);
+}
+
+.selectCharUI .charTalking:hover {
+  background-color: rgb(212, 103, 0);
+}
+
+.selectChar.active {
+  background-color: rgb(212, 103, 0);
+}

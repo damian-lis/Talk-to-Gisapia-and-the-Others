@@ -1,0 +1,15 @@
+.characters {
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  height: 100%;
+}
+
+#gisapiasvg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  max-width: 500px;
+  z-index: -1;
+}

@@ -1,0 +1,47 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-size: 16px;
+  font-family: Comic Sans MS, Comic Sans, cursive;
+}
+
+button {
+  cursor: pointer;
+}
+
+h1 {
+  margin: 0;
+}
+
+button,
+input {
+  outline-style: none;
+  border: none;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+:root {
+  --mainSize: 5px;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  max-width: 1200px;
+  position: relative;
+}

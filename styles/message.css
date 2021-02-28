@@ -1,0 +1,57 @@
+.message-container {
+  margin-bottom: 10px;
+  display: flex;
+  position: relative;
+}
+
+.message {
+  max-width: 70%;
+  margin: 0;
+  padding: 8px;
+  border-radius: 15px;
+}
+
+.message-Gisapia {
+  margin-left: 40px;
+  background-color: rgb(224, 175, 199);
+}
+
+.message-user {
+  margin-left: auto;
+  background-color: rgb(178, 158, 235);
+}
+
+.character-avatar {
+  position: absolute;
+  border: 1px solid #000;
+  border-radius: 50%;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 33px;
+  height: 33px;
+}
+
+.circle {
+  display: inline-block;
+  background-color: rgb(132, 42, 86);
+  height: 10px;
+  width: 10px;
+  border-radius: 25px;
+}
+
+#circle-container {
+  height: 50px;
+  margin-left: 5px;
+  margin-top: 20px;
+}
+
+#ball-1 {
+  animation: bounce 0.7s 0.2s infinite;
+}
+#ball-2 {
+  animation: bounce 0.7s 0.3s infinite;
+}
+#ball-3 {
+  animation: bounce 0.7s 0.4s infinite;
+}
