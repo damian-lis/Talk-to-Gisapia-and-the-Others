@@ -5,6 +5,9 @@ import CharsFactory from './CharsFactory.js'
 import InputPanelUI from './InputPanelUI.js'
 import Screen from './Screen.js'
 import SelectCharUI from './SelectCharUI.js'
+import Character from './characters/Character.js'
+import Gisapia from './characters/Gisapia.js'
+import NullCharacter from './characters/NullCharacter.js'
 
 export {
   BackgroundAnimation,
@@ -14,4 +17,7 @@ export {
   InputPanelUI,
   Screen,
   SelectCharUI,
+  Character,
+  Gisapia,
+  NullCharacter,
 }
