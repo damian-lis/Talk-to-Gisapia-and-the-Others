@@ -30,10 +30,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   //Select character part
   const handleSelectChar = (charName) => {
-    if (charName !== charNames.gisapia)
-      return alert(communiques.characterDoesntExist)
-
-    selectCharUi.deleteButton(buttons.types.character)
     const chosenChar = charsFactory.getChar(charName)
     memory.setSelectedChar(chosenChar)
   }
@@ -43,7 +39,13 @@ document.addEventListener('DOMContentLoaded', function () {
   const checkSelectedChar = () => {
     const chosenChar = memory.getChar()
 
-    if (!chosenChar) return alert(communiques.selectChar)
+    if (!chosenChar) {
+      return alert(communiques.selectChar)
+    } else if (chosenChar.name === null) {
+      memory.setSelectedChar(null)
+      alert('Dostepna w przyszłości')
+      return selectCharUi.removeActive(selectCharUi.getCharButtons())
+    }
 
     selectCharUi.deleteButton(buttons.types.start)
 
