@@ -5,7 +5,7 @@
 html,
 body {
   font-size: 16px;
-  font-family: sans-serif;
+  font-family: Comic Sans MS, Comic Sans, cursive;
 }
 
 button {
@@ -39,16 +39,16 @@ body {
   overflow: hidden;
 }
 
-.app-container {
-  width: 100vw;
-  height: 100vh;
+.wrapper {
+  width: 100%;
+  height: 100%;
   max-width: 1200px;
   position: relative;
 }
 
-.messenger-container {
-  height: 500px;
-  width: 300px;
+.messenger {
+  height: 550px;
+  width: 350px;
   position: absolute;
   border: 1px solid #000;
   border-radius: var(--mainSize);
@@ -63,29 +63,31 @@ body {
   height: 100%;
 }
 
-.messenger-screen-container {
+.messenger-screen {
   border-radius: var(--mainSize);
   height: 92%;
   overflow-y: scroll;
 }
 
-.messenger-input-container {
+.messenger-interface {
   height: 7%;
   padding-top: var(--mainSize);
   display: flex;
   justify-content: space-between;
 }
 
-.messenger-input-container input {
+.messenger-interface input {
   height: 100%;
   width: 77%;
   border-radius: 5px;
+  font-size: 16px;
 }
 
-.messenger-input-container button {
+.messenger-interface button {
   width: 20%;
   height: 100%;
   border-radius: 5px;
+  background-color: rgb(224, 175, 199);
 }
 
 .screen {
@@ -109,17 +111,16 @@ body {
 }
 
 .message-Gisapia {
-  margin-left: 30px;
-  background-color: rgb(214, 129, 170);
+  margin-left: 40px;
+  background-color: rgb(224, 175, 199);
 }
 
 .message-user {
   margin-left: auto;
-
-  background-color: rgb(132, 99, 226);
+  background-color: rgb(178, 158, 235);
 }
 
-.characters-container {
+.characters {
   position: relative;
   top: 0;
   left: 0;
@@ -134,8 +135,8 @@ body {
   top: 50%;
   left: 0;
   transform: translateY(-50%);
-  width: 26px;
-  height: 26px;
+  width: 33px;
+  height: 33px;
 }
 
 .circle {
@@ -164,13 +165,12 @@ body {
 
 /* SelectCharUI */
 
-.selectCharUI-container {
+.selectCharUI {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 400px;
-  /* height: 320px; */
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
@@ -183,15 +183,19 @@ body {
   border-radius: 15px;
 }
 
-.selectCharUI-container h1 {
+.selectCharUI h1 {
   text-transform: uppercase;
   line-height: 50px;
+  margin-bottom: 20px;
 }
 
-.selectCharUI-container button {
+.selectCharUI .selectChar {
   width: 100px;
   height: 60px;
-  padding: 10px;
+}
+
+.selectCharUI button {
+  padding: 15px;
   margin: 5px;
   color: #fff;
   font-size: 19px;
@@ -200,23 +204,23 @@ body {
   background-color: rgb(95, 16, 54);
 }
 
-.selectCharUI-container .charTalking {
-  width: 180px;
-  height: 60px;
+.selectCharUI .charTalking {
   background-color: rgb(218, 4, 111);
   text-transform: uppercase;
+  margin-top: 20px;
+  font-family: Comic Sans MS, Comic Sans, cursive;
 }
 
-.selectCharUI-container .selectChar:hover {
+.selectCharUI .selectChar:hover {
   background-color: rgb(170, 120, 144);
 }
 
-.selectCharUI-container .charTalking:hover {
+.selectCharUI .charTalking:hover {
   background-color: rgb(212, 103, 0);
 }
 
 .selectChar.active {
-  background-color: red;
+  background-color: rgb(212, 103, 0);
 }
 
 #gisapiasvg {

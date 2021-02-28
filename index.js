@@ -16,10 +16,10 @@ import {
 } from './data/globalNames.js'
 
 document.addEventListener('DOMContentLoaded', function () {
-  const selectCharUi = new SelectCharUI(charNames, '.selectCharUI-container')
+  const selectCharUi = new SelectCharUI(charNames, '.selectCharUI')
   const charsFactory = new CharsFactory()
-  const inputPanelUI = new InputPanelUI('.messenger-input-container')
-  const screen = new Screen('.messenger-screen-container')
+  const inputPanelUI = new InputPanelUI('.messenger-interface')
+  const screen = new Screen('.messenger-screen')
 
   //Select character part
   const handleSelectChar = (charName) => {
@@ -41,11 +41,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     runElement([
       {
-        name: '.selectCharUI-container',
+        name: '.selectCharUI',
         animation: 'bottomHide forwards 1s',
       },
       {
-        name: '.messenger-container',
+        name: '.messenger',
         animation: 'fallFromAbove 2s forwards',
       },
     ])
@@ -65,11 +65,11 @@ document.addEventListener('DOMContentLoaded', function () {
       return setTimeout(() => {
         runElement([
           {
-            name: '.selectCharUI-container',
+            name: '.selectCharUI',
             animation: 'bottomHide reverse 1s',
           },
           {
-            name: '.messenger-container',
+            name: '.messenger',
             animation: 'backToTheTop 2s forwards',
           },
         ])

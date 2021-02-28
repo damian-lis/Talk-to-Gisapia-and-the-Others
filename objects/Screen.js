@@ -49,9 +49,7 @@ export default class Screen {
   }
 
   scrollMessengerContainer() {
-    const messengerContainer = document.querySelector(
-      '.messenger-screen-container'
-    )
+    const messengerContainer = document.querySelector('.messenger-screen')
 
     const valueToScroll =
       messengerContainer.scrollHeight - messengerContainer.clientHeight
