@@ -8,7 +8,7 @@ import SelectCharUI from './SelectCharUI.js'
 import Character from './characters/Character.js'
 import Gisapia from './characters/Gisapia.js'
 import NullCharacter from './characters/NullCharacter.js'
-import Ted from './characters/Ted.js'
+import Hookin from './characters/Hookin.js'
 import Reduxon from './characters/Reduxon.js'
 
 export {
@@ -22,6 +22,6 @@ export {
   Character,
   Gisapia,
   NullCharacter,
-  Ted,
+  Hookin,
   Reduxon,
 }

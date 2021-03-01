@@ -20,12 +20,12 @@
   border: 1px solid rgb(132, 42, 86);
 }
 
-.message-Ted {
+.message-Hookin {
   margin-left: 40px;
   background-color: rgb(214, 159, 87);
 }
 
-.message-Ted + img {
+.message-Hookin + img {
   border: 1px solid rgb(223, 140, 7);
 }
 
@@ -62,7 +62,7 @@
   border-radius: 25px;
 }
 
-.circle-Ted {
+.circle-HooHookin {
   background-color: rgb(223, 140, 7);
 }
 

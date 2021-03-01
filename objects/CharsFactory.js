@@ -1,9 +1,9 @@
-import { Gisapia, NullCharacter, Ted, Reduxon } from '../objects/index.js'
+import { Gisapia, NullCharacter, Hookin, Reduxon } from '../objects/index.js'
 import { scriptTalk, memory } from '../data/gisapia/index.js'
 import {
   scriptTalk as tedScriptTalk,
   memory as tedMemory,
-} from '../data/ted/index.js'
+} from '../data/hookin/index.js'
 import {
   scriptTalk as reduxonScriptTalk,
   memory as reduxonMemory,
@@ -13,7 +13,7 @@ import { charNames } from '../data/globalNames.js'
 export default class CharsFactory {
   constructor() {
     this.gisapia = new Gisapia(scriptTalk, memory)
-    this.ted = new Ted(tedScriptTalk, tedMemory)
+    this.hookin = new Hookin(tedScriptTalk, tedMemory)
     this.reduxon = new Reduxon(reduxonScriptTalk, reduxonMemory)
     this.nullCharacter = new NullCharacter()
   }
@@ -22,8 +22,8 @@ export default class CharsFactory {
     switch (charName) {
       case charNames.gisapia:
         return this.gisapia
-      case charNames.ted:
-        return this.ted
+      case charNames.hookin:
+        return this.hookin
       case charNames.reduxon:
         return this.reduxon
       default:

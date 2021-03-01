@@ -4,7 +4,7 @@ export default {
   [categories.name]: {
     messages: [
       ['Cześć!', 'Hej!', 'Witaj!'],
-      `Nazywam się ${charNames.ted}`,
+      `Nazywam się ${charNames.hookin}`,
       [
         'Powiedz mi proszę jak mogę się do Ciebie zwracać?',
         'Jakis kolejny tekst',

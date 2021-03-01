@@ -1,6 +1,6 @@
 export const charNames = {
   gisapia: 'Gisapia',
-  ted: 'Ted',
+  hookin: 'Hookin',
   reduxon: 'Reduxon',
 }
 
