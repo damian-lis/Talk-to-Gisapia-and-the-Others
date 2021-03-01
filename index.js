@@ -7,7 +7,7 @@ import {
   Screen,
 } from './objects/index.js'
 
-import { runElement } from '../helpers/index.js'
+import { runElement, addNewClasses } from '../helpers/index.js'
 import {
   charNames,
   answerVariants,
@@ -38,6 +38,11 @@ document.addEventListener('DOMContentLoaded', function () {
       alert('Dostepna w przyszłości')
       return selectCharUi.removeActive(selectCharUi.getCharButtons())
     }
+
+    addNewClasses({
+      name: '.messenger',
+      classesToAdd: [chosenChar.name],
+    })
 
     runElement([
       {

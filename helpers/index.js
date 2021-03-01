@@ -5,6 +5,7 @@ import setScale from './setScale.js'
 import runElement from './runElement.js'
 import setScript from './setScript.js'
 import removeElFromContainer from './removeElFromContainer.js'
+import addNewClasses from './addNewClasses.js'
 
 export {
   createElementFn,
@@ -14,4 +15,5 @@ export {
   runElement,
   setScript,
   removeElFromContainer,
+  addNewClasses,
 }
