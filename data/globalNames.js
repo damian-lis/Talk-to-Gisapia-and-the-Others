@@ -10,7 +10,7 @@ export const answerVariants = {
   addedToMemory: 'addedToMemory',
 }
 
-export const scriptCategories = {
+export const categories = {
   name: 'name',
   origin: 'origin',
   hobby: 'hobby',

@@ -11,7 +11,7 @@ import { runElement } from '../helpers/index.js'
 import {
   charNames,
   answerVariants,
-  scriptCategories,
+  categories,
   subscriberTypes,
 } from './data/globalNames.js'
 
@@ -55,8 +55,11 @@ document.addEventListener('DOMContentLoaded', function () {
   //Character talking process
   const handleCharTalking = async () => {
     let userMessage = memory.getUserMessage()
-    const currentScriptCategory = memory.getCurrentScriptCategory()
     const chosenChar = memory.getChar()
+    const conversationStep = memory.getConversationStep()
+    const currentScriptCategory = chosenChar.getCurrentScriptCategory(
+      conversationStep
+    )
 
     if (memory.getIsFinish()) {
       if (userMessage === 'zapisz') {
@@ -77,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }, 2000)
     }
 
-    if (currentScriptCategory === scriptCategories.summary) {
+    if (currentScriptCategory === categories.summary) {
       memory.setIsFinish(true)
       const scriptCategories = chosenChar.getScriptCategories()
       chosenChar.addAboutUserToMessages(scriptCategories, currentScriptCategory)
@@ -89,15 +92,17 @@ document.addEventListener('DOMContentLoaded', function () {
     if (memory.getIsListening()) {
       userMessage = chosenChar.setUpperLetter(userMessage)
       chosenChar.addToMemoryAboutUser(currentScriptCategory, userMessage)
+
       if (
-        currentScriptCategory === scriptCategories.origin ||
-        currentScriptCategory === scriptCategories.hobby
+        currentScriptCategory === categories.origin ||
+        currentScriptCategory === categories.hobby
       ) {
         chosenChar.addUserMessageToAnswer(userMessage, currentScriptCategory, {
           place: 'start',
-          where: answerVariants.isInMemory,
+          where: answerVariants.addedToMemory,
         })
       } else {
+        console.log('Jestem poza origin i dodaje na koncu')
         chosenChar.addUserMessageToAnswer(userMessage, currentScriptCategory, {
           place: 'end',
           where: answerVariants.addedToMemory,
@@ -124,8 +129,8 @@ document.addEventListener('DOMContentLoaded', function () {
             elementFromMemory
           )
           if (
-            currentScriptCategory === scriptCategories.origin ||
-            currentScriptCategory === scriptCategories.hobby
+            currentScriptCategory === categories.origin ||
+            currentScriptCategory === categories.hobby
           ) {
             chosenChar.addUserMessageToAnswer(
               elementFromMemory,
@@ -187,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (memory.getIsCallAgain()) {
       memory.setIsCallAgain(false)
-      memory.changeScriptCategory()
+      memory.increaseConversationStep()
       return handleCharTalking()
     }
 

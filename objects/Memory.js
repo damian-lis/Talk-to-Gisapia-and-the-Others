@@ -1,10 +1,10 @@
 import { GisapiaAnimation, BackgroundAnimation } from '../objects/index.js'
-import { scriptCategories } from '../data/globalNames.js'
+import { categories } from '../data/globalNames.js'
 
 class Memory {
   constructor() {
     if (Memory.instance == null) {
-      this.scriptCategories = Object.values(scriptCategories)
+      this.categories = Object.values(categories)
       this.conversationStep = 0
       this.character = null
       this.userMessage = null
@@ -26,9 +26,11 @@ class Memory {
     new GisapiaAnimation()
   }
 
-  getCurrentScriptCategory() {
-    return this.scriptCategories[this.conversationStep]
-  }
+  // getCurrentScriptCategory() {
+  //   return this.categories[this.conversationStep]
+  // }
+
+  //Storzymy script category
 
   setIsFinish(value) {
     this.isFinish = value
@@ -38,8 +40,12 @@ class Memory {
     return this.isFinish
   }
 
-  changeScriptCategory() {
+  increaseConversationStep() {
     this.conversationStep++
+  }
+
+  getConversationStep() {
+    return this.conversationStep
   }
 
   setSelectedChar(character) {

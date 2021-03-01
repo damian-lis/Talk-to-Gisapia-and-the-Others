@@ -7,14 +7,12 @@ export default ({
   disabled,
   eventListenerObj,
 }) => {
-  console.log(src)
   const createdElement = document.createElement(elementToCreate)
   if (text) {
     createdElement.innerText = text
   }
 
   if (src) {
-    console.log(createdElement.src)
     createdElement.src = src
   }
 

@@ -17,14 +17,15 @@ export default class Character {
   }
 
   getScriptMessages(currentCategory) {
-    console.log(currentCategory)
     return this.scriptTalk[currentCategory].messages
   }
 
+  getCurrentScriptCategory(conversationStep) {
+    return Object.keys(this.scriptTalk)[conversationStep]
+  }
+
   getScriptCategories() {
-    let result = []
-    this.scriptTalk.map((part) => result.push(part.category))
-    return result
+    return Object.keys(this.scriptTalk)
   }
 
   getScriptAnswers(currentCategory, { from }) {
@@ -69,6 +70,8 @@ export default class Character {
   }
 
   addUserMessageToAnswer(message, currentCategory, { place, where }) {
+    console.log(message)
+    console.log(this.scriptTalk[currentCategory].answers[where][0])
     switch (place) {
       case 'start':
         return (this.scriptTalk[currentCategory].answers[where][0] =
