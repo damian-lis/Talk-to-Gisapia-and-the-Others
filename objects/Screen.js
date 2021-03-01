@@ -72,7 +72,8 @@ export default class Screen {
     document.querySelector(container).appendChild(this.screen)
   }
 
-  createLoader() {
+  createLoader(charName) {
+    console.log(charName)
     const circleContainer = createElementFn({
       elementToCreate: 'div',
       attributes: [{ type: 'id', name: 'circle-container' }],
@@ -82,7 +83,7 @@ export default class Screen {
       const circle = createElementFn({
         elementToCreate: 'div',
         attributes: [{ type: 'id', name: `ball-${i + 1}` }],
-        classesName: ['circle'],
+        classesName: ['circle', `circle-${charName}`],
       })
       circleContainer.appendChild(circle)
     }
@@ -94,8 +95,8 @@ export default class Screen {
     loader.remove()
   }
 
-  showTyping(time) {
-    const loader = this.createLoader()
+  showTyping(time, charName) {
+    const loader = this.createLoader(charName)
     this.attachToScreen(loader)
     this.scrollMessengerContainer()
     setTimeout(() => this.removeLoader(loader), time)

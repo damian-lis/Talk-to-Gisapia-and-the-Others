@@ -16,6 +16,19 @@
   background-color: rgb(224, 175, 199);
 }
 
+.message-Gisapia + img {
+  border: 1px solid rgb(132, 42, 86);
+}
+
+.message-Ted {
+  margin-left: 40px;
+  background-color: rgb(214, 159, 87);
+}
+
+.message-Ted + img {
+  border: 1px solid rgb(223, 140, 7);
+}
+
 .message-user {
   margin-left: auto;
   background-color: rgb(178, 158, 235);
@@ -38,6 +51,10 @@
   height: 10px;
   width: 10px;
   border-radius: 25px;
+}
+
+.circle-Ted {
+  background-color: rgb(223, 140, 7);
 }
 
 #circle-container {

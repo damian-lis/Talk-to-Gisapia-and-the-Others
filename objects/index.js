@@ -8,6 +8,7 @@ import SelectCharUI from './SelectCharUI.js'
 import Character from './characters/Character.js'
 import Gisapia from './characters/Gisapia.js'
 import NullCharacter from './characters/NullCharacter.js'
+import Ted from './characters/Ted.js'
 
 export {
   BackgroundAnimation,
@@ -20,4 +21,5 @@ export {
   Character,
   Gisapia,
   NullCharacter,
+  Ted,
 }

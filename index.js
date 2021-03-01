@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         await chosenChar.mustThink(500)
-        await screen.showTyping(timeForTyping)
+        await screen.showTyping(timeForTyping, chosenChar.name)
       }
 
       const messageContainer = screen.createMessageContainer(chosenChar.name)
