@@ -2,5 +2,16 @@
   min-height: 100%;
   width: 100%;
   padding: 10px;
-  background-color: #fff;
+}
+
+.screen-gisapia {
+  background-color: var(--gisapiaSecondColor);
+}
+
+.screen-hookin {
+  background-color: var(--hookinSecondColor);
+}
+
+.screen-reduxon {
+  background-color: var(--reduxonSecondColor);
 }

@@ -5,18 +5,21 @@
   border: 1px solid #000;
   border-radius: var(--mainSize);
   padding: var(--mainSize);
-  background-color: rgb(132, 42, 86);
   left: 50%;
   top: -100%;
   transform: translate(-50%, -50%);
 }
 
+.messenger-gisapia {
+  background-color: var(--gisapiaMainColor);
+}
+
 .messenger-hookin {
-  background-color: rgb(243, 117, 14);
+  background-color: var(--hookinMainColor);
 }
 
 .messenger-reduxon {
-  background-color: rgb(243, 14, 14);
+  background-color: var(--reduxonMainColor);
 }
 
 .messenger-inner {
@@ -47,5 +50,4 @@
   width: 20%;
   height: 100%;
   border-radius: 5px;
-  background-color: rgb(224, 175, 199);
 }

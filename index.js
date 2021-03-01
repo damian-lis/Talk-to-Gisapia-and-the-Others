@@ -39,10 +39,16 @@ document.addEventListener('DOMContentLoaded', function () {
       return selectCharUi.removeActive(selectCharUi.getCharButtons())
     }
 
-    addNewClasses({
-      name: '.messenger',
-      classesToAdd: [chosenChar.name],
-    })
+    addNewClasses([
+      {
+        name: '.messenger',
+        classesToAdd: [chosenChar.name],
+      },
+      {
+        name: '.screen',
+        classesToAdd: [chosenChar.name],
+      },
+    ])
 
     runElement([
       {

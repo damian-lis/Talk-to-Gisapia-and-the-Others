@@ -13,29 +13,29 @@
 
 .message-Gisapia {
   margin-left: 40px;
-  background-color: rgb(224, 175, 199);
+  background-color: var(--gisapiaMainColor);
 }
 
 .message-Gisapia + img {
-  border: 1px solid rgb(132, 42, 86);
+  border: 1px solid var(--gisapiaMainColor);
 }
 
 .message-Hookin {
   margin-left: 40px;
-  background-color: rgb(214, 159, 87);
+  background-color: var(--hookinMainColor);
 }
 
 .message-Hookin + img {
-  border: 1px solid rgb(223, 140, 7);
+  border: 1px solid var(--hookinMainColor);
 }
 
 .message-Reduxon {
   margin-left: 40px;
-  background-color: rgb(236, 73, 73);
+  background-color: var(--reduxonMainColor);
 }
 
 .message-Reduxon + img {
-  border: 1px solid rgb(236, 73, 73);
+  border: 1px solid var(--reduxonMainColor);
 }
 
 .message-user {
@@ -62,12 +62,16 @@
   border-radius: 25px;
 }
 
-.circle-HooHookin {
-  background-color: rgb(223, 140, 7);
+.circle-Gisapia {
+  background-color: var(--gisapiaMainColor);
+}
+
+.circle-Hookin {
+  background-color: var(--hookinMainColor);
 }
 
 .circle-Reduxon {
-  background-color: rgb(236, 73, 73);
+  background-color: var(--reduxonMainColor);
 }
 
 #circle-container {

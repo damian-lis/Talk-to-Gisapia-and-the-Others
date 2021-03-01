@@ -1,3 +1,13 @@
+:root {
+  --mainSize: 5px;
+  --gisapiaMainColor: rgb(212, 126, 168);
+  --gisapiaSecondColor: rgb(243, 234, 239);
+  --hookinMainColor: rgb(214, 159, 87);
+  --hookinSecondColor: rgb(231, 216, 195);
+  --reduxonMainColor: rgb(236, 73, 73);
+  --reduxonSecondColor: rgb(248, 212, 212);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -24,10 +34,6 @@ input {
 
 ::-webkit-scrollbar {
   width: 0px;
-}
-
-:root {
-  --mainSize: 5px;
 }
 
 body {
