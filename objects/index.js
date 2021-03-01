@@ -9,6 +9,7 @@ import Character from './characters/Character.js'
 import Gisapia from './characters/Gisapia.js'
 import NullCharacter from './characters/NullCharacter.js'
 import Ted from './characters/Ted.js'
+import Reduxon from './characters/Reduxon.js'
 
 export {
   BackgroundAnimation,
@@ -22,4 +23,5 @@ export {
   Gisapia,
   NullCharacter,
   Ted,
+  Reduxon,
 }

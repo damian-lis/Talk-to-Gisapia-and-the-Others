@@ -1,7 +1,7 @@
 export const charNames = {
   gisapia: 'Gisapia',
   ted: 'Ted',
-  jessica: 'Jessica',
+  reduxon: 'Reduxon',
 }
 
 export const answerVariants = {

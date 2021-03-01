@@ -29,6 +29,15 @@
   border: 1px solid rgb(223, 140, 7);
 }
 
+.message-Reduxon {
+  margin-left: 40px;
+  background-color: rgb(236, 73, 73);
+}
+
+.message-Reduxon + img {
+  border: 1px solid rgb(236, 73, 73);
+}
+
 .message-user {
   margin-left: auto;
   background-color: rgb(178, 158, 235);
@@ -55,6 +64,10 @@
 
 .circle-Ted {
   background-color: rgb(223, 140, 7);
+}
+
+.circle-Reduxon {
+  background-color: rgb(236, 73, 73);
 }
 
 #circle-container {
