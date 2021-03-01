@@ -1,6 +1,8 @@
+import { setScript } from '../../helpers/index.js'
+
 export default class Character {
   constructor(scriptTalk, memory) {
-    this.scriptTalk = scriptTalk
+    this.scriptTalk = setScript(scriptTalk)
     this.memory = memory
     this.memoryAboutUser = {}
   }
@@ -70,8 +72,6 @@ export default class Character {
   }
 
   addUserMessageToAnswer(message, currentCategory, { place, where }) {
-    console.log(message)
-    console.log(this.scriptTalk[currentCategory].answers[where][0])
     switch (place) {
       case 'start':
         return (this.scriptTalk[currentCategory].answers[where][0] =

@@ -3,28 +3,46 @@ import { charNames, answerVariants, categories } from '../globalNames.js'
 export default {
   [categories.name]: {
     messages: [
-      'Cześć!',
+      ['Cześć!', 'Hej!', 'Witaj!'],
       `Nazywam się ${charNames.gisapia}`,
-      'Powiedz mi proszę jak mogę się do Ciebie zwracać?',
+      [
+        'Powiedz mi proszę jak mogę się do Ciebie zwracać?',
+        'Jakis kolejny tekst',
+        'kolejny tekst',
+      ],
     ],
     answers: {
       [answerVariants.isInMemory]: [
-        'Tak, kojarzę takie imię jak',
-        'Miałam dwóch znajomych, którzy tak się nazywali.',
-        'Niestety  zadnym z nich nie utrzymuje juz kontaktu...',
+        [
+          'Tak, kojarzę takie imię jak',
+          'Po naszej rozmowię wygoogluje sobie etymologię słowa',
+        ],
+        `Miałam dwóch znajomych, którzy tak się nazywali.`,
+        `Niestety  zadnym z nich nie utrzymuje juz kontaktu...`,
       ],
       [answerVariants.isNotInMemory]: [
         'Niestety nie kojarzę takiego imienia',
-        'Napisz je proszę jeszcze raz, a zapamiętam!',
+        [
+          'Napisz je proszę jeszcze raz, a zapamiętam!',
+          'Ej napiszesz proszę jeszcze raz to imię?',
+        ],
       ],
       [answerVariants.addedToMemory]: [
-        'Ale super! Ciesze się, ze poznałam nowe imię',
+        [
+          'Ale super! Ciesze się, ze poznałam nowe imię',
+          'Moja pamięć jest bogatsza o imię',
+        ],
       ],
     },
   },
 
   [categories.origin]: {
-    messages: ['Skąd w ogóle jesteś jezeli mogę wiedzieć?'],
+    messages: [
+      [
+        'Tak w ogóle to skąd jesteś?',
+        'Skąd w ogóle jesteś jezeli mogę wiedzieć?',
+      ],
+    ],
     answers: {
       [answerVariants.isInMemory]: ['to piękna miejscowość', 'Bla bla'],
       [answerVariants.isNotInMemory]: [
