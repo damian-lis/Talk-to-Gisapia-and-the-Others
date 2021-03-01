@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function () {
         await screen.showTyping(timeForTyping)
       }
 
-      const messageContainer = screen.createMessageContainer()
+      const messageContainer = screen.createMessageContainer(chosenChar.name)
       const message = screen.createMessage(charMessage, chosenChar.name)
       const avatar = screen.createAvatar(chosenChar.avatar)
 

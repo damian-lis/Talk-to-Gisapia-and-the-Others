@@ -1,17 +1,23 @@
-import { createElementFn } from '../helpers/index.js'
+import { createElementFn, removeElFromContainer } from '../helpers/index.js'
 
 export default class Screen {
   constructor(container) {
     this.screen = this.createScreen()
     this.attachToContainer(container)
-    this.messages = []
+    this.charMessagesPart = 0
   }
 
-  createMessageContainer() {
+  createMessageContainer(whoTalking = 'user') {
     const messageContainer = createElementFn({
       elementToCreate: 'div',
       classesName: ['message-container'],
     })
+
+    if (whoTalking !== 'user') {
+      messageContainer.setAttribute('messagesPart', this.charMessagesPart)
+    } else {
+      this.charMessagesPart++
+    }
 
     return messageContainer
   }
@@ -36,6 +42,7 @@ export default class Screen {
   }
 
   attachToMessageContainer(container, ...elements) {
+    removeElFromContainer('img', `[messagespart="${this.charMessagesPart}"]`)
     elements.map((element) => container.appendChild(element))
   }
 
