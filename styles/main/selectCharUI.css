@@ -11,47 +11,42 @@
   align-content: space-between;
   text-align: center;
   color: rgb(248, 233, 241);
-  background-color: rgba(75, 23, 48, 0.9);
-  border: 3px solid rgb(132, 42, 86);
+  background-color: var(--selectCharUIBgColor);
+  border: 3px solid var(--selectCharUISecondColor);
   border-radius: 15px;
 }
 
 .selectCharUI h1 {
+  font-size: 3rem;
   text-transform: uppercase;
   line-height: 50px;
   margin-bottom: 20px;
 }
 
-.selectCharUI .selectChar {
-  width: 100px;
-  height: 60px;
-}
-
-.selectCharUI button {
-  margin: 5px;
-  color: #fff;
-  font-size: 19px;
-  border: 1px solid rgb(132, 42, 86);
+.charTalking {
   border-radius: 15px;
-  background-color: rgb(95, 16, 54);
-}
-
-.selectCharUI .charTalking {
   background-color: rgb(218, 4, 111);
   padding: 15px;
+  font-size: 1.9rem;
+  color: #fff;
+  width: auto;
   text-transform: uppercase;
   margin-top: 20px;
   font-family: Comic Sans MS, Comic Sans, cursive;
 }
 
-.selectCharUI .selectChar:hover {
-  background-color: rgb(170, 120, 144);
+.selectChar {
+  width: 100px;
+  height: 60px;
+  cursor: pointer;
+  margin: 5px;
+  color: #fff;
+  font-size: 1.9rem;
+  border: 2px solid var(--selectCharUIMainColor);
+  border-radius: 15px;
+  background-color: var(--selectCharUISecondColor);
 }
 
-.selectCharUI .charTalking:hover {
-  background-color: rgb(212, 103, 0);
-}
-
-.selectChar.active {
-  background-color: rgb(212, 103, 0);
+.active {
+  background-color: rgb(241, 161, 12);
 }

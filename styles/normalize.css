@@ -1,0 +1,32 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-size: 10px;
+  font-family: Comic Sans MS, Comic Sans, cursive;
+  margin: 0;
+}
+
+button,
+input {
+  outline-style: none;
+  border: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgb(241, 161, 12);
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+body {
+  height: 100vh;
+}

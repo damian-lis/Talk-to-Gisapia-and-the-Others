@@ -1,4 +1,4 @@
-class BackgroundAnimation {
+export default class Background {
   constructor() {
     this.canvas = document.getElementById('canvas')
     this.cxt = canvas.getContext('2d')
@@ -49,5 +49,3 @@ class BackgroundAnimation {
     }, time)
   }
 }
-
-export default BackgroundAnimation

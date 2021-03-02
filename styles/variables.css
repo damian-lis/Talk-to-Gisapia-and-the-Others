@@ -1,0 +1,19 @@
+:root {
+  --messengerMainSize: 5px;
+  --messengerOutlineColor: rgb(211, 211, 211);
+
+  --selectCharUIBgColor: rgba(75, 23, 48, 0.9);
+  --selectCharUIMainColor: rgb(75, 23, 48);
+  --selectCharUISecondColor: rgb(132, 42, 86);
+
+  --gisapiaMainColor: rgb(212, 126, 168);
+  --gisapiaSecondColor: rgb(243, 234, 239);
+
+  --hookinMainColor: rgb(214, 159, 87);
+  --hookinSecondColor: rgb(231, 216, 195);
+
+  --reduxonMainColor: rgb(236, 73, 73);
+  --reduxonSecondColor: rgb(248, 212, 212);
+
+  --userMainColor: rgb(178, 158, 235);
+}

@@ -1,4 +1,4 @@
-import { GisapiaAnimation, BackgroundAnimation } from '../objects/index.js'
+import { GisapiaAnimation, Background } from '../objects/index.js'
 import { categories } from '../data/globalNames.js'
 
 class Memory {
@@ -11,26 +11,20 @@ class Memory {
       this.isCallAgain = false
       this.isListening = false
       this.isFinish = false
-      this.backgroundAnimation = this.backgroundAnimation()
+      this.backgroundAnimation = this.background()
       this.gisapiaAnimation = this.gisapiaAnimation()
       Memory.instance = this
     }
     return Memory.instance
   }
 
-  backgroundAnimation() {
-    new BackgroundAnimation()
+  background() {
+    new Background()
   }
 
   gisapiaAnimation() {
     new GisapiaAnimation()
   }
-
-  // getCurrentScriptCategory() {
-  //   return this.categories[this.conversationStep]
-  // }
-
-  //Storzymy script category
 
   setIsFinish(value) {
     this.isFinish = value

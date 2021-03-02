@@ -1,13 +1,12 @@
 import { sendAboutUser } from './actions/dataActions.js'
+import { runElement, addNewClasses } from '../helpers/index.js'
 import {
   memory,
   SelectCharUI,
   CharsFactory,
-  InputPanelUI,
-  Screen,
+  MessengerInterface,
+  MessengerScreen,
 } from './objects/index.js'
-
-import { runElement, addNewClasses } from '../helpers/index.js'
 import {
   charNames,
   answerVariants,
@@ -18,8 +17,8 @@ import {
 document.addEventListener('DOMContentLoaded', function () {
   const selectCharUi = new SelectCharUI(charNames, '.selectCharUI')
   const charsFactory = new CharsFactory()
-  const inputPanelUI = new InputPanelUI('.messenger-interface')
-  const screen = new Screen('.messenger-screen')
+  const messengerInterface = new MessengerInterface('.messenger-interface')
+  const messengerScreen = new MessengerScreen('.messenger-screen')
 
   //Select character part
   const handleSelectChar = (charName) => {
@@ -42,22 +41,31 @@ document.addEventListener('DOMContentLoaded', function () {
     addNewClasses([
       {
         name: '.messenger',
-        classesToAdd: [chosenChar.name],
+        classesToAdd: [`${chosenChar.name}-main`],
       },
       {
         name: '.screen',
-        classesToAdd: [chosenChar.name],
+        classesToAdd: [`${chosenChar.name}-second`],
+      },
+
+      {
+        name: '.interface-input',
+        classesToAdd: [`${chosenChar.name}-second`],
+      },
+      {
+        name: '.interface-btn',
+        classesToAdd: [`${chosenChar.name}-second`],
       },
     ])
 
     runElement([
       {
         name: '.selectCharUI',
-        animation: 'bottomHide forwards 1s',
+        animation: 'toBottomHide forwards 1s',
       },
       {
         name: '.messenger',
-        animation: 'fallFromAbove 2s forwards',
+        animation: 'fallFromTop 1s forwards',
       },
     ])
     handleCharTalking()
@@ -80,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
         runElement([
           {
             name: '.selectCharUI',
-            animation: 'bottomHide reverse 1s',
+            animation: 'fromBottomShow 2s forwards ',
           },
           {
             name: '.messenger',
@@ -190,15 +198,24 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         await chosenChar.mustThink(500)
-        await screen.showTyping(timeForTyping, chosenChar.name)
+        await messengerScreen.showTyping(timeForTyping, chosenChar.name)
       }
 
-      const messageContainer = screen.createMessageContainer(chosenChar.name)
-      const message = screen.createMessage(charMessage, chosenChar.name)
-      const avatar = screen.createAvatar(chosenChar.avatar)
+      const messageContainer = messengerScreen.createMessageContainer(
+        chosenChar.name
+      )
+      const message = messengerScreen.createMessage(
+        charMessage,
+        chosenChar.name
+      )
+      const avatar = messengerScreen.createAvatar(chosenChar.avatar)
 
-      screen.attachToMessageContainer(messageContainer, message, avatar)
-      screen.attachToScreen(messageContainer)
+      messengerScreen.attachToMessageContainer(
+        messageContainer,
+        message,
+        avatar
+      )
+      messengerScreen.attachToScreen(messageContainer)
     }
 
     if (memory.getIsCallAgain()) {
@@ -207,7 +224,7 @@ document.addEventListener('DOMContentLoaded', function () {
       return handleCharTalking()
     }
 
-    inputPanelUI.activatePanel()
+    messengerInterface.activatePanel()
   }
 
   selectCharUi.subscribe(checkSelectedChar, subscriberTypes.charTalking)
@@ -216,14 +233,14 @@ document.addEventListener('DOMContentLoaded', function () {
   const handleUserTalking = (userMessage) => {
     memory.setUserMessage(userMessage)
 
-    const messageContainer = screen.createMessageContainer()
-    const message = screen.createMessage(userMessage, 'user')
-    screen.attachToMessageContainer(messageContainer, message)
-    screen.attachToScreen(messageContainer)
+    const messageContainer = messengerScreen.createMessageContainer()
+    const message = messengerScreen.createMessage(userMessage, 'user')
+    messengerScreen.attachToMessageContainer(messageContainer, message)
+    messengerScreen.attachToScreen(messageContainer)
 
-    inputPanelUI.deactivatePanel()
+    messengerInterface.deactivatePanel()
     handleCharTalking()
   }
 
-  inputPanelUI.subscribe(handleUserTalking)
+  messengerInterface.subscribe(handleUserTalking)
 })

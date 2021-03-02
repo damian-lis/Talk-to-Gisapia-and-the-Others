@@ -1,7 +1,7 @@
-import { buttons } from '../data/globalNames.js'
-import { createElementFn, runAlertOrForEachFn } from '../helpers/index.js'
+import { buttons } from '../../data/globalNames.js'
+import { createElementFn, runAlertOrForEachFn } from '../../helpers/index.js'
 
-export default class InputPanelUI {
+export default class MessengerInterface {
   constructor(container) {
     this.input = this.createInput()
     this.button = this.createButton()
@@ -14,6 +14,7 @@ export default class InputPanelUI {
     const input = createElementFn({
       elementToCreate: 'input',
       disabled: true,
+      classesName: ['interface-input'],
     })
 
     const events = ['input', 'keypress']
@@ -41,6 +42,7 @@ export default class InputPanelUI {
       elementToCreate: 'button',
       text: buttons.names.send,
       disabled: true,
+      classesName: ['interface-btn'],
     })
 
     button.addEventListener('click', () => {

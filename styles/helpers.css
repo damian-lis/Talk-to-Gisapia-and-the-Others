@@ -1,0 +1,47 @@
+.wrapper {
+  width: 100%;
+  height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.gisapia-main {
+  background-color: var(--gisapiaMainColor);
+}
+
+.gisapia-second {
+  background-color: var(--gisapiaSecondColor);
+}
+
+.gisapia-main + img {
+  border: 1px solid var(--gisapiaMainColor);
+}
+
+.hookin-main {
+  background-color: var(--hookinMainColor);
+}
+
+.hookin-second {
+  background-color: var(--hookinSecondColor);
+}
+
+.hookin-main + img {
+  border: 1px solid var(--hookinMainColor);
+}
+
+.reduxon-main {
+  background-color: var(--reduxonMainColor);
+}
+
+.reduxon-second {
+  background-color: var(--reduxonSecondColor);
+}
+
+.reduxon-main + img {
+  border: 1px solid var(--reduxonMainColor);
+}
+
+.user-main {
+  background-color: var(--userMainColor);
+}

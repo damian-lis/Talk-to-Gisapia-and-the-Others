@@ -1,6 +1,6 @@
 import { createElementFn, removeElFromContainer } from '../helpers/index.js'
 
-export default class Screen {
+export default class MessengerScreen {
   constructor(container) {
     this.screen = this.createScreen()
     this.attachToContainer(container)
@@ -26,7 +26,7 @@ export default class Screen {
     const message = createElementFn({
       elementToCreate: 'p',
       text,
-      classesName: ['message', `message-${whoTalking}`],
+      classesName: ['message', `${whoTalking.toLowerCase()}-main`],
     })
 
     return message
@@ -76,14 +76,14 @@ export default class Screen {
     console.log(charName)
     const circleContainer = createElementFn({
       elementToCreate: 'div',
-      attributes: [{ type: 'id', name: 'circle-container' }],
+      classesName: ['circle-container'],
     })
 
     for (let i = 0; i < 3; i++) {
       const circle = createElementFn({
         elementToCreate: 'div',
         attributes: [{ type: 'id', name: `ball-${i + 1}` }],
-        classesName: ['circle', `circle-${charName}`],
+        classesName: ['circle', `${charName.toLowerCase()}-main`],
       })
       circleContainer.appendChild(circle)
     }

@@ -1,4 +1,4 @@
-@keyframes bottomHide {
+@keyframes toBottomHide {
   0% {
     top: 50%;
     opacity: 1;
@@ -12,13 +12,32 @@
   }
 }
 
-@keyframes fallFromAbove {
+@keyframes fromBottomShow {
+  0% {
+    top: 150%;
+    opacity: 0;
+  }
+
+  60% {
+    opacity: 1;
+  }
+
+  100% {
+    top: 50%;
+    opacity: 1;
+  }
+}
+
+@keyframes fallFromTop {
   100% {
     top: 50%;
   }
 }
 
 @keyframes backToTheTop {
+  0% {
+    top: 50%;
+  }
   100% {
     top: -100%;
   }

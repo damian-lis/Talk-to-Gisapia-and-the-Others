@@ -1,8 +1,5 @@
-@import './global.css';
-@import './background.css';
-@import './animation.css';
-@import './messenger.css';
-@import './screen.css';
-@import './characters.css';
-@import './message.css';
-@import './selectCharUI.css';
+@import './variables.css';
+@import './normalize.css';
+@import './animations.css';
+@import './main/index.css';
+@import './helpers.css';
