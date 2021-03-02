@@ -50,3 +50,29 @@
 .active {
   background-color: rgb(241, 161, 12);
 }
+
+@media (max-width: 500px) {
+  .selectCharUI {
+    width: 320px;
+  }
+}
+
+@media (max-width: 380px) {
+  .selectCharUI {
+    width: 240px;
+  }
+
+  .selectCharUI h1 {
+    font-size: 2.2rem;
+  }
+
+  .charTalking {
+    font-size: 1.5rem;
+  }
+
+  .selectChar {
+    font-size: 1.7rem;
+    width: 100px;
+    height: 60px;
+  }
+}

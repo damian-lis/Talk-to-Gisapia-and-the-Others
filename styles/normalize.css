@@ -9,6 +9,11 @@ body {
   margin: 0;
 }
 
+body {
+  height: 100vh;
+  background-color: #000;
+}
+
 button,
 input {
   outline-style: none;
@@ -25,8 +30,4 @@ button:hover {
 
 ::-webkit-scrollbar {
   width: 0px;
-}
-
-body {
-  height: 100vh;
 }
