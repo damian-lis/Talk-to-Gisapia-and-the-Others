@@ -1,5 +1,5 @@
 import { sendAboutUser } from './actions/dataActions.js'
-import { runElement, addNewClasses } from '../helpers/index.js'
+import { runElement, addNewClasses } from './helpers/index.js'
 import {
   memory,
   SelectCharUI,
