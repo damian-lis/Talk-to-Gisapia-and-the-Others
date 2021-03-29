@@ -1,5 +1,5 @@
-import { GisapiaAnimation, Background } from '../objects/index.js'
-import { categories } from '../data/globalNames.js'
+import { GisapiaAnimation, Background } from './index.js'
+import { categories } from '../../data/globalNames.js'
 
 class Memory {
   constructor() {

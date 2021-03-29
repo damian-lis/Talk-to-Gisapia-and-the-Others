@@ -1,5 +1,5 @@
-import { sendAboutUser } from './actions/dataActions.js'
-import { runElement, addNewClasses } from './helpers/index.js'
+import { sendAboutUser } from '../../actions/dataActions.js'
+import { runElement, addNewClasses } from '../../helpers/index.js'
 import {
   memory,
   SelectCharUI,
@@ -12,7 +12,7 @@ import {
   answerVariants,
   categories,
   subscriberTypes,
-} from './data/globalNames.js'
+} from '../../data/globalNames.js'
 
 document.addEventListener('DOMContentLoaded', function () {
   const selectCharUi = new SelectCharUI(charNames, '.selectCharUI')

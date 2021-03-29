@@ -1,4 +1,4 @@
-import { createElementFn, removeElFromContainer } from '../helpers/index.js'
+import { createElementFn, removeElFromContainer } from '../../helpers/index.js'
 
 export default class MessengerScreen {
   constructor(container) {

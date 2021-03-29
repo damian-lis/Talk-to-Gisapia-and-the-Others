@@ -1,14 +1,14 @@
-import { Gisapia, NullCharacter, Hookin, Reduxon } from '../objects/index.js'
-import { scriptTalk, memory } from '../data/gisapia/index.js'
+import { Gisapia, NullCharacter, Hookin, Reduxon } from './index.js'
+import { scriptTalk, memory } from '../../data/gisapia/index.js'
 import {
   scriptTalk as tedScriptTalk,
   memory as tedMemory,
-} from '../data/hookin/index.js'
+} from '../../data/hookin/index.js'
 import {
   scriptTalk as reduxonScriptTalk,
   memory as reduxonMemory,
-} from '../data/reduxon/index.js'
-import { charNames } from '../data/globalNames.js'
+} from '../../data/reduxon/index.js'
+import { charNames } from '../../data/globalNames.js'
 
 export default class CharsFactory {
   constructor() {

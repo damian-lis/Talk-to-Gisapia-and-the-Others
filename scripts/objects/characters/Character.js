@@ -1,4 +1,4 @@
-import { setScript } from '../../helpers/index.js'
+import { setScript } from '../../../helpers/index.js'
 
 export default class Character {
   constructor(scriptTalk, memory) {
