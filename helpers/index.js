@@ -1,19 +1,15 @@
 import createElementFn from './createElementFn.js'
-import pageReload from './pageReload.js'
-import runAlertOrForEachFn from './runAlertOrForEachFn.js'
-import setScale from './setScale.js'
 import runElement from './runElement.js'
-import setScript from './setScript.js'
-import removeElFromContainer from './removeElFromContainer.js'
+import removeElement from './removeElement.js'
 import addNewClasses from './addNewClasses.js'
+import appendElementsToContainer from './appendElementsToContainer.js'
+import findAndReplaceFn from './findAndReplaceFn.js'
 
 export {
   createElementFn,
-  pageReload,
-  runAlertOrForEachFn,
-  setScale,
   runElement,
-  setScript,
-  removeElFromContainer,
+  removeElement,
   addNewClasses,
+  appendElementsToContainer,
+  findAndReplaceFn,
 }
