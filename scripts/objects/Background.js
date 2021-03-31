@@ -1,4 +1,4 @@
-export default class Background {
+class Background {
   constructor() {
     this.canvas = document.getElementById('canvas')
     this.cxt = canvas.getContext('2d')
@@ -49,3 +49,5 @@ export default class Background {
     }, time)
   }
 }
+
+export default Background
