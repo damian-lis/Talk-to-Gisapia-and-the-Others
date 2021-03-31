@@ -1,5 +1,7 @@
-export default class NullCharacter {
+class NullCharacter {
   constructor() {
     this.name = null
   }
 }
+
+export default NullCharacter
