@@ -1,5 +1,4 @@
-import { setScale } from '../../helpers/index.js'
-
+// Approve
 class GisapiaAnimation {
   constructor() {
     this.gisapiaObject = this.getObjectContent()
@@ -29,7 +28,7 @@ class GisapiaAnimation {
       onComplete: this.lipsAnimation,
     })
     tl.to(this.lips, 0.1, {
-      scale: setScale(0.2, 1),
+      scale: this.setScale(0.2, 1),
       yoyo: true,
       transformOrigin: '50% 50%',
     })
@@ -56,7 +55,7 @@ class GisapiaAnimation {
       onComplete: this.hairAnimation,
     })
     tl.to(this.hair, 1, {
-      scale: setScale(0.03, 0.97),
+      scale: this.setScale(0.03, 0.97),
       transformOrigin: '50% 50%',
     })
     return tl
@@ -67,10 +66,14 @@ class GisapiaAnimation {
       onComplete: this.eyesAnimation,
     })
     tl.to(this.eyes, 1, {
-      scale: setScale(0.05, 1),
+      scale: this.setScale(0.05, 1),
       transformOrigin: '50% 50%',
     })
     return tl
+  }
+
+  setScale(...values) {
+    return Math.random() * values[0] + values[1]
   }
 }
 
