@@ -1,14 +1,16 @@
 export const charNames = {
-  gisapia: 'Gisapia',
-  hookin: 'Hookin',
-  reduxon: 'Reduxon',
+  Gisapia: 'Gisapia',
+  Hookin: 'Hookin',
+  Reduxon: 'Reduxon',
 }
 
-export const answerVariants = {
-  isInMemory: 'isInMemory',
-  isNotInMemory: 'isNotInMemory',
-  addedToMemory: 'addedToMemory',
-}
+export const charNameList = [
+  charNames.Gisapia,
+  charNames.Hookin,
+  charNames.Reduxon,
+]
+
+//Tak samo zrobisz z elementsByClass i clasami
 
 export const categories = {
   name: 'name',
@@ -17,18 +19,33 @@ export const categories = {
   summary: 'summary',
 }
 
-export const buttons = {
-  names: {
-    letsTalk: 'Porozmawiaj!',
-    send: 'Wyślij',
+export const answerTypes = {
+  isInMemory: 'isInMemory',
+  isNotInMemory: 'isNotInMemory',
+  isAddedToMemory: 'isAddedToMemory',
+}
+
+export const animationSettings = {
+  selectCharUI: {
+    start: 'toBottomHide forwards 1s',
+    end: 'fromBottomShow 2s forwards',
   },
-  types: {
-    character: 'character',
-    start: 'start',
+  messenger: {
+    start: 'fallFromTop 1s forwards',
+    end: 'backToTheTop 2s forwards',
   },
 }
 
-export const subscriberTypes = {
-  selectChar: 'selectChar',
-  charTalking: 'charTalking',
+export const elementsByClass = {
+  selectCharUI: '.selectCharUI',
+  messenger: '.messenger',
+  messengerInterface: '.messenger-interface',
+  messengerScreen: '.messenger-screen',
+  screen: '.screen',
+  interfaceInput: '.interface-input',
+  interfaceBtn: '.interface-btn',
 }
+
+export const messages = 'messages'
+
+export const answers = 'answers'
