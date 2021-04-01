@@ -1,16 +1,14 @@
 import { GisapiaAnimation, Background } from './index.js'
-import { categories } from '../../data/globalNames.js'
 
 class Memory {
   constructor() {
     if (Memory.instance == null) {
-      this.categories = Object.values(categories)
-      this.conversationStep = 0
+      this.talkingStep = 0
       this.character = null
       this.userMessage = null
-      this.isCallAgain = false
-      this.isListening = false
-      this.isFinish = false
+      this.isCallCharTalkingAgain = false
+      this.isCharListening = false
+      this.isCharTalkingFinish = false
       this.backgroundAnimation = this.background()
       this.gisapiaAnimation = this.gisapiaAnimation()
       Memory.instance = this
@@ -26,20 +24,12 @@ class Memory {
     new GisapiaAnimation()
   }
 
-  setIsFinish(value) {
-    this.isFinish = value
+  increaseTalkingStep() {
+    this.talkingStep++
   }
 
-  getIsFinish() {
-    return this.isFinish
-  }
-
-  increaseConversationStep() {
-    this.conversationStep++
-  }
-
-  getConversationStep() {
-    return this.conversationStep
+  getTalkingStep() {
+    return this.talkingStep
   }
 
   setSelectedChar(character) {
@@ -58,24 +48,28 @@ class Memory {
     return this.userMessage
   }
 
-  setNumberOfQuestion(number) {
-    this.numberOfQuestion = number
+  setIsCallCharTalkingAgain(value) {
+    this.isCallCharTalkingAgain = value
   }
 
-  setIsCallAgain(value) {
-    this.isCallAgain = value
+  getIsCallCharTalkingAgain() {
+    return this.isCallCharTalkingAgain
   }
 
-  getIsCallAgain() {
-    return this.isCallAgain
+  setIsCharListening(value) {
+    this.isCharListening = value
   }
 
-  setIsListening(value) {
-    this.isListening = value
+  getIsCharListening() {
+    return this.isCharListening
   }
 
-  getIsListening() {
-    return this.isListening
+  setIsCharTalkingFinish(value) {
+    this.isCharTalkingFinish = value
+  }
+
+  getIsCharTalkingFinish() {
+    return this.isCharTalkingFinish
   }
 }
 
