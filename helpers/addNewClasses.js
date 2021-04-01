@@ -1,8 +1,11 @@
-export default (elements) => {
-  elements.map((element) => {
-    const el = document.querySelector(element.name)
-    element.classesToAdd.map((className) =>
-      el.classList.add(`${className.toLowerCase()}`)
+export default (objects) => {
+  objects.map((object) => {
+    let element = document.querySelector(object.element)
+    if (typeof object.element !== 'string') {
+      element = object.element
+    }
+    object.newClasses.map((className) =>
+      element.classList.add(`${className.toLowerCase()}`)
     )
   })
 }
