@@ -1,43 +1,30 @@
-export default ({
-  elementToCreate,
-  text,
-  classesName,
-  src,
-  attributes,
-  disabled,
-  eventListenerObj,
-}) => {
-  const createdElement = document.createElement(elementToCreate)
-  if (text) {
-    createdElement.innerText = text
-  }
+export default ({ element, ...rest }) => {
+  const createdElement = document.createElement(element)
 
-  if (src) {
-    createdElement.src = src
+  if (Object.keys(rest).length) {
+    for (const propEl in rest) {
+      if (propEl === 'listeners') {
+        rest[propEl].map((events) => {
+          const { event, cb } = events
+          createdElement.addEventListener(event, (e, event) => {
+            cb(e, event)
+          })
+        })
+      } else if (propEl === 'attributes') {
+        rest[propEl].map((attribute) => {
+          createdElement.setAttribute(`${attribute.type}`, `${attribute.name}`)
+        })
+      } else if (propEl === 'classes') {
+        createdElement.classList.add(...rest[propEl])
+      } else if (propEl === 'styles') {
+        rest[propEl].map((styleObj) => {
+          createdElement.style[styleObj.name] = styleObj.value
+        })
+      } else if (propEl === 'cb') {
+        rest[propEl](createdElement)
+      } else createdElement[propEl] = rest[propEl]
+    }
   }
-
-  if (disabled) {
-    createdElement.disabled = disabled
-  }
-
-  if (eventListenerObj) {
-    eventListenerObj.events.map((event) =>
-      createdElement.addEventListener(event.name, (e) => {
-        if (event.condition) {
-          event.valueToChange
-        } else {
-          event.result
-        }
-      })
-    )
-  }
-  classesName &&
-    classesName.map((className) => createdElement.classList.add(className))
-
-  attributes &&
-    attributes.map((attribute) =>
-      createdElement.setAttribute(`${attribute.type}`, `${attribute.name}`)
-    )
 
   return createdElement
 }
