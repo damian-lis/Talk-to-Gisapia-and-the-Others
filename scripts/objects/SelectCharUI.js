@@ -1,26 +1,56 @@
-import { buttons, subscriberTypes } from '../../data/globalNames.js'
-import { createElementFn } from '../../helpers/index.js'
+import {
+  createElementFn,
+  appendElementsToContainer,
+} from '../../helpers/index.js'
 
-export default class SelectCharUI {
+class SelectCharUI {
   constructor(charNames, container) {
-    this.container = container
+    const containerSent = document.querySelector(container)
+    const selectCharUIElements = this.createSelectCharUIElements(charNames)
+    this.subscribers = {}
+
+    appendElementsToContainer(selectCharUIElements, containerSent)
+  }
+
+  createSelectCharUIElements(charNames) {
     this.headline = createElementFn({
-      elementToCreate: 'h1',
-      text: 'Wybierz swojego rozmówcę!',
+      element: 'h1',
+      textContent: 'Wybierz swojego rozmówcę!',
     })
-    this.charButtons = this.createButtons(charNames, subscriberTypes.selectChar)
-    this.startButton = this.createButton(
-      buttons.names.letsTalk,
-      subscriberTypes.charTalking
+
+    this.charButtons = Object.entries(charNames).map((charName) =>
+      createElementFn({
+        element: 'button',
+        textContent: charName[1],
+        classes: ['selectChar'],
+        listeners: [
+          {
+            event: 'click',
+            cb: (e) => {
+              this.subscribers['selectChar'](charName[1])
+              this.removeActive(this.charButtons)
+              this.setActive(e.target)
+            },
+          },
+        ],
+      })
     )
 
-    this.attachToContainer(
-      this.container,
-      this.headline,
-      ...this.charButtons,
-      this.startButton
-    )
-    this.subscribers = {}
+    this.startButton = createElementFn({
+      element: 'button',
+      textContent: 'Porozmawiaj',
+      classes: ['startTalking'],
+      listeners: [
+        {
+          event: 'click',
+          cb: () => {
+            this.subscribers['startTalking']()
+          },
+        },
+      ],
+    })
+
+    return [this.headline, ...this.charButtons, this.startButton]
   }
 
   deleteElements(...elements) {
@@ -32,20 +62,6 @@ export default class SelectCharUI {
     this.headline.innerText = 'Spawdź swojego maila!'
   }
 
-  createButtons(charNames, type) {
-    const buttons = []
-    Object.entries(charNames).map((charName) =>
-      buttons.push(this.createButton(charName[1], type))
-    )
-
-    return buttons
-  }
-
-  attachToContainer(container, ...elements) {
-    const parent = document.querySelector(container)
-    elements.map((element) => parent.appendChild(element))
-  }
-
   removeActive(elements) {
     elements.map((element) => element.classList.remove('active'))
   }
@@ -55,26 +71,12 @@ export default class SelectCharUI {
   }
 
   setActive(element) {
-    this.removeActive(this.charButtons)
-    element && element.classList.add('active')
-  }
-
-  createButton(name, type) {
-    const button = createElementFn({
-      elementToCreate: 'button',
-      text: name,
-      classesName: [`${type}`],
-    })
-    button.addEventListener('click', () => {
-      this.subscribers[type](name)
-      if (type !== subscriberTypes.charTalking) {
-        this.setActive(button)
-      }
-    })
-    return button
+    element.classList.add('active')
   }
 
   subscribe(subscriber, name) {
     this.subscribers[name] = subscriber
   }
 }
+
+export default SelectCharUI

@@ -1,5 +1,12 @@
-import { sendAboutUser } from '../../actions/dataActions.js'
-import { runElement, addNewClasses } from '../../helpers/index.js'
+import { runElements, addNewClasses } from '../helpers/index.js'
+import {
+  charNameList,
+  answerTypes,
+  animationSettings,
+  elementsByClass,
+  messages,
+  answers,
+} from '../data/globalNames.js'
 import {
   memory,
   SelectCharUI,
@@ -7,188 +14,171 @@ import {
   MessengerInterface,
   MessengerScreen,
 } from './objects/index.js'
-import {
-  charNames,
-  answerVariants,
-  categories,
-  subscriberTypes,
-} from '../../data/globalNames.js'
 
 document.addEventListener('DOMContentLoaded', function () {
-  const selectCharUi = new SelectCharUI(charNames, '.selectCharUI')
+  const selectCharUi = new SelectCharUI(
+    charNameList,
+    elementsByClass.selectCharUI
+  )
   const charsFactory = new CharsFactory()
-  const messengerInterface = new MessengerInterface('.messenger-interface')
-  const messengerScreen = new MessengerScreen('.messenger-screen')
+  const messengerInterface = new MessengerInterface(
+    elementsByClass.messengerInterface
+  )
+  const messengerScreen = new MessengerScreen(elementsByClass.messengerScreen)
 
-  //Select character part
   const handleSelectChar = (charName) => {
     const chosenChar = charsFactory.getChar(charName)
     memory.setSelectedChar(chosenChar)
   }
-  selectCharUi.subscribe(handleSelectChar, subscriberTypes.selectChar)
 
-  const checkSelectedChar = () => {
+  const isSelectedChar = () => {
     const chosenChar = memory.getChar()
 
     if (!chosenChar) {
-      return alert('Wybierz rozmówcę!')
-    } else if (chosenChar.name === null) {
-      memory.setSelectedChar(null)
-      alert('Dostepna w przyszłości')
-      return selectCharUi.removeActive(selectCharUi.getCharButtons())
+      alert('Wybierz rozmówcę!')
+      return false
     }
+    return true
+  }
+
+  const initialAnimation = () => {
+    runElements([
+      {
+        element: elementsByClass.selectCharUI,
+        animation: animationSettings.selectCharUI.start,
+      },
+      {
+        element: elementsByClass.messenger,
+        animation: animationSettings.messenger.start,
+      },
+    ])
+  }
+
+  const customizeMessenger = () => {
+    const chosenChar = memory.getChar()
 
     addNewClasses([
       {
-        name: '.messenger',
-        classesToAdd: [`${chosenChar.name}-main`],
+        element: elementsByClass.messenger,
+        newClasses: [`${chosenChar.name}-main`],
       },
       {
-        name: '.screen',
-        classesToAdd: [`${chosenChar.name}-second`],
+        element: elementsByClass.screen,
+        newClasses: [`${chosenChar.name}-second`],
       },
 
       {
-        name: '.interface-input',
-        classesToAdd: [`${chosenChar.name}-second`],
+        element: elementsByClass.interfaceInput,
+        newClasses: [`${chosenChar.name}-second`],
       },
       {
-        name: '.interface-btn',
-        classesToAdd: [`${chosenChar.name}-second`],
+        element: elementsByClass.interfaceBtn,
+        newClasses: [`${chosenChar.name}-second`],
       },
     ])
+  }
 
-    runElement([
-      {
-        name: '.selectCharUI',
-        animation: 'toBottomHide forwards 1s',
-      },
-      {
-        name: '.messenger',
-        animation: 'fallFromTop 1s forwards',
-      },
-    ])
+  const startTalking = () => {
+    if (!isSelectedChar()) return
+    customizeMessenger()
+    initialAnimation()
     handleCharTalking()
   }
 
-  //Character talking process
   const handleCharTalking = async () => {
-    let userMessage = memory.getUserMessage()
     const chosenChar = memory.getChar()
-    const conversationStep = memory.getConversationStep()
-    const currentScriptCategory = chosenChar.getCurrentScriptCategory(
-      conversationStep
+    const talkingStep = memory.getTalkingStep()
+    const currentScriptTalkCategory = chosenChar.getCurrentScriptTalkCategory(
+      talkingStep
     )
+    const scriptTalkCategories = chosenChar.getScriptTalkCategories()
+    let userMessage = memory.getUserMessage()
+    let scriptTalkMessages
 
-    if (memory.getIsFinish()) {
+    if (memory.getIsCharTalkingFinish()) {
       if (userMessage === 'zapisz') {
-        sendAboutUser(chosenChar.getMemoryAboutUser())
+        // sendAboutUser(chosenChar.getMemoryAboutUser())
       }
       return setTimeout(() => {
-        runElement([
+        runElements([
           {
-            name: '.selectCharUI',
-            animation: 'fromBottomShow 2s forwards ',
+            element: elementsByClass.selectCharUI,
+            animation: animationSettings.selectCharUI.end,
           },
           {
-            name: '.messenger',
-            animation: 'backToTheTop 2s forwards',
+            element: elementsByClass.messenger,
+            animation: animationSettings.messenger.end,
           },
         ])
         selectCharUi.showEndMessage()
       }, 2000)
     }
 
-    if (currentScriptCategory === categories.summary) {
-      memory.setIsFinish(true)
-      const scriptCategories = chosenChar.getScriptCategories()
-      chosenChar.addAboutUserToMessages(scriptCategories, currentScriptCategory)
-    }
-
-    let charMessages = chosenChar.getScriptMessages(currentScriptCategory)
-
-    //Part when character wants to save new word in his memory
-    if (memory.getIsListening()) {
-      userMessage = chosenChar.setUpperLetter(userMessage)
-      chosenChar.addToMemoryAboutUser(currentScriptCategory, userMessage)
-
-      if (
-        currentScriptCategory === categories.origin ||
-        currentScriptCategory === categories.hobby
-      ) {
-        chosenChar.addUserMessageToAnswer(userMessage, currentScriptCategory, {
-          place: 'start',
-          where: answerVariants.addedToMemory,
+    if (userMessage) {
+      const foundWordInCharMemory = chosenChar.checkUserMessageInMemory(
+        currentScriptTalkCategory,
+        userMessage
+      )
+      if (memory.getIsCharListening()) {
+        chosenChar.addToMemoryAboutUser(currentScriptTalkCategory, userMessage)
+        chosenChar.changeScriptTalkMessages({
+          from: answers,
+          type: answerTypes.isAddedToMemory,
+          category: currentScriptTalkCategory,
         })
-      } else {
-        console.log('Jestem poza origin i dodaje na koncu')
-        chosenChar.addUserMessageToAnswer(userMessage, currentScriptCategory, {
-          place: 'end',
-          where: answerVariants.addedToMemory,
+        scriptTalkMessages = chosenChar.getScriptTalkMessages({
+          from: answers,
+          type: answerTypes.isAddedToMemory,
+          category: currentScriptTalkCategory,
         })
-      }
-      charMessages = chosenChar.getScriptAnswers(currentScriptCategory, {
-        from: answerVariants.addedToMemory,
-      })
-      memory.setUserMessage('')
-      memory.setIsCallAgain(true)
-      memory.setIsListening(false)
-    }
-    // Part where character checks typed word in his memory
-    else {
-      if (userMessage) {
-        const elementFromMemory = chosenChar.checkUserMessageInMemory(
-          currentScriptCategory,
-          userMessage
+
+        memory.setUserMessage('')
+        memory.setIsCallCharTalkingAgain(true)
+        memory.setIsCharListening(false)
+      } else if (foundWordInCharMemory) {
+        chosenChar.addToMemoryAboutUser(
+          currentScriptTalkCategory,
+          foundWordInCharMemory
         )
-
-        if (elementFromMemory) {
-          chosenChar.addToMemoryAboutUser(
-            currentScriptCategory,
-            elementFromMemory
-          )
-          if (
-            currentScriptCategory === categories.origin ||
-            currentScriptCategory === categories.hobby
-          ) {
-            chosenChar.addUserMessageToAnswer(
-              elementFromMemory,
-              currentScriptCategory,
-              {
-                place: 'start',
-                where: answerVariants.isInMemory,
-              }
-            )
-          } else {
-            chosenChar.addUserMessageToAnswer(
-              elementFromMemory,
-              currentScriptCategory,
-              {
-                place: 'end',
-                where: answerVariants.isInMemory,
-              }
-            )
-          }
-
-          charMessages = chosenChar.getScriptAnswers(currentScriptCategory, {
-            from: answerVariants.isInMemory,
-          })
-          memory.setUserMessage('')
-          memory.setIsCallAgain(true)
-        } else {
-          charMessages = chosenChar.getScriptAnswers(currentScriptCategory, {
-            from: answerVariants.isNotInMemory,
-          })
-          memory.setIsListening(true)
-        }
+        chosenChar.changeScriptTalkMessages({
+          from: answers,
+          type: answerTypes.isInMemory,
+          category: currentScriptTalkCategory,
+        })
+        scriptTalkMessages = chosenChar.getScriptTalkMessages({
+          from: answers,
+          type: answerTypes.isInMemory,
+          category: currentScriptTalkCategory,
+        })
+        memory.setUserMessage('')
+        memory.setIsCallCharTalkingAgain(true)
+      } else {
+        chosenChar.changeScriptTalkMessages({
+          from: answers,
+          type: answerTypes.isNotInMemory,
+          category: currentScriptTalkCategory,
+        })
+        scriptTalkMessages = chosenChar.getScriptTalkMessages({
+          from: answers,
+          type: answerTypes.isNotInMemory,
+          category: currentScriptTalkCategory,
+        })
+        memory.setIsCharListening(true)
       }
+    } else {
+      chosenChar.changeScriptTalkMessages({
+        from: messages,
+        category: currentScriptTalkCategory,
+      })
+      scriptTalkMessages = chosenChar.getScriptTalkMessages({
+        from: messages,
+        category: currentScriptTalkCategory,
+      })
     }
 
     //Part about character typing
-
-    for (let i = 0; i < charMessages.length; i++) {
-      const charMessage = charMessages[i]
-
+    for (let i = 0; i < scriptTalkMessages.length; i++) {
+      const charMessage = scriptTalkMessages[i]
       let timeForTyping = chosenChar.countTimeForTyping(charMessage.length, 80)
       const typingQuantity = chosenChar.countTypingQuantity(charMessage.length)
 
@@ -197,50 +187,46 @@ document.addEventListener('DOMContentLoaded', function () {
           timeForTyping = chosenChar.changeTimeForTyping(timeForTyping)
         }
 
-        await chosenChar.mustThink(500)
+        await chosenChar.mustThink(1000)
         await messengerScreen.showTyping(timeForTyping, chosenChar.name)
       }
 
-      const messageContainer = messengerScreen.createMessageContainer(
-        chosenChar.name
-      )
-      const message = messengerScreen.createMessage(
+      const chatBubble = messengerScreen.createChatBubble(
         charMessage,
-        chosenChar.name
+        chosenChar
       )
-      const avatar = messengerScreen.createAvatar(chosenChar.avatar)
-
-      messengerScreen.attachToMessageContainer(
-        messageContainer,
-        message,
-        avatar
-      )
-      messengerScreen.attachToScreen(messageContainer)
+      messengerScreen.attachToMessengerScreen(chatBubble)
+      messengerScreen.scrollMessengerScreenContainer()
     }
 
-    if (memory.getIsCallAgain()) {
-      memory.setIsCallAgain(false)
-      memory.increaseConversationStep()
-      return handleCharTalking()
+    if (currentScriptTalkCategory === scriptTalkCategories.summary) {
+      memory.setIsCharTalkingFinish(true)
     }
 
-    messengerInterface.activatePanel()
+    if (memory.getIsCallCharTalkingAgain()) {
+      memory.setIsCallCharTalkingAgain(false)
+      memory.increaseTalkingStep()
+      handleCharTalking()
+    } else {
+      messengerInterface.activatePanel()
+    }
   }
-
-  selectCharUi.subscribe(checkSelectedChar, subscriberTypes.charTalking)
 
   //User talking process
   const handleUserTalking = (userMessage) => {
+    const chatBubble = messengerScreen.createChatBubble(userMessage, {
+      name: 'user',
+    })
+
     memory.setUserMessage(userMessage)
-
-    const messageContainer = messengerScreen.createMessageContainer()
-    const message = messengerScreen.createMessage(userMessage, 'user')
-    messengerScreen.attachToMessageContainer(messageContainer, message)
-    messengerScreen.attachToScreen(messageContainer)
-
+    messengerScreen.attachToMessengerScreen(chatBubble)
+    messengerScreen.scrollMessengerScreenContainer()
+    messengerScreen.increaseCharMessagesPart()
     messengerInterface.deactivatePanel()
     handleCharTalking()
   }
 
   messengerInterface.subscribe(handleUserTalking)
+  selectCharUi.subscribe(handleSelectChar, 'selectChar')
+  selectCharUi.subscribe(startTalking, 'startTalking')
 })

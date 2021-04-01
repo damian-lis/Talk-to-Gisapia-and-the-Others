@@ -1,14 +1,15 @@
-import { setScript } from '../../../helpers/index.js'
-
-export default class Character {
+import { findAndReplaceFn } from '../../../helpers/index.js'
+import { messages, answers, categories } from '../../../data/globalNames.js'
+// Approve
+class Character {
   constructor(scriptTalk, memory) {
-    this.scriptTalk = setScript(scriptTalk)
+    this.scriptTalk = this.setScriptTalkMessages(scriptTalk)
     this.memory = memory
-    this.memoryAboutUser = {}
+    this.finalListening = false
   }
 
   getMemoryAboutUser() {
-    return this.memoryAboutUser
+    return this.memory.aboutUser
   }
 
   changeTimeForTyping(timeForTyping) {
@@ -18,20 +19,22 @@ export default class Character {
     return result < 1000 ? 1000 : result
   }
 
-  getScriptMessages(currentCategory) {
-    return this.scriptTalk[currentCategory].messages
+  getScriptTalkMessages({ category, from, type }) {
+    if (from === messages) return this.scriptTalk[category].messages
+    if (from === answers) return this.scriptTalk[category].answers[type]
   }
 
-  getCurrentScriptCategory(conversationStep) {
+  getCurrentScriptTalkCategory(conversationStep) {
     return Object.keys(this.scriptTalk)[conversationStep]
   }
 
-  getScriptCategories() {
-    return Object.keys(this.scriptTalk)
-  }
+  getScriptTalkCategories() {
+    const categories = {}
+    Object.keys(this.scriptTalk).map(
+      (categoryName) => (categories[categoryName] = categoryName)
+    )
 
-  getScriptAnswers(currentCategory, { from }) {
-    return this.scriptTalk[currentCategory].answers[from]
+    return categories
   }
 
   mustThink(time) {
@@ -45,7 +48,11 @@ export default class Character {
   }
 
   addToMemoryAboutUser(scriptCategory, word) {
-    this.memoryAboutUser[scriptCategory] = word
+    if (scriptCategory !== categories.hobby) {
+      word = this.setUpperLetter(word)
+    }
+
+    this.memory.aboutUser[scriptCategory] = word
   }
 
   setUpperLetter(message) {
@@ -71,24 +78,59 @@ export default class Character {
     return result > 2500 ? 2500 : result < 1000 ? 1000 : result
   }
 
-  addUserMessageToAnswer(message, currentCategory, { place, where }) {
-    switch (place) {
-      case 'start':
-        return (this.scriptTalk[currentCategory].answers[where][0] =
-          message + ' ' + this.scriptTalk[currentCategory].answers[where][0])
-      case 'end':
-        return (this.scriptTalk[currentCategory].answers[
-          where
-        ][0] += ` ${message}`)
+  setScriptTalkMessages(scriptTalk) {
+    for (const category in scriptTalk) {
+      scriptTalk[category].messages = scriptTalk[category].messages.map(
+        (message) => {
+          if (Array.isArray(message)) {
+            return message[Math.floor(Math.random() * message.length)]
+          } else {
+            return message
+          }
+        }
+      )
+      for (const answerVariants in scriptTalk[category].answers) {
+        scriptTalk[category].answers[answerVariants] = scriptTalk[
+          category
+        ].answers[answerVariants].map((answerVariant) => {
+          if (Array.isArray(answerVariant)) {
+            return answerVariant[
+              Math.floor(Math.random() * answerVariant.length)
+            ]
+          } else {
+            return answerVariant
+          }
+        })
+      }
     }
+    return scriptTalk
   }
 
-  addAboutUserToMessages(scriptCategories, currentCategory) {
-    scriptCategories.pop()
-    scriptCategories.forEach((scriptCategory, index) => {
-      this.scriptTalk[currentCategory].messages[
-        index + 1
-      ] += this.memoryAboutUser[scriptCategory]
-    })
+  changeScriptTalkMessages({ category, from, type }) {
+    const wordsToSearchAndReplace = Object.keys(this.memory.aboutUser).map(
+      (category) => {
+        return {
+          search: `-user${this.setUpperLetter(category)}-`,
+          replace: this.memory.aboutUser[category],
+        }
+      }
+    )
+    if (wordsToSearchAndReplace.length === 0) return
+
+    if (from === messages) {
+      this.scriptTalk[category].messages = findAndReplaceFn(
+        { wordsSets: wordsToSearchAndReplace },
+        this.scriptTalk[category].messages
+      )
+    }
+
+    if (from === answers) {
+      this.scriptTalk[category].answers[type] = findAndReplaceFn(
+        { wordsSets: wordsToSearchAndReplace },
+        this.scriptTalk[category].answers[type]
+      )
+    }
   }
 }
+
+export default Character

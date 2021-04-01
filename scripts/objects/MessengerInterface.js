@@ -1,69 +1,60 @@
-import { buttons } from '../../data/globalNames.js'
-import { createElementFn, runAlertOrForEachFn } from '../../helpers/index.js'
+import {
+  createElementFn,
+  appendElementsToContainer,
+} from '../../helpers/index.js'
 
-export default class MessengerInterface {
+class MessengerInterface {
   constructor(container) {
-    this.input = this.createInput()
-    this.button = this.createButton()
-    this.attachToContainer(container, this.input, this.button)
-    this.inputMessage = ''
+    const containerSent = document.querySelector(container)
+    const messengerInterfaceElements = this.createMessengerInterfaceElements()
+    this.inputValue = ''
     this.subscribers = []
+
+    appendElementsToContainer(messengerInterfaceElements, containerSent)
   }
 
-  createInput() {
-    const input = createElementFn({
-      elementToCreate: 'input',
+  createMessengerInterfaceElements() {
+    this.input = createElementFn({
+      element: 'input',
       disabled: true,
-      classesName: ['interface-input'],
+      classes: ['interface-input'],
+      listeners: [
+        {
+          event: 'input',
+          cb: (e) => {
+            this.inputValue = e.target.value
+          },
+        },
+        {
+          event: 'keypress',
+          cb: (e) => {
+            if (e.key === 'Enter') {
+              this.checkInputAndCallSubscribers()
+            }
+          },
+        },
+      ],
     })
 
-    const events = ['input', 'keypress']
-    events.map((event) => {
-      input.addEventListener(event, (e) => {
-        if (event === 'input') {
-          this.inputMessage = e.target.value
-        } else {
-          if (e.key === 'Enter') {
-            runAlertOrForEachFn({
-              elements: this.subscribers,
-              alertMessage: 'Musisz coś napisać!',
-              toSendInFn: this.inputMessage,
-            })
-          }
-        }
-      })
-    })
-
-    return input
-  }
-
-  createButton() {
-    const button = createElementFn({
-      elementToCreate: 'button',
-      text: buttons.names.send,
+    this.button = createElementFn({
+      element: 'button',
+      textContent: 'Wyślij',
       disabled: true,
-      classesName: ['interface-btn'],
+      classes: ['interface-btn'],
+      listeners: [
+        {
+          event: 'click',
+          cb: () => this.checkInputAndCallSubscribers(),
+        },
+      ],
     })
 
-    button.addEventListener('click', () => {
-      runAlertOrForEachFn({
-        elements: this.subscribers,
-        alertMessage: 'Musisz coś napisać',
-        toSendInFn: this.inputMessage,
-      })
-    })
-
-    return button
+    return [this.input, this.button]
   }
 
-  appendToRoot(root, ...elements) {
-    elements.map((element) => root.appendChild(element))
-  }
-
-  attachToContainer(container, ...elements) {
-    elements.map((element) =>
-      document.querySelector(container).appendChild(element)
-    )
+  checkInputAndCallSubscribers() {
+    if (this.inputValue === '') return alert('Musisz coś napisać')
+    this.subscribers.map((subscriber) => subscriber(this.inputValue))
   }
 
   deactivatePanel() {
@@ -79,10 +70,12 @@ export default class MessengerInterface {
 
   clearInput() {
     this.input.value = ''
-    this.inputMessage = ''
+    this.inputValue = ''
   }
 
   subscribe(subscriber) {
     this.subscribers.push(subscriber)
   }
 }
+
+export default MessengerInterface
