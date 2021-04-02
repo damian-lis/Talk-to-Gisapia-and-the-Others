@@ -6,7 +6,7 @@ import {
   elementsByClass,
   messages,
   answers,
-  serverErrorMessage,
+  noConnectionMessage,
   withoutMailMessage,
   mailEndPoint,
 } from '../data/globalNames.js'
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
           animation: animationSettings.messenger.end,
         },
       ])
-      return selectCharUi.showEndMessage(variant)
+      return selectCharUi.showFinishMessages(variant)
     }, 2000)
   }
 
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       })
       .catch(() => {
-        finishAnimation(serverErrorMessage)
+        finishAnimation(noConnectionMessage)
       })
   }
 
