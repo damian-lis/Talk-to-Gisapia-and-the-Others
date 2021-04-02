@@ -1,7 +1,4 @@
-import {
-  createElementFn,
-  appendElementsToContainer,
-} from '../../helpers/index.js'
+import { createElementFn, appendElementsToContainer } from '../helpers/index.js'
 
 class MessengerInterface {
   constructor(container) {

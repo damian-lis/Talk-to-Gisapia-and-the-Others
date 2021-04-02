@@ -2,7 +2,7 @@ import {
   createElementFn,
   removeElement,
   appendElementsToContainer,
-} from '../../helpers/index.js'
+} from '../helpers/index.js'
 
 class MessengerScreen {
   constructor(container) {

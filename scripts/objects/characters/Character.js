@@ -1,4 +1,4 @@
-import { findAndReplaceFn } from '../../../helpers/index.js'
+import { findAndReplaceFn } from '../../helpers/index.js'
 import { messages, answers, categories } from '../../../data/globalNames.js'
 // Approve
 class Character {

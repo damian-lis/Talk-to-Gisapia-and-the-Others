@@ -1,4 +1,4 @@
-import { runElements, addNewClasses } from '../helpers/index.js'
+import { runElements, addNewClasses } from './helpers/index.js'
 import {
   charNameList,
   answerTypes,
