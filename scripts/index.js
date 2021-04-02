@@ -6,6 +6,9 @@ import {
   elementsByClass,
   messages,
   answers,
+  serverErrorMessage,
+  withoutMailMessage,
+  mailEndPoint,
 } from '../data/globalNames.js'
 import {
   memory,
@@ -54,6 +57,22 @@ document.addEventListener('DOMContentLoaded', function () {
     ])
   }
 
+  const finishAnimation = (variant) => {
+    return setTimeout(() => {
+      runElements([
+        {
+          element: elementsByClass.selectCharUI,
+          animation: animationSettings.selectCharUI.end,
+        },
+        {
+          element: elementsByClass.messenger,
+          animation: animationSettings.messenger.end,
+        },
+      ])
+      return selectCharUi.showEndMessage(variant)
+    }, 2000)
+  }
+
   const customizeMessenger = () => {
     const chosenChar = memory.getChar()
 
@@ -78,6 +97,28 @@ document.addEventListener('DOMContentLoaded', function () {
     ])
   }
 
+  const handleSendData = async (data) => {
+    return await fetch(mailEndPoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          finishAnimation(data.message)
+        } else {
+          finishAnimation(data.message)
+        }
+      })
+      .catch(() => {
+        finishAnimation(serverErrorMessage)
+      })
+  }
+
   const startTalking = () => {
     if (!isSelectedChar()) return
     customizeMessenger()
@@ -96,22 +137,16 @@ document.addEventListener('DOMContentLoaded', function () {
     let scriptTalkMessages
 
     if (memory.getIsCharTalkingFinish()) {
-      if (userMessage === 'zapisz') {
-        // sendAboutUser(chosenChar.getMemoryAboutUser())
+      if (userMessage.includes('@')) {
+        const data = {
+          senderName: chosenChar.name,
+          recipientMail: userMessage,
+          ...chosenChar.getMemoryAboutUser(),
+        }
+        return await handleSendData(data)
+      } else {
+        return finishAnimation(withoutMailMessage)
       }
-      return setTimeout(() => {
-        runElements([
-          {
-            element: elementsByClass.selectCharUI,
-            animation: animationSettings.selectCharUI.end,
-          },
-          {
-            element: elementsByClass.messenger,
-            animation: animationSettings.messenger.end,
-          },
-        ])
-        selectCharUi.showEndMessage()
-      }, 2000)
     }
 
     if (userMessage) {
@@ -187,8 +222,8 @@ document.addEventListener('DOMContentLoaded', function () {
           timeForTyping = chosenChar.changeTimeForTyping(timeForTyping)
         }
 
-        await chosenChar.mustThink(1000)
-        await messengerScreen.showTyping(timeForTyping, chosenChar.name)
+        // await chosenChar.mustThink(1000)
+        // await messengerScreen.showTyping(timeForTyping, chosenChar.name)
       }
 
       const chatBubble = messengerScreen.createChatBubble(
