@@ -2,11 +2,11 @@ import { createElementFn, appendElementsToContainer } from '../helpers/index.js'
 
 class SelectCharUI {
   constructor(charNames, container) {
-    const containerSent = document.querySelector(container)
+    this.containerSent = document.querySelector(container)
     const selectCharUIElements = this.createSelectCharUIElements(charNames)
     this.subscribers = {}
 
-    appendElementsToContainer(selectCharUIElements, containerSent)
+    appendElementsToContainer(selectCharUIElements, this.containerSent)
   }
 
   createSelectCharUIElements(charNames) {
@@ -50,13 +50,26 @@ class SelectCharUI {
     return [this.headline, ...this.charButtons, this.startButton]
   }
 
-  deleteElements(...elements) {
-    elements.map((element) => element.remove())
+  createMessagesComponent(messages) {
+    const msgContainer = createElementFn({
+      element: 'div',
+    })
+
+    messages.map((message) => {
+      const msg = createElementFn({
+        element: 'p',
+        textContent: message,
+      })
+      msgContainer.appendChild(msg)
+    })
+
+    return msgContainer
   }
 
-  showEndMessage(message) {
-    this.deleteElements(...this.charButtons, this.startButton)
-    this.headline.innerHTML = message
+  showFinishMessages(messages) {
+    const messagesComponent = this.createMessagesComponent(messages)
+    this.containerSent.innerHTML = ''
+    this.containerSent.appendChild(messagesComponent)
   }
 
   removeActive(elements) {
