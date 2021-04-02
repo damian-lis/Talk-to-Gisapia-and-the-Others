@@ -54,9 +54,9 @@ class SelectCharUI {
     elements.map((element) => element.remove())
   }
 
-  showEndMessage() {
+  showEndMessage(message) {
     this.deleteElements(...this.charButtons, this.startButton)
-    this.headline.innerText = 'Spawdź swojego maila!'
+    this.headline.innerHTML = message
   }
 
   removeActive(elements) {
