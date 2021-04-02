@@ -1,15 +1,14 @@
 import express from 'express'
-import mailRoutes from './routes/mailRoutes.js'
+import { sendMail } from './mail.js'
+import cors from 'cors'
 
 const app = express()
 
+app.use(cors())
 app.use(express.json())
 
-app.use('/api/mail', mailRoutes)
+app.use('/api/mail', sendMail)
 
-const PORT = 5000
+const PORT = 5001
 
-app.listen(
-  PORT,
-  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
-)
+app.listen(PORT, console.log(`Server running on ${PORT} port`))
