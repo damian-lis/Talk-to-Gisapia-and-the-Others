@@ -1,6 +1,6 @@
-import { SENDGRID_API_KEY } from './env.js'
+import { SENDGRID_API_KEY } from '../env.js'
 import sgMail from '@sendgrid/mail'
-import { createMessageFn } from './utils/index.js'
+import { createMessageFn } from './helpers/index.js'
 
 sgMail.setApiKey(SENDGRID_API_KEY)
 

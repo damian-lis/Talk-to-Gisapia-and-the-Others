@@ -1,5 +1,5 @@
 import express from 'express'
-import { sendMail } from './mail.js'
+import { sendMail } from './mail/index.js'
 import cors from 'cors'
 
 const app = express()
