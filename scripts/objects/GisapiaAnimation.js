@@ -10,7 +10,7 @@ class GisapiaAnimation {
   }
 
   getObjectContent() {
-    return document.querySelector('#gisapiasvg').contentDocument
+    return document.querySelector('#gisapia').contentDocument
   }
 
   startAnimation() {
