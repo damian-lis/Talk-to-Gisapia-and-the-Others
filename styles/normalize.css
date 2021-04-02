@@ -1,17 +1,13 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html,
 body {
   font-size: 10px;
   font-family: Comic Sans MS, Comic Sans, cursive;
-  margin: 0;
-}
-
-body {
-  height: 100vh;
-  background-color: #000;
 }
 
 button,
