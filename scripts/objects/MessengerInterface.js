@@ -1,4 +1,5 @@
 import { createElementFn, appendElementsToContainer } from '../helpers/index.js'
+import { classNames } from '../../data/globalNames.js'
 
 class MessengerInterface {
   constructor(container) {
@@ -14,7 +15,7 @@ class MessengerInterface {
     this.input = createElementFn({
       element: 'input',
       disabled: true,
-      classes: ['interface-input'],
+      classes: [classNames.messenger.interfaceInput],
       listeners: [
         {
           event: 'input',
@@ -37,7 +38,7 @@ class MessengerInterface {
       element: 'button',
       textContent: 'Wyślij',
       disabled: true,
-      classes: ['interface-btn'],
+      classes: [classNames.messenger.interfaceBtn],
       listeners: [
         {
           event: 'click',

@@ -4,12 +4,14 @@ import {
   appendElementsToContainer,
 } from '../helpers/index.js'
 
+import { classNames } from '../../data/globalNames.js'
+
 class MessengerScreen {
   constructor(container) {
     this.containerSent = document.querySelector(container)
     this.screen = createElementFn({
       element: 'div',
-      classes: ['screen'],
+      classes: [classNames.messenger.screen],
     })
     this.charMessagesPart = 0
 
@@ -27,23 +29,23 @@ class MessengerScreen {
       name !== 'user'
         ? createElementFn({
             element: 'div',
-            classes: ['message-container'],
+            classes: [classNames.messenger.messageContainer],
             attributes: [{ type: 'messagespart', name: this.charMessagesPart }],
           })
         : createElementFn({
             element: 'div',
-            classes: ['message-container'],
+            classes: [classNames.messenger.messageContainer],
           })
     const message = createElementFn({
       element: 'p',
       textContent: text,
-      classes: ['message', `${name.toLowerCase()}-main`],
+      classes: [classNames.messenger.message, `${name.toLowerCase()}-main`],
     })
     if (name !== 'user') {
       const avatar = createElementFn({
         element: 'img',
         src: avatarImage,
-        classes: ['character-avatar'],
+        classes: [classNames.messenger.characterAvatar],
       })
       removeElement({
         element: 'img',
@@ -70,14 +72,17 @@ class MessengerScreen {
   createLoader(charName) {
     const circleContainer = createElementFn({
       element: 'div',
-      classes: ['circle-container'],
+      classes: [classNames.messenger.loaderContainer],
     })
 
     for (let i = 0; i < 3; i++) {
       const circle = createElementFn({
         element: 'div',
         attributes: [{ type: 'id', name: `ball-${i + 1}` }],
-        classes: ['circle', `${charName.toLowerCase()}-main`],
+        classes: [
+          classNames.messenger.loader,
+          `${charName.toLowerCase()}-main`,
+        ],
       })
       circleContainer.appendChild(circle)
     }

@@ -1,4 +1,5 @@
 import { createElementFn, appendElementsToContainer } from '../helpers/index.js'
+import { classNames } from '../../data/globalNames.js'
 
 class SelectCharUI {
   constructor(charNames, container) {
@@ -13,13 +14,14 @@ class SelectCharUI {
     this.headline = createElementFn({
       element: 'h1',
       textContent: 'Wybierz swojego rozmówcę!',
+      classes: [classNames.selectCharUI.headline],
     })
 
     this.charButtons = Object.entries(charNames).map((charName) =>
       createElementFn({
         element: 'button',
         textContent: charName[1],
-        classes: ['selectChar'],
+        classes: [classNames.selectCharUI.selectBtn],
         listeners: [
           {
             event: 'click',
@@ -36,7 +38,7 @@ class SelectCharUI {
     this.startButton = createElementFn({
       element: 'button',
       textContent: 'Porozmawiaj',
-      classes: ['startTalking'],
+      classes: [classNames.selectCharUI.startBtn],
       listeners: [
         {
           event: 'click',
@@ -59,6 +61,7 @@ class SelectCharUI {
       const msg = createElementFn({
         element: 'p',
         textContent: message,
+        classes: [classNames.selectCharUI.message],
       })
       msgContainer.appendChild(msg)
     })
@@ -73,7 +76,9 @@ class SelectCharUI {
   }
 
   removeActive(elements) {
-    elements.map((element) => element.classList.remove('active'))
+    elements.map((element) =>
+      element.classList.remove(classNames.selectCharUI.activeBtn)
+    )
   }
 
   getCharButtons() {
@@ -81,7 +86,7 @@ class SelectCharUI {
   }
 
   setActive(element) {
-    element.classList.add('active')
+    element.classList.add(classNames.selectCharUI.activeBtn)
   }
 
   subscribe(subscriber, name) {

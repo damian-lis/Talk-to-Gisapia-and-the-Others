@@ -3,12 +3,12 @@ import {
   charNameList,
   answerTypes,
   animationSettings,
-  elementsByClass,
   messages,
   answers,
   noConnectionMessage,
   withoutMailMessage,
   mailEndPoint,
+  classReferences,
 } from '../data/globalNames.js'
 import {
   memory,
@@ -21,13 +21,15 @@ import {
 document.addEventListener('DOMContentLoaded', function () {
   const selectCharUi = new SelectCharUI(
     charNameList,
-    elementsByClass.selectCharUI
+    classReferences.selectCharUI.main
   )
   const charsFactory = new CharsFactory()
   const messengerInterface = new MessengerInterface(
-    elementsByClass.messengerInterface
+    classReferences.messenger.interfaceContainer
   )
-  const messengerScreen = new MessengerScreen(elementsByClass.messengerScreen)
+  const messengerScreen = new MessengerScreen(
+    classReferences.messenger.screenContainer
+  )
 
   const handleSelectChar = (charName) => {
     const chosenChar = charsFactory.getChar(charName)
@@ -47,11 +49,11 @@ document.addEventListener('DOMContentLoaded', function () {
   const initialAnimation = () => {
     runElements([
       {
-        element: elementsByClass.selectCharUI,
+        element: classReferences.selectCharUI.main,
         animation: animationSettings.selectCharUI.start,
       },
       {
-        element: elementsByClass.messenger,
+        element: classReferences.messenger.main,
         animation: animationSettings.messenger.start,
       },
     ])
@@ -61,11 +63,11 @@ document.addEventListener('DOMContentLoaded', function () {
     return setTimeout(() => {
       runElements([
         {
-          element: elementsByClass.selectCharUI,
+          element: classReferences.selectCharUI.main,
           animation: animationSettings.selectCharUI.end,
         },
         {
-          element: elementsByClass.messenger,
+          element: classReferences.messenger.main,
           animation: animationSettings.messenger.end,
         },
       ])
@@ -78,20 +80,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
     addNewClasses([
       {
-        element: elementsByClass.messenger,
+        element: classReferences.messenger.main,
         newClasses: [`${chosenChar.name}-main`],
       },
       {
-        element: elementsByClass.screen,
+        element: classReferences.messenger.screenContainer,
         newClasses: [`${chosenChar.name}-second`],
       },
 
       {
-        element: elementsByClass.interfaceInput,
+        element: classReferences.messenger.interfaceInput,
         newClasses: [`${chosenChar.name}-second`],
       },
       {
-        element: elementsByClass.interfaceBtn,
+        element: classReferences.messenger.interfaceBtn,
         newClasses: [`${chosenChar.name}-second`],
       },
     ])
