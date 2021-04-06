@@ -43,20 +43,19 @@ export default ({ type, data }) => {
       break
 
     case 'success':
-      message = `
-      ${p(`Mail wysłany!,`)}
-      ${p(`sprawdź! :)`)}
-      `
+      message = [`Mail wysłany!`, `sprawdź! :)`]
+
       break
 
     case 'error':
-      message = `
-      ${p(`Dzięki za rozmowę :)`)}
-      ${p(`Mail niestety nie został wysłany...`)}
-      ${p(`Jakiś problem z serwerem... :(`)}
-      ${p(`Idę to sprawdzić...`)}
-      ${p(`Tymczasem dzięki za rozmowę :)!`)}
-      `
+      message = [
+        `Dzięki za rozmowę!`,
+        `Mail niestety nie został wysłany...`,
+        `Jakiś problem z serwerem... `,
+        `Idę to sprawdzić...`,
+        `Tymczasem dzięki za rozmowę!`,
+      ]
+
       break
 
     default:

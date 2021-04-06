@@ -44,7 +44,7 @@ export const classNames = {
     message: 'messenger-message',
     characterAvatar: 'messenger-character-avatar',
     loaderContainer: 'messenger-loader-container',
-    loader: 'messenger-loader ',
+    loader: 'messenger-loader',
     interfaceContainer: 'messenger-interface-container',
     interfaceInput: 'messenger-interface-input',
     interfaceBtn: 'messenger-interface-btn',
@@ -90,7 +90,11 @@ export const classReferences = {
 
 export const messages = 'messages'
 export const answers = 'answers'
-export const noConnectionMessage = `<p>Dzięki za rozmowę :)</p> <p> Maila niestety nie otrzymasz bo nie ma połączenia z serwerem... :(</p>  <p>Idę to sprawdzić... </p> <p>Tymczasem dzięki za rozmowę :)!</p>`
+export const noConnectionMessage = [
+  `Dzięki za rozmowę :)`,
+  `Maila niestety nie otrzymasz bo nie ma połączenia z serwerem... :(`,
+  `Idę to sprawdzić... Tymczasem dzięki za rozmowę :)!`,
+]
 export const withoutMailMessage = [
   'Maila nie wysyłam,',
   'dzięki za rozmowę',
