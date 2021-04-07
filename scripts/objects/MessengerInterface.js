@@ -1,4 +1,7 @@
-import { createElementFn, appendElementsToContainer } from '../helpers/index.js'
+import {
+  createElementFn,
+  appendElementsToContainerFn,
+} from '../helpers/index.js'
 import { classNames } from '../../data/globalNames.js'
 
 class MessengerInterface {
@@ -8,7 +11,7 @@ class MessengerInterface {
     this.inputValue = ''
     this.subscribers = []
 
-    appendElementsToContainer(messengerInterfaceElements, containerSent)
+    appendElementsToContainerFn(messengerInterfaceElements, containerSent)
   }
 
   createMessengerInterfaceElements() {

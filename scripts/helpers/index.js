@@ -1,15 +1,15 @@
 import createElementFn from './createElementFn.js'
-import runElements from './runElements.js'
-import removeElement from './removeElement.js'
-import addNewClasses from './addNewClasses.js'
-import appendElementsToContainer from './appendElementsToContainer.js'
+import runElementsFn from './runElementsFn.js'
+import removeElementFn from './removeElementFn.js'
+import addNewClassesFn from './addNewClassesFn.js'
+import appendElementsToContainerFn from './appendElementsToContainerFn.js'
 import findAndReplaceFn from './findAndReplaceFn.js'
 
 export {
   createElementFn,
-  runElements,
-  removeElement,
-  addNewClasses,
-  appendElementsToContainer,
+  runElementsFn,
+  removeElementFn,
+  addNewClassesFn,
+  appendElementsToContainerFn,
   findAndReplaceFn,
 }

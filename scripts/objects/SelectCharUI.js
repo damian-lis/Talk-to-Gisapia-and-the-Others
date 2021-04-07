@@ -1,4 +1,7 @@
-import { createElementFn, appendElementsToContainer } from '../helpers/index.js'
+import {
+  createElementFn,
+  appendElementsToContainerFn,
+} from '../helpers/index.js'
 import { classNames } from '../../data/globalNames.js'
 
 class SelectCharUI {
@@ -7,7 +10,7 @@ class SelectCharUI {
     const selectCharUIElements = this.createSelectCharUIElements(charNames)
     this.subscribers = {}
 
-    appendElementsToContainer(selectCharUIElements, this.containerSent)
+    appendElementsToContainerFn(selectCharUIElements, this.containerSent)
   }
 
   createSelectCharUIElements(charNames) {

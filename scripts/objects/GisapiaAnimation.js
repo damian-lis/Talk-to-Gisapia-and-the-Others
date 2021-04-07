@@ -1,4 +1,3 @@
-// Approve
 class GisapiaAnimation {
   constructor() {
     this.gisapiaObject = this.getObjectContent()

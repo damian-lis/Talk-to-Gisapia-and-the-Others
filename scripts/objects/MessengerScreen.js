@@ -1,7 +1,7 @@
 import {
   createElementFn,
-  removeElement,
-  appendElementsToContainer,
+  removeElementFn,
+  appendElementsToContainerFn,
 } from '../helpers/index.js'
 
 import { classNames } from '../../data/globalNames.js'
@@ -15,7 +15,7 @@ class MessengerScreen {
     })
     this.charMessagesPart = 0
 
-    appendElementsToContainer([this.screen], this.containerSent)
+    appendElementsToContainerFn([this.screen], this.containerSent)
   }
 
   increaseCharMessagesPart() {
@@ -47,7 +47,7 @@ class MessengerScreen {
         src: avatarImage,
         classes: [classNames.messenger.characterAvatar],
       })
-      removeElement({
+      removeElementFn({
         element: 'img',
         search: `[messagespart="${this.charMessagesPart}"]`,
       })

@@ -1,4 +1,4 @@
-import { runElements, addNewClasses } from './helpers/index.js'
+import { runElementsFn, addNewClassesFn } from './helpers/index.js'
 import {
   charNameList,
   answerTypes,
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   const initialAnimation = () => {
-    runElements([
+    runElementsFn([
       {
         element: classReferences.selectCharUI.main,
         animation: animationSettings.selectCharUI.start,
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const finishAnimation = (variant) => {
     return setTimeout(() => {
-      runElements([
+      runElementsFn([
         {
           element: classReferences.selectCharUI.main,
           animation: animationSettings.selectCharUI.end,
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const customizeMessenger = () => {
     const chosenChar = memory.getChar()
 
-    addNewClasses([
+    addNewClassesFn([
       {
         element: classReferences.messenger.main,
         newClasses: [`${chosenChar.name}-main`],
