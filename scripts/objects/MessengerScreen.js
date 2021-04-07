@@ -38,7 +38,7 @@ class MessengerScreen {
           })
     const message = createElementFn({
       element: 'p',
-      textContent: text,
+      innerHTML: text,
       classes: [classNames.messenger.message, `${name.toLowerCase()}-main`],
     })
     if (name !== 'user') {
