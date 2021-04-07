@@ -1,86 +1,151 @@
-import { charNames, answerVariants, categories } from '../globalNames.js'
-
 export default {
-  [categories.name]: {
+  name: {
     messages: [
-      ['Cześć!', 'Hej!', 'Witaj!'],
-      `Nazywam się ${charNames.reduxon}`,
       [
-        'Powiedz mi proszę jak mogę się do Ciebie zwracać?',
-        'Jakis kolejny tekst',
-        'kolejny tekst',
+        'Siema! 😎',
+        `jestem Reduxon!`,
+        `zanim zaczniemy gadać musisz wiedzieć, ze jestem dosyć bezpośredni 😉`,
+        'jak masz na imię?',
       ],
+      ['Siema, siema! 😎', 'jestem Reduxon!', 'jak masz na imię?'],
     ],
     answers: {
-      [answerVariants.isInMemory]: [
+      isInMemory: [
         [
-          'Tak, kojarzę takie imię jak',
-          'Po naszej rozmowię wygoogluje sobie etymologię słowa',
+          'heh, taka śmieszna sprawa bo ostatnio przyłozyłem osobie o imieniu -userName- 😅',
+          'wiesz osoba chciała mnie zlagować i dostała prądem z laptopa... 😂',
+          'nie popełnij tego błędu! 😋',
+          'oczywiście ma się juz dobrze!',
         ],
-        `Miałam dwóch znajomych, którzy tak się nazywali.`,
-        `Niestety  zadnym z nich nie utrzymuje juz kontaktu...`,
+        [
+          'mówisz, ze -userName-?',
+          'kojarzę takie imię, kiedyś wybiłem zęba osobie o takim imieniu 😅',
+          'tzn. wirtualnego zęba, nie wazne... 😂',
+          'ale u nas w świecie 0 i 1 jest to odczuwalne tak jak u was 😋',
+        ],
       ],
-      [answerVariants.isNotInMemory]: [
-        'Niestety nie kojarzę takiego imienia',
+      isNotInMemory: [
         [
-          'Napisz je proszę jeszcze raz, a zapamiętam!',
-          'Ej napiszesz proszę jeszcze raz to imię?',
+          'o raczej nigdy takiego imienia nie widziałem',
+          'napisz je jeszcze raz, a je zapamiętam i nauczę się czegoś nowego! 😎',
+        ],
+        [
+          'hmmm...',
+          'nic z tego... Nie mam tego imienia w pamięci 😞',
+          'napisz je jeszcze raz, a je zapamiętam i nauczę się czegoś nowego! 😎',
         ],
       ],
-      [answerVariants.addedToMemory]: [
-        [
-          'Ale super! Ciesze się, ze poznałam nowe imię',
-          'Moja pamięć jest bogatsza o imię',
-        ],
+      isAddedToMemory: [
+        ['no i elegancko, -userName- wpadło do mojej czerwonej pamięci! 😎'],
+        ['gitarunia, moje imiona zostały wzbogacone o -userName-, yeah! 😎'],
       ],
     },
   },
 
-  [categories.origin]: {
+  origin: {
     messages: [
       [
-        'Tak w ogóle to skąd jesteś?',
-        'Skąd w ogóle jesteś jezeli mogę wiedzieć?',
+        'a gdzie w ogóle mieszkasz? Jakieś miasto, wioska?',
+        'wiesz, jezeli o mnie chodzi to mój świat to 0 i 1... 😉',
+        'za duzo zieleni to tutaj nie ma... 😂',
+      ],
+      [
+        'coś mi się lokalizacja po IP zawiesiła...',
+        'dobra nie dam rady to zapytam',
+        'skąd jesteś? Zawsze mogłem spradzić, ale teraz coś nawaliło... 😓',
+        'bo ja to wiesz... 0 i 1... Nic specjalnego 😂',
       ],
     ],
     answers: {
-      [answerVariants.isInMemory]: ['to piękna miejscowość', 'Bla bla'],
-      [answerVariants.isNotInMemory]: [
-        'Niestety nie kojarzę takiego miejsca',
-        'Napisz je proszę jeszcze raz, a zapamiętam!',
+      isInMemory: [
+        [
+          '-userOrigin- to stare dobre tereny',
+          'kiedyś sobie tam w google maps chodziłem 😎',
+          'fajny macie ten sklep obok tego wielkiego budynku 😉',
+        ],
+        [
+          'fajna miejscówka ten -userOrigin-, taki Kazik tam mieszka',
+          'ale nie będę Cię teraz -userName- tym zanudzał 😉',
+        ],
       ],
-      [answerVariants.addedToMemory]: [
-        'to pewnie ciekawa miejscowość. Od razu po naszej rozmowie idę wygooglować',
+      isNotInMemory: [
+        [
+          'nie kojarzę takiej miejscówki 😞',
+          'podaj dokładnie miejscowość, z której jesteś, a ja ją zapamiętam! 😎',
+        ],
+      ],
+      isAddedToMemory: [
+        [
+          'no ciekawe to miejsce',
+          'czyli tak wygląda -userOrigin- w google maps',
+          'no biedy nie ma 😉',
+          'widzę -userName-, ze na tereny leśne tez nie narzekacie 😎',
+        ],
+        [
+          'fajna miejscówka ten -userOrigin-',
+          'gdybym mógł się tylko zmaterializować to bym jakąś panienkę tam poderwał... 😂',
+        ],
       ],
     },
   },
-  [categories.hobby]: {
-    messages: ['Powiedz mi jakie masz hobby?'],
-    answers: {
-      [answerVariants.isInMemory]: [
-        'znam to zajęcie jak własną kieszeń!',
-        'Bla bla',
-      ],
-      [answerVariants.isNotInMemory]: [
-        'Hmmm ciekawe... Nie kojarzę takiego hobby.',
-        'Mozesz jeszcze raz je napisać to zapamiętam?',
-      ],
-      [answerVariants.addedToMemory]: [
-        'wlicza się do ekstremalnych sportów, czy coś mylę? :)',
-        'Nie wazne poczytam napewno!',
-      ],
-    },
-  },
-  [categories.summary]: {
+  hobby: {
     messages: [
-      'Okej to co udało mi się zapamiętać odnośnie Ciebie',
-      'Masz na imię ',
-      'Pochodzisz z ',
-      'Twoje hobby to ',
-      'Ciesze się, ze mogłam Cię poznać!',
-      'Niestety ze względu na inne obowiazki muszę zmykać...',
-      'Jezeli chcesz aby Twoje odpowiedzi trafiły do mojej pamięci na zawsze to napisz proszę "zapisz" :)',
-      'Jezeli nie chcesz to napisz cokolwiek a sobie pójdę :)!',
+      [
+        'teraz -userName- pytanie za sto punktów!',
+        'co robisz w wolnym czasie?',
+        'tzn. jakie masz hobby w tej swojej miejscowości -userOrigin-? 😏',
+      ],
+      [
+        'przechodzimy -userName- do mojego ulubionego pytania!',
+        'co ogólnie robisz po pracy?',
+        'w sensie jakie masz hobby w tej swojej miejscowości -userOrigin-? 😏',
+      ],
+    ],
+    answers: {
+      isInMemory: [
+        [
+          '-userHobby- to jest to!',
+          'często oglądam na youtube filmiki o tym',
+          'powiem Ci, ze to mega ciekawe zajęcie 😎',
+        ],
+        [
+          'tez się tym interesujesz -userName-?',
+          '-userHobby- to moje hobby od dziecka',
+          'tzn. od pierwszych linijek kodu... 😁',
+        ],
+      ],
+      isNotInMemory: [
+        [
+          'no patrz, taki ze mnie mądrala, a tego hobby nie znam...',
+          'napisz mi po prostu jak Twoje ulubione zajęcie się nazywa, a ja je zapamiętam! 😎',
+        ],
+      ],
+      isAddedToMemory: [
+        [
+          '-userHobby-, no zobaczmy',
+          'piszą, ze to hobby bardziej dla spokojnych osób...',
+          'czyli raczej nie dla mnie 😅',
+          'ale ogólnie spoko zajęcie na zabicie czasu! 😉',
+        ],
+        [
+          '-userHobby- brzmi mega ciekawie i trochę tak niebezpiecznie! 😈',
+          'tak czytam i widzę, ze polubił bym te klimaty! 😎',
+        ],
+      ],
+    },
+  },
+  summary: {
+    messages: [
+      [
+        '-userName- ze względu na brak czasu muszę tutaj zakończyć 😔',
+        'zeby nie było, coś tam udało mi się zapamiętać podczas dzisiejszej rozmowy 😀',
+        `więc tak, Twoje imię to -userName-,`,
+        `mieszkasz sobie w -userOrigin-,`,
+        `a Twoje hobby to -userHobby-`,
+        'fajnie było Cię  poznać! 😎',
+        'jezeli chcesz abym wysłał Twoje odpowiedzi na maila to podaj mi go w czystej postaci 😊',
+        'jezeli nie chcesz to napisz cokolwiek i się moze kiedyś jeszcze zobaczymy! 😉',
+      ],
     ],
   },
 }
