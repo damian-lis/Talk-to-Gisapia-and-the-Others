@@ -80,27 +80,21 @@ class Character {
 
   setScriptTalkMessages(scriptTalk) {
     for (const category in scriptTalk) {
-      scriptTalk[category].messages = scriptTalk[category].messages.map(
-        (message) => {
-          if (Array.isArray(message)) {
-            return message[Math.floor(Math.random() * message.length)]
-          } else {
-            return message
-          }
-        }
+      const messageNumber = Math.floor(
+        Math.random() * scriptTalk[category].messages.length
       )
+      const selectedMessage = scriptTalk[category].messages[messageNumber]
+
+      scriptTalk[category].messages = selectedMessage
+
       for (const answerVariants in scriptTalk[category].answers) {
-        scriptTalk[category].answers[answerVariants] = scriptTalk[
-          category
-        ].answers[answerVariants].map((answerVariant) => {
-          if (Array.isArray(answerVariant)) {
-            return answerVariant[
-              Math.floor(Math.random() * answerVariant.length)
-            ]
-          } else {
-            return answerVariant
-          }
-        })
+        const answerNumber = Math.floor(
+          Math.random() * scriptTalk[category].answers[answerVariants].length
+        )
+        const selectedAnswer =
+          scriptTalk[category].answers[answerVariants][answerNumber]
+
+        scriptTalk[category].answers[answerVariants] = selectedAnswer
       }
     }
     return scriptTalk
