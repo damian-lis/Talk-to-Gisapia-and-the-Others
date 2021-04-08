@@ -42,6 +42,7 @@ class MessengerInterface {
       textContent: 'Wyślij',
       disabled: true,
       classes: [classNames.messenger.interfaceBtn],
+      styles: [{ name: 'pointerEvents', value: 'none' }],
       listeners: [
         {
           event: 'click',
@@ -61,12 +62,14 @@ class MessengerInterface {
   deactivatePanel() {
     this.input.disabled = true
     this.button.disabled = true
+    this.button.style.pointerEvents = 'none'
     this.clearInput()
   }
 
   activatePanel() {
     this.input.disabled = false
     this.button.disabled = false
+    this.button.style.pointerEvents = 'auto'
   }
 
   clearInput() {
