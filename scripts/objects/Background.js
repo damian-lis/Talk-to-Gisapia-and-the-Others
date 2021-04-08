@@ -11,6 +11,16 @@ class Background {
     this.columns = this.canvas.width / this.font_size
     this.drops = this.addDrops()
     this.draw()
+    this.resize()
+  }
+
+  resize() {
+    window.addEventListener('resize', () => {
+      this.canvas.width = window.innerWidth
+      this.canvas.height = window.innerHeight
+      this.columns = this.canvas.width / this.font_size
+      this.drops = this.addDrops()
+    })
   }
 
   addDrops() {
