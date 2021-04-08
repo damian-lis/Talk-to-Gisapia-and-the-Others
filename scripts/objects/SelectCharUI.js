@@ -63,7 +63,7 @@ class SelectCharUI {
     messages.map((message) => {
       const msg = createElementFn({
         element: 'p',
-        textContent: message,
+        innerHTML: message,
         classes: [classNames.selectCharUI.message],
       })
       msgContainer.appendChild(msg)
