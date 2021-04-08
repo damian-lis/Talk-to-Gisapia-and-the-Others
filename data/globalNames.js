@@ -100,4 +100,4 @@ export const withoutMailMessage = [
   '😉',
 ]
 
-export const mailEndPoint = 'http://localhost:5001/api/mail'
+export const mailEndPoint = 'http://localhost:5000/api/mail'
