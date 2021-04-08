@@ -21,7 +21,7 @@ export default ({ type, data }) => {
         ${p(`Hej ${name}, tutaj ${senderName}!`)}
         ${space(5)}
         ${p(
-          `Zgodnie z obietnicą przesyłam informacje jakie udało mi się zapamiętać.`
+          `Zgodnie z obietnicą przesyłam informacje jakie udało mi się zapamiętać. 😉`
         )}
         ${p(`Więc tak, masz na imię ${strong(name)},`)}
         ${p(`Twoja miejscowość zamieszkania to ${strong(origin)},`)}
@@ -29,31 +29,30 @@ export default ({ type, data }) => {
        ${p(
          `Chyba dobrze się spisał${
            senderName === 'Gisapia' ? 'am' : 'em'
-         } co nie?`
+         } co nie? 😃`
        )}
         ${space(5)}
         ${p(
           `Dzięki wielkie za rozmowę, dobrze się bawił${
             senderName === 'Gisapia' ? 'am' : 'em'
-          }!`
+          }! 😎`
         )}
-        ${p(`Mam nadzieję, ze Ty równiez :)!`)}
+        ${p(`Mam nadzieję, że Ty również 😋!`)}
         `,
       }
       break
 
     case 'success':
-      message = [`Mail wysłany!`, `sprawdź! :)`]
+      message = [`Mail wysłany!`, `sprawdź! 😋`]
 
       break
 
     case 'error':
       message = [
-        `Dzięki za rozmowę!`,
         `Mail niestety nie został wysłany...`,
-        `Jakiś problem z serwerem... `,
+        `Jakiś problem z serwerem... 😓`,
         `Idę to sprawdzić...`,
-        `Tymczasem dzięki za rozmowę!`,
+        `Tymczasem dzięki za rozmowę! 😉`,
       ]
 
       break

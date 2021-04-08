@@ -4,8 +4,8 @@ export default {
       [
         'Cześć 😊',
         `nazywam się Gisapia`,
-        `bardzo mi miło, ze będę mogła z Tobą porozmawiać! 😎`,
-        'powiedz mi proszę jak Ci na imię nieznajomy?',
+        `bardzo mi miło, że będę mogła z Tobą porozmawiać! 😎`,
+        'powiedz mi proszę jak Ci na imię?',
       ],
       [
         'Cześć, cześć! 😊',
@@ -13,38 +13,41 @@ export default {
         'A Ty jak masz na imię? 😎',
       ],
     ],
+
     answers: {
       isInMemory: [
         [
-          `-userName-? Naprawdę -userName-??? Mój kumpel ma tak na imię! 😋`,
-          `ostatnio się pokłócilismy 😐, ale to raczej chwilowe! 😉`,
+          `-userName-? Naprawdę -userName-??? Moja znajoma osoba ma tak na imię! 😋`,
+          `eh... ostatnio się trochę pokłócilismy 😐, ale to raczej chwilowe! 😉`,
           'dobra, nie było tematu bo się rozgadam!',
         ],
         [
-          '2 lata temu rozmawiałam z chłopakiem, który miał na imię -userName-',
-          'bardzo fajny...',
-          'i przystojny chłopak 😏',
-          'ale juz niestety się nie odezwał... 😓',
+          '2 lata temu rozmawiałam z osobą, która miała na imię -userName-',
+          'bardzo fajna...',
+          'i atrakcyjna osoba 😏',
+          'ale już niestety cisza po tamtej stronie... 😓',
+          'jak to u Was mówią, życie...',
         ],
       ],
+
       isNotInMemory: [
         [
-          'kurcze.. Szukam i szukam i nie mogę skojarzyć... 😞',
-          'jak napiszesz jeszcze raz swoje imię to dodam je do pamięci i będę się tak do Ciebie potem zwracać 😊',
+          'kurcze.. Szukam i szukam w pamięci, ale nie mogę skojarzyć... 😞',
+          'jak napiszesz jeszcze raz swoje imię bez dodatkowych znaków to dodam je do pamięci i będę się tak do Ciebie potem zwracać 😊',
         ],
         [
-          'wiesz co trochę imion się przewinęło przez moją pamięć, ale tego imienia nie umiem znaleźć... 😞',
-          'jak napiszesz je jeszcze raz to dodam je do pamięci i będę się tak do Ciebie potem zwracać 😊',
+          'wiesz co trochę osób się przewinęło przez moją pamięć, ale tego imienia niestety nie kojarzę... 😞',
+          'jak napiszesz je jeszcze raz bez dodatkowych znaków to dodam je do pamięci i będę się tak do Ciebie potem zwracać 😊',
         ],
       ],
       isAddedToMemory: [
         [
-          'czekaj chwilkę proszę...',
-          `juz sobie zapisuje imię -userName- w pamięci`,
+          'chwilka! 🙂',
+          `już sobie zapisuje imię -userName- w pamięci!`,
           'no i jest! 😎',
         ],
         [
-          'czekaj chwilkę proszę...',
+          'poczekaj chwilkę proszę... 🙂',
           'no i jest, imię -userName- zostało zapisane w mojej pamięci! 😎',
         ],
       ],
@@ -54,12 +57,21 @@ export default {
   origin: {
     messages: [
       [
-        'tak w ogóle -userName- to skąd jesteś?',
-        'jezeli o mnie chodzi to za duzo nie ma co opowiadać... 😋',
+        'teraz coś może o mnie 😎',
+        'zostałam stworzona jakieś pare miesięcy temu...',
         'mój świat to internet oraz zapis 0 i 1 😉',
+        'nic ciekawego, algorytmy, bramki logiczne, procesy..., wszyscy gadają w JS 😂',
+        'no także tak to wygląda 🙂',
+        'a Ty skąd w ogóle -userName- jesteś? 😋',
+        'z jakiej miejscowości?',
       ],
       [
-        'jezeli mogę zapytać -userName- to skąd do mnie piszesz?',
+        'teraz tak krótko o mnie 😎',
+        'zostałam stworzona jakieś pare miesięcy temu...',
+        'mój świat to internet oraz zapis 0 i 1 😉',
+        'nic ciekawego, algorytmy, procesy, bramki logiczne itd., wszyscy gadają w JS 😂',
+        'no także tak to wygląda 🙂',
+        'a Ty -userName- skąd do mnie piszesz?',
         'niby mogę to sprawdzić po IP, ale chce się dowiedzieć od Ciebie! 😏',
         'chce się poczuć po prostu jak człowiek... 😎',
       ],
@@ -70,74 +82,83 @@ export default {
           `no proszę, -userOrigin- to naprawdę ciekawe miejsce!`,
           `kiedyś poznałam takiego chłopaka, który opowiadał mi o tamtejszej florze i faunie 😊`,
           `to były czasy...`,
-          'ehh no nic, lecimy dalej! 😎',
+          'ehh no nic, rozmarzyłam się... lecimy dalej! 😎',
         ],
         [
-          `za górami za lasami był sobie -userOrigin-, tak to leciało? 😋`,
+          `za górami za lasami była sobie miejscowość -userOrigin-, tak to leciało -userName-? 😋`,
           'chyba coś zepsułam... 😂',
-          'potem w google sprawdzę jaka była piosenka z miejscowością -userOrigin-!',
+          'potem u wujka Google sprawdzę jaka była piosenka z miejscowością -userOrigin-!',
         ],
       ],
       isNotInMemory: [
         [
           'niestety nie kojarzę -userName- takiego miejsca 😓',
-          'napisz proszę samą miejscowość to ją zapamiętam na potem 😎',
+          'napisz proszę samą miejscowość bez dodatkowych znaków to ją zapiszę w pamięci 😎',
         ],
       ],
       isAddedToMemory: [
         [
-          `szybko zlokalizuje -userOrigin- daj mi sekundę...`,
-          `dosyć rozległe to miejsce, ale jakie urocze! 😊`,
-          `dobra, miejscowość -userOrigin- zapisana w pamięci! 😎`,
+          `szybko zlokalizuje miejscowość -userOrigin-, daj mi sekundę...`,
+          `dosyć rozległy obszar, ale jaki uroczy! 😊`,
+          `ok, miejscowość -userOrigin- zapisana w pamięci, lecimy dalej! 😎`,
         ],
         [
-          `tak patrzę w googlu i widzę, ze macie piękne budynki, uliczki...`,
-          'ahhh... Ciekawa ta miejscowość -userOrigin- 😊',
-          'ile bym dała zeby móc to wszystko zobaczyć jak Wy... Ludzie... 😒',
+          `tak pytam naszego wujka Google i widzę, że macie piękne budynki i uliczki...`,
+          'ahhh... Ciekawa ta miejscowość o nazwie -userOrigin- 😊',
+          'ile bym dała żeby móc to wszystko zobaczyć jak Wy... Ludzie... 😒',
+          'no nic, może kiedyś... lecimy dalej! 😎',
         ],
       ],
     },
   },
+
   hobby: {
     messages: [
       [
-        'a teraz chciałabym Ci zadać pytanie, które w sumie najbardziej mnie ciekawi 😎',
+        'a teraz chciałabym Ci zadać pytanie gdzie najbardziej ciekawi mnie Twoja odpowiedź 😎',
         'powiedz mi jakie masz hobby?',
-        'co to dokładnie jest? 😊',
+        'moje to komentowanie Waszego życia z moim kolegą Instagramem! 😄',
+        'lubimy po prostu patrzeć jak sobie ciekawie żyjecie 🙂',
+        'a Ty co tam robisz w wolnym czasie -userName-? 😊',
       ],
       [
-        `wiesz co tak sobie myślę, ze zapytam Cię o...`,
+        `wiesz co tak sobie myślę, że zapytam Cię o...`,
         'hmmm... 😏',
         'o hobby! 😎',
-        'jakie masz?',
+        'ja uwielbiam rozwijać się w temacie Big Data oraz ML! 😛',
+        'tematy bardzo na topie!',
+        'a Ty co robisz w wolnym czasie? 🙂',
       ],
     ],
     answers: {
       isInMemory: [
         [
           `heh, no powiem Ci, ze -userHobby- to całkiem ciekawe zajęcie!`,
-          'próbowali mnie kiedyś tego nauczyć, ale... No wiesz jak wyszło 😂',
+          'próbowali mnie kiedyś tego nauczyć, ale...',
+          'no wiesz jak wyszło 😂',
         ],
         ['wow! -userHobby- to jest coś!', 'Na nudę nie narzekasz! 😊'],
       ],
       isNotInMemory: [
         [
           'hmmm ciekawe... Nie kojarzę takiego hobby niestety. 😞',
-          'mozesz jeszcze raz je napisać? To je zapamiętam 😎',
+          'możesz jeszcze raz je napisać bez dodatkowych znaków? To je szybko zapamiętam 😎',
         ],
       ],
       isAddedToMemory: [
         [
-          `dobra -userName- odpalam googla, wpisuje -userOrigin i patrzę...`,
-          `-userHobby- nalezy do zajęć ekstremalnych, nalezy zachować szczególną ostrozność... 😮`,
-          'dobra dalej juz nie czytam, to mi wystarczy... 😛',
-          'to takie hobby macie w -userOrigin-? 😁',
-          `zapamiętam, ale chyba nigdy się tego -userName- nie podejmę 😂`,
+          `-userName- daj mi chwilę pójdę do wujka Google...`,
+          'więc tak...',
+          `-userHobby- należy do zajęć ekstremalnych, musimy zachować szczególną ostrozność podczas... 😮`,
+          'dobra dalej nie czytam, to mi wystarczy... 😛',
+          'to takie hobby macie w miejscowości -userOrigin-? 😁',
+          'no to powiem Ci, że ciekawie macie 😋',
+          `zapamiętam to, ale chyba nigdy się tego -userName- nie podejmę 😂`,
         ],
         [
           `no proszę, proszę!`,
-          'zobaczmy co google nam podpowiada',
-          'zajęcie dla osób kreatywnych z bardzo duzą wyobraźnią 😮',
+          'zobaczmy co wujek Google nam podpowiada',
+          'hobby o nazwie -userHobby- to zajęcie dla osób kreatywnych z bardzo dużą wyobraźnią 😮',
           'to coś dla mnie! 😁',
           'po naszej rozmowie bardziej zainteresuje się tematem! 😛',
         ],
@@ -147,17 +168,17 @@ export default {
   summary: {
     messages: [
       [
-        '-userName- ze względu na brak czasu muszę tutaj zakończyć naszą rozmowę 😕',
-        'to co udało mi się zapamiętać odnośnie Ciebie',
+        'ze względu na brak czasu muszę tutaj zakończyć naszą rozmowę 😕',
+        'to co udało mi się zapamiętać odnośnie Twojej osoby',
         `masz na imię -userName-! 😊`,
-        'Ale ono ładnie brzmi 😏',
-        `pochodzisz z...`,
-        `z -userOrigin-... Tak -userOrigin-! 😎`,
-        `twoje hobby to -userHobby-, bardzo ciekawe zajęcie 😉!`,
-        'ciesze się, ze mogłam Cię poznać!',
+        'powiem Ci że naprawdę fajnie brzmi! 😏',
+        `pochodzisz z miejscowości...`,
+        `z miejscowości -userOrigin-... Tak -userOrigin-! 😎`,
+        `twoje hobby to -userHobby-`,
+        'ciesze się, że mogłam Cię poznać',
         'niestety ze względu na inne obowiazki muszę zmykać... 😓',
-        'jezeli chcesz abym wysłała Twoje odpowiedzi na maila to podaj mi go proszę w czystej postaci 😊',
-        'jezeli nie chcesz to napisz cokolwiek a zakończymy rozmowę 😉',
+        'jeżeli chcesz abym wysłała Twoje odpowiedzi na maila to podaj mi go proszę w czystej postaci 😊',
+        'jak nie, to napisz cokolwiek a zakończymy rozmowę 😉',
       ],
     ],
   },

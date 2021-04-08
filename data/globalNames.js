@@ -91,14 +91,13 @@ export const classReferences = {
 export const messages = 'messages'
 export const answers = 'answers'
 export const noConnectionMessage = [
-  `Dzięki za rozmowę :)`,
-  `Maila niestety nie otrzymasz bo nie ma połączenia z serwerem... :(`,
-  `Idę to sprawdzić... Tymczasem dzięki za rozmowę :)!`,
+  `Maila niestety nie otrzymasz bo nie ma połączenia z serwerem... 😕`,
+  `Idę to sprawdzić... Tymczasem dzięki za rozmowę! 😉`,
 ]
 export const withoutMailMessage = [
   'Maila nie wysyłam,',
   'dzięki za rozmowę',
-  ':)',
+  '😉',
 ]
 
 export const mailEndPoint = 'http://localhost:5001/api/mail'

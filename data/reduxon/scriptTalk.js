@@ -4,7 +4,7 @@ export default {
       [
         'Siema! 😎',
         `jestem Reduxon!`,
-        `zanim zaczniemy gadać musisz wiedzieć, ze jestem dosyć bezpośredni 😉`,
+        `zanim zaczniemy rozmawiać musisz wiedzieć, że jestem dosyć bezpośredni 😉`,
         'jak masz na imię?',
       ],
       ['Siema, siema! 😎', 'jestem Reduxon!', 'jak masz na imię?'],
@@ -12,50 +12,55 @@ export default {
     answers: {
       isInMemory: [
         [
-          'heh, taka śmieszna sprawa bo ostatnio przyłozyłem osobie o imieniu -userName- 😅',
-          'wiesz osoba chciała mnie zlagować i dostała prądem z laptopa... 😂',
+          'heh, taka śmieszna sprawa bo ostatnio przyłożyłem osobie o imieniu -userName- 😅',
+          'wiesz chciała mnie zlagować i dostała prądem z laptopa... 😂',
           'nie popełnij tego błędu! 😋',
           'oczywiście ma się juz dobrze!',
         ],
         [
-          'mówisz, ze -userName-?',
-          'kojarzę takie imię, kiedyś wybiłem zęba osobie o takim imieniu 😅',
-          'tzn. wirtualnego zęba, nie wazne... 😂',
-          'ale u nas w świecie 0 i 1 jest to odczuwalne tak jak u was 😋',
+          'mówisz, że -userName-?',
+          'kojarzę takie imię, kiedyś wybiłem zęba osobie, która tak się nazywała 😅',
+          'tzn. wirtualnego zęba...',
+          'yy... nie ważne... 😂',
+          'w świecie 0 i 1 ból jest tak samo odczuwalny jak u was 😈',
         ],
       ],
+
       isNotInMemory: [
         [
-          'o raczej nigdy takiego imienia nie widziałem',
-          'napisz je jeszcze raz, a je zapamiętam i nauczę się czegoś nowego! 😎',
+          'nigdy takiego imienia nie widziałem',
+          'napisz je jeszcze raz bez dodatkowych znaków, a je zapamiętam i nauczę się czegoś nowego! 😎',
         ],
         [
           'hmmm...',
           'nic z tego... Nie mam tego imienia w pamięci 😞',
-          'napisz je jeszcze raz, a je zapamiętam i nauczę się czegoś nowego! 😎',
+          'napisz je jeszcze raz bez dodatkowych znaków, a je zapamiętam i nauczę się czegoś nowego! 😎',
         ],
       ],
       isAddedToMemory: [
-        ['no i elegancko, -userName- wpadło do mojej czerwonej pamięci! 😎'],
-        ['gitarunia, moje imiona zostały wzbogacone o -userName-, yeah! 😎'],
+        ['no i elegancko, -userName- wpadło do mojej czerwonej pamięci! 😈'],
+        [
+          'gitarunia, moje pamięć została wzbogacona o imię -userName-, yeah! 😈',
+        ],
       ],
     },
   },
-
+  //
   origin: {
     messages: [
       [
         'a gdzie w ogóle mieszkasz? Jakieś miasto, wioska?',
-        'wiesz, jezeli o mnie chodzi to mój świat to 0 i 1... 😉',
-        'za duzo zieleni to tutaj nie ma... 😂',
+        'wiesz, jeżeli o mnie chodzi to mój świat to 0 i 1... 😉',
+        'za dużo zieleni to tutaj nie ma... 😂',
       ],
       [
         'coś mi się lokalizacja po IP zawiesiła...',
-        'dobra nie dam rady to zapytam',
+        'dobra... nie dam rady... muszę Cię zapytać...',
         'skąd jesteś? Zawsze mogłem spradzić, ale teraz coś nawaliło... 😓',
         'bo ja to wiesz... 0 i 1... Nic specjalnego 😂',
       ],
     ],
+
     answers: {
       isInMemory: [
         [
@@ -64,14 +69,14 @@ export default {
           'fajny macie ten sklep obok tego wielkiego budynku 😉',
         ],
         [
-          'fajna miejscówka ten -userOrigin-, taki Kazik tam mieszka',
+          'fajna miejscówka ten -userOrigin-, taki kumpel Apachi tam mieszka',
           'ale nie będę Cię teraz -userName- tym zanudzał 😉',
         ],
       ],
       isNotInMemory: [
         [
           'nie kojarzę takiej miejscówki 😞',
-          'podaj dokładnie miejscowość, z której jesteś, a ja ją zapamiętam! 😎',
+          'podaj dokładnie miejscowość bez dodatkowych znaków, a ja ją zapamiętam! 😎',
         ],
       ],
       isAddedToMemory: [
@@ -79,7 +84,7 @@ export default {
           'no ciekawe to miejsce',
           'czyli tak wygląda -userOrigin- w google maps',
           'no biedy nie ma 😉',
-          'widzę -userName-, ze na tereny leśne tez nie narzekacie 😎',
+          'widzę -userName-, ze na tereny leśne też nie narzekacie 😎',
         ],
         [
           'fajna miejscówka ten -userOrigin-',
@@ -96,7 +101,7 @@ export default {
         'tzn. jakie masz hobby w tej swojej miejscowości -userOrigin-? 😏',
       ],
       [
-        'przechodzimy -userName- do mojego ulubionego pytania!',
+        'ok, przechodzimy -userName- do mojego ulubionego pytania!',
         'co ogólnie robisz po pracy?',
         'w sensie jakie masz hobby w tej swojej miejscowości -userOrigin-? 😏',
       ],
@@ -106,10 +111,10 @@ export default {
         [
           '-userHobby- to jest to!',
           'często oglądam na youtube filmiki o tym',
-          'powiem Ci, ze to mega ciekawe zajęcie 😎',
+          'powiem Ci, że to mega ciekawe zajęcie 😎',
         ],
         [
-          'tez się tym interesujesz -userName-?',
+          'też się tym interesujesz -userName-?',
           '-userHobby- to moje hobby od dziecka',
           'tzn. od pierwszych linijek kodu... 😁',
         ],
@@ -123,13 +128,19 @@ export default {
       isAddedToMemory: [
         [
           '-userHobby-, no zobaczmy',
-          'piszą, ze to hobby bardziej dla spokojnych osób...',
+          'piszą, że to hobby bardziej dla spokojnych osób...',
           'czyli raczej nie dla mnie 😅',
           'ale ogólnie spoko zajęcie na zabicie czasu! 😉',
+          'ja natomiast uwielbiam oglądać te wasze kotki i pieski z moim kumplem Youtube 🙃',
+          'w świecie 0 i 1 mamy podobne zwierzątka, które nazywają się bugi i errory',
+          'ale bardziej denerwują niż bawią... 😅',
         ],
         [
           '-userHobby- brzmi mega ciekawie i trochę tak niebezpiecznie! 😈',
-          'tak czytam i widzę, ze polubił bym te klimaty! 😎',
+          'tak czytam i widzę, że polubił bym te klimaty! 😎',
+          'ja natomiast uwielbiam oglądać te wasze kotki i pieski z moim kumplem Youtube 🙃',
+          'w świecie 0 i 1 mamy podobne zwierzątka, które nazywają się bugi i errory',
+          'ale bardziej denerwują niż bawią... 😅',
         ],
       ],
     },
@@ -138,13 +149,13 @@ export default {
     messages: [
       [
         '-userName- ze względu na brak czasu muszę tutaj zakończyć 😔',
-        'zeby nie było, coś tam udało mi się zapamiętać podczas dzisiejszej rozmowy 😀',
+        'żeby nie było, coś tam udało mi się zapamiętać podczas dzisiejszej rozmowy 😀',
         `więc tak, Twoje imię to -userName-,`,
         `mieszkasz sobie w -userOrigin-,`,
         `a Twoje hobby to -userHobby-`,
         'fajnie było Cię  poznać! 😎',
-        'jezeli chcesz abym wysłał Twoje odpowiedzi na maila to podaj mi go w czystej postaci 😊',
-        'jezeli nie chcesz to napisz cokolwiek i się moze kiedyś jeszcze zobaczymy! 😉',
+        'jeżeli chcesz abym wysłał Twoje odpowiedzi na maila to podaj mi go w czystej postaci 😊',
+        'jeśli nie to napisz cokolwiek, a ja się zawinę! 😉',
       ],
     ],
   },
