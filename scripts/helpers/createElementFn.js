@@ -20,8 +20,6 @@ export default ({ element, ...rest }) => {
         rest[propEl].map((styleObj) => {
           createdElement.style[styleObj.name] = styleObj.value
         })
-      } else if (propEl === 'cb') {
-        rest[propEl](createdElement)
       } else createdElement[propEl] = rest[propEl]
     }
   }
