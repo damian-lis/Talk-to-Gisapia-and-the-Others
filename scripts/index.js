@@ -1,4 +1,4 @@
-import { runElementsFn, addNewClassesFn } from './helpers/index.js'
+import { runElementsFn, setClassesFn } from './helpers/index.js'
 import {
   charNameList,
   answerTypes,
@@ -76,23 +76,23 @@ document.addEventListener('DOMContentLoaded', function () {
   const customizeMessenger = () => {
     const chosenChar = memory.getChar()
 
-    addNewClassesFn([
+    setClassesFn([
       {
         element: classReferences.messenger.main,
-        newClasses: [`${chosenChar.name}-main`],
+        classes: [`${chosenChar.name.toLowerCase()}-main`],
       },
       {
         element: classReferences.messenger.screenContainer,
-        newClasses: [`${chosenChar.name}-second`],
+        classes: [`${chosenChar.name.toLowerCase()}-second`],
       },
 
       {
         element: classReferences.messenger.interfaceInput,
-        newClasses: [`${chosenChar.name}-second`],
+        classes: [`${chosenChar.name.toLowerCase()}-second`],
       },
       {
         element: classReferences.messenger.interfaceBtn,
-        newClasses: [`${chosenChar.name}-second`],
+        classes: [`${chosenChar.name.toLowerCase()}-second`],
       },
     ])
   }
