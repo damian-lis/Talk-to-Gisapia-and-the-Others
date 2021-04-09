@@ -1,7 +1,7 @@
 import createElementFn from './createElementFn.js'
 import runElementsFn from './runElementsFn.js'
 import removeElementFn from './removeElementFn.js'
-import addNewClassesFn from './addNewClassesFn.js'
+import setClassesFn from './setClassesFn.js'
 import appendElementsToContainerFn from './appendElementsToContainerFn.js'
 import findAndReplaceFn from './findAndReplaceFn.js'
 
@@ -9,7 +9,7 @@ export {
   createElementFn,
   runElementsFn,
   removeElementFn,
-  addNewClassesFn,
+  setClassesFn,
   appendElementsToContainerFn,
   findAndReplaceFn,
 }
