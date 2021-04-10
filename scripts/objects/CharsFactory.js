@@ -1,7 +1,16 @@
 import { Gisapia, NullCharacter, Hookin, Reduxon } from './index.js'
-import { gisapiaScriptTalk, gisapiaMemory } from '/data/gisapia/index.js'
-import { hookinScriptTalk, hookinMemory } from '/data/hookin/index.js'
-import { reduxonScriptTalk, reduxonMemory } from '/data/reduxon/index.js'
+import {
+  gisapiaScriptTalk,
+  gisapiaMemory,
+} from '/data/characters/gisapia/index.js'
+import {
+  hookinScriptTalk,
+  hookinMemory,
+} from '/data/characters/hookin/index.js'
+import {
+  reduxonScriptTalk,
+  reduxonMemory,
+} from '/data/characters/reduxon/index.js'
 import { charNames } from '/data/global/names.js'
 
 class CharsFactory {
