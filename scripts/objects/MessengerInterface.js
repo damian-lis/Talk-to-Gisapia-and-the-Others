@@ -1,8 +1,8 @@
 import {
   createElementFn,
   appendElementsToContainerFn,
-} from '../helpers/index.js'
-import { classNames } from '../../data/globalNames.js'
+} from '/scripts/helpers/index.js'
+import { classNames } from '/data/global/names.js'
 
 class MessengerInterface {
   constructor(container) {

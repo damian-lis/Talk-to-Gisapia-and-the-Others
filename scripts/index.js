@@ -1,4 +1,4 @@
-import { runElementsFn, setClassesFn } from './helpers/index.js'
+import { runElementsFn, setClassesFn } from '/scripts/helpers/index.js'
 import {
   charNameList,
   answerTypes,
@@ -9,14 +9,14 @@ import {
   withoutMailMessage,
   mailEndPoint,
   classReferences,
-} from '../data/globalNames.js'
+} from '/data/global/names.js'
 import {
   memory,
   SelectCharUI,
   CharsFactory,
   MessengerInterface,
   MessengerScreen,
-} from './objects/index.js'
+} from '/scripts/objects/index.js'
 
 document.addEventListener('DOMContentLoaded', () => {
   const selectCharUi = new SelectCharUI(

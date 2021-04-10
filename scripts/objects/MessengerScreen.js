@@ -2,9 +2,9 @@ import {
   createElementFn,
   removeElAmongElsFn,
   appendElementsToContainerFn,
-} from '../helpers/index.js'
+} from '/scripts/helpers/index.js'
 
-import { classNames } from '../../data/globalNames.js'
+import { classNames } from '/data/global/names.js'
 
 class MessengerScreen {
   constructor(container) {
@@ -22,12 +22,12 @@ class MessengerScreen {
   createMessengerScreenAudio() {
     this.typingAudio = createElementFn({
       element: 'audio',
-      src: '/musics/typing.mp3',
+      src: '/audio/typing.mp3',
     })
 
     this.chatBubbleAudio = createElementFn({
       element: 'audio',
-      src: '/musics/chatBubble.mp3',
+      src: '/audio/chatBubble.mp3',
     })
   }
 

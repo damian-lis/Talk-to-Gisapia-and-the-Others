@@ -1,6 +1,6 @@
-import { findAndReplaceFn } from '../../helpers/index.js'
-import { messages, answers, categories } from '../../../data/globalNames.js'
-// Approve
+import { findAndReplaceFn } from '/scripts/helpers/index.js'
+import { messages, answers, categories } from '/data/global/names.js'
+
 class Character {
   constructor(scriptTalk, memory) {
     this.scriptTalk = this.setScriptTalkMessages(scriptTalk)
