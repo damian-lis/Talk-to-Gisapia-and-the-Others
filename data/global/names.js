@@ -100,4 +100,25 @@ export const withoutMailMessage = [
   '😉',
 ]
 
+export const src = {
+  audio: {
+    typing: '/audio/typing.mp3',
+    chatBubble: '/audio/chatBubble.mp3',
+    throw: '/audio/throw.mp3',
+    background: '/audio/background.mp3',
+    finish: '/audio/finish.mp3',
+  },
+  characters: {
+    gisapia: {
+      avatar: '/images/gisapia/avatar.jpg',
+    },
+    hookin: {
+      avatar: '/images/hookin/avatar.jpg',
+    },
+    reduxon: {
+      avatar: '/images/reduxon/avatar.jpg',
+    },
+  },
+}
+
 export const mailEndPoint = 'http://localhost:5000/api/mail'

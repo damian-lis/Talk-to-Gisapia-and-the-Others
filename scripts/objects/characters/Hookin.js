@@ -1,11 +1,11 @@
 import Character from './Character.js'
-import { charNames } from '/data/global/names.js'
+import { charNames, src } from '/data/global/names.js'
 
 class Hookin extends Character {
   constructor(scriptTalk, memory) {
     super(scriptTalk, memory)
     this.name = charNames.Hookin
-    this.avatar = '/images/hookin/avatar.jpg'
+    this.avatar = src.characters.hookin.avatar
   }
 }
 

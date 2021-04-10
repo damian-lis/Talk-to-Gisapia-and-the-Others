@@ -4,7 +4,7 @@ import {
   appendElementsToContainerFn,
 } from '/scripts/helpers/index.js'
 
-import { classNames } from '/data/global/names.js'
+import { classNames, src } from '/data/global/names.js'
 
 class MessengerScreen {
   constructor(container) {
@@ -22,12 +22,12 @@ class MessengerScreen {
   createMessengerScreenAudio() {
     this.typingAudio = createElementFn({
       element: 'audio',
-      src: '/audio/typing.mp3',
+      src: src.audio.typing,
     })
 
     this.chatBubbleAudio = createElementFn({
       element: 'audio',
-      src: '/audio/chatBubble.mp3',
+      src: src.audio.chatBubble,
     })
   }
 

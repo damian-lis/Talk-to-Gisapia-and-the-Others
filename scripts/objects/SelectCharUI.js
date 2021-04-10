@@ -2,7 +2,7 @@ import {
   createElementFn,
   appendElementsToContainerFn,
 } from '/scripts/helpers/index.js'
-import { classNames } from '/data/global/names.js'
+import { classNames, src } from '/data/global/names.js'
 
 class SelectCharUI {
   constructor(charNames, container) {
@@ -16,17 +16,17 @@ class SelectCharUI {
   createSelectCharUIElements(charNames) {
     this.fallDownAudio = createElementFn({
       element: 'audio',
-      src: '/audio/throw.mp3',
+      src: src.audio.throw,
     })
 
     this.backgroundAudio = createElementFn({
       element: 'audio',
-      src: '/audio/background.mp3',
+      src: src.audio.background,
     })
 
     this.finishAudio = createElementFn({
       element: 'audio',
-      src: '/audio/finish.mp3',
+      src: src.audio.finish,
     })
 
     this.headline = createElementFn({
