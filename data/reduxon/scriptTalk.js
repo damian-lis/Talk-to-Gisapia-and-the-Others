@@ -15,14 +15,14 @@ export default {
           'heh, taka śmieszna sprawa bo ostatnio przyłożyłem osobie o imieniu -userName- 😅',
           'wiesz chciała mnie zlagować i dostała prądem z laptopa... 😂',
           'nie popełnij tego błędu! 😋',
-          'oczywiście ma się juz dobrze!',
+          'oczywiście ma się już dobrze!',
         ],
         [
           'mówisz, że -userName-?',
           'kojarzę takie imię, kiedyś wybiłem zęba osobie, która tak się nazywała 😅',
           'tzn. wirtualnego zęba...',
           'yy... nie ważne... 😂',
-          'w świecie 0 i 1 ból jest tak samo odczuwalny jak u was 😈',
+          'w świecie 0 i 1 ból jest tak samo odczuwalny jak u Was 😈',
         ],
       ],
 
@@ -69,8 +69,8 @@ export default {
           'fajny macie ten sklep obok tego wielkiego budynku 😉',
         ],
         [
-          'fajna miejscówka ten -userOrigin-, taki kumpel Apachi tam mieszka',
-          'ale nie będę Cię teraz -userName- tym zanudzał 😉',
+          'miejscowość -userOrigin- jest naprawdę spoko, taki kumpel Apachi tam mieszka',
+          'ale nie będę Cię teraz tym zanudzał 😉',
         ],
       ],
       isNotInMemory: [
