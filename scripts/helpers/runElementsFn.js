@@ -1,6 +1,9 @@
 export default (objects) => {
   objects.map((object) => {
-    const container = document.querySelector(object.element)
-    container.style.animation = object.animation
+    let element = object.element
+    if (typeof object.element === 'string') {
+      element = document.querySelector(object.element)
+    }
+    element.style.animation = object.animation
   })
 }
