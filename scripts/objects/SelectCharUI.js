@@ -14,6 +14,21 @@ class SelectCharUI {
   }
 
   createSelectCharUIElements(charNames) {
+    this.fallDownAudio = createElementFn({
+      element: 'audio',
+      src: '/musics/throw.mp3',
+    })
+
+    this.backgroundAudio = createElementFn({
+      element: 'audio',
+      src: '/musics/background.mp3',
+    })
+
+    this.finishAudio = createElementFn({
+      element: 'audio',
+      src: '/musics/finish.mp3',
+    })
+
     this.headline = createElementFn({
       element: 'h1',
       textContent: 'Wybierz swojego rozmówcę!',
@@ -46,6 +61,8 @@ class SelectCharUI {
         {
           event: 'click',
           cb: () => {
+            this.fallDownAudio.play()
+            this.backgroundAudio.play()
             this.subscribers['startTalking']()
           },
         },
@@ -53,6 +70,12 @@ class SelectCharUI {
     })
 
     return [this.headline, ...this.charButtons, this.startButton]
+  }
+
+  handleFinishAudio() {
+    this.backgroundAudio.pause()
+    this.fallDownAudio.play()
+    this.finishAudio.play()
   }
 
   createMessagesComponent(messages) {
@@ -76,6 +99,7 @@ class SelectCharUI {
     const messagesComponent = this.createMessagesComponent(messages)
     this.containerSent.innerHTML = ''
     this.containerSent.appendChild(messagesComponent)
+    this.handleFinishAudio()
   }
 
   removeActive(elements) {

@@ -1,6 +1,6 @@
 import {
   createElementFn,
-  removeElementFn,
+  removeElAmongElsFn,
   appendElementsToContainerFn,
 } from '../helpers/index.js'
 
@@ -13,9 +13,22 @@ class MessengerScreen {
       element: 'div',
       classes: [classNames.messenger.screen],
     })
-    this.charMessagesPart = 0
 
+    this.charMessagesPart = 0
+    this.createMessengerScreenAudio()
     appendElementsToContainerFn([this.screen], this.containerSent)
+  }
+
+  createMessengerScreenAudio() {
+    this.typingAudio = createElementFn({
+      element: 'audio',
+      src: '/musics/typing.mp3',
+    })
+
+    this.chatBubbleAudio = createElementFn({
+      element: 'audio',
+      src: '/musics/chatBubble.mp3',
+    })
   }
 
   increaseCharMessagesPart() {
@@ -47,13 +60,13 @@ class MessengerScreen {
         src: avatarImage,
         classes: [classNames.messenger.characterAvatar],
       })
-      removeElementFn({
+      removeElAmongElsFn({
         element: 'img',
         search: `[messagespart="${this.charMessagesPart}"]`,
       })
       messageContainer.appendChild(avatar)
     }
-
+    this.chatBubbleAudio.play()
     messageContainer.appendChild(message)
 
     return messageContainer
@@ -95,6 +108,7 @@ class MessengerScreen {
   }
 
   showTyping(time, charName) {
+    this.typingAudio.play()
     const loader = this.createLoader(charName)
     this.attachToMessengerScreen(loader)
     this.scrollMessengerScreenContainer()
