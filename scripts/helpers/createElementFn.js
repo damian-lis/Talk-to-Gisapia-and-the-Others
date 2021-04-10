@@ -4,10 +4,10 @@ export default ({ element, ...rest }) => {
   if (Object.keys(rest).length) {
     for (const propEl in rest) {
       if (propEl === 'listeners') {
-        rest[propEl].map((events) => {
-          const { event, cb } = events
-          createdElement.addEventListener(event, (e, event) => {
-            cb(e, event)
+        rest[propEl].map((listener) => {
+          const { event, cb } = listener
+          createdElement.addEventListener(event, (e) => {
+            cb(e)
           })
         })
       } else if (propEl === 'attributes') {
