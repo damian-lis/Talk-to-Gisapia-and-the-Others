@@ -227,8 +227,8 @@ document.addEventListener('DOMContentLoaded', () => {
           timeForTyping = chosenChar.changeTimeForTyping(timeForTyping)
         }
 
-        // await chosenChar.mustThink(1000)
-        // await messengerScreen.showTyping(timeForTyping, chosenChar.name)
+        await chosenChar.mustThink(1000)
+        await messengerScreen.showTyping(timeForTyping, chosenChar.name)
       }
 
       const chatBubble = messengerScreen.createChatBubble(
