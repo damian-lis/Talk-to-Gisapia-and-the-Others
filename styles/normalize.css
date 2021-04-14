@@ -29,5 +29,10 @@ button:hover {
 }
 
 ::-webkit-scrollbar {
-  width: 0px;
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: rgba(243, 243, 243, 0.329);
 }
