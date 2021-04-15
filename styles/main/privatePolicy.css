@@ -11,6 +11,7 @@
   background-color: var(--selectCharUIBgColor);
   border: 1px solid var(--selectCharUISecondColor);
   cursor: pointer;
+  z-index: -1;
 }
 
 .privatePolicy-link {
@@ -28,7 +29,6 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  /* height: 600px; */
   width: 90%;
   max-width: 800px;
   padding: 10px 20px;
