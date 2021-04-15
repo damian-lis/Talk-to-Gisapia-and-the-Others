@@ -121,4 +121,4 @@ export const src = {
   },
 }
 
-export const mailEndPoint = 'http://localhost:5000/api/mail'
+export const mailEndPoint = 'https://dirt-ten-risk.glitch.me/api/mail/gisapia'
