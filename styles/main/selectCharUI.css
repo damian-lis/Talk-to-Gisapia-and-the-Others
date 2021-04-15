@@ -37,7 +37,7 @@
   width: auto;
   text-transform: uppercase;
   margin-top: 20px;
-  font-family: Comic Sans MS, Comic Sans, cursive;
+  font-family: Comic Sans MS, Comic Sans, cursive, sans-serif;
   pointer-events: none;
 }
 
