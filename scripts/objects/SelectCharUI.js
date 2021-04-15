@@ -56,6 +56,7 @@ class SelectCharUI {
     this.startButton = createElementFn({
       element: 'button',
       textContent: 'Porozmawiaj',
+      disabled: 'true',
       classes: [classNames.selectCharUI.startBtn],
       listeners: [
         {
@@ -70,6 +71,12 @@ class SelectCharUI {
     })
 
     return [this.headline, ...this.charButtons, this.startButton]
+  }
+
+  enableStartCharTalkingBtn() {
+    this.startButton.disabled = false
+    this.startButton.style.pointerEvents = 'all'
+    this.startButton.style.backgroundColor = 'rgb(218, 4, 111)'
   }
 
   handleFinishAudio() {

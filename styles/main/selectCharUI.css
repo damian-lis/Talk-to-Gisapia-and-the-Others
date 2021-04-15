@@ -30,7 +30,7 @@
 
 .selectCharUI-startBtn {
   border-radius: 15px;
-  background-color: rgb(218, 4, 111);
+  background-color: rgba(173, 173, 173, 0.322);
   padding: 15px;
   font-size: 1.9rem;
   color: #fff;
@@ -38,6 +38,7 @@
   text-transform: uppercase;
   margin-top: 20px;
   font-family: Comic Sans MS, Comic Sans, cursive;
+  pointer-events: none;
 }
 
 .selectCharUI-selectBtn {
