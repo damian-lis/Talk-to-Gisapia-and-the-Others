@@ -1,21 +1,13 @@
 @keyframes toBottomHide {
-  0% {
-    top: 50%;
-    opacity: 1;
-  }
-
-  40% {
-    opacity: 0;
-  }
   100% {
-    top: 150%;
+    top: 250%;
     opacity: 0;
   }
 }
 
 @keyframes fromBottomShow {
   0% {
-    top: 150%;
+    top: 250%;
     opacity: 0;
   }
 
