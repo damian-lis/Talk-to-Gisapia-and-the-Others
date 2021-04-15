@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const handleCharSelect = (charName) => {
     const chosenChar = charsFactory.getChar(charName)
     memory.setSelectedChar(chosenChar)
+    selectCharUi.enableStartCharTalkingBtn()
   }
 
   const handleStartCharTalking = () => {
@@ -257,6 +258,10 @@ document.addEventListener('DOMContentLoaded', () => {
       {
         element: classReferences.messenger.main,
         animation: animationSettings.messenger.start,
+      },
+      {
+        element: '.privatePolicy-link-container',
+        animation: 'disappear 1s forwards',
       },
     ])
   }
