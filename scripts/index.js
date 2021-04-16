@@ -263,10 +263,6 @@ document.addEventListener('DOMContentLoaded', () => {
         element: classReferences.messenger.main,
         animation: animationSettings.messenger.start,
       },
-      {
-        element: '.privatePolicy-link-container',
-        animation: 'disappear 1s forwards',
-      },
     ])
   }
 

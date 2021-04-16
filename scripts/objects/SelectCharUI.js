@@ -70,7 +70,32 @@ class SelectCharUI {
       ],
     })
 
-    return [this.headline, ...this.charButtons, this.startButton]
+    this.privatePolicy = this.createPrivatePolicy()
+
+    return [
+      this.headline,
+      ...this.charButtons,
+      this.startButton,
+      this.privatePolicy,
+    ]
+  }
+
+  createPrivatePolicy() {
+    this.privatePolicyLinkContainer = createElementFn({
+      element: 'div',
+      classes: ['privatePolicy-link-container'],
+    })
+
+    this.privatePolicyLink = createElementFn({
+      element: 'a',
+      textContent: 'Polityka prywatności',
+      href: '/privatePolicy.html',
+      target: '_blank',
+      classes: ['privatePolicy-link'],
+    })
+
+    this.privatePolicyLinkContainer.appendChild(this.privatePolicyLink)
+    return this.privatePolicyLinkContainer
   }
 
   enableStartCharTalkingBtn() {

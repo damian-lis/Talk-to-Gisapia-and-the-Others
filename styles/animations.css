@@ -21,12 +21,6 @@
   }
 }
 
-@keyframes disappear {
-  100% {
-    opacity: 0;
-  }
-}
-
 @keyframes fallFromTop {
   100% {
     top: 50%;

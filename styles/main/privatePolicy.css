@@ -1,22 +1,14 @@
 .privatePolicy-link-container {
-  position: absolute;
-  display: flex;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 15px;
-  padding: 10px 15px;
-  margin-bottom: 5px;
-  font-size: 16px;
-  background-color: var(--selectCharUIBgColor);
-  border: 1px solid var(--selectCharUISecondColor);
-  cursor: pointer;
-  z-index: -1;
+  margin-top: 25px;
+  width: 100%;
 }
 
 .privatePolicy-link {
-  color: white;
+  color: rgb(253, 229, 229);
   text-decoration: none;
+  margin: 0 auto;
+  margin-top: 30px;
+  font-size: 1.5rem;
 }
 
 .privatePolicy-link:hover {
