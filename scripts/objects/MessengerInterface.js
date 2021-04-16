@@ -6,12 +6,12 @@ import { classNames } from '/data/global/names.js'
 
 class MessengerInterface {
   constructor(container) {
-    const containerSent = document.querySelector(container)
+    this.containerSent = document.querySelector(container)
     const messengerInterfaceElements = this.createMessengerInterfaceElements()
     this.inputValue = ''
     this.subscribers = []
 
-    appendElementsToContainerFn(messengerInterfaceElements, containerSent)
+    appendElementsToContainerFn(messengerInterfaceElements, this.containerSent)
   }
 
   createMessengerInterfaceElements() {
@@ -51,7 +51,9 @@ class MessengerInterface {
       ],
     })
 
-    return [this.input, this.button]
+    this.spinner = this.createSpinner()
+
+    return [this.input, this.button, this.spinner]
   }
 
   checkInputAndCallSubscribers() {
@@ -79,6 +81,36 @@ class MessengerInterface {
 
   subscribe(subscriber) {
     this.subscribers.push(subscriber)
+  }
+
+  addWaitTextToInput() {
+    this.input.value = 'Wysyłam, cierpliwości! 😎'
+  }
+
+  createSpinner() {
+    this.formSpinnerContainer = createElementFn({
+      element: 'div',
+      classes: ['messenger-spinner-container'],
+    })
+
+    this.formSpinner = createElementFn({
+      element: 'div',
+      classes: ['messenger-spinner'],
+    })
+
+    this.formSpinnerContainer.appendChild(this.formSpinner)
+
+    return this.formSpinnerContainer
+  }
+
+  showSpinnerInsteadBtn() {
+    this.button.style.display = 'none'
+    this.spinner.style.display = 'flex'
+  }
+
+  showBtnInsteadSpinner() {
+    this.button.style.display = 'block'
+    this.spinner.style.display = 'none'
   }
 }
 

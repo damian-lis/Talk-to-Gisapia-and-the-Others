@@ -103,6 +103,78 @@
   border-radius: var(--messengerMainSize);
 }
 
+.messenger-spinner-container {
+  border: 2px solid var(--messengerOutlineColor);
+  width: 20%;
+  height: 100%;
+  border-radius: var(--messengerMainSize);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  display: none;
+}
+
+.messenger-spinner {
+  position: relative;
+  width: 25px;
+  height: 25px;
+  margin: auto;
+  border-radius: 50%;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+
+  background: #ffffff;
+  background: -moz-linear-gradient(
+    left,
+    #ffffff 10%,
+    rgba(255, 255, 255, 0) 42%
+  );
+  background: -webkit-linear-gradient(
+    left,
+    #ffffff 10%,
+    rgba(255, 255, 255, 0) 42%
+  );
+  background: -o-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+  background: -ms-linear-gradient(
+    left,
+    #ffffff 10%,
+    rgba(255, 255, 255, 0) 42%
+  );
+  background: linear-gradient(to right, #4d4d4d85 10%, rgba(93, 93, 93, 0) 42%);
+  font-size: 10px;
+  text-indent: -9999em;
+
+  -webkit-animation: spinnerAnimation 1.4s infinite linear;
+  animation: spinnerAnimation 1.4s infinite linear;
+}
+.spinner:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 50%;
+  border-radius: 100% 0 0 0;
+
+  background: #ffffff;
+  content: '';
+}
+.spinner:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 75%;
+  height: 75%;
+  margin: auto;
+  border-radius: 50%;
+
+  background-color: var(--buttonColor);
+  content: '';
+}
+
 @media (max-width: 500px) {
   .messenger {
     height: 85%;

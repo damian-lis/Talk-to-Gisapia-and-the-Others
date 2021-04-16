@@ -90,9 +90,13 @@ document.addEventListener('DOMContentLoaded', () => {
         recipientMail: userMessage,
         ...chosenChar.getMemoryAboutUser(),
       }
-      return await handleCharSendData(data)
+      messengerInterface.showSpinnerInsteadBtn()
+      messengerInterface.addWaitTextToInput()
+      await handleCharSendData(data)
+      messengerInterface.clearInput()
+      messengerInterface.showBtnInsteadSpinner()
     } else {
-      return finishAnimation(withoutMailMessage)
+      finishAnimation(withoutMailMessage, 1000)
     }
   }
 
@@ -114,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       })
       .catch(() => {
-        finishAnimation(noConnectionMessage)
+        finishAnimation(noConnectionMessage, 1000)
       })
   }
 
@@ -266,7 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ])
   }
 
-  const finishAnimation = (variant) => {
+  const finishAnimation = (variant, delay) => {
     return setTimeout(() => {
       runElementsFn([
         {
@@ -279,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
       ])
       return selectCharUi.showFinishMessages(variant)
-    }, 2000)
+    }, delay)
   }
 
   const customizeMessenger = () => {
@@ -301,6 +305,10 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       {
         element: classReferences.messenger.interfaceBtn,
+        classes: [`${chosenChar.name.toLowerCase()}-second`],
+      },
+      {
+        element: '.messenger-spinner-container',
         classes: [`${chosenChar.name.toLowerCase()}-second`],
       },
     ])
