@@ -177,14 +177,29 @@
 
 @media (max-width: 500px) {
   .messenger {
-    height: 85%;
-    width: 85%;
-  }
-}
-
-@media (max-width: 380px) {
-  .messenger {
     height: 100%;
     width: 100%;
+  }
+
+  .messenger-message {
+    margin: 0 0 0 50px;
+    font-size: 1.8rem;
+  }
+
+  .messenger-character-avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .messenger-interface-container {
+    min-height: 50px;
+  }
+
+  .messenger-interface-input {
+    font-size: 1.7rem;
+  }
+
+  .messenger-interface-btn {
+    font-size: 1.6rem;
   }
 }
