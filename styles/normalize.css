@@ -8,6 +8,8 @@ html,
 body {
   font-size: 10px;
   font-family: Comic Sans, Comic Sans MS, sans-serif;
+  overflow-y: hidden;
+  max-height: 100vh;
 }
 
 body {
