@@ -20,19 +20,19 @@ import {
 } from '/scripts/objects/index.js'
 
 document.addEventListener('DOMContentLoaded', () => {
+  const charsFactory = new CharsFactory()
+  const messengerInterface = new MessengerInterface(
+    classReferences.messenger.interfaceContainer
+  )
   const selectCharUI = new SelectCharUI(
     charNameList,
     classReferences.selectCharUI.main,
     memory
   )
-  const charsFactory = new CharsFactory()
-  const messengerInterface = new MessengerInterface(
-    classReferences.messenger.interfaceContainer
-  )
   const messengerScreen = new MessengerScreen(
     classReferences.messenger.screenContainer,
-    memory,
-    selectCharUI
+    selectCharUI,
+    memory
   )
 
   const handleCharSelect = (charName) => {

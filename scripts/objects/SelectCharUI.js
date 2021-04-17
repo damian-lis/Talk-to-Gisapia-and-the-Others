@@ -15,21 +15,6 @@ class SelectCharUI {
   }
 
   createSelectCharUIElements(charNames) {
-    this.fallDownAudio = createElementFn({
-      element: 'audio',
-      src: src.audio.throw,
-    })
-
-    this.backgroundAudio = createElementFn({
-      element: 'audio',
-      src: src.audio.background,
-    })
-
-    this.finishAudio = createElementFn({
-      element: 'audio',
-      src: src.audio.finish,
-    })
-
     this.headline = createElementFn({
       element: 'h1',
       textContent: 'Wybierz swojego rozmówcę!',
@@ -63,8 +48,8 @@ class SelectCharUI {
         {
           event: 'click',
           cb: () => {
-            this.fallDownAudio.play()
-            this.backgroundAudio.play()
+            this.memory.playFallDownAudio()
+            this.memory.playBackgroundAudio()
             this.subscribers['startTalking']()
           },
         },
@@ -81,10 +66,12 @@ class SelectCharUI {
           event: 'click',
           cb: () => {
             this.memory.restart()
+            this.memory.playFinishAudio({ pause: true })
+            this.memory.playBackgroundAudio({ reload: true })
+            this.messagesComponent.remove()
             this.changeDisplay({ initialSettings: true })
             this.removeActiveBtns()
             this.toggleStartCharTalkingBtn('off')
-            this.messagesComponent.remove()
           },
         },
       ],
@@ -129,9 +116,9 @@ class SelectCharUI {
   }
 
   handleFinishAudio() {
-    this.backgroundAudio.pause()
-    this.fallDownAudio.play()
-    this.finishAudio.play()
+    this.memory.playFallDownAudio()
+    this.memory.playFinishAudio()
+    this.memory.playBackgroundAudio({ pause: true })
   }
 
   createMessagesComponent(messages) {

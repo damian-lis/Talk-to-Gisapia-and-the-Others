@@ -1,4 +1,6 @@
 import { GisapiaAnimation, Background } from './index.js'
+import { createElementFn } from '/scripts/helpers/index.js'
+import { src } from '/data/global/names.js'
 
 class Memory {
   constructor() {
@@ -11,9 +13,69 @@ class Memory {
       this.isCharTalkingFinish = false
       this.backgroundAnimation = this.background()
       this.gisapiaAnimation = this.gisapiaAnimation()
+      this.createAudio()
       Memory.instance = this
     }
     return Memory.instance
+  }
+
+  createAudio() {
+    this.typingAudio = createElementFn({
+      element: 'audio',
+      src: src.audio.typing,
+    })
+
+    this.chatBubbleAudio = createElementFn({
+      element: 'audio',
+      src: src.audio.chatBubble,
+    })
+
+    this.fallDownAudio = createElementFn({
+      element: 'audio',
+      src: src.audio.throw,
+    })
+
+    this.backgroundAudio = createElementFn({
+      element: 'audio',
+      src: src.audio.background,
+    })
+
+    this.finishAudio = createElementFn({
+      element: 'audio',
+      src: src.audio.finish,
+    })
+  }
+
+  playTypingAudio() {
+    this.typingAudio.play()
+  }
+
+  playChatBubbleAudio() {
+    this.chatBubbleAudio.play()
+  }
+
+  playFallDownAudio() {
+    this.fallDownAudio.play()
+  }
+
+  playBackgroundAudio({ pause, reload } = false) {
+    if (reload) {
+      this.backgroundAudio.load()
+    }
+
+    if (pause) {
+      this.backgroundAudio.pause()
+    } else {
+      this.backgroundAudio.play()
+    }
+  }
+
+  playFinishAudio({ pause } = false) {
+    if (pause) {
+      this.finishAudio.pause()
+    } else {
+      this.finishAudio.play()
+    }
   }
 
   background() {

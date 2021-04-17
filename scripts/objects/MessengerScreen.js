@@ -13,7 +13,7 @@ import {
 } from '/data/global/names.js'
 
 class MessengerScreen {
-  constructor(container, memory, selectCharUI) {
+  constructor(container, selectCharUI, memory) {
     this.memory = memory
     this.selectCharUI = selectCharUI
     this.containerSent = document.querySelector(container)
@@ -33,16 +33,6 @@ class MessengerScreen {
   }
 
   createMessengerScreenElements() {
-    this.typingAudio = createElementFn({
-      element: 'audio',
-      src: src.audio.typing,
-    })
-
-    this.chatBubbleAudio = createElementFn({
-      element: 'audio',
-      src: src.audio.chatBubble,
-    })
-
     this.screen = createElementFn({
       element: 'div',
       classes: [classNames.messenger.screen],
@@ -58,6 +48,7 @@ class MessengerScreen {
           cb: () => {
             this.selectCharUI.removeActiveBtns()
             this.deactivateBackBtn()
+            this.memory.playFallDownAudio()
             runElementsFn([
               {
                 element: classReferences.selectCharUI.main,
@@ -115,7 +106,7 @@ class MessengerScreen {
       })
       messageContainer.appendChild(avatar)
     }
-    this.chatBubbleAudio.play()
+    this.memory.playChatBubbleAudio()
     messageContainer.appendChild(message)
 
     return messageContainer
@@ -157,7 +148,8 @@ class MessengerScreen {
   }
 
   showTyping(time, charName) {
-    this.typingAudio.play()
+    this.memory.playTypingAudio()
+    // this.typingAudio.play()
     const loader = this.createLoader(charName)
     this.attachToMessengerScreen(loader)
     this.scrollMessengerScreenContainer()
