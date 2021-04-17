@@ -111,7 +111,6 @@ class SelectCharUI {
       element: 'a',
       textContent: 'Polityka prywatności',
       href: '/privatePolicy.html',
-      target: '_blank',
       classes: ['privatePolicy-link'],
     })
 
