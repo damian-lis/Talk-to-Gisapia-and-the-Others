@@ -22,7 +22,8 @@ import {
 document.addEventListener('DOMContentLoaded', () => {
   const selectCharUI = new SelectCharUI(
     charNameList,
-    classReferences.selectCharUI.main
+    classReferences.selectCharUI.main,
+    memory
   )
   const charsFactory = new CharsFactory()
   const messengerInterface = new MessengerInterface(
@@ -38,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const chosenChar = charsFactory.getChar(charName)
     memory.restart()
     memory.setSelectedChar(chosenChar)
-    selectCharUI.enableStartCharTalkingBtn()
+    selectCharUI.toggleStartCharTalkingBtn('on')
   }
 
   const handleStartCharTalking = () => {

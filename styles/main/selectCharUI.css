@@ -41,6 +41,15 @@
   pointer-events: none;
 }
 
+.selectCharUI-readyBtn {
+  background-color: rgb(218, 4, 111);
+  pointer-events: all;
+}
+
+.selectCharUI-readyBtn:hover {
+  background-color: rgb(241, 161, 12);
+}
+
 .selectCharUI-selectBtn {
   width: 100px;
   height: 60px;

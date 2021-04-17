@@ -5,8 +5,9 @@ import {
 import { classNames, src } from '/data/global/names.js'
 
 class SelectCharUI {
-  constructor(charNames, container) {
+  constructor(charNames, container, memory) {
     this.containerSent = document.querySelector(container)
+    this.memory = memory
     const selectCharUIElements = this.createSelectCharUIElements(charNames)
     this.subscribers = {}
 
@@ -70,12 +71,32 @@ class SelectCharUI {
       ],
     })
 
+    this.talkAgainButton = createElementFn({
+      element: 'button',
+      textContent: 'Porozmawiaj ponownie',
+      classes: [classNames.selectCharUI.startBtn, 'selectCharUI-readyBtn'],
+      styles: [{ name: 'display', value: 'none' }],
+      listeners: [
+        {
+          event: 'click',
+          cb: () => {
+            this.memory.restart()
+            this.changeDisplay({ initialSettings: true })
+            this.removeActiveBtns()
+            this.toggleStartCharTalkingBtn('off')
+            this.messagesComponent.remove()
+          },
+        },
+      ],
+    })
+
     this.privatePolicy = this.createPrivatePolicy()
 
     return [
       this.headline,
       ...this.charButtons,
       this.startButton,
+      this.talkAgainButton,
       this.privatePolicy,
     ]
   }
@@ -98,10 +119,14 @@ class SelectCharUI {
     return this.privatePolicyLinkContainer
   }
 
-  enableStartCharTalkingBtn() {
-    this.startButton.disabled = false
-    this.startButton.style.pointerEvents = 'all'
-    this.startButton.style.backgroundColor = 'rgb(218, 4, 111)'
+  toggleStartCharTalkingBtn(toggle) {
+    if (toggle === 'on') {
+      this.startButton.disabled = false
+      this.startButton.classList.add('selectCharUI-readyBtn')
+    } else {
+      this.startButton.disabled = true
+      this.startButton.classList.remove('selectCharUI-readyBtn')
+    }
   }
 
   handleFinishAudio() {
@@ -128,10 +153,17 @@ class SelectCharUI {
   }
 
   showFinishMessages(messages) {
-    const messagesComponent = this.createMessagesComponent(messages)
-    this.containerSent.innerHTML = ''
-    this.containerSent.appendChild(messagesComponent)
+    this.messagesComponent = this.createMessagesComponent(messages)
+    this.containerSent.prepend(this.messagesComponent)
+    this.changeDisplay()
     this.handleFinishAudio()
+  }
+
+  changeDisplay({ initialSettings } = false) {
+    ;[...this.charButtons, this.startButton, this.headline].map((element) => {
+      element.style.display = initialSettings ? 'block' : 'none'
+    })
+    this.talkAgainButton.style.display = initialSettings ? 'none' : 'block'
   }
 
   removeActiveBtns() {
