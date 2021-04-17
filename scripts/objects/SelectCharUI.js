@@ -66,7 +66,7 @@ class SelectCharUI {
           event: 'click',
           cb: () => {
             this.memory.restart()
-            this.memory.playFinishAudio({ pause: true })
+            this.memory.playFinishAudio({ pause: true, reload: true })
             this.memory.playBackgroundAudio({ reload: true })
             this.messagesComponent.remove()
             this.changeDisplay({ initialSettings: true })

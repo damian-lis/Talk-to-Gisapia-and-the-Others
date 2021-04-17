@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const handleStartCharTalking = () => {
     if (!isCharSelected()) return
-    customizeMessenger()
+    initialSettings()
     initialAnimation()
     handleCharTalking()
   }
@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentScriptTalkCategory = chosenChar.getCurrentScriptTalkCategory(
       talkingStep
     )
+
     const scriptTalkCategories = chosenChar.getScriptTalkCategories()
     let userMessage = memory.getUserMessage()
 
@@ -289,8 +290,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }, delay)
   }
 
-  const customizeMessenger = () => {
+  const initialSettings = () => {
     const chosenChar = memory.getChar()
+    chosenChar.deleteMemoryAboutUser()
+    chosenChar.setScriptTalk()
     messengerScreen.removeChatBubbles()
 
     setClassesFn([

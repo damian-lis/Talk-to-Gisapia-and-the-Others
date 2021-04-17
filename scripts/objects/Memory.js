@@ -1,6 +1,9 @@
 import { GisapiaAnimation, Background } from './index.js'
 import { createElementFn } from '/scripts/helpers/index.js'
 import { src } from '/data/global/names.js'
+import gisapiaScriptTalk from '/data/characters/gisapia/scriptTalk.js'
+import hookinScriptTalk from '/data/characters/hookin/scriptTalk.js'
+import reduxonScriptTalk from '/data/characters/reduxon/scriptTalk.js'
 
 class Memory {
   constructor() {
@@ -70,7 +73,10 @@ class Memory {
     }
   }
 
-  playFinishAudio({ pause } = false) {
+  playFinishAudio({ pause, reload } = false) {
+    if (reload) {
+      this.finishAudio.load()
+    }
     if (pause) {
       this.finishAudio.pause()
     } else {

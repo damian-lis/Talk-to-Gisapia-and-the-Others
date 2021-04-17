@@ -3,9 +3,18 @@ import { messages, answers, categories } from '/data/global/names.js'
 
 class Character {
   constructor(scriptTalk, memory) {
-    this.scriptTalk = this.setScriptTalkMessages(scriptTalk)
+    this.scriptTalk = scriptTalk
     this.memory = memory
     this.finalListening = false
+  }
+
+  deleteMemoryAboutUser() {
+    this.memory.aboutUser = {}
+  }
+
+  setScriptTalk() {
+    this.scriptTalkCopy = JSON.parse(JSON.stringify(this.scriptTalk))
+    this.modifiedScriptTalk = this.setScriptTalkMessages(this.scriptTalkCopy)
   }
 
   getMemoryAboutUser() {
@@ -20,17 +29,17 @@ class Character {
   }
 
   getScriptTalkMessages({ category, from, type }) {
-    if (from === messages) return this.scriptTalk[category].messages
-    if (from === answers) return this.scriptTalk[category].answers[type]
+    if (from === messages) return this.modifiedScriptTalk[category].messages
+    if (from === answers) return this.modifiedScriptTalk[category].answers[type]
   }
 
   getCurrentScriptTalkCategory(conversationStep) {
-    return Object.keys(this.scriptTalk)[conversationStep]
+    return Object.keys(this.modifiedScriptTalk)[conversationStep]
   }
 
   getScriptTalkCategories() {
     const categories = {}
-    Object.keys(this.scriptTalk).map(
+    Object.keys(this.modifiedScriptTalk).map(
       (categoryName) => (categories[categoryName] = categoryName)
     )
 
@@ -112,16 +121,16 @@ class Character {
     if (wordsToSearchAndReplace.length === 0) return
 
     if (from === messages) {
-      this.scriptTalk[category].messages = findAndReplaceFn(
+      this.modifiedScriptTalk[category].messages = findAndReplaceFn(
         { wordsSets: wordsToSearchAndReplace },
-        this.scriptTalk[category].messages
+        this.modifiedScriptTalk[category].messages
       )
     }
 
     if (from === answers) {
-      this.scriptTalk[category].answers[type] = findAndReplaceFn(
+      this.modifiedScriptTalk[category].answers[type] = findAndReplaceFn(
         { wordsSets: wordsToSearchAndReplace },
-        this.scriptTalk[category].answers[type]
+        this.modifiedScriptTalk[category].answers[type]
       )
     }
   }
