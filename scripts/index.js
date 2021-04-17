@@ -9,6 +9,7 @@ import {
   withoutMailMessage,
   mailEndPoint,
   classReferences,
+  classNames,
 } from '/data/global/names.js'
 import {
   memory,
@@ -19,7 +20,7 @@ import {
 } from '/scripts/objects/index.js'
 
 document.addEventListener('DOMContentLoaded', () => {
-  const selectCharUi = new SelectCharUI(
+  const selectCharUI = new SelectCharUI(
     charNameList,
     classReferences.selectCharUI.main
   )
@@ -28,13 +29,16 @@ document.addEventListener('DOMContentLoaded', () => {
     classReferences.messenger.interfaceContainer
   )
   const messengerScreen = new MessengerScreen(
-    classReferences.messenger.screenContainer
+    classReferences.messenger.screenContainer,
+    memory,
+    selectCharUI
   )
 
   const handleCharSelect = (charName) => {
     const chosenChar = charsFactory.getChar(charName)
+    memory.restart()
     memory.setSelectedChar(chosenChar)
-    selectCharUi.enableStartCharTalkingBtn()
+    selectCharUI.enableStartCharTalkingBtn()
   }
 
   const handleStartCharTalking = () => {
@@ -80,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
       handleCharTalking()
     } else {
       messengerInterface.activatePanel()
+      messengerScreen.activateBackBtn()
     }
   }
 
@@ -240,6 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
         charMessage,
         chosenChar
       )
+
       messengerScreen.attachToMessengerScreen(chatBubble)
       messengerScreen.scrollMessengerScreenContainer()
     }
@@ -278,40 +284,45 @@ document.addEventListener('DOMContentLoaded', () => {
           animation: animationSettings.messenger.end,
         },
       ])
-      return selectCharUi.showFinishMessages(variant)
+      return selectCharUI.showFinishMessages(variant)
     }, delay)
   }
 
   const customizeMessenger = () => {
     const chosenChar = memory.getChar()
+    messengerScreen.removeChatBubbles()
 
     setClassesFn([
       {
-        element: classReferences.messenger.main,
+        element: classNames.messenger.main,
         classes: [`${chosenChar.name.toLowerCase()}-main`],
       },
       {
-        element: classReferences.messenger.screenContainer,
+        element: classNames.messenger.screenContainer,
         classes: [`${chosenChar.name.toLowerCase()}-second`],
       },
 
       {
-        element: classReferences.messenger.interfaceInput,
+        element: classNames.messenger.interfaceInput,
         classes: [`${chosenChar.name.toLowerCase()}-second`],
       },
       {
-        element: classReferences.messenger.interfaceBtn,
+        element: classNames.messenger.interfaceBtn,
         classes: [`${chosenChar.name.toLowerCase()}-second`],
       },
       {
-        element: '.messenger-spinner-container',
+        element: 'messenger-spinner-container',
         classes: [`${chosenChar.name.toLowerCase()}-second`],
+      },
+      {
+        element: 'messenger-back-icon',
+        classes: [`${chosenChar.name.toLowerCase()}-main`],
       },
     ])
   }
 
-  selectCharUi.subscribe(handleCharSelect, 'selectChar')
-  selectCharUi.subscribe(handleStartCharTalking, 'startTalking')
+  selectCharUI.subscribe(handleCharSelect, 'selectChar')
+  selectCharUI.subscribe(handleStartCharTalking, 'startTalking')
 
   const handleUserTalking = (userMessage) => {
     const chatBubble = messengerScreen.createChatBubble(userMessage, {
@@ -321,6 +332,7 @@ document.addEventListener('DOMContentLoaded', () => {
     messengerScreen.attachToMessengerScreen(chatBubble)
     messengerScreen.scrollMessengerScreenContainer()
     messengerScreen.increaseCharMessagesPart()
+    messengerScreen.deactivateBackBtn()
     messengerInterface.deactivatePanel()
     handleCharTalking()
   }

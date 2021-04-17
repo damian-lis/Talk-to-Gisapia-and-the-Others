@@ -2,24 +2,37 @@ import {
   createElementFn,
   removeElAmongElsFn,
   appendElementsToContainerFn,
+  runElementsFn,
 } from '/scripts/helpers/index.js'
 
-import { classNames, src } from '/data/global/names.js'
+import {
+  classNames,
+  classReferences,
+  animationSettings,
+  src,
+} from '/data/global/names.js'
 
 class MessengerScreen {
-  constructor(container) {
+  constructor(container, memory, selectCharUI) {
+    this.memory = memory
+    this.selectCharUI = selectCharUI
     this.containerSent = document.querySelector(container)
-    this.screen = createElementFn({
-      element: 'div',
-      classes: [classNames.messenger.screen],
-    })
-
+    this.messengerScreenElements = this.createMessengerScreenElements()
     this.charMessagesPart = 0
-    this.createMessengerScreenAudio()
-    appendElementsToContainerFn([this.screen], this.containerSent)
+
+    this.connectMessengerScreenElements(
+      this.messengerScreenElements,
+      this.containerSent
+    )
   }
 
-  createMessengerScreenAudio() {
+  connectMessengerScreenElements(elements, container) {
+    const [screen, backBtn] = elements
+    this.containerSent.appendChild(backBtn)
+    appendElementsToContainerFn([screen], container)
+  }
+
+  createMessengerScreenElements() {
     this.typingAudio = createElementFn({
       element: 'audio',
       src: src.audio.typing,
@@ -29,6 +42,42 @@ class MessengerScreen {
       element: 'audio',
       src: src.audio.chatBubble,
     })
+
+    this.screen = createElementFn({
+      element: 'div',
+      classes: [classNames.messenger.screen],
+    })
+
+    this.backBtn = createElementFn({
+      element: 'img',
+      classes: ['messenger-back-icon'],
+      src: '/images/icons/back.svg',
+      listeners: [
+        {
+          event: 'click',
+          cb: () => {
+            this.selectCharUI.removeActiveBtns()
+            this.deactivateBackBtn()
+            runElementsFn([
+              {
+                element: classReferences.selectCharUI.main,
+                animation: animationSettings.selectCharUI.end,
+              },
+              {
+                element: classReferences.messenger.main,
+                animation: animationSettings.messenger.end,
+              },
+            ])
+          },
+        },
+      ],
+    })
+
+    return [this.screen, this.backBtn]
+  }
+
+  setTypingOn() {
+    this.typing = true
   }
 
   increaseCharMessagesPart() {
@@ -114,6 +163,20 @@ class MessengerScreen {
     this.scrollMessengerScreenContainer()
     setTimeout(() => this.removeLoader(loader), time)
     return new Promise((resolve) => setTimeout(resolve, time))
+  }
+
+  removeChatBubbles() {
+    this.screen.innerHTML = ''
+  }
+
+  activateBackBtn() {
+    this.backBtn.style.visibility = 'visible'
+    this.backBtn.style.opacity = 1
+  }
+
+  deactivateBackBtn() {
+    this.backBtn.style.visibility = 'hidden'
+    this.backBtn.style.opacity = '0'
   }
 }
 

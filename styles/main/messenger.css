@@ -29,6 +29,26 @@
   padding: 10px;
 }
 
+.messenger-back-icon {
+  position: fixed;
+  top: 2%;
+  right: 4%;
+  width: 30px;
+  height: 30px;
+  padding: 2px;
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 50%;
+  z-index: 1;
+  cursor: pointer;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.messenger-back-icon:hover {
+  background-color: rgb(241, 161, 12);
+}
+
 .messenger-message-container {
   margin-bottom: 10px;
   display: flex;

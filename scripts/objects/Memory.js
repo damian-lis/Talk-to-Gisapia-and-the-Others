@@ -71,6 +71,15 @@ class Memory {
   getIsCharTalkingFinish() {
     return this.isCharTalkingFinish
   }
+
+  restart() {
+    this.talkingStep = 0
+    this.character = null
+    this.userMessage = null
+    this.isCallCharTalkingAgain = false
+    this.isCharListening = false
+    this.isCharTalkingFinish = false
+  }
 }
 
 const memory = new Memory()
