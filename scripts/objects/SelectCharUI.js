@@ -45,8 +45,8 @@ class SelectCharUI {
             event: 'click',
             cb: (e) => {
               this.subscribers['selectChar'](charName[1])
-              this.removeActive(this.charButtons)
-              this.setActive(e.target)
+              this.removeActiveBtns()
+              this.setActiveBtn(e.target)
             },
           },
         ],
@@ -134,9 +134,9 @@ class SelectCharUI {
     this.handleFinishAudio()
   }
 
-  removeActive(elements) {
-    elements.map((element) =>
-      element.classList.remove(classNames.selectCharUI.activeBtn)
+  removeActiveBtns() {
+    this.charButtons.map((btn) =>
+      btn.classList.remove(classNames.selectCharUI.activeBtn)
     )
   }
 
@@ -144,7 +144,7 @@ class SelectCharUI {
     return this.charButtons
   }
 
-  setActive(element) {
+  setActiveBtn(element) {
     element.classList.add(classNames.selectCharUI.activeBtn)
   }
 
