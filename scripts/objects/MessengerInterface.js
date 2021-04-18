@@ -56,8 +56,17 @@ class MessengerInterface {
     return [this.input, this.button, this.spinner]
   }
 
+  emailValidation(email) {
+    const reg = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+    return reg.test(email)
+  }
+
   checkInputAndCallSubscribers() {
     if (this.inputValue === '') return alert('Musisz coś napisać')
+    if (this.inputValue.includes('@')) {
+      if (!this.emailValidation(this.inputValue))
+        return alert('Podaj właściwy format maila')
+    }
     this.subscribers.map((subscriber) => subscriber(this.inputValue))
   }
 
