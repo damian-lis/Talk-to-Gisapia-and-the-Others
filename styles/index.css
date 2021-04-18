@@ -1,5 +1,2 @@
-@import './variables.css';
-@import './normalize.css';
-@import './animations.css';
+@import './global/index.css';
 @import './main/index.css';
-@import './helpers.css';

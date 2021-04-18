@@ -48,6 +48,9 @@ export const classNames = {
     interfaceContainer: 'messenger-interface-container',
     interfaceInput: 'messenger-interface-input',
     interfaceBtn: 'messenger-interface-btn',
+    backIcon: 'messenger-back-icon',
+    spinnerContainer: 'messenger-spinner-container',
+    spinner: 'messenger-spinner',
   },
 
   selectCharUI: {
@@ -58,6 +61,15 @@ export const classNames = {
     startBtn: 'selectCharUI-startBtn',
     selectBtn: 'selectCharUI-selectBtn',
     activeBtn: 'selectCharUI-activeBtn',
+    readyBtn: 'selectCharUI-readyBtn',
+  },
+
+  privatePolicy: {
+    linkContainer: 'privatePolicy-link-container',
+    link: 'privatePolicy-link',
+    descriptionContainer: 'privatePolicy-description-container',
+    headline: 'privatePolicy-headline',
+    paragraph: 'privatePolicy-paragraph',
   },
 }
 
@@ -75,6 +87,9 @@ export const classReferences = {
     interfaceContainer: '.messenger-interface-container',
     interfaceInput: '.messenger-interface-input',
     interfaceBtn: '.messenger-interface-btn',
+    backIcon: '.messenger-back-icon',
+    spinnerContainer: '.messenger-spinner-container',
+    spinner: '.messenger-spinner',
   },
 
   selectCharUI: {
@@ -85,6 +100,15 @@ export const classReferences = {
     startBtn: '.selectCharUI-startBtn',
     selectBtn: '.selectCharUI-selectBtn',
     activeBtn: '.selectCharUI-activeBtn',
+    readyBtn: '.selectCharUI-readyBtn',
+  },
+
+  privatePolicy: {
+    linkContainer: '.privatePolicy-link-container',
+    link: '.privatePolicy-link',
+    descriptionContainer: '.privatePolicy-description-container',
+    headline: '.privatePolicy-headline',
+    paragraph: '.privatePolicy-paragraph',
   },
 }
 
@@ -118,6 +142,9 @@ export const src = {
     reduxon: {
       avatar: '/images/reduxon/avatar.jpg',
     },
+  },
+  messenger: {
+    backIcon: '/images/icons/back.svg',
   },
 }
 

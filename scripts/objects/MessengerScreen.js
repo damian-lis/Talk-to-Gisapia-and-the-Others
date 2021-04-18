@@ -38,10 +38,10 @@ class MessengerScreen {
       classes: [classNames.messenger.screen],
     })
 
-    this.backBtn = createElementFn({
+    this.backIcon = createElementFn({
       element: 'img',
-      classes: ['messenger-back-icon'],
-      src: '/images/icons/back.svg',
+      classes: [classNames.messenger.backIcon],
+      src: src.messenger.backIcon,
       listeners: [
         {
           event: 'click',
@@ -66,7 +66,7 @@ class MessengerScreen {
       ],
     })
 
-    return [this.screen, this.backBtn]
+    return [this.screen, this.backIcon]
   }
 
   setTypingOn() {
@@ -151,7 +151,6 @@ class MessengerScreen {
 
   showTyping(time, charName) {
     this.memory.playTypingAudio()
-    // this.typingAudio.play()
     const loader = this.createLoader(charName)
     this.attachToMessengerScreen(loader)
     this.scrollMessengerScreenContainer()
@@ -164,13 +163,13 @@ class MessengerScreen {
   }
 
   activateBackBtn() {
-    this.backBtn.style.visibility = 'visible'
-    this.backBtn.style.opacity = 1
+    this.backIcon.style.visibility = 'visible'
+    this.backIcon.style.opacity = 1
   }
 
   deactivateBackBtn() {
-    this.backBtn.style.visibility = 'hidden'
-    this.backBtn.style.opacity = '0'
+    this.backIcon.style.visibility = 'hidden'
+    this.backIcon.style.opacity = '0'
   }
 }
 

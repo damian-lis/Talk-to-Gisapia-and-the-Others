@@ -59,7 +59,10 @@ class SelectCharUI {
     this.talkAgainButton = createElementFn({
       element: 'button',
       textContent: 'Porozmawiaj ponownie',
-      classes: [classNames.selectCharUI.startBtn, 'selectCharUI-readyBtn'],
+      classes: [
+        classNames.selectCharUI.startBtn,
+        classNames.selectCharUI.readyBtn,
+      ],
       styles: [{ name: 'display', value: 'none' }],
       listeners: [
         {
@@ -91,14 +94,14 @@ class SelectCharUI {
   createPrivatePolicy() {
     this.privatePolicyLinkContainer = createElementFn({
       element: 'div',
-      classes: ['privatePolicy-link-container'],
+      classes: [classNames.privatePolicy.linkContainer],
     })
 
     this.privatePolicyLink = createElementFn({
       element: 'a',
       textContent: 'Polityka prywatności',
       href: '/privatePolicy.html',
-      classes: ['privatePolicy-link'],
+      classes: [classNames.privatePolicy.link],
     })
 
     this.privatePolicyLinkContainer.appendChild(this.privatePolicyLink)
@@ -108,10 +111,10 @@ class SelectCharUI {
   toggleStartCharTalkingBtn(toggle) {
     if (toggle === 'on') {
       this.startButton.disabled = false
-      this.startButton.classList.add('selectCharUI-readyBtn')
+      this.startButton.classList.add(classNames.selectCharUI.readyBtn)
     } else {
       this.startButton.disabled = true
-      this.startButton.classList.remove('selectCharUI-readyBtn')
+      this.startButton.classList.remove(classNames.selectCharUI.readyBtn)
     }
   }
 

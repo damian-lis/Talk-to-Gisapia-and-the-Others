@@ -53,7 +53,6 @@ class Background {
         )
           this.drops[i] = 0
 
-        //increment y coordinate
         this.drops[i]++
       }
     }, time)

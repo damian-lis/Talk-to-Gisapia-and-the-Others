@@ -99,12 +99,12 @@ class MessengerInterface {
   createSpinner() {
     this.formSpinnerContainer = createElementFn({
       element: 'div',
-      classes: ['messenger-spinner-container'],
+      classes: [classNames.messenger.spinnerContainer],
     })
 
     this.formSpinner = createElementFn({
       element: 'div',
-      classes: ['messenger-spinner'],
+      classes: [classNames.messenger.spinner],
     })
 
     this.formSpinnerContainer.appendChild(this.formSpinner)
