@@ -1,12 +1,12 @@
 .messenger {
-  height: 550px;
-  width: 350px;
   position: absolute;
+  left: 50%;
+  top: -100%;
+  width: 350px;
+  height: 550px;
   border: 1px solid var(--messengerOutlineColor);
   border-radius: var(--messengerMainSize);
   padding: 5px;
-  left: 50%;
-  top: -100%;
   transform: translate(-50%, -50%);
 }
 
@@ -17,15 +17,15 @@
 }
 
 .messenger-screen-container {
-  border-radius: var(--messengerMainSize);
   height: 100%;
-  overflow-y: scroll;
   border: 2px solid var(--messengerOutlineColor);
+  border-radius: var(--messengerMainSize);
+  overflow-y: scroll;
 }
 
 .messenger-screen {
-  min-height: 100%;
   width: 100%;
+  min-height: 100%;
   padding: 10px;
 }
 
@@ -50,9 +50,9 @@
 }
 
 .messenger-message-container {
-  margin-bottom: 10px;
-  display: flex;
   position: relative;
+  display: flex;
+  margin-bottom: 10px;
 }
 
 .messenger-message {
@@ -69,12 +69,12 @@
 
 .messenger-character-avatar {
   position: absolute;
-  border-radius: 50%;
   top: 50%;
   left: 0;
-  transform: translateY(-50%);
   width: 33px;
   height: 33px;
+  border-radius: 50%;
+  transform: translateY(-50%);
 }
 
 .messenger-loader-container {
@@ -85,8 +85,8 @@
 
 .messenger-loader {
   display: inline-block;
-  height: 10px;
   width: 10px;
+  height: 10px;
   border-radius: 25px;
 }
 
@@ -101,38 +101,37 @@
 }
 
 .messenger-interface-container {
+  display: flex;
+  justify-content: space-between;
   height: 7%;
   min-height: 40px;
   padding-top: 5px;
-  display: flex;
-  justify-content: space-between;
 }
 
 .messenger-interface-input {
-  height: 100%;
   width: 77%;
+  height: 100%;
   border-radius: var(--messengerMainSize);
   border: 2px solid var(--messengerOutlineColor);
   font-size: 1.6rem;
 }
 
 .messenger-interface-btn {
-  border: 2px solid var(--messengerOutlineColor);
   width: 20%;
   height: 100%;
+  border: 2px solid var(--messengerOutlineColor);
   border-radius: var(--messengerMainSize);
 }
 
 .messenger-spinner-container {
-  border: 2px solid var(--messengerOutlineColor);
-  width: 20%;
-  height: 100%;
-  border-radius: var(--messengerMainSize);
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
+  width: 20%;
+  height: 100%;
+  border: 2px solid var(--messengerOutlineColor);
+  border-radius: var(--messengerMainSize);
   font-size: 14px;
-  display: none;
 }
 
 .messenger-spinner {
@@ -176,7 +175,6 @@
   width: 50%;
   height: 50%;
   border-radius: 100% 0 0 0;
-
   background: #ffffff;
   content: '';
 }
@@ -197,8 +195,8 @@
 
 @media (max-width: 500px) {
   .messenger {
-    height: 100%;
     width: 100%;
+    height: 100%;
   }
 
   .messenger-message {
