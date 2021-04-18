@@ -46,7 +46,9 @@ class MessengerScreen {
         {
           event: 'click',
           cb: () => {
+            this.memory.restart()
             this.selectCharUI.removeActiveBtns()
+            this.selectCharUI.toggleStartCharTalkingBtn('off')
             this.deactivateBackBtn()
             this.memory.playFallDownAudio()
             runElementsFn([
