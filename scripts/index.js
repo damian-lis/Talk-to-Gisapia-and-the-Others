@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const handleCharSelect = (charName) => {
     const chosenChar = charsFactory.getChar(charName)
-    memory.restart()
+
     memory.setSelectedChar(chosenChar)
     selectCharUI.toggleStartCharTalkingBtn('on')
   }
