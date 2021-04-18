@@ -49,6 +49,14 @@ document.addEventListener('DOMContentLoaded', () => {
     handleCharTalking()
   }
 
+  const isCharSelected = () => {
+    if (!memory.getChar()) {
+      alert('Wybierz rozmówcę!')
+      return false
+    }
+    return true
+  }
+
   const handleCharTalking = async () => {
     const chosenChar = memory.getChar()
     const talkingStep = memory.getTalkingStep()
@@ -251,14 +259,6 @@ document.addEventListener('DOMContentLoaded', () => {
       messengerScreen.attachToMessengerScreen(chatBubble)
       messengerScreen.scrollMessengerScreenContainer()
     }
-  }
-
-  const isCharSelected = () => {
-    if (!memory.getChar()) {
-      alert('Wybierz rozmówcę!')
-      return false
-    }
-    return true
   }
 
   const initialAnimation = () => {
