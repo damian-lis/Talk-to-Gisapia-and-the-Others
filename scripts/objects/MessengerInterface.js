@@ -70,30 +70,42 @@ class MessengerInterface {
     this.subscribers.map((subscriber) => subscriber(this.inputValue))
   }
 
-  deactivatePanel() {
-    this.input.disabled = true
-    this.button.disabled = true
-    this.button.style.pointerEvents = 'none'
+  togglePanel(toggle) {
+    this.input.disabled = toggle === 'on' ? false : true
+    this.button.disabled = toggle === 'on' ? false : true
+    this.button.style.pointerEvents = toggle === 'on' ? 'auto' : 'none'
     this.clearInput()
   }
 
-  activatePanel() {
-    this.input.disabled = false
-    this.button.disabled = false
-    this.button.style.pointerEvents = 'auto'
-  }
-
-  clearInput() {
+  clearInput({ withTimeouts } = false) {
     this.input.value = ''
     this.inputValue = ''
+    if (withTimeouts) {
+      this.clearInputTimeouts()
+    }
+  }
+
+  clearInputTimeouts() {
+    if (this.firstInputTimeout) {
+      clearTimeout(this.firstInputTimeout)
+    }
+    if (this.secondInputTimeout) {
+      clearTimeout(this.secondInputTimeout)
+    }
   }
 
   subscribe(subscriber) {
     this.subscribers.push(subscriber)
   }
 
-  addWaitTextToInput() {
-    this.input.value = 'Wysyłam, cierpliwości! 😎'
+  addWaitMessagesToInput({ firstDelay, secondDelay }) {
+    this.firstInputTimeout = setTimeout(() => {
+      this.input.value = 'Już wysyłam! 😎'
+    }, firstDelay)
+
+    this.secondInputTimeout = setTimeout(() => {
+      this.input.value = 'jeszcze naprawdę chwilkę! 😏'
+    }, secondDelay)
   }
 
   createSpinner() {
