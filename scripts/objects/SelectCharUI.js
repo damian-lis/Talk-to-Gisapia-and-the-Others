@@ -2,7 +2,7 @@ import {
   createElementFn,
   appendElementsToContainerFn,
 } from '/scripts/helpers/index.js'
-import { classNames, src } from '/data/global/names.js'
+import { classNames } from '/data/global/names.js'
 
 class SelectCharUI {
   constructor(charNames, container, memory) {

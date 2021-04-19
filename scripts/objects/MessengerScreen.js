@@ -49,7 +49,7 @@ class MessengerScreen {
             this.memory.restart()
             this.selectCharUI.removeActiveBtns()
             this.selectCharUI.toggleStartCharTalkingBtn('off')
-            this.deactivateBackBtn()
+            this.toggleBackBtn('off')
             this.memory.playFallDownAudio()
             runElementsFn([
               {
@@ -162,14 +162,9 @@ class MessengerScreen {
     this.screen.innerHTML = ''
   }
 
-  activateBackBtn() {
-    this.backIcon.style.visibility = 'visible'
-    this.backIcon.style.opacity = 1
-  }
-
-  deactivateBackBtn() {
-    this.backIcon.style.visibility = 'hidden'
-    this.backIcon.style.opacity = '0'
+  toggleBackBtn(toggle) {
+    this.backIcon.style.visibility = toggle === 'on' ? 'visible' : 'hidden'
+    this.backIcon.style.opacity = toggle === 'on' ? 1 : 0
   }
 }
 

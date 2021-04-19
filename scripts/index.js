@@ -93,8 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
       memory.increaseTalkingStep()
       handleCharTalking()
     } else {
-      messengerInterface.activatePanel()
-      messengerScreen.activateBackBtn()
+      messengerInterface.togglePanel('on')
+      messengerScreen.toggleBackBtn('on')
     }
   }
 
@@ -106,9 +106,12 @@ document.addEventListener('DOMContentLoaded', () => {
         ...chosenChar.getMemoryAboutUser(),
       }
       messengerInterface.showSpinnerInsteadBtn()
-      messengerInterface.addWaitTextToInput()
+      messengerInterface.addWaitMessagesToInput({
+        firstDelay: 4000,
+        secondDelay: 8000,
+      })
       await handleCharSendData(data)
-      messengerInterface.clearInput()
+      messengerInterface.clearInput({ withTimeouts: true })
       messengerInterface.showBtnInsteadSpinner()
     } else {
       finishAnimation(withoutMailMessage, 1000)
@@ -336,8 +339,8 @@ document.addEventListener('DOMContentLoaded', () => {
     messengerScreen.attachToMessengerScreen(chatBubble)
     messengerScreen.scrollMessengerScreenContainer()
     messengerScreen.increaseCharMessagesPart()
-    messengerScreen.deactivateBackBtn()
-    messengerInterface.deactivatePanel()
+    messengerScreen.toggleBackBtn('off')
+    messengerInterface.togglePanel('off')
     handleCharTalking()
   }
 

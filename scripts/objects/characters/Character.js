@@ -5,7 +5,6 @@ class Character {
   constructor(scriptTalk, memory) {
     this.scriptTalk = scriptTalk
     this.memory = memory
-    this.finalListening = false
   }
 
   deleteMemoryAboutUser() {
