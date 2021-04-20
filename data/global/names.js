@@ -118,11 +118,7 @@ export const noConnectionMessage = [
   `Maila niestety nie otrzymasz bo nie ma połączenia z serwerem... 😕`,
   `Idę to sprawdzić... Tymczasem dzięki za rozmowę! 😉`,
 ]
-export const withoutMailMessage = [
-  'Maila nie wysyłam,',
-  'dzięki za rozmowę',
-  '😉',
-]
+export const withoutMailMessage = ['Maila nie wysyłam,', 'dzięki za rozmowę 😉']
 
 export const src = {
   audio: {
@@ -131,6 +127,7 @@ export const src = {
     throw: '/audio/throw.mp3',
     background: '/audio/background.mp3',
     finish: '/audio/finish.mp3',
+    click: '/audio/click.mp3',
   },
   characters: {
     gisapia: {
