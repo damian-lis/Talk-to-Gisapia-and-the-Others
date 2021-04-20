@@ -46,9 +46,3 @@
 .user-main {
   background-color: var(--userMainColor);
 }
-
-#control-height {
-  height: 100vh;
-  width: 0;
-  position: absolute;
-}

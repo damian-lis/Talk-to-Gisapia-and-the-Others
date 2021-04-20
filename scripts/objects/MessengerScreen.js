@@ -35,7 +35,7 @@ class MessengerScreen {
   createMessengerScreenElements() {
     this.screen = createElementFn({
       element: 'div',
-      classes: [classNames.messenger.screen],
+      classes: [classNames.messenger.screenInner],
     })
 
     this.backIcon = createElementFn({
@@ -101,7 +101,7 @@ class MessengerScreen {
       const avatar = createElementFn({
         element: 'img',
         src: avatarImage,
-        classes: [classNames.messenger.characterAvatar],
+        classes: [classNames.messenger.avatar],
       })
       removeElAmongElsFn({
         element: 'img',

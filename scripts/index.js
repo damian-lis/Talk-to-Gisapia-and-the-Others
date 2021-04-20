@@ -22,7 +22,7 @@ import {
 document.addEventListener('DOMContentLoaded', () => {
   const charsFactory = new CharsFactory()
   const messengerInterface = new MessengerInterface(
-    classReferences.messenger.interfaceContainer
+    classReferences.messenger.interface
   )
   const selectCharUI = new SelectCharUI(
     charNameList,
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     memory
   )
   const messengerScreen = new MessengerScreen(
-    classReferences.messenger.screenContainer,
+    classReferences.messenger.screen,
     selectCharUI,
     memory
   )
@@ -305,7 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
         classes: [`${chosenChar.name.toLowerCase()}-main`],
       },
       {
-        element: classNames.messenger.screenContainer,
+        element: classNames.messenger.screen,
         classes: [`${chosenChar.name.toLowerCase()}-second`],
       },
 
@@ -318,11 +318,11 @@ document.addEventListener('DOMContentLoaded', () => {
         classes: [`${chosenChar.name.toLowerCase()}-second`],
       },
       {
-        element: 'messenger-spinner-container',
+        element: classNames.messenger.spinnerContainer,
         classes: [`${chosenChar.name.toLowerCase()}-second`],
       },
       {
-        element: 'messenger-back-icon',
+        element: classNames.messenger.backIcon,
         classes: [`${chosenChar.name.toLowerCase()}-main`],
       },
     ])

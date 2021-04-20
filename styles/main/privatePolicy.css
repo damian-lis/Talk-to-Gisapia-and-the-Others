@@ -1,21 +1,4 @@
-.privatePolicy-link-container {
-  width: 100%;
-  margin-top: 25px;
-}
-
-.privatePolicy-link {
-  margin: 10px auto;
-  font-size: 1.5rem;
-  color: rgb(253, 229, 229);
-  text-decoration: none;
-}
-
-.privatePolicy-link:hover {
-  text-decoration: underline;
-  color: rgb(241, 161, 12);
-}
-
-.privatePolicy-description {
+.privatePolicy {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -36,6 +19,23 @@
   overflow: auto;
 }
 
+.privatePolicy-link-container {
+  width: 100%;
+  margin-top: 25px;
+}
+
+.privatePolicy-link {
+  margin: 10px auto;
+  font-size: 1.5rem;
+  color: rgb(253, 229, 229);
+  text-decoration: none;
+}
+
+.privatePolicy-link:hover {
+  text-decoration: underline;
+  color: rgb(241, 161, 12);
+}
+
 .privatePolicy-headline {
   margin-top: 20px;
 }
@@ -45,7 +45,7 @@
 }
 
 @media (max-width: 600px) {
-  .privatePolicy-description {
+  .privatePolicy {
     height: 95%;
     text-align: left;
   }
