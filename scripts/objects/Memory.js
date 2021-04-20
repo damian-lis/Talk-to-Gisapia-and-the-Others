@@ -44,6 +44,15 @@ class Memory {
       element: 'audio',
       src: src.audio.finish,
     })
+
+    this.clickAudio = createElementFn({
+      element: 'audio',
+      src: src.audio.click,
+    })
+  }
+
+  playClickAudio() {
+    this.clickAudio.play()
   }
 
   playTypingAudio() {

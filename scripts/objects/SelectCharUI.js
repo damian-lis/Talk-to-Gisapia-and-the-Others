@@ -33,6 +33,7 @@ class SelectCharUI {
               this.subscribers['selectChar'](charName[1])
               this.removeActiveBtns()
               this.setActiveBtn(e.target)
+              this.memory.playClickAudio()
             },
           },
         ],
@@ -50,6 +51,7 @@ class SelectCharUI {
           cb: () => {
             this.memory.playFallDownAudio()
             this.memory.playBackgroundAudio()
+            this.memory.playClickAudio()
             this.subscribers['startTalking']()
           },
         },
@@ -71,6 +73,7 @@ class SelectCharUI {
             this.memory.restart()
             this.memory.playFinishAudio({ pause: true, reload: true })
             this.memory.playBackgroundAudio({ reload: true })
+            this.memory.playClickAudio()
             this.messagesComponent.remove()
             this.changeDisplay({ initialSettings: true })
             this.removeActiveBtns()
