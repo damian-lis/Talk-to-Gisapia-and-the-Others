@@ -4,8 +4,7 @@
 }
 
 .privatePolicy-link {
-  margin: 0 auto;
-  margin-top: 30px;
+  margin: 10px auto;
   font-size: 1.5rem;
   color: rgb(253, 229, 229);
   text-decoration: none;
@@ -46,7 +45,7 @@
 }
 
 @media (max-width: 600px) {
-  .privatePolicy-description-container {
+  .privatePolicy-description {
     height: 95%;
     text-align: left;
   }
