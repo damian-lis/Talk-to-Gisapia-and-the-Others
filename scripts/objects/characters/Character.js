@@ -73,7 +73,7 @@ class Character {
       result = 1
     } else if (textLength < 80) {
       result = 2
-    } else if (textLength >= 80) {
+    } else {
       result = 3
     }
 
