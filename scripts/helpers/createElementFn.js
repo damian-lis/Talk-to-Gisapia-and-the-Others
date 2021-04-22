@@ -37,7 +37,6 @@ export default ({ element, ...rest }) => {
           break
       }
     }
-
-    return createdElement
   }
+  return createdElement
 }
