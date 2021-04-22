@@ -3,26 +3,41 @@ export default ({ element, ...rest }) => {
 
   if (Object.keys(rest).length) {
     for (const propEl in rest) {
-      if (propEl === 'listeners') {
-        rest[propEl].map((listener) => {
-          const { event, cb } = listener
-          createdElement.addEventListener(event, (e) => {
-            cb(e)
+      switch (propEl) {
+        case 'listeners':
+          rest[propEl].map((listener) => {
+            const { event, cb } = listener
+            createdElement.addEventListener(event, (e) => {
+              cb(e)
+            })
           })
-        })
-      } else if (propEl === 'attributes') {
-        rest[propEl].map((attribute) => {
-          createdElement.setAttribute(`${attribute.type}`, `${attribute.name}`)
-        })
-      } else if (propEl === 'classes') {
-        createdElement.classList.add(...rest[propEl])
-      } else if (propEl === 'styles') {
-        rest[propEl].map((styleObj) => {
-          createdElement.style[styleObj.name] = styleObj.value
-        })
-      } else createdElement[propEl] = rest[propEl]
-    }
-  }
+          break
 
-  return createdElement
+        case 'attributes':
+          rest[propEl].map((attribute) => {
+            createdElement.setAttribute(
+              `${attribute.type}`,
+              `${attribute.name}`
+            )
+          })
+          break
+
+        case 'classes':
+          createdElement.classList.add(...rest[propEl])
+          break
+
+        case 'styles':
+          rest[propEl].map((styleObj) => {
+            createdElement.style[styleObj.name] = styleObj.value
+          })
+          break
+
+        default:
+          createdElement[propEl] = rest[propEl]
+          break
+      }
+    }
+
+    return createdElement
+  }
 }
