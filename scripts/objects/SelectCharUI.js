@@ -113,6 +113,7 @@ class SelectCharUI {
           cb: (e) => {
             this.memory.changeLanguage()
             this.changeSelectCharUITexts()
+            this.memory.playClickAudio()
             this.removeActives(
               [this.plLngBtn, this.engLngBtn],
               classNames.selectCharUI.lngBtnActive
@@ -139,6 +140,7 @@ class SelectCharUI {
           cb: (e) => {
             this.memory.changeLanguage()
             this.changeSelectCharUITexts()
+            this.memory.playClickAudio()
             this.removeActives(
               [this.plLngBtn, this.engLngBtn],
               classNames.selectCharUI.lngBtnActive
