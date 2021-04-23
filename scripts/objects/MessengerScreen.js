@@ -49,7 +49,10 @@ class MessengerScreen {
             this.memory.restart()
             this.memory.playFallDownAudio()
             this.memory.playClickAudio()
-            this.selectCharUI.removeActiveBtns()
+            this.selectCharUI.removeActives(
+              this.selectCharUI.getCharButtons(),
+              classNames.selectCharUI.selectBtnActive
+            )
             this.selectCharUI.toggleStartCharTalkingBtn('off')
             this.toggleBackBtn('off')
             runElementsFn([

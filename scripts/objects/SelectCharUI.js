@@ -39,9 +39,9 @@ class SelectCharUI {
               this.subscribers['selectChar'](charName[1])
               this.removeActives(
                 this.charButtons,
-                classNames.selectCharUI.activeBtn
+                classNames.selectCharUI.selectBtnActive
               )
-              this.setActive(e.target, classNames.selectCharUI.activeBtn)
+              this.setActive(e.target, classNames.selectCharUI.selectBtnActive)
               this.memory.playClickAudio()
             },
           },
@@ -72,7 +72,7 @@ class SelectCharUI {
       textContent: talkAgain[this.memory.getLanguage()],
       classes: [
         classNames.selectCharUI.startBtn,
-        classNames.selectCharUI.readyBtn,
+        classNames.selectCharUI.startBtnReady,
       ],
       styles: [{ name: 'display', value: 'none' }],
       listeners: [
@@ -87,7 +87,7 @@ class SelectCharUI {
             this.changeDisplay({ initialSettings: true })
             this.removeActives(
               this.charButtons,
-              classNames.selectCharUI.activeBtn
+              classNames.selectCharUI.selectBtnActive
             )
             this.toggleStartCharTalkingBtn('off')
             this.toggleLanguageIcons('on')
@@ -161,6 +161,10 @@ class SelectCharUI {
     ]
   }
 
+  getCharButtons() {
+    return this.charButtons
+  }
+
   changeSelectCharUITexts() {
     this.headline.textContent = chooseCharacter[this.memory.getLanguage()]
     this.startButton.textContent = startTalking[this.memory.getLanguage()]
@@ -189,10 +193,10 @@ class SelectCharUI {
   toggleStartCharTalkingBtn(toggle) {
     if (toggle === 'on') {
       this.startButton.disabled = false
-      this.startButton.classList.add(classNames.selectCharUI.readyBtn)
+      this.startButton.classList.add(classNames.selectCharUI.startBtnReady)
     } else {
       this.startButton.disabled = true
-      this.startButton.classList.remove(classNames.selectCharUI.readyBtn)
+      this.startButton.classList.remove(classNames.selectCharUI.startBtnReady)
     }
   }
 
