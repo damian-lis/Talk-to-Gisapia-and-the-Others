@@ -23,10 +23,7 @@ class SelectCharUI {
   createSelectCharUIElements(charNames) {
     this.headline = createElementFn({
       element: 'h1',
-      textContent:
-        this.memory.getLanguage() === 'pl'
-          ? chooseCharacter.pl
-          : chooseCharacter.eng,
+      textContent: chooseCharacter[this.memory.getLanguage()],
       classes: [classNames.selectCharUI.headline],
     })
 
@@ -51,8 +48,7 @@ class SelectCharUI {
 
     this.startButton = createElementFn({
       element: 'button',
-      textContent:
-        this.memory.getLanguage() === 'pl' ? startTalking.pl : startTalking.eng,
+      textContent: startTalking[this.memory.getLanguage()],
       disabled: 'true',
       classes: [classNames.selectCharUI.startBtn],
       listeners: [
@@ -70,8 +66,7 @@ class SelectCharUI {
 
     this.talkAgainButton = createElementFn({
       element: 'button',
-      textContent:
-        this.memory.getLanguage() === 'pl' ? talkAgain.pl : talkAgain.eng,
+      textContent: talkAgain[this.memory.getLanguage()],
       classes: [
         classNames.selectCharUI.startBtn,
         classNames.selectCharUI.readyBtn,
@@ -128,18 +123,11 @@ class SelectCharUI {
   }
 
   changeSelectCharUITexts() {
-    this.headline.textContent =
-      this.memory.getLanguage() === 'pl'
-        ? chooseCharacter.pl
-        : chooseCharacter.eng
-    this.startButton.textContent =
-      this.memory.getLanguage() === 'pl' ? startTalking.pl : startTalking.eng
-    ;(this.talkAgainButton.textContent =
-      this.memory.getLanguage() === 'pl' ? talkAgain.pl : talkAgain.eng),
-      (this.privatePolicyLink.textContent =
-        this.memory.getLanguage() === 'pl'
-          ? privatePolicy.pl
-          : privatePolicy.eng)
+    this.headline.textContent = chooseCharacter[this.memory.getLanguage()]
+    this.startButton.textContent = startTalking[this.memory.getLanguage()]
+    this.talkAgainButton.textContent = talkAgain[this.memory.getLanguage()]
+    this.privatePolicyLink.textContent =
+      privatePolicy[this.memory.getLanguage()]
   }
 
   createPrivatePolicy() {
@@ -150,10 +138,7 @@ class SelectCharUI {
 
     this.privatePolicyLink = createElementFn({
       element: 'a',
-      textContent:
-        this.memory.getLanguage() === 'pl'
-          ? privatePolicy.pl
-          : privatePolicy.eng,
+      textContent: privatePolicy[this.memory.getLanguage()],
       href: src.privatePolicy.site,
       classes: [classNames.privatePolicy.link],
     })

@@ -47,7 +47,7 @@ class MessengerInterface {
 
     this.button = createElementFn({
       element: 'button',
-      textContent: this.memory.getLanguage() === 'pl' ? send.pl : send.eng,
+      textContent: send[this.memory.getLanguage()],
       disabled: true,
       classes: [classNames.messenger.interfaceBtn],
       styles: [{ name: 'pointerEvents', value: 'none' }],
@@ -71,18 +71,10 @@ class MessengerInterface {
 
   checkInputAndCallSubscribers() {
     if (this.inputValue === '')
-      return alert(
-        this.memory.getLanguage() === 'pl'
-          ? mustWritingSomething.pl
-          : mustWritingSomething.eng
-      )
+      return alert(mustWritingSomething[this.memory.getLanguage()])
     if (this.inputValue.includes('@')) {
       if (!this.emailValidation(this.inputValue))
-        return alert(
-          this.memory.getLanguage() === 'pl'
-            ? correctMailFormat.pl
-            : correctMailFormat.eng
-        )
+        return alert(correctMailFormat[this.memory.getLanguage()])
     }
     this.subscribers.map((subscriber) => subscriber(this.inputValue))
   }
@@ -117,21 +109,16 @@ class MessengerInterface {
 
   addWaitMessagesToInput({ firstDelay, secondDelay }) {
     this.firstInputTimeout = setTimeout(() => {
-      this.input.value =
-        this.memory.getLanguage() === 'pl' ? sending.pl : sending.eng
+      this.input.value = sending[this.memory.getLanguage()]
     }, firstDelay)
 
     this.secondInputTimeout = setTimeout(() => {
-      this.input.value =
-        this.memory.getLanguage() === 'pl'
-          ? oneMoreMoment.pl
-          : oneMoreMoment.eng
+      this.input.value = oneMoreMoment[this.memory.getLanguage()]
     }, secondDelay)
   }
 
   setButtonLanguage() {
-    this.button.textContent =
-      this.memory.getLanguage() === 'pl' ? send.pl : send.eng
+    this.button.textContent = send[this.memory.getLanguage()]
   }
 
   createSpinner() {
