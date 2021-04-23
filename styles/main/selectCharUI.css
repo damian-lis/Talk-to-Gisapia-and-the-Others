@@ -18,7 +18,7 @@
 
 .selectCharUI-headline,
 .selectCharUI-message {
-  font-size: 3rem;
+  font-size: 30px;
   text-transform: uppercase;
   line-height: 50px;
   margin-top: 15px;
@@ -30,13 +30,14 @@
 }
 
 .selectCharUI-startBtn {
-  width: auto;
+  width: 60%;
+  min-width: 180px;
   margin-top: 20px;
   padding: 15px;
   border-radius: 15px;
   background-color: rgba(173, 173, 173, 0.322);
   font-family: Comic Sans MS, Comic Sans, cursive, sans-serif;
-  font-size: 1.9rem;
+  font-size: 19px;
   text-transform: uppercase;
   color: #fff;
   pointer-events: none;
@@ -59,7 +60,7 @@
   border: 2px solid var(--selectCharUIMainColor);
   border-radius: 15px;
   color: #fff;
-  font-size: 1.9rem;
+  font-size: 19px;
   cursor: pointer;
 }
 
@@ -94,20 +95,28 @@
 
 @media (max-width: 380px) {
   .selectCharUI {
-    width: 240px;
+    width: 250px;
   }
 
   .selectCharUI-headline,
   .selectCharUI-message {
-    font-size: 2.2rem;
+    font-size: 22px;
+    line-height: 35px;
+  }
+
+  .selectCharUI-plLngBtn,
+  .selectCharUI-engLngBtn {
+    width: 35px;
+    height: 35px;
+    font-size: 10px;
   }
 
   .selectCharUI-startBtn {
-    font-size: 1.5rem;
+    font-size: 15px;
   }
 
   .selectCharUI-selectBtn {
-    font-size: 1.7rem;
+    font-size: 17px;
     width: 100px;
     height: 60px;
   }
