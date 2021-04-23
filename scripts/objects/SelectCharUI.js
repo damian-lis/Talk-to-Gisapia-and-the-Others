@@ -37,8 +37,11 @@ class SelectCharUI {
             event: 'click',
             cb: (e) => {
               this.subscribers['selectChar'](charName[1])
-              this.removeActiveBtns()
-              this.setActiveBtn(e.target)
+              this.removeActives(
+                this.charButtons,
+                classNames.selectCharUI.activeBtn
+              )
+              this.setActive(e.target, classNames.selectCharUI.activeBtn)
               this.memory.playClickAudio()
             },
           },
@@ -82,25 +85,64 @@ class SelectCharUI {
             this.memory.playClickAudio()
             this.messagesComponent.remove()
             this.changeDisplay({ initialSettings: true })
-            this.removeActiveBtns()
+            this.removeActives(
+              this.charButtons,
+              classNames.selectCharUI.activeBtn
+            )
             this.toggleStartCharTalkingBtn('off')
-            this.toggleLanguageIcon('on')
+            this.toggleLanguageIcons('on')
           },
         },
       ],
     })
 
-    this.languageIcon = createElementFn({
+    this.plLngIcon = createElementFn({
       element: 'img',
-      classes: [classNames.selectCharUI.languageIcon],
-      src: `/images/icons/${this.memory.getLanguage()}.svg`,
+      classes:
+        this.memory.getLanguage() === 'pl'
+          ? [
+              classNames.selectCharUI.plLngIcon,
+              classNames.selectCharUI.lngIconActive,
+            ]
+          : [classNames.selectCharUI.plLngIcon],
+
+      src: src.selectCharUI.plIcon,
       listeners: [
         {
           event: 'click',
-          cb: () => {
+          cb: (e) => {
             this.memory.changeLanguage()
-            this.changeLanguageImage()
             this.changeSelectCharUITexts()
+            this.removeActives(
+              [this.plLngIcon, this.engLngIcon],
+              classNames.selectCharUI.lngIconActive
+            )
+            this.setActive(e.target, classNames.selectCharUI.lngIconActive)
+          },
+        },
+      ],
+    })
+    this.engLngIcon = createElementFn({
+      element: 'img',
+      classes:
+        this.memory.getLanguage() === 'eng'
+          ? [
+              classNames.selectCharUI.engLngIcon,
+              classNames.selectCharUI.lngIconActive,
+            ]
+          : [classNames.selectCharUI.engLngIcon],
+      src: src.selectCharUI.engIcon,
+      listeners: [
+        {
+          event: 'click',
+          cb: (e) => {
+            this.memory.changeLanguage()
+            this.changeSelectCharUITexts()
+            this.removeActives(
+              [this.plLngIcon, this.engLngIcon],
+              classNames.selectCharUI.lngIconActive
+            )
+            this.setActive(e.target, classNames.selectCharUI.lngIconActive)
           },
         },
       ],
@@ -109,17 +151,14 @@ class SelectCharUI {
     this.privatePolicy = this.createPrivatePolicy()
 
     return [
+      this.plLngIcon,
+      this.engLngIcon,
       this.headline,
       ...this.charButtons,
       this.startButton,
       this.talkAgainButton,
-      this.languageIcon,
       this.privatePolicy,
     ]
-  }
-
-  changeLanguageImage() {
-    this.languageIcon.src = `/images/icons/${this.memory.getLanguage()}.svg`
   }
 
   changeSelectCharUITexts() {
@@ -186,11 +225,13 @@ class SelectCharUI {
     this.containerSent.prepend(this.messagesComponent)
     this.changeDisplay()
     this.handleFinishAudio()
-    this.toggleLanguageIcon('off')
+    this.toggleLanguageIcons('off')
   }
 
-  toggleLanguageIcon(toggle) {
-    this.languageIcon.style.display = toggle === 'on' ? 'block' : 'none'
+  toggleLanguageIcons(toggle) {
+    ;[this.plLngIcon, this.engLngIcon].map((icon) => {
+      icon.style.display = toggle === 'on' ? 'block' : 'none'
+    })
   }
 
   changeDisplay({ initialSettings } = false) {
@@ -200,18 +241,16 @@ class SelectCharUI {
     this.talkAgainButton.style.display = initialSettings ? 'none' : 'block'
   }
 
-  removeActiveBtns() {
-    this.charButtons.map((btn) =>
-      btn.classList.remove(classNames.selectCharUI.activeBtn)
-    )
+  removeActives(elements, clsName) {
+    elements.map((btn) => btn.classList.remove(clsName))
   }
 
   getCharButtons() {
     return this.charButtons
   }
 
-  setActiveBtn(element) {
-    element.classList.add(classNames.selectCharUI.activeBtn)
+  setActive(element, clsName) {
+    element.classList.add(clsName)
   }
 
   subscribe(subscriber, name) {

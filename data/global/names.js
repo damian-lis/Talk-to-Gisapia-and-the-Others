@@ -62,7 +62,9 @@ export const classNames = {
     selectBtn: 'selectCharUI-selectBtn',
     activeBtn: 'selectCharUI-activeBtn',
     readyBtn: 'selectCharUI-readyBtn',
-    languageIcon: 'selectCharUI-languageIcon',
+    plLngIcon: 'selectCharUI-plLngIcon',
+    engLngIcon: 'selectCharUI-engLngIcon',
+    lngIconActive: 'selectCharUI-lngIcon-active',
   },
 
   privatePolicy: {
@@ -102,7 +104,9 @@ export const classReferences = {
     selectBtn: '.selectCharUI-selectBtn',
     activeBtn: '.selectCharUI-activeBtn',
     readyBtn: '.selectCharUI-readyBtn',
-    languageIcon: '.selectCharUI-languageIcon',
+    plLngIcon: '.selectCharUI-plLngIcon',
+    engLngIcon: '.selectCharUI-engLngIcon',
+    lngIconActive: '.selectCharUI-lngIcon-active',
   },
 
   privatePolicy: {
@@ -202,6 +206,10 @@ export const src = {
   },
   privatePolicy: {
     site: '/privatePolicy.html',
+  },
+  selectCharUI: {
+    plIcon: `/images/icons/pl.svg`,
+    engIcon: `/images/icons/eng.svg`,
   },
 }
 

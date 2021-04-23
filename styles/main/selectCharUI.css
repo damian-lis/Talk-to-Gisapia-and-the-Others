@@ -21,6 +21,7 @@
   font-size: 3rem;
   text-transform: uppercase;
   line-height: 50px;
+  margin-top: 15px;
   margin-bottom: 20px;
 }
 
@@ -66,13 +67,25 @@
   background-color: rgb(241, 161, 12);
 }
 
-.selectCharUI-languageIcon {
-  position: absolute;
-  right: 5px;
-  top: 5px;
-  width: 25px;
-  height: 25px;
+.selectCharUI-plLngIcon,
+.selectCharUI-engLngIcon {
+  /* position: absolute;
+  right: 7px;
+  top: 5px; */
+  width: 35px;
+  height: 35px;
   cursor: pointer;
+}
+
+.selectCharUI-engLngIcon {
+  right: 42px;
+  margin-left: 10px;
+}
+
+.selectCharUI-lngIcon-active {
+  background-color: rgb(241, 161, 12);
+  padding: 1px;
+  border-radius: 50%;
 }
 
 @media (max-width: 500px) {
