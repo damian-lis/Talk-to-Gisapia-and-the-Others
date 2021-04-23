@@ -60,7 +60,7 @@
   margin: 0 0 0 40px;
   padding: 8px;
   border-radius: 15px;
-  font-size: 1.6rem;
+  font-size: 16px;
 }
 
 .messenger-message.user-main {
@@ -113,7 +113,7 @@
   height: 100%;
   border-radius: var(--messengerMainSize);
   border: 2px solid var(--messengerOutlineColor);
-  font-size: 1.6rem;
+  font-size: 16px;
 }
 
 .messenger-interface-btn {
@@ -201,7 +201,7 @@
 
   .messenger-message {
     margin: 0 0 0 50px;
-    font-size: 1.8rem;
+    font-size: 18px;
   }
 
   .messenger-avatar {
@@ -214,10 +214,10 @@
   }
 
   .messenger-interface-input {
-    font-size: 1.7rem;
+    font-size: 17px;
   }
 
   .messenger-interface-btn {
-    font-size: 1.6rem;
+    font-size: 16px;
   }
 }
