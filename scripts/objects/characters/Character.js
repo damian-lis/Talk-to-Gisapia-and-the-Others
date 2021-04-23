@@ -15,9 +15,9 @@ class Character {
 
   setScriptTalk() {
     this.scriptTalkCopy = JSON.parse(JSON.stringify(this.scriptTalk))
-    this.modifiedScriptTalk = this.setScriptTalkMessages(this.scriptTalkCopy)[
-      this.memory.getLanguage()
-    ]
+    this.modifiedScriptTalk = this.setScriptTalkMessages(
+      this.scriptTalkCopy[this.memory.getLanguage()]
+    )
   }
 
   getMemoryAboutUser() {
@@ -91,28 +91,22 @@ class Character {
   }
 
   setScriptTalkMessages(scriptTalk) {
-    for (const language in scriptTalk) {
-      for (const category in scriptTalk[language]) {
-        const messageNumber = Math.floor(
-          Math.random() * scriptTalk[language][category].messages.length
+    for (const category in scriptTalk) {
+      const messageNumber = Math.floor(
+        Math.random() * scriptTalk[category].messages.length
+      )
+      const selectedMessage = scriptTalk[category].messages[messageNumber]
+
+      scriptTalk[category].messages = selectedMessage
+
+      for (const answerVariants in scriptTalk[category].answers) {
+        const answerNumber = Math.floor(
+          Math.random() * scriptTalk[category].answers[answerVariants].length
         )
-        const selectedMessage =
-          scriptTalk[language][category].messages[messageNumber]
+        const selectedAnswer =
+          scriptTalk[category].answers[answerVariants][answerNumber]
 
-        scriptTalk[language][category].messages = selectedMessage
-
-        for (const answerVariants in scriptTalk[language][category].answers) {
-          const answerNumber = Math.floor(
-            Math.random() *
-              scriptTalk[language][category].answers[answerVariants].length
-          )
-          const selectedAnswer =
-            scriptTalk[language][category].answers[answerVariants][answerNumber]
-
-          scriptTalk[language][category].answers[
-            answerVariants
-          ] = selectedAnswer
-        }
+        scriptTalk[category].answers[answerVariants] = selectedAnswer
       }
     }
     return scriptTalk
