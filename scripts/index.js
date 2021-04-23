@@ -102,6 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const handleFinishCharTalking = async ({ userMessage, chosenChar }) => {
     if (userMessage.includes('@')) {
       const data = {
+        language: memory.getLanguage(),
         senderName: chosenChar.name,
         recipientMail: userMessage,
         ...chosenChar.getMemoryAboutUser(),
