@@ -90,23 +90,23 @@ class SelectCharUI {
               classNames.selectCharUI.selectBtnActive
             )
             this.toggleStartCharTalkingBtn('off')
-            this.toggleLanguageIcons('on')
+            this.toggleLanguageBtns('on')
           },
         },
       ],
     })
 
-    this.plLngIcon = createElementFn({
-      element: 'img',
+    this.plLngBtn = createElementFn({
+      element: 'button',
+      textContent: 'PL',
       classes:
         this.memory.getLanguage() === 'pl'
           ? [
-              classNames.selectCharUI.plLngIcon,
-              classNames.selectCharUI.lngIconActive,
+              classNames.selectCharUI.plLngBtn,
+              classNames.selectCharUI.lngBtnActive,
             ]
-          : [classNames.selectCharUI.plLngIcon],
+          : [classNames.selectCharUI.plLngBtn],
 
-      src: src.selectCharUI.plIcon,
       listeners: [
         {
           event: 'click',
@@ -114,24 +114,25 @@ class SelectCharUI {
             this.memory.changeLanguage()
             this.changeSelectCharUITexts()
             this.removeActives(
-              [this.plLngIcon, this.engLngIcon],
-              classNames.selectCharUI.lngIconActive
+              [this.plLngBtn, this.engLngBtn],
+              classNames.selectCharUI.lngBtnActive
             )
-            this.setActive(e.target, classNames.selectCharUI.lngIconActive)
+            this.setActive(e.target, classNames.selectCharUI.lngBtnActive)
           },
         },
       ],
     })
-    this.engLngIcon = createElementFn({
-      element: 'img',
+    this.engLngBtn = createElementFn({
+      element: 'button',
+      textContent: 'ENG',
       classes:
         this.memory.getLanguage() === 'eng'
           ? [
-              classNames.selectCharUI.engLngIcon,
-              classNames.selectCharUI.lngIconActive,
+              classNames.selectCharUI.engLngBtn,
+              classNames.selectCharUI.lngBtnActive,
             ]
-          : [classNames.selectCharUI.engLngIcon],
-      src: src.selectCharUI.engIcon,
+          : [classNames.selectCharUI.engLngBtn],
+
       listeners: [
         {
           event: 'click',
@@ -139,10 +140,10 @@ class SelectCharUI {
             this.memory.changeLanguage()
             this.changeSelectCharUITexts()
             this.removeActives(
-              [this.plLngIcon, this.engLngIcon],
-              classNames.selectCharUI.lngIconActive
+              [this.plLngBtn, this.engLngBtn],
+              classNames.selectCharUI.lngBtnActive
             )
-            this.setActive(e.target, classNames.selectCharUI.lngIconActive)
+            this.setActive(e.target, classNames.selectCharUI.lngBtnActive)
           },
         },
       ],
@@ -151,8 +152,8 @@ class SelectCharUI {
     this.privatePolicy = this.createPrivatePolicy()
 
     return [
-      this.plLngIcon,
-      this.engLngIcon,
+      this.plLngBtn,
+      this.engLngBtn,
       this.headline,
       ...this.charButtons,
       this.startButton,
@@ -229,11 +230,11 @@ class SelectCharUI {
     this.containerSent.prepend(this.messagesComponent)
     this.changeDisplay()
     this.handleFinishAudio()
-    this.toggleLanguageIcons('off')
+    this.toggleLanguageBtns('off')
   }
 
-  toggleLanguageIcons(toggle) {
-    ;[this.plLngIcon, this.engLngIcon].map((icon) => {
+  toggleLanguageBtns(toggle) {
+    ;[this.plLngBtn, this.engLngBtn].map((icon) => {
       icon.style.display = toggle === 'on' ? 'block' : 'none'
     })
   }

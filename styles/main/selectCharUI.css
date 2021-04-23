@@ -67,22 +67,23 @@
   background-color: rgb(241, 161, 12);
 }
 
-.selectCharUI-plLngIcon,
-.selectCharUI-engLngIcon {
-  width: 35px;
-  height: 35px;
-  cursor: pointer;
+.selectCharUI-plLngBtn,
+.selectCharUI-engLngBtn {
+  width: 42px;
+  height: 42px;
+  padding: 3px;
+  border-radius: 50%;
+  background-color: var(--selectCharUISecondColor);
+  color: #fff;
 }
 
-.selectCharUI-engLngIcon {
+.selectCharUI-engLngBtn {
   right: 42px;
   margin-left: 10px;
 }
 
-.selectCharUI-lngIcon-active {
-  background-color: rgb(241, 161, 12);
-  padding: 1px;
-  border-radius: 50%;
+.selectCharUI-lngBtn-active {
+  border: 2px solid rgb(241, 161, 12);
 }
 
 @media (max-width: 500px) {
