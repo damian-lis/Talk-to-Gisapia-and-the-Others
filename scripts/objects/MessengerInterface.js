@@ -2,11 +2,19 @@ import {
   createElementFn,
   appendElementsToContainerFn,
 } from '/scripts/helpers/index.js'
-import { classNames } from '/data/global/names.js'
+import {
+  classNames,
+  send,
+  mustWritingSomething,
+  correctMailFormat,
+  sending,
+  oneMoreMoment,
+} from '/data/global/names.js'
 
 class MessengerInterface {
-  constructor(container) {
+  constructor(container, memory) {
     this.containerSent = document.querySelector(container)
+    this.memory = memory
     const messengerInterfaceElements = this.createMessengerInterfaceElements()
     this.inputValue = ''
     this.subscribers = []
@@ -39,7 +47,7 @@ class MessengerInterface {
 
     this.button = createElementFn({
       element: 'button',
-      textContent: 'Wyślij',
+      textContent: this.memory.getLanguage() === 'pl' ? send.pl : send.eng,
       disabled: true,
       classes: [classNames.messenger.interfaceBtn],
       styles: [{ name: 'pointerEvents', value: 'none' }],
@@ -62,10 +70,19 @@ class MessengerInterface {
   }
 
   checkInputAndCallSubscribers() {
-    if (this.inputValue === '') return alert('Musisz coś napisać')
+    if (this.inputValue === '')
+      return alert(
+        this.memory.getLanguage() === 'pl'
+          ? mustWritingSomething.pl
+          : mustWritingSomething.eng
+      )
     if (this.inputValue.includes('@')) {
       if (!this.emailValidation(this.inputValue))
-        return alert('Podaj właściwy format maila')
+        return alert(
+          this.memory.getLanguage() === 'pl'
+            ? correctMailFormat.pl
+            : correctMailFormat.eng
+        )
     }
     this.subscribers.map((subscriber) => subscriber(this.inputValue))
   }
@@ -100,12 +117,21 @@ class MessengerInterface {
 
   addWaitMessagesToInput({ firstDelay, secondDelay }) {
     this.firstInputTimeout = setTimeout(() => {
-      this.input.value = 'Już wysyłam! 😎'
+      this.input.value =
+        this.memory.getLanguage() === 'pl' ? sending.pl : sending.eng
     }, firstDelay)
 
     this.secondInputTimeout = setTimeout(() => {
-      this.input.value = 'jeszcze naprawdę chwilkę! 😏'
+      this.input.value =
+        this.memory.getLanguage() === 'pl'
+          ? oneMoreMoment.pl
+          : oneMoreMoment.eng
     }, secondDelay)
+  }
+
+  setButtonLanguage() {
+    this.button.textContent =
+      this.memory.getLanguage() === 'pl' ? send.pl : send.eng
   }
 
   createSpinner() {

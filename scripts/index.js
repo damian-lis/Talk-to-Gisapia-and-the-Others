@@ -22,7 +22,8 @@ import {
 document.addEventListener('DOMContentLoaded', () => {
   const charsFactory = new CharsFactory()
   const messengerInterface = new MessengerInterface(
-    classReferences.messenger.interface
+    classReferences.messenger.interface,
+    memory
   )
   const selectCharUI = new SelectCharUI(
     charNameList,
@@ -298,6 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
     chosenChar.deleteMemoryAboutUser()
     chosenChar.setScriptTalk()
     messengerScreen.removeChatBubbles()
+    messengerInterface.setButtonLanguage()
 
     setClassesFn([
       {

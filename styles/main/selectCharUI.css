@@ -66,6 +66,16 @@
   background-color: rgb(241, 161, 12);
 }
 
+.selectCharUI-languageIcon {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
 @media (max-width: 500px) {
   .selectCharUI {
     width: 320px;

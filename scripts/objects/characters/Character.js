@@ -1,23 +1,27 @@
 import { findAndReplaceFn } from '/scripts/helpers/index.js'
 import { messages, answers, categories } from '/data/global/names.js'
+import { memory } from '../index.js'
 
 class Character {
-  constructor(scriptTalk, memory) {
+  constructor(scriptTalk, charMemory) {
     this.scriptTalk = scriptTalk
+    this.charMemory = charMemory
     this.memory = memory
   }
 
   deleteMemoryAboutUser() {
-    this.memory.aboutUser = {}
+    this.charMemory.aboutUser = {}
   }
 
   setScriptTalk() {
     this.scriptTalkCopy = JSON.parse(JSON.stringify(this.scriptTalk))
-    this.modifiedScriptTalk = this.setScriptTalkMessages(this.scriptTalkCopy)
+    this.modifiedScriptTalk = this.setScriptTalkMessages(this.scriptTalkCopy)[
+      this.memory.getLanguage()
+    ]
   }
 
   getMemoryAboutUser() {
-    return this.memory.aboutUser
+    return this.charMemory.aboutUser
   }
 
   changeTimeForTyping(timeForTyping) {
@@ -50,7 +54,7 @@ class Character {
   }
 
   checkUserMessageInMemory(scriptCategory, message) {
-    return this.memory[scriptCategory].find((word) =>
+    return this.charMemory[scriptCategory].find((word) =>
       message.toLowerCase().includes(word.toLowerCase())
     )
   }
@@ -60,7 +64,7 @@ class Character {
       word = this.setUpperLetter(word)
     }
 
-    this.memory.aboutUser[scriptCategory] = word
+    this.charMemory.aboutUser[scriptCategory] = word
   }
 
   setUpperLetter(message) {
@@ -87,33 +91,39 @@ class Character {
   }
 
   setScriptTalkMessages(scriptTalk) {
-    for (const category in scriptTalk) {
-      const messageNumber = Math.floor(
-        Math.random() * scriptTalk[category].messages.length
-      )
-      const selectedMessage = scriptTalk[category].messages[messageNumber]
-
-      scriptTalk[category].messages = selectedMessage
-
-      for (const answerVariants in scriptTalk[category].answers) {
-        const answerNumber = Math.floor(
-          Math.random() * scriptTalk[category].answers[answerVariants].length
+    for (const language in scriptTalk) {
+      for (const category in scriptTalk[language]) {
+        const messageNumber = Math.floor(
+          Math.random() * scriptTalk[language][category].messages.length
         )
-        const selectedAnswer =
-          scriptTalk[category].answers[answerVariants][answerNumber]
+        const selectedMessage =
+          scriptTalk[language][category].messages[messageNumber]
 
-        scriptTalk[category].answers[answerVariants] = selectedAnswer
+        scriptTalk[language][category].messages = selectedMessage
+
+        for (const answerVariants in scriptTalk[language][category].answers) {
+          const answerNumber = Math.floor(
+            Math.random() *
+              scriptTalk[language][category].answers[answerVariants].length
+          )
+          const selectedAnswer =
+            scriptTalk[language][category].answers[answerVariants][answerNumber]
+
+          scriptTalk[language][category].answers[
+            answerVariants
+          ] = selectedAnswer
+        }
       }
     }
     return scriptTalk
   }
 
   changeScriptTalkMessages({ category, from, type }) {
-    const wordsToSearchAndReplace = Object.keys(this.memory.aboutUser).map(
+    const wordsToSearchAndReplace = Object.keys(this.charMemory.aboutUser).map(
       (category) => {
         return {
           search: `-user${this.setUpperLetter(category)}-`,
-          replace: this.memory.aboutUser[category],
+          replace: this.charMemory.aboutUser[category],
         }
       }
     )

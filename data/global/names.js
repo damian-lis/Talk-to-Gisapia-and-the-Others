@@ -62,6 +62,7 @@ export const classNames = {
     selectBtn: 'selectCharUI-selectBtn',
     activeBtn: 'selectCharUI-activeBtn',
     readyBtn: 'selectCharUI-readyBtn',
+    languageIcon: 'selectCharUI-languageIcon',
   },
 
   privatePolicy: {
@@ -101,6 +102,7 @@ export const classReferences = {
     selectBtn: '.selectCharUI-selectBtn',
     activeBtn: '.selectCharUI-activeBtn',
     readyBtn: '.selectCharUI-readyBtn',
+    languageIcon: '.selectCharUI-languageIcon',
   },
 
   privatePolicy: {
@@ -114,11 +116,66 @@ export const classReferences = {
 
 export const messages = 'messages'
 export const answers = 'answers'
-export const noConnectionMessage = [
-  `Maila niestety nie otrzymasz bo nie ma połączenia z serwerem... 😕`,
-  `Idę to sprawdzić... Tymczasem dzięki za rozmowę! 😉`,
-]
-export const withoutMailMessage = ['Maila nie wysyłam,', 'dzięki za rozmowę 😉']
+export const noConnectionMessage = {
+  pl: [
+    `Maila niestety nie otrzymasz bo nie ma połączenia z serwerem... 😕`,
+    `Idę to sprawdzić... Tymczasem dzięki za rozmowę! 😉`,
+  ],
+  eng: [
+    `Unfortunately you will not receive e-mail because there is no connection to the server ...`,
+    `I'm going to check it out ... In the meantime, thanks for the interview! 😉`,
+  ],
+}
+
+export const withoutMailMessage = {
+  pl: ['Maila nie wysyłam,', 'dzięki za rozmowę 😉'],
+  eng: [`I don't send the e-mail,`, `thanks for the interview! 😉`],
+}
+
+export const chooseCharacter = {
+  pl: 'Wybierz swojego rozmówcę',
+  eng: 'Choose a character to talk!',
+}
+
+export const startTalking = {
+  pl: 'Porozmawiaj',
+  eng: 'Start talking',
+}
+
+export const talkAgain = {
+  pl: 'Porozmawiaj ponownie',
+  eng: 'Talk again',
+}
+
+export const privatePolicy = {
+  pl: 'Polityka prywatności',
+  eng: 'Private policy',
+}
+
+export const send = {
+  pl: 'Wyślij',
+  eng: 'Send',
+}
+
+export const mustWritingSomething = {
+  pl: 'Musisz coś napisać',
+  eng: 'You must writing something',
+}
+
+export const correctMailFormat = {
+  pl: 'Podaj właściwy format maila',
+  eng: 'Write the correct mail format',
+}
+
+export const sending = {
+  pl: 'Już wysyłam! 😎',
+  eng: "I'm sending! 😎",
+}
+
+export const oneMoreMoment = {
+  pl: 'jeszcze naprawdę chwilkę! 😏',
+  eng: 'one more moment! 😏',
+}
 
 export const src = {
   audio: {
@@ -142,6 +199,9 @@ export const src = {
   },
   messenger: {
     backIcon: '/images/icons/back.svg',
+  },
+  privatePolicy: {
+    site: '/privatePolicy.html',
   },
 }
 

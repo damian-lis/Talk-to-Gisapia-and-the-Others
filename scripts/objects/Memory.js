@@ -14,6 +14,7 @@ class Memory {
       this.backgroundAnimation = this.background()
       this.gisapiaAnimation = this.gisapiaAnimation()
       this.createAudio()
+      this.language = this.setLanguage()
       Memory.instance = this
     }
     return Memory.instance
@@ -153,6 +154,28 @@ class Memory {
     this.isCallCharTalkingAgain = false
     this.isCharListening = false
     this.isCharTalkingFinish = false
+  }
+
+  setLanguage() {
+    if (localStorage.getItem('language')) {
+      return localStorage.getItem('language')
+    } else {
+      return 'pl'
+    }
+  }
+
+  changeLanguage() {
+    if (this.language === 'pl') {
+      localStorage.setItem('language', 'eng')
+      this.language = 'eng'
+    } else {
+      localStorage.setItem('language', 'pl')
+      this.language = 'pl'
+    }
+  }
+
+  getLanguage() {
+    return this.language
   }
 }
 

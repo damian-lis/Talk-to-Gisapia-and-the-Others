@@ -2,7 +2,14 @@ import {
   createElementFn,
   appendElementsToContainerFn,
 } from '/scripts/helpers/index.js'
-import { classNames } from '/data/global/names.js'
+import {
+  classNames,
+  chooseCharacter,
+  startTalking,
+  talkAgain,
+  privatePolicy,
+  src,
+} from '/data/global/names.js'
 
 class SelectCharUI {
   constructor(charNames, container, memory) {
@@ -10,14 +17,16 @@ class SelectCharUI {
     this.memory = memory
     const selectCharUIElements = this.createSelectCharUIElements(charNames)
     this.subscribers = {}
-
     appendElementsToContainerFn(selectCharUIElements, this.containerSent)
   }
 
   createSelectCharUIElements(charNames) {
     this.headline = createElementFn({
       element: 'h1',
-      textContent: 'Wybierz swojego rozmówcę!',
+      textContent:
+        this.memory.getLanguage() === 'pl'
+          ? chooseCharacter.pl
+          : chooseCharacter.eng,
       classes: [classNames.selectCharUI.headline],
     })
 
@@ -42,7 +51,8 @@ class SelectCharUI {
 
     this.startButton = createElementFn({
       element: 'button',
-      textContent: 'Porozmawiaj',
+      textContent:
+        this.memory.getLanguage() === 'pl' ? startTalking.pl : startTalking.eng,
       disabled: 'true',
       classes: [classNames.selectCharUI.startBtn],
       listeners: [
@@ -60,7 +70,8 @@ class SelectCharUI {
 
     this.talkAgainButton = createElementFn({
       element: 'button',
-      textContent: 'Porozmawiaj ponownie',
+      textContent:
+        this.memory.getLanguage() === 'pl' ? talkAgain.pl : talkAgain.eng,
       classes: [
         classNames.selectCharUI.startBtn,
         classNames.selectCharUI.readyBtn,
@@ -78,6 +89,23 @@ class SelectCharUI {
             this.changeDisplay({ initialSettings: true })
             this.removeActiveBtns()
             this.toggleStartCharTalkingBtn('off')
+            this.toggleLanguageIcon('on')
+          },
+        },
+      ],
+    })
+
+    this.languageIcon = createElementFn({
+      element: 'img',
+      classes: [classNames.selectCharUI.languageIcon],
+      src: `/images/icons/${this.memory.getLanguage()}.svg`,
+      listeners: [
+        {
+          event: 'click',
+          cb: () => {
+            this.memory.changeLanguage()
+            this.changeLanguageImage()
+            this.changeSelectCharUITexts()
           },
         },
       ],
@@ -90,8 +118,28 @@ class SelectCharUI {
       ...this.charButtons,
       this.startButton,
       this.talkAgainButton,
+      this.languageIcon,
       this.privatePolicy,
     ]
+  }
+
+  changeLanguageImage() {
+    this.languageIcon.src = `/images/icons/${this.memory.getLanguage()}.svg`
+  }
+
+  changeSelectCharUITexts() {
+    this.headline.textContent =
+      this.memory.getLanguage() === 'pl'
+        ? chooseCharacter.pl
+        : chooseCharacter.eng
+    this.startButton.textContent =
+      this.memory.getLanguage() === 'pl' ? startTalking.pl : startTalking.eng
+    ;(this.talkAgainButton.textContent =
+      this.memory.getLanguage() === 'pl' ? talkAgain.pl : talkAgain.eng),
+      (this.privatePolicyLink.textContent =
+        this.memory.getLanguage() === 'pl'
+          ? privatePolicy.pl
+          : privatePolicy.eng)
   }
 
   createPrivatePolicy() {
@@ -102,8 +150,11 @@ class SelectCharUI {
 
     this.privatePolicyLink = createElementFn({
       element: 'a',
-      textContent: 'Polityka prywatności',
-      href: '/privatePolicy.html',
+      textContent:
+        this.memory.getLanguage() === 'pl'
+          ? privatePolicy.pl
+          : privatePolicy.eng,
+      href: src.privatePolicy.site,
       classes: [classNames.privatePolicy.link],
     })
 
@@ -128,11 +179,12 @@ class SelectCharUI {
   }
 
   createMessagesComponent(messages) {
+    const msgsInCorrectLng = messages[this.memory.getLanguage()]
     const msgContainer = createElementFn({
       element: 'div',
     })
 
-    messages.map((message) => {
+    msgsInCorrectLng.map((message) => {
       const msg = createElementFn({
         element: 'p',
         innerHTML: message,
@@ -149,6 +201,11 @@ class SelectCharUI {
     this.containerSent.prepend(this.messagesComponent)
     this.changeDisplay()
     this.handleFinishAudio()
+    this.toggleLanguageIcon('off')
+  }
+
+  toggleLanguageIcon(toggle) {
+    this.languageIcon.style.display = toggle === 'on' ? 'block' : 'none'
   }
 
   changeDisplay({ initialSettings } = false) {
