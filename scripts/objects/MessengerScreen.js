@@ -53,8 +53,8 @@ class MessengerScreen {
               this.selectCharUI.getCharButtons(),
               classNames.selectCharUI.selectBtnActive
             )
-            this.selectCharUI.toggleStartCharTalkingBtn('off')
-            this.toggleBackBtn('off')
+            this.selectCharUI.toggleReadyStartCharTalkingBtn('off')
+            this.toggleShowBackBtn('off')
             runElementsFn([
               {
                 element: classReferences.selectCharUI.main,
@@ -166,7 +166,7 @@ class MessengerScreen {
     this.screen.innerHTML = ''
   }
 
-  toggleBackBtn(toggle) {
+  toggleShowBackBtn(toggle) {
     this.backIcon.style.visibility = toggle === 'on' ? 'visible' : 'hidden'
     this.backIcon.style.opacity = toggle === 'on' ? 1 : 0
   }

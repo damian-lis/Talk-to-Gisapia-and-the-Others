@@ -91,7 +91,7 @@ class SelectCharUI {
               this.charButtons,
               classNames.selectCharUI.selectBtnActive
             )
-            this.toggleStartCharTalkingBtn('off')
+            this.toggleReadyStartCharTalkingBtn('off')
             this.toggleShowLanguageBtns('on')
           },
         },
@@ -200,7 +200,7 @@ class SelectCharUI {
     return this.privatePolicyLinkContainer
   }
 
-  toggleStartCharTalkingBtn(toggle) {
+  toggleReadyStartCharTalkingBtn(toggle) {
     if (toggle === 'on') {
       this.startButton.disabled = false
       this.startButton.classList.add(classNames.selectCharUI.startBtnReady)

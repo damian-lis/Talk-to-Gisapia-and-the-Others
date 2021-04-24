@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const chosenChar = charsFactory.getChar(charName)
 
     memory.setSelectedChar(chosenChar)
-    selectCharUI.toggleStartCharTalkingBtn('on')
+    selectCharUI.toggleReadyStartCharTalkingBtn('on')
   }
 
   const handleStartCharTalking = () => {
@@ -94,8 +94,8 @@ document.addEventListener('DOMContentLoaded', () => {
       memory.increaseTalkingStep()
       handleCharTalking()
     } else {
-      messengerInterface.togglePanel('on')
-      messengerScreen.toggleBackBtn('on')
+      messengerInterface.toggleActivePanel('on')
+      messengerScreen.toggleShowBackBtn('on')
     }
   }
 
@@ -341,8 +341,8 @@ document.addEventListener('DOMContentLoaded', () => {
     messengerScreen.attachToMessengerScreen(chatBubble)
     messengerScreen.scrollMessengerScreenContainer()
     messengerScreen.increaseCharMessagesPart()
-    messengerScreen.toggleBackBtn('off')
-    messengerInterface.togglePanel('off')
+    messengerScreen.toggleShowBackBtn('off')
+    messengerInterface.toggleActivePanel('off')
     handleCharTalking()
   }
 

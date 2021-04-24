@@ -80,7 +80,7 @@ class MessengerInterface {
     this.subscribers.map((subscriber) => subscriber(this.inputValue))
   }
 
-  togglePanel(toggle) {
+  toggleActivePanel(toggle) {
     this.input.disabled = toggle === 'on' ? false : true
     this.button.disabled = toggle === 'on' ? false : true
     this.button.style.pointerEvents = toggle === 'on' ? 'auto' : 'none'
