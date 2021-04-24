@@ -14,10 +14,10 @@ import {
 import { charNames } from '/data/global/names.js'
 
 class CharsFactory {
-  constructor() {
-    this.gisapia = new Gisapia(gisapiaScriptTalk, gisapiaMemory)
-    this.hookin = new Hookin(hookinScriptTalk, hookinMemory)
-    this.reduxon = new Reduxon(reduxonScriptTalk, reduxonMemory)
+  constructor(memory) {
+    this.gisapia = new Gisapia(gisapiaScriptTalk, gisapiaMemory, memory)
+    this.hookin = new Hookin(hookinScriptTalk, hookinMemory, memory)
+    this.reduxon = new Reduxon(reduxonScriptTalk, reduxonMemory, memory)
     this.nullCharacter = new NullCharacter()
   }
 

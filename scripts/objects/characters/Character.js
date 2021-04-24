@@ -1,9 +1,8 @@
 import { findAndReplaceFn } from '/scripts/helpers/index.js'
 import { messages, answers, categories } from '/data/global/names.js'
-import { memory } from '../index.js'
 
 class Character {
-  constructor(scriptTalk, charMemory) {
+  constructor(scriptTalk, charMemory, memory) {
     this.scriptTalk = scriptTalk
     this.charMemory = charMemory
     this.memory = memory

@@ -20,7 +20,7 @@ import {
 } from '/scripts/objects/index.js'
 
 document.addEventListener('DOMContentLoaded', () => {
-  const charsFactory = new CharsFactory()
+  const charsFactory = new CharsFactory(memory)
   const messengerInterface = new MessengerInterface(
     classReferences.messenger.interface,
     memory
