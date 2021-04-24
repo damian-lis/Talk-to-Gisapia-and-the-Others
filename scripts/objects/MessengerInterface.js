@@ -15,6 +15,7 @@ class MessengerInterface {
   constructor(container, memory) {
     this.containerSent = document.querySelector(container)
     this.memory = memory
+    this.memory.lngSubscribe((lng) => this.changeLanguage(lng))
     const messengerInterfaceElements = this.createMessengerInterfaceElements()
     this.inputValue = ''
     this.subscribers = []
@@ -117,8 +118,8 @@ class MessengerInterface {
     }, secondDelay)
   }
 
-  setButtonLanguage() {
-    this.button.textContent = send[this.memory.getLanguage()]
+  changeLanguage(lng) {
+    this.button.textContent = send[lng]
   }
 
   createSpinner() {

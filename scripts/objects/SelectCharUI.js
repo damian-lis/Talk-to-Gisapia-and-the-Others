@@ -15,8 +15,10 @@ class SelectCharUI {
   constructor(charNames, container, memory) {
     this.containerSent = document.querySelector(container)
     this.memory = memory
+    this.memory.lngSubscribe((lng) => this.changeLanguage(lng))
     const selectCharUIElements = this.createSelectCharUIElements(charNames)
     this.subscribers = {}
+
     appendElementsToContainerFn(selectCharUIElements, this.containerSent)
   }
 
@@ -112,8 +114,8 @@ class SelectCharUI {
         {
           event: 'click',
           cb: (e) => {
+            this.memory.setLanguage('pl')
             this.memory.changeLanguage()
-            this.changeSelectCharUITexts()
             this.memory.playClickAudio()
             this.removeActives(
               [this.plLngBtn, this.engLngBtn],
@@ -142,8 +144,8 @@ class SelectCharUI {
         {
           event: 'click',
           cb: (e) => {
+            this.memory.setLanguage('eng')
             this.memory.changeLanguage()
-            this.changeSelectCharUITexts()
             this.memory.playClickAudio()
             this.removeActives(
               [this.plLngBtn, this.engLngBtn],
@@ -174,12 +176,11 @@ class SelectCharUI {
     return this.charButtons
   }
 
-  changeSelectCharUITexts() {
-    this.headline.textContent = chooseCharacter[this.memory.getLanguage()]
-    this.startButton.textContent = startTalking[this.memory.getLanguage()]
-    this.talkAgainButton.textContent = talkAgain[this.memory.getLanguage()]
-    this.privatePolicyLink.textContent =
-      privatePolicy[this.memory.getLanguage()]
+  changeLanguage(lng) {
+    this.headline.textContent = chooseCharacter[lng]
+    this.startButton.textContent = startTalking[lng]
+    this.talkAgainButton.textContent = talkAgain[lng]
+    this.privatePolicyLink.textContent = privatePolicy[lng]
   }
 
   createPrivatePolicy() {

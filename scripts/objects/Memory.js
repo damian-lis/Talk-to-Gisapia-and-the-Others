@@ -13,8 +13,9 @@ class Memory {
       this.isCharTalkingFinish = false
       this.backgroundAnimation = this.background()
       this.gisapiaAnimation = this.gisapiaAnimation()
+      this.language = localStorage.getItem('language') || 'pl'
+      this.lngSubscribers = []
       this.createAudio()
-      this.language = this.setLanguage()
       Memory.instance = this
     }
     return Memory.instance
@@ -147,6 +148,25 @@ class Memory {
     return this.isCharTalkingFinish
   }
 
+  setLanguage(lng) {
+    this.language = lng
+    localStorage.setItem('language', lng)
+  }
+
+  getLanguage() {
+    return this.language
+  }
+
+  lngSubscribe(cb) {
+    this.lngSubscribers.push(cb)
+  }
+
+  changeLanguage() {
+    this.lngSubscribers.map((cb) => {
+      cb(this.language)
+    })
+  }
+
   restart() {
     this.talkingStep = 0
     this.character = null
@@ -154,28 +174,6 @@ class Memory {
     this.isCallCharTalkingAgain = false
     this.isCharListening = false
     this.isCharTalkingFinish = false
-  }
-
-  setLanguage() {
-    if (localStorage.getItem('language')) {
-      return localStorage.getItem('language')
-    } else {
-      return 'pl'
-    }
-  }
-
-  changeLanguage() {
-    if (this.language === 'pl') {
-      localStorage.setItem('language', 'eng')
-      this.language = 'eng'
-    } else {
-      localStorage.setItem('language', 'pl')
-      this.language = 'pl'
-    }
-  }
-
-  getLanguage() {
-    return this.language
   }
 }
 

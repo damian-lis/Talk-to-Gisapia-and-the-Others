@@ -300,7 +300,6 @@ document.addEventListener('DOMContentLoaded', () => {
     chosenChar.deleteMemoryAboutUser()
     chosenChar.setScriptTalk()
     messengerScreen.removeChatBubbles()
-    messengerInterface.setButtonLanguage()
 
     setClassesFn([
       {
