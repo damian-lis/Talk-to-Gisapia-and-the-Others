@@ -111,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
       messengerInterface.addWaitMessagesToInput({
         firstDelay: 4000,
         secondDelay: 8000,
+        thirdDelay: 12000,
       })
       await handleCharSendData(data)
       messengerInterface.clearInput({ withTimeouts: true })

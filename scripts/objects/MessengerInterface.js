@@ -9,6 +9,7 @@ import {
   correctMailFormat,
   sending,
   oneMoreMoment,
+  secondMoreMoment,
 } from '/data/global/names.js'
 
 class MessengerInterface {
@@ -102,13 +103,16 @@ class MessengerInterface {
     if (this.secondInputTimeout) {
       clearTimeout(this.secondInputTimeout)
     }
+    if (this.thirdInputTimeout) {
+      clearTimeout(this.thirdInputTimeout)
+    }
   }
 
   subscribe(subscriber) {
     this.subscribers.push(subscriber)
   }
 
-  addWaitMessagesToInput({ firstDelay, secondDelay }) {
+  addWaitMessagesToInput({ firstDelay, secondDelay, thirdDelay }) {
     this.firstInputTimeout = setTimeout(() => {
       this.input.value = sending[this.memory.getLanguage()]
     }, firstDelay)
@@ -116,6 +120,10 @@ class MessengerInterface {
     this.secondInputTimeout = setTimeout(() => {
       this.input.value = oneMoreMoment[this.memory.getLanguage()]
     }, secondDelay)
+
+    this.thirdInputTimeout = setTimeout(() => {
+      this.input.value = secondMoreMoment[this.memory.getLanguage()]
+    }, thirdDelay)
   }
 
   changeLanguage(lng) {

@@ -181,6 +181,11 @@ export const oneMoreMoment = {
   eng: 'one more moment! 😏',
 }
 
+export const secondMoreMoment = {
+  pl: 'już, już, prawie! 😎',
+  eng: 'already, already, almost!! 😎',
+}
+
 export const src = {
   audio: {
     typing: '/audio/typing.mp3',
