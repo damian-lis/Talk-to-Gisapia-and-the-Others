@@ -1,6 +1,5 @@
 import {
   createElementFn,
-  removeElAmongElsFn,
   appendElementsToContainerFn,
   runElementsFn,
 } from '/scripts/helpers/index.js'
@@ -106,7 +105,7 @@ class MessengerScreen {
         src: avatarImage,
         classes: [classNames.messenger.avatar],
       })
-      removeElAmongElsFn({
+      this.removeImgAmongImgs({
         element: 'img',
         search: `[messagespart="${this.charMessagesPart}"]`,
       })
@@ -116,6 +115,16 @@ class MessengerScreen {
     messageContainer.appendChild(message)
 
     return messageContainer
+  }
+
+  removeImgAmongImgs({ element, search }) {
+    let searchEls = search
+    if (typeof search === 'string') {
+      searchEls = document.querySelectorAll(search)
+    }
+
+    searchEls[searchEls.length - 1] &&
+      searchEls[searchEls.length - 1].querySelector(element).remove()
   }
 
   scrollMessengerScreenContainer() {

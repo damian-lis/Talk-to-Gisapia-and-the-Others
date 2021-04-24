@@ -1,4 +1,3 @@
-import { findAndReplaceFn } from '/scripts/helpers/index.js'
 import { messages, answers, categories } from '/data/global/names.js'
 
 class Character {
@@ -111,6 +110,19 @@ class Character {
     return scriptTalk
   }
 
+  findWordAndReplace({ wordsSets }, messages) {
+    return messages.map((message) => {
+      wordsSets.forEach((wordSet) => {
+        if (message.includes(wordSet.search)) {
+          const regexp = new RegExp(wordSet.search, 'gi')
+          message = message.replace(regexp, wordSet.replace)
+        }
+      })
+
+      return message
+    })
+  }
+
   changeScriptTalkMessages({ category, from, type }) {
     const wordsToSearchAndReplace = Object.keys(this.charMemory.aboutUser).map(
       (category) => {
@@ -123,14 +135,14 @@ class Character {
     if (wordsToSearchAndReplace.length === 0) return
 
     if (from === messages) {
-      this.modifiedScriptTalk[category].messages = findAndReplaceFn(
+      this.modifiedScriptTalk[category].messages = this.findWordAndReplace(
         { wordsSets: wordsToSearchAndReplace },
         this.modifiedScriptTalk[category].messages
       )
     }
 
     if (from === answers) {
-      this.modifiedScriptTalk[category].answers[type] = findAndReplaceFn(
+      this.modifiedScriptTalk[category].answers[type] = this.findWordAndReplace(
         { wordsSets: wordsToSearchAndReplace },
         this.modifiedScriptTalk[category].answers[type]
       )
