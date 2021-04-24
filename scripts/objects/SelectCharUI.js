@@ -99,6 +99,7 @@ class SelectCharUI {
     this.plLngBtn = createElementFn({
       element: 'button',
       textContent: 'PL',
+      disabled: this.memory.getLanguage() === 'pl' ? true : false,
       classes:
         this.memory.getLanguage() === 'pl'
           ? [
@@ -119,6 +120,8 @@ class SelectCharUI {
               classNames.selectCharUI.lngBtnActive
             )
             this.setActive(e.target, classNames.selectCharUI.lngBtnActive)
+            this.removeDisableds([this.engLngBtn, this.plLngBtn])
+            this.setDisabled(e.target)
           },
         },
       ],
@@ -126,6 +129,7 @@ class SelectCharUI {
     this.engLngBtn = createElementFn({
       element: 'button',
       textContent: 'ENG',
+      disabled: this.memory.getLanguage() === 'eng' ? true : false,
       classes:
         this.memory.getLanguage() === 'eng'
           ? [
@@ -146,6 +150,8 @@ class SelectCharUI {
               classNames.selectCharUI.lngBtnActive
             )
             this.setActive(e.target, classNames.selectCharUI.lngBtnActive)
+            this.removeDisableds([this.engLngBtn, this.plLngBtn])
+            this.setDisabled(e.target)
           },
         },
       ],
@@ -238,6 +244,16 @@ class SelectCharUI {
   toggleShowLanguageBtns(toggle) {
     ;[this.plLngBtn, this.engLngBtn].map((icon) => {
       icon.style.display = toggle === 'on' ? 'block' : 'none'
+    })
+  }
+
+  setDisabled(element) {
+    element.disabled = true
+  }
+
+  removeDisableds(elements) {
+    elements.map((element) => {
+      element.disabled = false
     })
   }
 
