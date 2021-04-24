@@ -90,7 +90,7 @@ class SelectCharUI {
               classNames.selectCharUI.selectBtnActive
             )
             this.toggleStartCharTalkingBtn('off')
-            this.toggleLanguageBtns('on')
+            this.toggleShowLanguageBtns('on')
           },
         },
       ],
@@ -232,10 +232,10 @@ class SelectCharUI {
     this.containerSent.prepend(this.messagesComponent)
     this.changeDisplay()
     this.handleFinishAudio()
-    this.toggleLanguageBtns('off')
+    this.toggleShowLanguageBtns('off')
   }
 
-  toggleLanguageBtns(toggle) {
+  toggleShowLanguageBtns(toggle) {
     ;[this.plLngBtn, this.engLngBtn].map((icon) => {
       icon.style.display = toggle === 'on' ? 'block' : 'none'
     })
