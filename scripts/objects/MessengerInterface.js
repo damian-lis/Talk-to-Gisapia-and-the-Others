@@ -40,7 +40,9 @@ class MessengerInterface {
           event: 'keypress',
           cb: (e) => {
             if (e.key === 'Enter') {
-              this.checkInputAndCallSubscribers()
+              if (this.isCorrectInputValue()) {
+                this.callSubscribers()
+              }
             }
           },
         },
@@ -56,7 +58,11 @@ class MessengerInterface {
       listeners: [
         {
           event: 'click',
-          cb: () => this.checkInputAndCallSubscribers(),
+          cb: () => {
+            if (this.isCorrectInputValue()) {
+              this.callSubscribers()
+            }
+          },
         },
       ],
     })
@@ -71,13 +77,20 @@ class MessengerInterface {
     return reg.test(email)
   }
 
-  checkInputAndCallSubscribers() {
-    if (this.inputValue === '')
+  isCorrectInputValue() {
+    if (this.inputValue === '') {
       return alert(mustWritingSomething[this.memory.getLanguage()])
+    }
     if (this.inputValue.includes('@')) {
       if (!this.emailValidation(this.inputValue))
         return alert(correctMailFormat[this.memory.getLanguage()])
     }
+
+    return true
+  }
+
+  callSubscribers() {
+    console.log('elo')
     this.subscribers.map((subscriber) => subscriber(this.inputValue))
   }
 
