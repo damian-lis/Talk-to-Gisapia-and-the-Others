@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const messengerScreen = new MessengerScreen(
     classReferences.messenger.screen,
     selectCharUI,
+    messengerInterface,
     memory
   )
 

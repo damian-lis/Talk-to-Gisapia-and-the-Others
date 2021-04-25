@@ -12,9 +12,10 @@ import {
 } from '/data/global/names.js'
 
 class MessengerScreen {
-  constructor(container, selectCharUI, memory) {
+  constructor(container, selectCharUI, messengerInterface, memory) {
     this.memory = memory
     this.selectCharUI = selectCharUI
+    this.messengerInterface = messengerInterface
     this.containerSent = document.querySelector(container)
     this.messengerScreenElements = this.createMessengerScreenElements()
     this.charMessagesPart = 0
@@ -53,6 +54,7 @@ class MessengerScreen {
               classNames.selectCharUI.selectBtnActive
             )
             this.selectCharUI.toggleReadyStartCharTalkingBtn('off')
+            this.messengerInterface.toggleActivePanel('off')
             this.toggleShowBackBtn('off')
             runElementsFn([
               {
