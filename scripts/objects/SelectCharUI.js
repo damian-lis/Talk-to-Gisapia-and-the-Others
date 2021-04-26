@@ -220,6 +220,7 @@ class SelectCharUI {
     const msgsInCorrectLng = messages[this.memory.getLanguage()]
     const msgContainer = createElementFn({
       element: 'div',
+      classes: [classNames.selectCharUI.messageContainer],
     })
 
     msgsInCorrectLng.map((message) => {
