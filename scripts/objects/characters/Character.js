@@ -1,8 +1,11 @@
 import { messages, answers, categories } from '/data/global/names.js'
 
 class Character {
-  constructor(scriptTalk, charMemory, memory) {
+  constructor(scriptTalk, email, charMemory, memory) {
     this.scriptTalk = scriptTalk
+    this.modifiedScriptTalk = {}
+    this.email = email
+    this.modifiedEmail = {}
     this.charMemory = charMemory
     this.memory = memory
   }
@@ -12,9 +15,9 @@ class Character {
   }
 
   setScriptTalk() {
-    this.scriptTalkCopy = JSON.parse(JSON.stringify(this.scriptTalk))
+    let scriptTalkCopy = JSON.parse(JSON.stringify(this.scriptTalk))
     this.modifiedScriptTalk = this.setScriptTalkMessages(
-      this.scriptTalkCopy[this.memory.getLanguage()]
+      scriptTalkCopy[this.memory.getLanguage()]
     )
   }
 
@@ -110,43 +113,76 @@ class Character {
     return scriptTalk
   }
 
-  findWordAndReplace({ wordsSets }, messages) {
-    return messages.map((message) => {
-      wordsSets.forEach((wordSet) => {
-        if (message.includes(wordSet.search)) {
-          const regexp = new RegExp(wordSet.search, 'gi')
-          message = message.replace(regexp, wordSet.replace)
-        }
-      })
+  findWordAndReplace({ wordsSets, texts }) {
+    if (typeof texts === 'object') {
+      let textsCopy = texts
+      for (const text in textsCopy) {
+        wordsSets.forEach((wordSet) => {
+          if (textsCopy[text].includes(wordSet.search)) {
+            const regexp = new RegExp(wordSet.search, 'gi')
+            textsCopy[text] = textsCopy[text].replace(regexp, wordSet.replace)
+          }
+        })
+      }
 
-      return message
+      return textsCopy
+    } else {
+      return texts.map((message) => {
+        wordsSets.forEach((wordSet) => {
+          if (message.includes(wordSet.search)) {
+            const regexp = new RegExp(wordSet.search, 'gi')
+            message = message.replace(regexp, wordSet.replace)
+          }
+        })
+
+        return message
+      })
+    }
+  }
+
+  setWordsToSearchAndReplace() {
+    return Object.keys(this.charMemory.aboutUser).map((category) => {
+      return {
+        search: `-user${this.setUpperLetter(category)}-`,
+        replace: this.charMemory.aboutUser[category],
+      }
     })
   }
 
   changeScriptTalkMessages({ category, from, type }) {
-    const wordsToSearchAndReplace = Object.keys(this.charMemory.aboutUser).map(
-      (category) => {
-        return {
-          search: `-user${this.setUpperLetter(category)}-`,
-          replace: this.charMemory.aboutUser[category],
-        }
-      }
-    )
+    const wordsToSearchAndReplace = this.setWordsToSearchAndReplace()
+
     if (wordsToSearchAndReplace.length === 0) return
 
     if (from === messages) {
-      this.modifiedScriptTalk[category].messages = this.findWordAndReplace(
-        { wordsSets: wordsToSearchAndReplace },
-        this.modifiedScriptTalk[category].messages
-      )
+      this.modifiedScriptTalk[category].messages = this.findWordAndReplace({
+        wordsSets: wordsToSearchAndReplace,
+        texts: this.modifiedScriptTalk[category].messages,
+      })
     }
 
     if (from === answers) {
       this.modifiedScriptTalk[category].answers[type] = this.findWordAndReplace(
-        { wordsSets: wordsToSearchAndReplace },
-        this.modifiedScriptTalk[category].answers[type]
+        {
+          wordsSets: wordsToSearchAndReplace,
+          texts: this.modifiedScriptTalk[category].answers[type],
+        }
       )
     }
+  }
+
+  addUserDataToEmail({ lng, recipient }) {
+    let emailCopy = JSON.parse(JSON.stringify(this.email[lng]))
+    const wordsToSearchAndReplace = this.setWordsToSearchAndReplace()
+    this.modifiedEmail = this.findWordAndReplace({
+      wordsSets: wordsToSearchAndReplace,
+      texts: emailCopy,
+    })
+    this.modifiedEmail.to = recipient
+  }
+
+  getEmail() {
+    return this.modifiedEmail
   }
 }
 

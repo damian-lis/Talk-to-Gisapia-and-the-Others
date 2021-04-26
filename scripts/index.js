@@ -7,6 +7,8 @@ import {
   answers,
   noConnectionMessage,
   withoutMailMessage,
+  mailSent,
+  problemWithServer,
   mailEndPoint,
   classReferences,
   classNames,
@@ -102,19 +104,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const handleFinishCharTalking = async ({ userMessage, chosenChar }) => {
     if (userMessage.includes('@')) {
-      const data = {
-        language: memory.getLanguage(),
-        senderName: chosenChar.name,
-        recipientMail: userMessage,
-        ...chosenChar.getMemoryAboutUser(),
-      }
       messengerInterface.showSpinnerInsteadBtn()
       messengerInterface.addWaitMessagesToInput({
         firstDelay: 4000,
         secondDelay: 8000,
         thirdDelay: 12000,
       })
-      await handleCharSendData(data)
+      chosenChar.addUserDataToEmail({
+        lng: memory.getLanguage(),
+        recipient: userMessage,
+      })
+      const charEmail = chosenChar.getEmail()
+      await handleCharSendData(charEmail)
       messengerInterface.clearInput({ withTimeouts: true })
       messengerInterface.showBtnInsteadSpinner()
     } else {
@@ -134,9 +135,9 @@ document.addEventListener('DOMContentLoaded', () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          finishAnimation(data.message)
+          finishAnimation(mailSent)
         } else {
-          finishAnimation(data.message)
+          finishAnimation(problemWithServer)
         }
       })
       .catch(() => {
@@ -254,8 +255,8 @@ document.addEventListener('DOMContentLoaded', () => {
           timeForTyping = chosenChar.changeTimeForTyping(timeForTyping)
         }
 
-        await chosenChar.mustThink(1000)
-        await messengerScreen.showTyping(timeForTyping, chosenChar.name)
+        // await chosenChar.mustThink(1000)
+        // await messengerScreen.showTyping(timeForTyping, chosenChar.name)
       }
 
       const chatBubble = messengerScreen.createChatBubble(
