@@ -23,9 +23,11 @@ class SelectCharUI {
   }
 
   createSelectCharUIElements(charNames) {
+    const lng = this.memory.getLanguage()
+
     this.headline = createElementFn({
       element: 'h1',
-      textContent: chooseCharacter[this.memory.getLanguage()],
+      textContent: chooseCharacter[lng],
       classes: [classNames.selectCharUI.headline],
     })
 
@@ -53,7 +55,7 @@ class SelectCharUI {
 
     this.startButton = createElementFn({
       element: 'button',
-      textContent: startTalking[this.memory.getLanguage()],
+      textContent: startTalking[lng],
       disabled: 'true',
       classes: [classNames.selectCharUI.startBtn],
       listeners: [
@@ -71,7 +73,7 @@ class SelectCharUI {
 
     this.talkAgainButton = createElementFn({
       element: 'button',
-      textContent: talkAgain[this.memory.getLanguage()],
+      textContent: talkAgain[lng],
       classes: [
         classNames.selectCharUI.startBtn,
         classNames.selectCharUI.startBtnReady,
@@ -101,9 +103,9 @@ class SelectCharUI {
     this.plLngBtn = createElementFn({
       element: 'button',
       textContent: 'PL',
-      disabled: this.memory.getLanguage() === 'pl' ? true : false,
+      disabled: lng === 'pl' ? true : false,
       classes:
-        this.memory.getLanguage() === 'pl'
+        lng === 'pl'
           ? [
               classNames.selectCharUI.plLngBtn,
               classNames.selectCharUI.lngBtnActive,
@@ -131,9 +133,9 @@ class SelectCharUI {
     this.engLngBtn = createElementFn({
       element: 'button',
       textContent: 'ENG',
-      disabled: this.memory.getLanguage() === 'eng' ? true : false,
+      disabled: lng === 'eng' ? true : false,
       classes:
-        this.memory.getLanguage() === 'eng'
+        lng === 'eng'
           ? [
               classNames.selectCharUI.engLngBtn,
               classNames.selectCharUI.lngBtnActive,
@@ -184,6 +186,7 @@ class SelectCharUI {
   }
 
   createPrivatePolicy() {
+    const lng = this.memory.getLanguage()
     this.privatePolicyLinkContainer = createElementFn({
       element: 'div',
       classes: [classNames.privatePolicy.linkContainer],
@@ -191,7 +194,7 @@ class SelectCharUI {
 
     this.privatePolicyLink = createElementFn({
       element: 'a',
-      textContent: privatePolicy[this.memory.getLanguage()],
+      textContent: privatePolicy[lng],
       href: src.privatePolicy.site,
       classes: [classNames.privatePolicy.link],
     })
@@ -217,7 +220,8 @@ class SelectCharUI {
   }
 
   createMessagesComponent(messages) {
-    const msgsInCorrectLng = messages[this.memory.getLanguage()]
+    const lng = this.memory.getLanguage()
+    const msgsInCorrectLng = messages[lng]
     const msgContainer = createElementFn({
       element: 'div',
       classes: [classNames.selectCharUI.messageContainer],

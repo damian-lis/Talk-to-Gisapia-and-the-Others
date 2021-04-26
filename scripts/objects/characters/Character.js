@@ -15,10 +15,9 @@ class Character {
   }
 
   setScriptTalk() {
+    const lng = this.memory.getLanguage()
     let scriptTalkCopy = JSON.parse(JSON.stringify(this.scriptTalk))
-    this.modifiedScriptTalk = this.setScriptTalkMessages(
-      scriptTalkCopy[this.memory.getLanguage()]
-    )
+    this.modifiedScriptTalk = this.setScriptTalkMessages(scriptTalkCopy[lng])
   }
 
   getMemoryAboutUser() {

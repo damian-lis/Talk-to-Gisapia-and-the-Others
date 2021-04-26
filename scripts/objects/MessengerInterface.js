@@ -25,6 +25,7 @@ class MessengerInterface {
   }
 
   createMessengerInterfaceElements() {
+    const lng = this.memory.getLanguage()
     this.input = createElementFn({
       element: 'input',
       disabled: true,
@@ -51,7 +52,7 @@ class MessengerInterface {
 
     this.button = createElementFn({
       element: 'button',
-      textContent: send[this.memory.getLanguage()],
+      textContent: send[lng],
       disabled: true,
       classes: [classNames.messenger.interfaceBtn],
       styles: [{ name: 'pointerEvents', value: 'none' }],
@@ -78,12 +79,13 @@ class MessengerInterface {
   }
 
   isCorrectInputValue() {
+    const lng = this.memory.getLanguage()
     if (this.inputValue === '') {
-      return alert(mustWritingSomething[this.memory.getLanguage()])
+      return alert(mustWritingSomething[lng])
     }
     if (this.inputValue.includes('@')) {
       if (!this.emailValidation(this.inputValue))
-        return alert(correctMailFormat[this.memory.getLanguage()])
+        return alert(correctMailFormat[lng])
     }
 
     return true
@@ -126,16 +128,17 @@ class MessengerInterface {
   }
 
   addWaitMessagesToInput({ firstDelay, secondDelay, thirdDelay }) {
+    const lng = this.memory.getLanguage()
     this.firstInputTimeout = setTimeout(() => {
-      this.input.value = sending[this.memory.getLanguage()]
+      this.input.value = sending[lng]
     }, firstDelay)
 
     this.secondInputTimeout = setTimeout(() => {
-      this.input.value = oneMoreMoment[this.memory.getLanguage()]
+      this.input.value = oneMoreMoment[lng]
     }, secondDelay)
 
     this.thirdInputTimeout = setTimeout(() => {
-      this.input.value = secondMoreMoment[this.memory.getLanguage()]
+      this.input.value = secondMoreMoment[lng]
     }, thirdDelay)
   }
 
