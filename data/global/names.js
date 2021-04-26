@@ -56,7 +56,7 @@ export const classNames = {
   selectCharUI: {
     main: 'selectCharUI',
     headline: 'selectCharUI-headline',
-    message: 'selectCharUI-message',
+    messageContainer: 'selectCharUI-message-container',
     message: 'selectCharUI-message',
     startBtn: 'selectCharUI-startBtn',
     selectBtn: 'selectCharUI-selectBtn',
@@ -98,7 +98,7 @@ export const classReferences = {
   selectCharUI: {
     main: '.selectCharUI',
     headline: '.selectCharUI-headline',
-    message: '.selectCharUI-message',
+    messageContainer: 'selectCharUI-message-container',
     message: '.selectCharUI-message',
     startBtn: '.selectCharUI-startBtn',
     selectBtn: '.selectCharUI-selectBtn',
@@ -134,6 +134,26 @@ export const noConnectionMessage = {
 export const withoutMailMessage = {
   pl: ['Maila nie wysyłam,', 'dzięki za rozmowę 😉'],
   eng: [`I don't send the e-mail,`, `thanks for the interview! 😉`],
+}
+
+export const mailSent = {
+  pl: [`Mail wysłany, sprawdź! 😋`],
+  eng: [`Mail sent, check it! 😋`],
+}
+
+export const problemWithServer = {
+  pl: [
+    `Mail niestety nie został wysłany...`,
+    `Jakiś problem z serwerem... 😓`,
+    `Idę to sprawdzić...`,
+    `Tymczasem dzięki za rozmowę! 😉`,
+  ],
+  eng: [
+    ` Mail was unfortunately not sent ... `,
+    `Some problem with the server ... 😓`,
+    ` I'm going to check it out ... `,
+    ` In the meantime, thanks for the interview! 😉`,
+  ],
 }
 
 export const chooseCharacter = {
