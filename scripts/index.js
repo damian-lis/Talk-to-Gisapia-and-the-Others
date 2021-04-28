@@ -110,8 +110,9 @@ document.addEventListener('DOMContentLoaded', () => {
         secondDelay: 8000,
         thirdDelay: 12000,
       })
+      const lng = memory.getLanguage()
       chosenChar.addUserDataToEmail({
-        lng: memory.getLanguage(),
+        lng,
         recipient: userMessage,
       })
       const charEmail = chosenChar.getEmail()
