@@ -2,8 +2,8 @@ import Character from './Character.js'
 import { charNames, src } from '/data/global/names.js'
 
 class Gisapia extends Character {
-  constructor(scriptTalk, email, charMemory, memory) {
-    super(scriptTalk, email, charMemory, memory)
+  constructor(scriptTalk, email, memory) {
+    super(scriptTalk, email, memory)
     this.name = charNames.Gisapia
     this.avatar = src.characters.gisapia.avatar
   }

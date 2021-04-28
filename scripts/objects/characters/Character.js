@@ -1,13 +1,12 @@
 import { messages, answers } from '/data/global/names.js'
+import { setUpperLetterFn } from '/scripts/helpers/index.js'
 
 class Character {
-  constructor(scriptTalk, email, charMemory, memory) {
+  constructor(scriptTalk, email, memory) {
     this.scriptTalk = scriptTalk
     this.modifiedScriptTalk = {}
     this.email = email
     this.modifiedEmail = {}
-    this.charMemory = charMemory
-    console.log(this.charMemory)
     this.memory = memory
   }
 
@@ -47,9 +46,9 @@ class Character {
   }
 
   checkUserMessageInMemory(scriptCategory, message) {
-    return this.charMemory[scriptCategory].find((word) =>
-      message.toLowerCase().includes(word.toLowerCase())
-    )
+    return this.memory
+      .getCharMemory(scriptCategory)
+      .find((word) => message.toLowerCase().includes(word.toLowerCase()))
   }
 
   countTypingQuantity(textLength) {
@@ -125,8 +124,8 @@ class Character {
   setWordsToSearchAndReplace() {
     return Object.keys(this.memory.getAboutUser()).map((category) => {
       return {
-        search: `-user${this.setUpperLetter(category)}-`,
-        replace: this.memory.getAboutUser()[category],
+        search: `-user${setUpperLetterFn(category)}-`,
+        replace: this.memory.getAboutUser(category),
       }
     })
   }
