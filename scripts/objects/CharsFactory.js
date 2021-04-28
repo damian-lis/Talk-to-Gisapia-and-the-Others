@@ -1,17 +1,12 @@
 import { Gisapia, NullCharacter, Hookin, Reduxon } from './index.js'
+import charMemory from '/data/characters/charMemory.js'
 import {
   gisapiaScriptTalk,
-  gisapiaMemory,
   gisapiaEmail,
 } from '/data/characters/gisapia/index.js'
-import {
-  hookinScriptTalk,
-  hookinMemory,
-  hookinEmail,
-} from '/data/characters/hookin/index.js'
+import { hookinScriptTalk, hookinEmail } from '/data/characters/hookin/index.js'
 import {
   reduxonScriptTalk,
-  reduxonMemory,
   reduxonEmail,
 } from '/data/characters/reduxon/index.js'
 import { charNames } from '/data/global/names.js'
@@ -21,19 +16,14 @@ class CharsFactory {
     this.gisapia = new Gisapia(
       gisapiaScriptTalk,
       gisapiaEmail,
-      gisapiaMemory,
+      charMemory,
       memory
     )
-    this.hookin = new Hookin(
-      hookinScriptTalk,
-      hookinEmail,
-      hookinMemory,
-      memory
-    )
+    this.hookin = new Hookin(hookinScriptTalk, hookinEmail, charMemory, memory)
     this.reduxon = new Reduxon(
       reduxonScriptTalk,
       reduxonEmail,
-      reduxonMemory,
+      charMemory,
       memory
     )
     this.nullCharacter = new NullCharacter()
