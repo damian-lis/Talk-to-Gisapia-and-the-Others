@@ -126,16 +126,18 @@ class Character {
 
       return textsCopy
     } else {
-      return texts.map((message) => {
+      let textsCopy = texts
+      textsCopy.map((text) => {
         wordsSets.forEach((wordSet) => {
-          if (message.includes(wordSet.search)) {
+          if (text.includes(wordSet.search)) {
             const regexp = new RegExp(wordSet.search, 'gi')
-            message = message.replace(regexp, wordSet.replace)
+            text = text.replace(regexp, wordSet.replace)
           }
         })
-
-        return message
+        return text
       })
+
+      return textsCopy
     }
   }
 
