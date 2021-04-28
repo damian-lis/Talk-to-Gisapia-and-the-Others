@@ -1,12 +1,13 @@
 import { GisapiaAnimation, Background } from './index.js'
 import { createElementFn } from '/scripts/helpers/index.js'
-import { src } from '/data/global/names.js'
+import { src, categories } from '/data/global/names.js'
 
 class Memory {
   constructor() {
     if (Memory.instance == null) {
       this.talkingStep = 0
       this.character = null
+      this.aboutUser = {}
       this.userMessage = null
       this.isCallCharTalkingAgain = false
       this.isCharListening = false
@@ -98,6 +99,25 @@ class Memory {
 
   gisapiaAnimation() {
     new GisapiaAnimation()
+  }
+
+  setUpperLetter(message) {
+    return message.charAt(0).toUpperCase() + message.slice(1)
+  }
+
+  addDataToAboutUser(scriptCategory, word) {
+    if (scriptCategory !== categories.hobby) {
+      word = this.setUpperLetter(word)
+    }
+    this.aboutUser[scriptCategory] = word
+  }
+
+  getAboutUser() {
+    return this.aboutUser
+  }
+
+  deleteDataAboutUser() {
+    this.aboutUser = {}
   }
 
   increaseTalkingStep() {

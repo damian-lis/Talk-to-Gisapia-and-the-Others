@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
     answerType,
   }) => {
     if (shaping) {
-      chosenChar.addToMemoryAboutUser(currentScriptTalkCategory, wordToMemory)
+      memory.addDataToAboutUser(currentScriptTalkCategory, wordToMemory)
       chosenChar.changeScriptTalkMessages({
         from,
         type: answerType,
@@ -301,7 +301,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const initialSettings = () => {
     const chosenChar = memory.getChar()
-    chosenChar.deleteMemoryAboutUser()
+    memory.deleteDataAboutUser()
     chosenChar.setScriptTalk()
     messengerScreen.removeChatBubbles()
 

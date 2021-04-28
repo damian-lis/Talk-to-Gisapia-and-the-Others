@@ -1,4 +1,4 @@
-import { messages, answers, categories } from '/data/global/names.js'
+import { messages, answers } from '/data/global/names.js'
 
 class Character {
   constructor(scriptTalk, email, charMemory, memory) {
@@ -7,21 +7,14 @@ class Character {
     this.email = email
     this.modifiedEmail = {}
     this.charMemory = charMemory
+    console.log(this.charMemory)
     this.memory = memory
-  }
-
-  deleteMemoryAboutUser() {
-    this.charMemory.aboutUser = {}
   }
 
   setScriptTalk() {
     const lng = this.memory.getLanguage()
     let scriptTalkCopy = JSON.parse(JSON.stringify(this.scriptTalk))
     this.modifiedScriptTalk = this.setScriptTalkMessages(scriptTalkCopy[lng])
-  }
-
-  getMemoryAboutUser() {
-    return this.charMemory.aboutUser
   }
 
   changeTimeForTyping(timeForTyping) {
@@ -57,18 +50,6 @@ class Character {
     return this.charMemory[scriptCategory].find((word) =>
       message.toLowerCase().includes(word.toLowerCase())
     )
-  }
-
-  addToMemoryAboutUser(scriptCategory, word) {
-    if (scriptCategory !== categories.hobby) {
-      word = this.setUpperLetter(word)
-    }
-
-    this.charMemory.aboutUser[scriptCategory] = word
-  }
-
-  setUpperLetter(message) {
-    return message.charAt(0).toUpperCase() + message.slice(1)
   }
 
   countTypingQuantity(textLength) {
@@ -142,10 +123,10 @@ class Character {
   }
 
   setWordsToSearchAndReplace() {
-    return Object.keys(this.charMemory.aboutUser).map((category) => {
+    return Object.keys(this.memory.getAboutUser()).map((category) => {
       return {
         search: `-user${this.setUpperLetter(category)}-`,
-        replace: this.charMemory.aboutUser[category],
+        replace: this.memory.getAboutUser()[category],
       }
     })
   }
