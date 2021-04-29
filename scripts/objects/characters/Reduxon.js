@@ -1,4 +1,4 @@
-import Character from './Character.js'
+import { Character } from '/scripts/objects/index.js'
 import { common, src } from '/data/main.js'
 
 class Reduxon extends Character {
