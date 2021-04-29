@@ -308,13 +308,13 @@ export const src = {
   },
   characters: {
     gisapia: {
-      avatar: '/images/gisapia/avatar.jpg',
+      avatar: '/images/characters/gisapia/avatar.jpg',
     },
     hookin: {
-      avatar: '/images/hookin/avatar.jpg',
+      avatar: '/images/characters/hookin/avatar.jpg',
     },
     reduxon: {
-      avatar: '/images/reduxon/avatar.jpg',
+      avatar: '/images/characters/reduxon/avatar.jpg',
     },
   },
   messenger: {
