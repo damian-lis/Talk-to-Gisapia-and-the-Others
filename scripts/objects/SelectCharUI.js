@@ -248,7 +248,7 @@ class SelectCharUI {
   toggleShowLanguageBtns(toggle) {
     ;[this.plLngBtn, this.engLngBtn].map((icon) => {
       icon.style.display =
-        toggle === common.on
+        toggle === common.toggle.on
           ? common.styleProps.values.block
           : common.styleProps.values.none
     })
