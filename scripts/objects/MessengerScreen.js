@@ -8,8 +8,9 @@ import {
   classNames,
   classReferences,
   animationSettings,
+  common,
   src,
-} from '/data/global/names.js'
+} from '/data/main.js'
 
 class MessengerScreen {
   constructor(container, selectCharUI, messengerInterface, memory) {
@@ -34,17 +35,17 @@ class MessengerScreen {
 
   createMessengerScreenElements() {
     this.screen = createElementFn({
-      element: 'div',
+      element: common.elements.div,
       classes: [classNames.messenger.screenInner],
     })
 
     this.backIcon = createElementFn({
-      element: 'img',
+      element: common.elements.img,
       classes: [classNames.messenger.backIcon],
       src: src.messenger.backIcon,
       listeners: [
         {
-          event: 'click',
+          event: common.events.click,
           cb: () => {
             this.memory.restart()
             this.memory.playFallDownAudio()
@@ -53,9 +54,9 @@ class MessengerScreen {
               this.selectCharUI.getCharButtons(),
               classNames.selectCharUI.selectBtnActive
             )
-            this.selectCharUI.toggleReadyStartCharTalkingBtn('off')
-            this.messengerInterface.toggleActivePanel('off')
-            this.toggleShowBackBtn('off')
+            this.selectCharUI.toggleReadyStartCharTalkingBtn(common.toggle.off)
+            this.messengerInterface.toggleActivePanel(common.toggle.off)
+            this.toggleShowBackBtn(common.toggle.off)
             runElementsFn([
               {
                 element: classReferences.selectCharUI.main,
@@ -86,30 +87,35 @@ class MessengerScreen {
     const { name, avatar: avatarImage } = whoTalking
 
     const messageContainer =
-      name !== 'user'
+      name !== common.user
         ? createElementFn({
-            element: 'div',
+            element: common.elements.div,
             classes: [classNames.messenger.messageContainer],
-            attributes: [{ type: 'messagespart', name: this.charMessagesPart }],
+            attributes: [
+              { type: common.messagesPart, name: this.charMessagesPart },
+            ],
           })
         : createElementFn({
-            element: 'div',
+            element: common.elements.div,
             classes: [classNames.messenger.messageContainer],
           })
     const message = createElementFn({
-      element: 'p',
+      element: common.elements.p,
       innerHTML: text,
-      classes: [classNames.messenger.message, `${name.toLowerCase()}-main`],
+      classes: [
+        classNames.messenger.message,
+        `${name.toLowerCase()}-${common.main}`,
+      ],
     })
-    if (name !== 'user') {
+    if (name !== common.user) {
       const avatar = createElementFn({
-        element: 'img',
+        element: common.elements.img,
         src: avatarImage,
         classes: [classNames.messenger.avatar],
       })
       this.removeImgAmongImgs({
-        element: 'img',
-        search: `[messagespart="${this.charMessagesPart}"]`,
+        element: common.elements.img,
+        search: `[${common.messagesPart}="${this.charMessagesPart}"]`,
       })
       messageContainer.appendChild(avatar)
     }
@@ -121,7 +127,7 @@ class MessengerScreen {
 
   removeImgAmongImgs({ element, search }) {
     let searchEls = search
-    if (typeof search === 'string') {
+    if (typeof search === common.types.string) {
       searchEls = document.querySelectorAll(search)
     }
 
@@ -141,17 +147,17 @@ class MessengerScreen {
 
   createLoader(charName) {
     const circleContainer = createElementFn({
-      element: 'div',
+      element: common.elenets.div,
       classes: [classNames.messenger.loaderContainer],
     })
 
     for (let i = 0; i < 3; i++) {
       const circle = createElementFn({
-        element: 'div',
-        attributes: [{ type: 'id', name: `ball-${i + 1}` }],
+        element: common.elenets.div,
+        attributes: [{ type: common.id, name: `${common.ball}-${i + 1}` }],
         classes: [
           classNames.messenger.loader,
-          `${charName.toLowerCase()}-main`,
+          `${charName.toLowerCase()}-${common.main}`,
         ],
       })
       circleContainer.appendChild(circle)
@@ -178,8 +184,11 @@ class MessengerScreen {
   }
 
   toggleShowBackBtn(toggle) {
-    this.backIcon.style.visibility = toggle === 'on' ? 'visible' : 'hidden'
-    this.backIcon.style.opacity = toggle === 'on' ? 1 : 0
+    this.backIcon.style.visibility =
+      toggle === common.toggle.on
+        ? common.styleProps.values.visible
+        : common.styleProps.values.hidden
+    this.backIcon.style.opacity = toggle === common.toggle.on ? 1 : 0
   }
 }
 

@@ -1,10 +1,10 @@
 import Character from './Character.js'
-import { charNames, src } from '/data/global/names.js'
+import { common, src } from '/data/main.js'
 
 class Reduxon extends Character {
   constructor(scriptTalk, email, memory) {
     super(scriptTalk, email, memory)
-    this.name = charNames.Reduxon
+    this.name = common.charNames.Reduxon
     this.avatar = src.characters.reduxon.avatar
   }
 }

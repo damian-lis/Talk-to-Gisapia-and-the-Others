@@ -8,7 +8,7 @@ import {
   reduxonScriptTalk,
   reduxonEmail,
 } from '/data/characters/reduxon/index.js'
-import { charNames } from '/data/global/names.js'
+import { common } from '/data/main.js'
 
 class CharsFactory {
   constructor(memory) {
@@ -20,11 +20,11 @@ class CharsFactory {
 
   getChar(charName) {
     switch (charName) {
-      case charNames.Gisapia:
+      case common.charNames.Gisapia:
         return this.gisapia
-      case charNames.Hookin:
+      case common.charNames.Hookin:
         return this.hookin
-      case charNames.Reduxon:
+      case common.charNames.Reduxon:
         return this.reduxon
       default:
         return this.nullCharacter

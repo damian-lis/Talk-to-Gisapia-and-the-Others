@@ -1,4 +1,4 @@
-import { messages, answers } from '/data/global/names.js'
+import { common } from '/data/main.js'
 import { setUpperLetterFn } from '/scripts/helpers/index.js'
 
 class Character {
@@ -24,8 +24,10 @@ class Character {
   }
 
   getScriptTalkMessages({ category, from, type }) {
-    if (from === messages) return this.modifiedScriptTalk[category].messages
-    if (from === answers) return this.modifiedScriptTalk[category].answers[type]
+    if (from === common.messages)
+      return this.modifiedScriptTalk[category][common.messages]
+    if (from === common.answers)
+      return this.modifiedScriptTalk[category][common.answers][type]
   }
 
   getCurrentScriptTalkCategory(conversationStep) {
@@ -73,32 +75,37 @@ class Character {
   setScriptTalkMessages(scriptTalk) {
     for (const category in scriptTalk) {
       const messageNumber = Math.floor(
-        Math.random() * scriptTalk[category].messages.length
+        Math.random() * scriptTalk[category][common.messages].length
       )
-      const selectedMessage = scriptTalk[category].messages[messageNumber]
+      const selectedMessage =
+        scriptTalk[category][common.messages][messageNumber]
 
-      scriptTalk[category].messages = selectedMessage
+      scriptTalk[category][common.messages] = selectedMessage
 
-      for (const answerVariants in scriptTalk[category].answers) {
+      for (const answerVariants in scriptTalk[category][common.answers]) {
         const answerNumber = Math.floor(
-          Math.random() * scriptTalk[category].answers[answerVariants].length
+          Math.random() *
+            scriptTalk[category][common.answers][answerVariants].length
         )
         const selectedAnswer =
-          scriptTalk[category].answers[answerVariants][answerNumber]
+          scriptTalk[category][common.answers][answerVariants][answerNumber]
 
-        scriptTalk[category].answers[answerVariants] = selectedAnswer
+        scriptTalk[category][common.answers][answerVariants] = selectedAnswer
       }
     }
     return scriptTalk
   }
 
   findWordAndReplace({ wordsSets, texts }) {
-    if (typeof texts === 'object') {
+    if (typeof texts === common.types.object) {
       let textsCopy = texts
       for (const text in textsCopy) {
         wordsSets.forEach((wordSet) => {
           if (textsCopy[text].includes(wordSet.search)) {
-            const regexp = new RegExp(wordSet.search, 'gi')
+            const regexp = new RegExp(
+              wordSet.search,
+              common.regexp.modifiers.gi
+            )
             textsCopy[text] = textsCopy[text].replace(regexp, wordSet.replace)
           }
         })
@@ -110,7 +117,10 @@ class Character {
       textsCopy.map((text) => {
         wordsSets.forEach((wordSet) => {
           if (text.includes(wordSet.search)) {
-            const regexp = new RegExp(wordSet.search, 'gi')
+            const regexp = new RegExp(
+              wordSet.search,
+              common.regexp.modifiers.gi
+            )
             text = text.replace(regexp, wordSet.replace)
           }
         })
@@ -124,7 +134,7 @@ class Character {
   setWordsToSearchAndReplace() {
     return Object.keys(this.memory.getAboutUser()).map((category) => {
       return {
-        search: `-user${setUpperLetterFn(category)}-`,
+        search: `-${common.user}${setUpperLetterFn(category)}-`,
         replace: this.memory.getAboutUser(category),
       }
     })
@@ -135,20 +145,22 @@ class Character {
 
     if (wordsToSearchAndReplace.length === 0) return
 
-    if (from === messages) {
-      this.modifiedScriptTalk[category].messages = this.findWordAndReplace({
+    if (from === common.messages) {
+      this.modifiedScriptTalk[category][
+        common.messages
+      ] = this.findWordAndReplace({
         wordsSets: wordsToSearchAndReplace,
-        texts: this.modifiedScriptTalk[category].messages,
+        texts: this.modifiedScriptTalk[category][common.messages],
       })
     }
 
-    if (from === answers) {
-      this.modifiedScriptTalk[category].answers[type] = this.findWordAndReplace(
-        {
-          wordsSets: wordsToSearchAndReplace,
-          texts: this.modifiedScriptTalk[category].answers[type],
-        }
-      )
+    if (from === common.answers) {
+      this.modifiedScriptTalk[category][common.answers][
+        type
+      ] = this.findWordAndReplace({
+        wordsSets: wordsToSearchAndReplace,
+        texts: this.modifiedScriptTalk[category][common.answers][type],
+      })
     }
   }
 

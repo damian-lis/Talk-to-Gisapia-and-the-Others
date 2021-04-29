@@ -1,11 +1,12 @@
+import { common, chineseString } from '/data/main.js'
+
 class Background {
   constructor() {
-    this.canvas = document.getElementById('canvas')
+    this.canvas = document.getElementById(common.elements.canvas)
     this.cxt = canvas.getContext('2d')
     this.canvas.width = window.innerWidth
     this.canvas.height = window.innerHeight
-    this.chinese =
-      '田由甲申甴电甶男甸甹町画甼甽甾甿畀畁畂畃畄畅畆畇畈畉畊畋界畍畎畏畐畑'
+    this.chinese = chineseString
     this.chinese = this.chinese.split('')
     this.font_size = 20
     this.columns = this.canvas.width / this.font_size
@@ -15,7 +16,7 @@ class Background {
   }
 
   resize() {
-    window.addEventListener('resize', () => {
+    window.addEventListener(common.events.resize, () => {
       this.canvas.width = window.innerWidth
       this.canvas.height = window.innerHeight
       this.columns = this.canvas.width / this.font_size

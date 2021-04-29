@@ -1,25 +1,29 @@
+import { common, ideReferences } from '/data/main.js'
+
 class GisapiaAnimation {
   constructor() {
     this.gisapiaObject = this.getObjectContent()
-    this.lips = this.gisapiaObject.querySelector('#lips')
-    this.rightHand = this.gisapiaObject.querySelector('#right-hand')
-    this.hair = this.gisapiaObject.querySelector('#hair')
-    this.eyes = this.gisapiaObject.querySelector('#eyes')
+    this.lips = this.gisapiaObject.querySelector(ideReferences.gisapia.lips)
+    this.rightHand = this.gisapiaObject.querySelector(
+      ideReferences.gisapia.rightHand
+    )
+    this.hair = this.gisapiaObject.querySelector(ideReferences.gisapia.hair)
+    this.eyes = this.gisapiaObject.querySelector(ideReferences.gisapia.eyes)
     this.animation = this.startAnimation()
   }
 
   getObjectContent() {
-    return document.querySelector('#gisapia').contentDocument
+    return document.querySelector(ideReferences.gisapia.main).contentDocument
   }
 
   startAnimation() {
     this.master = new TimelineMax()
     this.master
-      .add('startAnimation')
-      .add(this.lipsAnimation(), 'startAnimation')
-      .add(this.rightHandAnimation(), 'startAnimation')
-      .add(this.hairAnimation(), 'startAnimation')
-      .add(this.eyesAnimation(), 'startAnimation')
+      .add(common.startAnimation)
+      .add(this.lipsAnimation(), common.startAnimation)
+      .add(this.rightHandAnimation(), common.startAnimation)
+      .add(this.hairAnimation(), common.startAnimation)
+      .add(this.eyesAnimation(), common.startAnimation)
   }
 
   lipsAnimation = () => {

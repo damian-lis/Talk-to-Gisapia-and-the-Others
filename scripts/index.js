@@ -1,18 +1,14 @@
 import { runElementsFn, setClassesFn } from '/scripts/helpers/index.js'
 import {
-  charNameList,
-  answerTypes,
-  animationSettings,
+  common,
+  commands,
   messages,
-  answers,
-  noConnectionMessage,
-  withoutMailMessage,
-  mailSent,
-  problemWithServer,
+  charNameList,
+  animationSettings,
   mailEndPoint,
   classReferences,
   classNames,
-} from '/data/global/names.js'
+} from '/data/main.js'
 import {
   memory,
   SelectCharUI,
@@ -21,7 +17,7 @@ import {
   MessengerScreen,
 } from '/scripts/objects/index.js'
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener(common.events.DOMContentLoaded, () => {
   const charsFactory = new CharsFactory(memory)
   const messengerInterface = new MessengerInterface(
     classReferences.messenger.interface,
@@ -43,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const chosenChar = charsFactory.getChar(charName)
 
     memory.setSelectedChar(chosenChar)
-    selectCharUI.toggleReadyStartCharTalkingBtn('on')
+    selectCharUI.toggleReadyStartCharTalkingBtn(common.toggle.on)
   }
 
   const handleStartCharTalking = () => {
@@ -55,7 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const isCharSelected = () => {
     if (!memory.getChar()) {
-      alert('Wybierz rozmówcę!')
+      const lng = memory.getLanguage()
+      alert(commands.chooseCharacter[lng])
       return false
     }
     return true
@@ -97,8 +94,8 @@ document.addEventListener('DOMContentLoaded', () => {
       memory.increaseTalkingStep()
       handleCharTalking()
     } else {
-      messengerInterface.toggleActivePanel('on')
-      messengerScreen.toggleShowBackBtn('on')
+      messengerInterface.toggleActivePanel(common.toggle.on)
+      messengerScreen.toggleShowBackBtn(common.toggle.on)
     }
   }
 
@@ -120,15 +117,16 @@ document.addEventListener('DOMContentLoaded', () => {
       messengerInterface.clearInput({ withTimeouts: true })
       messengerInterface.showBtnInsteadSpinner()
     } else {
-      finishAnimation(withoutMailMessage, 1000)
+      finishAnimation(messages.withoutMail, 1000)
     }
   }
 
   const handleCharSendData = async (data) => {
     return await fetch(mailEndPoint, {
-      method: 'POST',
+      method: common.fetch.methods.POST,
       headers: {
-        'Content-Type': 'application/json',
+        [common.fetch.headers.props.ContentType]:
+          common.fetch.headers.values.applicationJson,
       },
 
       body: JSON.stringify(data),
@@ -136,13 +134,13 @@ document.addEventListener('DOMContentLoaded', () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          finishAnimation(mailSent)
+          finishAnimation(messages.mailSent)
         } else {
-          finishAnimation(problemWithServer)
+          finishAnimation(messages.problemWithServer)
         }
       })
       .catch(() => {
-        finishAnimation(noConnectionMessage, 1000)
+        finishAnimation(messages.noConnection, 1000)
       })
   }
 
@@ -164,8 +162,8 @@ document.addEventListener('DOMContentLoaded', () => {
           currentScriptTalkCategory,
           shaping: true,
           wordToMemory: userMessage,
-          from: answers,
-          answerType: answerTypes.isAddedToMemory,
+          from: common.answers,
+          answerType: common.answerTypes.isAddedToMemory,
         })
 
         memory.setUserMessage('')
@@ -177,8 +175,8 @@ document.addEventListener('DOMContentLoaded', () => {
           currentScriptTalkCategory,
           shaping: true,
           wordToMemory: foundWordInCharMemory,
-          from: answers,
-          answerType: answerTypes.isInMemory,
+          from: common.answers,
+          answerType: common.answerTypes.isInMemory,
         })
         memory.setUserMessage('')
         memory.setIsCallCharTalkingAgain(true)
@@ -187,8 +185,8 @@ document.addEventListener('DOMContentLoaded', () => {
           chosenChar,
           currentScriptTalkCategory,
           shaping: false,
-          from: answers,
-          answerType: answerTypes.isNotInMemory,
+          from: common.answers,
+          answerType: common.answerTypes.isNotInMemory,
         })
         memory.setIsCharListening(true)
       }
@@ -197,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
         chosenChar,
         currentScriptTalkCategory,
         shaping: false,
-        from: messages,
+        from: common.messages,
       })
     }
 
@@ -220,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
         category: currentScriptTalkCategory,
       })
     } else {
-      if (from === 'messages') {
+      if (from === common.messages) {
         chosenChar.changeScriptTalkMessages({
           from,
           category: currentScriptTalkCategory,
@@ -308,45 +306,45 @@ document.addEventListener('DOMContentLoaded', () => {
     setClassesFn([
       {
         element: classNames.messenger.main,
-        classes: [`${chosenChar.name.toLowerCase()}-main`],
+        classes: [`${chosenChar.name.toLowerCase()}-${common.main}`],
       },
       {
         element: classNames.messenger.screen,
-        classes: [`${chosenChar.name.toLowerCase()}-second`],
+        classes: [`${chosenChar.name.toLowerCase()}-${common.second}`],
       },
 
       {
         element: classNames.messenger.interfaceInput,
-        classes: [`${chosenChar.name.toLowerCase()}-second`],
+        classes: [`${chosenChar.name.toLowerCase()}-${common.second}`],
       },
       {
         element: classNames.messenger.interfaceBtn,
-        classes: [`${chosenChar.name.toLowerCase()}-second`],
+        classes: [`${chosenChar.name.toLowerCase()}-${common.second}`],
       },
       {
         element: classNames.messenger.spinnerContainer,
-        classes: [`${chosenChar.name.toLowerCase()}-second`],
+        classes: [`${chosenChar.name.toLowerCase()}-${common.second}`],
       },
       {
         element: classNames.messenger.backIcon,
-        classes: [`${chosenChar.name.toLowerCase()}-main`],
+        classes: [`${chosenChar.name.toLowerCase()}-${common.main}`],
       },
     ])
   }
 
-  selectCharUI.subscribe(handleCharSelect, 'selectChar')
-  selectCharUI.subscribe(handleStartCharTalking, 'startTalking')
+  selectCharUI.subscribe(handleCharSelect, common.selectChar)
+  selectCharUI.subscribe(handleStartCharTalking, common.startTalking)
 
   const handleUserTalking = (userMessage) => {
     const chatBubble = messengerScreen.createChatBubble(userMessage, {
-      name: 'user',
+      name: common.user,
     })
     memory.setUserMessage(userMessage)
     messengerScreen.attachToMessengerScreen(chatBubble)
     messengerScreen.scrollMessengerScreenContainer()
     messengerScreen.increaseCharMessagesPart()
-    messengerScreen.toggleShowBackBtn('off')
-    messengerInterface.toggleActivePanel('off')
+    messengerScreen.toggleShowBackBtn(common.toggle.off)
+    messengerInterface.toggleActivePanel(common.toggle.off)
     handleCharTalking()
   }
 

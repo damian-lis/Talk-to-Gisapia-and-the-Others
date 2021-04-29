@@ -2,14 +2,7 @@ import {
   createElementFn,
   appendElementsToContainerFn,
 } from '/scripts/helpers/index.js'
-import {
-  classNames,
-  chooseCharacter,
-  startTalking,
-  talkAgain,
-  privatePolicy,
-  src,
-} from '/data/global/names.js'
+import { classNames, commands, common, src } from '/data/main.js'
 
 class SelectCharUI {
   constructor(charNames, container, memory) {
@@ -26,21 +19,21 @@ class SelectCharUI {
     const lng = this.memory.getLanguage()
 
     this.headline = createElementFn({
-      element: 'h1',
-      textContent: chooseCharacter[lng],
+      element: common.elements.h1,
+      textContent: commands.chooseCharacter[lng],
       classes: [classNames.selectCharUI.headline],
     })
 
     this.charButtons = Object.entries(charNames).map((charName) =>
       createElementFn({
-        element: 'button',
+        element: common.elements.button,
         textContent: charName[1],
         classes: [classNames.selectCharUI.selectBtn],
         listeners: [
           {
-            event: 'click',
+            event: common.events.click,
             cb: (e) => {
-              this.subscribers['selectChar'](charName[1])
+              this.subscribers[common.selectChar](charName[1])
               this.removeActives(
                 this.charButtons,
                 classNames.selectCharUI.selectBtnActive
@@ -54,34 +47,39 @@ class SelectCharUI {
     )
 
     this.startButton = createElementFn({
-      element: 'button',
-      textContent: startTalking[lng],
-      disabled: 'true',
+      element: common.elements.button,
+      textContent: commands.startTalking[lng],
+      disabled: common.types.boolean.true,
       classes: [classNames.selectCharUI.startBtn],
       listeners: [
         {
-          event: 'click',
+          event: common.events.click,
           cb: () => {
             this.memory.playFallDownAudio()
             this.memory.playBackgroundAudio()
             this.memory.playClickAudio()
-            this.subscribers['startTalking']()
+            this.subscribers[common.startTalking]()
           },
         },
       ],
     })
 
     this.talkAgainButton = createElementFn({
-      element: 'button',
-      textContent: talkAgain[lng],
+      element: common.elements.button,
+      textContent: commands.talkAgain[lng],
       classes: [
         classNames.selectCharUI.startBtn,
         classNames.selectCharUI.startBtnReady,
       ],
-      styles: [{ name: 'display', value: 'none' }],
+      styles: [
+        {
+          name: common.styleProps.names.display,
+          value: common.styleProps.values.none,
+        },
+      ],
       listeners: [
         {
-          event: 'click',
+          event: common.events.click,
           cb: () => {
             this.memory.restart()
             this.memory.playFinishAudio({ pause: true, reload: true })
@@ -93,19 +91,19 @@ class SelectCharUI {
               this.charButtons,
               classNames.selectCharUI.selectBtnActive
             )
-            this.toggleReadyStartCharTalkingBtn('off')
-            this.toggleShowLanguageBtns('on')
+            this.toggleReadyStartCharTalkingBtn(common.toggle.off)
+            this.toggleShowLanguageBtns(common.toggle.on)
           },
         },
       ],
     })
 
     this.plLngBtn = createElementFn({
-      element: 'button',
-      textContent: 'PL',
-      disabled: lng === 'pl' ? true : false,
+      element: common.elements.button,
+      textContent: common.language.pl.large,
+      disabled: lng === common.language.pl.small ? true : false,
       classes:
-        lng === 'pl'
+        lng === common.language.pl.small
           ? [
               classNames.selectCharUI.plLngBtn,
               classNames.selectCharUI.lngBtnActive,
@@ -114,9 +112,9 @@ class SelectCharUI {
 
       listeners: [
         {
-          event: 'click',
+          event: common.events.click,
           cb: (e) => {
-            this.memory.setLanguage('pl')
+            this.memory.setLanguage(common.language.pl.small)
             this.memory.changeLanguage()
             this.memory.playClickAudio()
             this.removeActives(
@@ -131,11 +129,11 @@ class SelectCharUI {
       ],
     })
     this.engLngBtn = createElementFn({
-      element: 'button',
-      textContent: 'ENG',
-      disabled: lng === 'eng' ? true : false,
+      element: common.elements.button,
+      textContent: common.language.eng.large,
+      disabled: lng === common.language.eng.small ? true : false,
       classes:
-        lng === 'eng'
+        lng === common.language.eng.small
           ? [
               classNames.selectCharUI.engLngBtn,
               classNames.selectCharUI.lngBtnActive,
@@ -144,9 +142,9 @@ class SelectCharUI {
 
       listeners: [
         {
-          event: 'click',
+          event: common.events.click,
           cb: (e) => {
-            this.memory.setLanguage('eng')
+            this.memory.setLanguage(common.language.eng.small)
             this.memory.changeLanguage()
             this.memory.playClickAudio()
             this.removeActives(
@@ -179,22 +177,22 @@ class SelectCharUI {
   }
 
   changeLanguage(lng) {
-    this.headline.textContent = chooseCharacter[lng]
-    this.startButton.textContent = startTalking[lng]
-    this.talkAgainButton.textContent = talkAgain[lng]
-    this.privatePolicyLink.textContent = privatePolicy[lng]
+    this.headline.textContent = commands.chooseCharacter[lng]
+    this.startButton.textContent = commands.startTalking[lng]
+    this.talkAgainButton.textContent = commands.talkAgain[lng]
+    this.privatePolicyLink.textContent = common.privatePolicy[lng]
   }
 
   createPrivatePolicy() {
     const lng = this.memory.getLanguage()
     this.privatePolicyLinkContainer = createElementFn({
-      element: 'div',
+      element: common.elements.div,
       classes: [classNames.privatePolicy.linkContainer],
     })
 
     this.privatePolicyLink = createElementFn({
-      element: 'a',
-      textContent: privatePolicy[lng],
+      element: common.elements.a,
+      textContent: common.privatePolicy[lng],
       href: src.privatePolicy.site,
       classes: [classNames.privatePolicy.link],
     })
@@ -204,7 +202,7 @@ class SelectCharUI {
   }
 
   toggleReadyStartCharTalkingBtn(toggle) {
-    if (toggle === 'on') {
+    if (toggle === common.toggle.on) {
       this.startButton.disabled = false
       this.startButton.classList.add(classNames.selectCharUI.startBtnReady)
     } else {
@@ -223,13 +221,13 @@ class SelectCharUI {
     const lng = this.memory.getLanguage()
     const msgsInCorrectLng = messages[lng]
     const msgContainer = createElementFn({
-      element: 'div',
+      element: common.elements.div,
       classes: [classNames.selectCharUI.messageContainer],
     })
 
     msgsInCorrectLng.map((message) => {
       const msg = createElementFn({
-        element: 'p',
+        element: common.elements.p,
         innerHTML: message,
         classes: [classNames.selectCharUI.message],
       })
@@ -244,12 +242,15 @@ class SelectCharUI {
     this.containerSent.prepend(this.messagesComponent)
     this.changeDisplay()
     this.handleFinishAudio()
-    this.toggleShowLanguageBtns('off')
+    this.toggleShowLanguageBtns(common.toggle.off)
   }
 
   toggleShowLanguageBtns(toggle) {
     ;[this.plLngBtn, this.engLngBtn].map((icon) => {
-      icon.style.display = toggle === 'on' ? 'block' : 'none'
+      icon.style.display =
+        toggle === common.on
+          ? common.styleProps.values.block
+          : common.styleProps.values.none
     })
   }
 
@@ -265,9 +266,13 @@ class SelectCharUI {
 
   changeDisplay({ initialSettings } = false) {
     ;[...this.charButtons, this.startButton, this.headline].map((element) => {
-      element.style.display = initialSettings ? 'block' : 'none'
+      element.style.display = initialSettings
+        ? common.styleProps.values.block
+        : common.styleProps.values.none
     })
-    this.talkAgainButton.style.display = initialSettings ? 'none' : 'block'
+    this.talkAgainButton.style.display = initialSettings
+      ? common.styleProps.values.none
+      : common.styleProps.values.block
   }
 
   removeActives(elements, clsName) {

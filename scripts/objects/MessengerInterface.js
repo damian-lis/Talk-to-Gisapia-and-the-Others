@@ -4,13 +4,12 @@ import {
 } from '/scripts/helpers/index.js'
 import {
   classNames,
-  send,
-  mustWritingSomething,
-  correctMailFormat,
-  sending,
-  oneMoreMoment,
-  secondMoreMoment,
-} from '/data/global/names.js'
+  commands,
+  alerts,
+  messages,
+  common,
+  emailValidationReg,
+} from '/data/main.js'
 
 class MessengerInterface {
   constructor(container, memory) {
@@ -27,20 +26,20 @@ class MessengerInterface {
   createMessengerInterfaceElements() {
     const lng = this.memory.getLanguage()
     this.input = createElementFn({
-      element: 'input',
+      element: common.elements.input,
       disabled: true,
       classes: [classNames.messenger.interfaceInput],
       listeners: [
         {
-          event: 'input',
+          event: common.elements.input,
           cb: (e) => {
             this.inputValue = e.target.value
           },
         },
         {
-          event: 'keypress',
+          event: common.events.keypress,
           cb: (e) => {
-            if (e.key === 'Enter') {
+            if (e.key === common.keys.Enter) {
               if (this.isCorrectInputValue()) {
                 this.callSubscribers()
               }
@@ -51,14 +50,19 @@ class MessengerInterface {
     })
 
     this.button = createElementFn({
-      element: 'button',
-      textContent: send[lng],
+      element: common.elements.button,
+      textContent: commands.send[lng],
       disabled: true,
       classes: [classNames.messenger.interfaceBtn],
-      styles: [{ name: 'pointerEvents', value: 'none' }],
+      styles: [
+        {
+          name: common.styleProps.names.pointerEvents,
+          value: common.styleProps.values.none,
+        },
+      ],
       listeners: [
         {
-          event: 'click',
+          event: common.events.click,
           cb: () => {
             if (this.isCorrectInputValue()) {
               this.callSubscribers()
@@ -74,32 +78,33 @@ class MessengerInterface {
   }
 
   emailValidation(email) {
-    const reg = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-    return reg.test(email)
+    return emailValidationReg.test(email)
   }
 
   isCorrectInputValue() {
     const lng = this.memory.getLanguage()
     if (this.inputValue === '') {
-      return alert(mustWritingSomething[lng])
+      return alert(alerts.mustWritingSomething[lng])
     }
     if (this.inputValue.includes('@')) {
       if (!this.emailValidation(this.inputValue))
-        return alert(correctMailFormat[lng])
+        return alert(alerts.correctMailFormat[lng])
     }
 
     return true
   }
 
   callSubscribers() {
-    console.log('elo')
     this.subscribers.map((subscriber) => subscriber(this.inputValue))
   }
 
   toggleActivePanel(toggle) {
-    this.input.disabled = toggle === 'on' ? false : true
-    this.button.disabled = toggle === 'on' ? false : true
-    this.button.style.pointerEvents = toggle === 'on' ? 'auto' : 'none'
+    this.input.disabled = toggle === common.toggle.on ? false : true
+    this.button.disabled = toggle === common.toggle.on ? false : true
+    this.button.style.pointerEvents =
+      toggle === common.toggle.on
+        ? common.styleProps.values.auto
+        : common.styleProps.values.none
     this.clearInput()
   }
 
@@ -130,30 +135,30 @@ class MessengerInterface {
   addWaitMessagesToInput({ firstDelay, secondDelay, thirdDelay }) {
     const lng = this.memory.getLanguage()
     this.firstInputTimeout = setTimeout(() => {
-      this.input.value = sending[lng]
+      this.input.value = messages.sending[lng]
     }, firstDelay)
 
     this.secondInputTimeout = setTimeout(() => {
-      this.input.value = oneMoreMoment[lng]
+      this.input.value = messages.oneMoreMoment[lng]
     }, secondDelay)
 
     this.thirdInputTimeout = setTimeout(() => {
-      this.input.value = secondMoreMoment[lng]
+      this.input.value = messages.secondMoreMoment[lng]
     }, thirdDelay)
   }
 
   changeLanguage(lng) {
-    this.button.textContent = send[lng]
+    this.button.textContent = commands.send[lng]
   }
 
   createSpinner() {
     this.formSpinnerContainer = createElementFn({
-      element: 'div',
+      element: common.elements.div,
       classes: [classNames.messenger.spinnerContainer],
     })
 
     this.formSpinner = createElementFn({
-      element: 'div',
+      element: common.elements.div,
       classes: [classNames.messenger.spinner],
     })
 
@@ -163,13 +168,13 @@ class MessengerInterface {
   }
 
   showSpinnerInsteadBtn() {
-    this.button.style.display = 'none'
-    this.spinner.style.display = 'flex'
+    this.button.style.display = common.styleProps.values.none
+    this.spinner.style.display = common.styleProps.values.flex
   }
 
   showBtnInsteadSpinner() {
-    this.button.style.display = 'block'
-    this.spinner.style.display = 'none'
+    this.button.style.display = common.styleProps.values.block
+    this.spinner.style.display = common.styleProps.values.none
   }
 }
 

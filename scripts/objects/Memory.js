@@ -1,7 +1,7 @@
 import { GisapiaAnimation, Background } from './index.js'
 import { createElementFn, setUpperLetterFn } from '/scripts/helpers/index.js'
 import charMemory from '/data/characters/charMemory.js'
-import { src, categories } from '/data/global/names.js'
+import { src, common } from '/data/main.js'
 
 class Memory {
   constructor() {
@@ -16,7 +16,8 @@ class Memory {
       this.isCharTalkingFinish = false
       this.backgroundAnimation = this.background()
       this.gisapiaAnimation = this.gisapiaAnimation()
-      this.language = localStorage.getItem('language') || 'pl'
+      this.language =
+        localStorage.getItem(common.language.name) || common.language.pl.small
       this.lngSubscribers = []
       this.createAudio()
       Memory.instance = this
@@ -26,32 +27,32 @@ class Memory {
 
   createAudio() {
     this.typingAudio = createElementFn({
-      element: 'audio',
+      element: common.elements.audio,
       src: src.audio.typing,
     })
 
     this.chatBubbleAudio = createElementFn({
-      element: 'audio',
+      element: common.elements.audio,
       src: src.audio.chatBubble,
     })
 
     this.fallDownAudio = createElementFn({
-      element: 'audio',
+      element: common.elements.audio,
       src: src.audio.throw,
     })
 
     this.backgroundAudio = createElementFn({
-      element: 'audio',
+      element: common.elements.audio,
       src: src.audio.background,
     })
 
     this.finishAudio = createElementFn({
-      element: 'audio',
+      element: common.elements.audio,
       src: src.audio.finish,
     })
 
     this.clickAudio = createElementFn({
-      element: 'audio',
+      element: common.elements.audio,
       src: src.audio.click,
     })
   }
@@ -108,7 +109,7 @@ class Memory {
   }
 
   addDataToAboutUser(scriptCategory, word) {
-    if (scriptCategory !== categories.hobby) {
+    if (scriptCategory !== common.categories.hobby) {
       word = setUpperLetterFn(word)
     }
     this.aboutUser[scriptCategory] = word
@@ -172,7 +173,7 @@ class Memory {
 
   setLanguage(lng) {
     this.language = lng
-    localStorage.setItem('language', lng)
+    localStorage.setItem(common.language.name, lng)
   }
 
   getLanguage() {
