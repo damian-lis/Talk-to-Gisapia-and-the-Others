@@ -3,10 +3,10 @@ import runElementsFn from './runElementsFn.js'
 import setClassesFn from './setClassesFn.js'
 import appendElementsToContainerFn from './appendElementsToContainerFn.js'
 import setUpperLetterFn from './setUpperLetterFn.js'
-import toggleDisplayFn from './toggleDisplay.js'
 import changeLanguageFn from './changeLanguageFn.js'
 import toggleReadyFn from './toggleReadyFn.js'
 import setActiveFn from './setActiveFn.js'
+import setPropsFn from './setPropsFn.js'
 
 export {
   setUpperLetterFn,
@@ -14,8 +14,8 @@ export {
   runElementsFn,
   setClassesFn,
   appendElementsToContainerFn,
-  toggleDisplayFn,
   changeLanguageFn,
   toggleReadyFn,
   setActiveFn,
+  setPropsFn,
 }
