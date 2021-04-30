@@ -6,7 +6,7 @@ import setUpperLetterFn from './setUpperLetterFn.js'
 import toggleDisplayFn from './toggleDisplay.js'
 import toggleLanguageFn from './toggleLanguageFn.js'
 import toggleReadyFn from './toggleReadyFn.js'
-import toggleDisabledFn from './toggleDisabledFn.js'
+import setActiveFn from './setActiveFn.js'
 
 export {
   setUpperLetterFn,
@@ -17,5 +17,5 @@ export {
   toggleDisplayFn,
   toggleLanguageFn,
   toggleReadyFn,
-  toggleDisabledFn,
+  setActiveFn,
 }
