@@ -5,6 +5,7 @@ import appendElementsToContainerFn from './appendElementsToContainerFn.js'
 import setUpperLetterFn from './setUpperLetterFn.js'
 import toggleDisplayFn from './toggleDisplay.js'
 import toggleLanguageFn from './toggleLanguageFn.js'
+import toggleReadyFn from './toggleReadyFn.js'
 
 export {
   setUpperLetterFn,
@@ -14,4 +15,5 @@ export {
   appendElementsToContainerFn,
   toggleDisplayFn,
   toggleLanguageFn,
+  toggleReadyFn,
 }
