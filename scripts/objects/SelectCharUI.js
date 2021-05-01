@@ -6,7 +6,13 @@ import {
   setActiveFn,
   setPropsFn,
 } from '/scripts/helpers/index.js'
-import { classNames, commands, common, src } from '/data/main.js'
+import {
+  animationSettings,
+  classNames,
+  commands,
+  common,
+  src,
+} from '/data/main.js'
 
 class SelectCharUI {
   constructor(charNames, container, memory) {
@@ -22,6 +28,23 @@ class SelectCharUI {
       [this.mainComponent],
       document.querySelector(container)
     )
+  }
+
+  move({ where }) {
+    setPropsFn([
+      {
+        elements: [this.container],
+        styleProps: [
+          {
+            name: 'animation',
+            value:
+              where === 'down'
+                ? animationSettings.selectCharUI.start
+                : animationSettings.selectCharUI.end,
+          },
+        ],
+      },
+    ])
   }
 
   memoryLngSubscribe() {
