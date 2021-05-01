@@ -1,10 +1,14 @@
 export default (objects) => {
   objects.map((object) => {
-    let element = object.element
-    if (typeof object.element === 'string') {
-      element = document.querySelector(`.${object.element}`)
-    }
-    element.className = object.element
-    element.classList.add(...object.classes)
+    object.elements.map((element) => {
+      let el = element
+
+      if (typeof element === 'string') {
+        el = document.querySelector(`.${element}`)
+      }
+
+      el.className = object.initialClass
+      el.classList.add(...object.classesToAdd)
+    })
   })
 }
