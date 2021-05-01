@@ -10,16 +10,18 @@ import { classNames, commands, common, src } from '/data/main.js'
 
 class SelectCharUI {
   constructor(charNames, container, memory) {
-    this.containerSent = document.querySelector(container)
     this.charNames = charNames
     this.memory = memory
     this.subscribers = {}
 
     this.createElements()
-    this.createLists()
+    this.createComponents()
     this.memoryLngSubscribe()
 
-    appendElementsToContainerFn(this.allElementsList, this.containerSent)
+    appendElementsToContainerFn(
+      [this.mainComponent],
+      document.querySelector(container)
+    )
   }
 
   memoryLngSubscribe() {
@@ -62,6 +64,11 @@ class SelectCharUI {
 
   createElements() {
     const lng = this.memory.getLanguage()
+
+    this.container = createElementFn({
+      element: 'div',
+      classes: ['selectCharUI'],
+    })
 
     this.headline = createElementFn({
       element: common.elements.h1,
@@ -165,7 +172,37 @@ class SelectCharUI {
       ],
     })
 
-    this.privatePolicy = this.createPrivatePolicy()
+    this.privatePolicyLinkContainer = createElementFn({
+      element: common.elements.div,
+      classes: [classNames.privatePolicy.linkContainer],
+    })
+
+    this.privatePolicyLink = createElementFn({
+      element: common.elements.a,
+      textContent: common.privatePolicy[lng],
+      href: src.privatePolicy.site,
+      classes: [classNames.privatePolicy.link],
+    })
+  }
+
+  createComponents() {
+    this.privatePolicyComponent = appendElementsToContainerFn(
+      [this.privatePolicyLink],
+      this.privatePolicyLinkContainer
+    )
+
+    this.mainComponent = appendElementsToContainerFn(
+      [
+        this.plLngBtn,
+        this.engLngBtn,
+        this.headline,
+        ...this.charButtons,
+        this.startButton,
+        this.talkAgainButton,
+        this.privatePolicyComponent,
+      ],
+      this.container
+    )
   }
 
   handleCharButtonsClick({ target, charName }) {
@@ -207,27 +244,9 @@ class SelectCharUI {
 
     setActiveFn({
       setOn: target,
-      removeFrom: this.lngButtonsList,
+      removeFrom: [this.engLngBtn, this.plLngBtn],
       classes: [classNames.selectCharUI.lngBtnActive],
     })
-  }
-
-  createPrivatePolicy() {
-    const lng = this.memory.getLanguage()
-    const privatePolicyLinkContainer = createElementFn({
-      element: common.elements.div,
-      classes: [classNames.privatePolicy.linkContainer],
-    })
-
-    this.privatePolicyLink = createElementFn({
-      element: common.elements.a,
-      textContent: common.privatePolicy[lng],
-      href: src.privatePolicy.site,
-      classes: [classNames.privatePolicy.link],
-    })
-
-    privatePolicyLinkContainer.appendChild(this.privatePolicyLink)
-    return privatePolicyLinkContainer
   }
 
   createMessagesComponent(messages) {
@@ -250,24 +269,6 @@ class SelectCharUI {
     return msgContainer
   }
 
-  createLists() {
-    this.allElementsList = [
-      this.plLngBtn,
-      this.engLngBtn,
-      this.headline,
-      ...this.charButtons,
-      this.startButton,
-      this.talkAgainButton,
-      this.privatePolicy,
-    ]
-    this.mainElementsList = [
-      ...this.charButtons,
-      this.startButton,
-      this.headline,
-    ]
-    this.lngButtonsList = [this.engLngBtn, this.plLngBtn]
-  }
-
   toggleReadyStartCharTalkingBtn(toggle) {
     toggleReadyFn({
       toggle,
@@ -279,12 +280,12 @@ class SelectCharUI {
   changeUI(messages) {
     if (messages) {
       this.messagesComponent = this.createMessagesComponent(messages)
-      this.containerSent.prepend(this.messagesComponent)
+      this.container.prepend(this.messagesComponent)
     }
 
     setPropsFn([
       {
-        elements: this.mainElementsList,
+        elements: [...this.charButtons, this.startButton, this.headline],
         styleProps: [{ name: 'display', value: messages ? 'none' : 'block' }],
       },
       {
@@ -292,7 +293,7 @@ class SelectCharUI {
         styleProps: [{ name: 'display', value: messages ? 'block' : 'none' }],
       },
       {
-        elements: this.lngButtonsList,
+        elements: [this.engLngBtn, this.plLngBtn],
         styleProps: [{ name: 'display', value: messages ? 'none' : 'block' }],
       },
     ])
