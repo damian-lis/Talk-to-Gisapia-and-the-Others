@@ -12,6 +12,7 @@ class Character {
 
   setScriptTalk() {
     const lng = this.memory.getLanguage()
+
     let scriptTalkCopy = JSON.parse(JSON.stringify(this.scriptTalk))
     this.modifiedScriptTalk = this.setScriptTalkMessages(scriptTalkCopy[lng])
   }
@@ -55,6 +56,7 @@ class Character {
 
   countTypingQuantity(textLength) {
     let result
+
     if (textLength < 20) {
       result = 1
     } else if (textLength < 80) {

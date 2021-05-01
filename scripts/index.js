@@ -115,7 +115,7 @@ document.addEventListener(common.events.DOMContentLoaded, () => {
       const charEmail = chosenChar.getEmail()
       await handleCharSendData(charEmail)
       messengerInterface.clearInput({ withTimeouts: true })
-      messengerInterface.showBtnInsteadSpinner()
+      messengerInterface.showSpinnerInsteadBtn({ invert: true })
     } else {
       finishAnimation(messages.withoutMail, 1000)
     }
@@ -264,7 +264,7 @@ document.addEventListener(common.events.DOMContentLoaded, () => {
       )
 
       messengerScreen.attachToMessengerScreen(chatBubble)
-      messengerScreen.scrollMessengerScreenContainer()
+      messengerScreen.scrollMessengerScreen()
     }
   }
 
@@ -293,7 +293,10 @@ document.addEventListener(common.events.DOMContentLoaded, () => {
           animation: animationSettings.messenger.end,
         },
       ])
-      return selectCharUI.showFinishMessages(variant)
+      memory.playFallDownAudio()
+      memory.playFinishAudio()
+      memory.playBackgroundAudio({ pause: true })
+      return selectCharUI.changeUI(variant)
     }, delay)
   }
 
@@ -341,7 +344,7 @@ document.addEventListener(common.events.DOMContentLoaded, () => {
     })
     memory.setUserMessage(userMessage)
     messengerScreen.attachToMessengerScreen(chatBubble)
-    messengerScreen.scrollMessengerScreenContainer()
+    messengerScreen.scrollMessengerScreen()
     messengerScreen.increaseCharMessagesPart()
     messengerScreen.toggleShowBackBtn(common.toggle.off)
     messengerInterface.toggleActivePanel(common.toggle.off)

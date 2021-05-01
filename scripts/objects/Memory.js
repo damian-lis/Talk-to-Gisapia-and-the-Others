@@ -6,23 +6,32 @@ import { src, common } from '/data/main.js'
 class Memory {
   constructor() {
     if (Memory.instance == null) {
-      this.talkingStep = 0
-      this.character = null
       this.charMemory = charMemory
-      this.aboutUser = {}
+      this.character = null
       this.userMessage = null
       this.isCallCharTalkingAgain = false
       this.isCharListening = false
       this.isCharTalkingFinish = false
-      this.backgroundAnimation = this.background()
-      this.gisapiaAnimation = this.gisapiaAnimation()
-      this.language =
-        localStorage.getItem(common.language.name) || common.language.pl.small
+      this.talkingStep = 0
+      this.aboutUser = {}
       this.lngSubscribers = []
+      this.language = this.setLanguage()
+
+      this.backgroundAnimation()
+      this.gisapiaAnimation()
       this.createAudio()
+
       Memory.instance = this
     }
     return Memory.instance
+  }
+
+  backgroundAnimation() {
+    new Background()
+  }
+
+  gisapiaAnimation() {
+    new GisapiaAnimation()
   }
 
   createAudio() {
@@ -74,34 +83,13 @@ class Memory {
   }
 
   playBackgroundAudio({ pause, reload } = false) {
-    if (reload) {
-      this.backgroundAudio.load()
-    }
-
-    if (pause) {
-      this.backgroundAudio.pause()
-    } else {
-      this.backgroundAudio.play()
-    }
+    reload && this.backgroundAudio.load()
+    pause ? this.backgroundAudio.pause() : this.backgroundAudio.play()
   }
 
   playFinishAudio({ pause, reload } = false) {
-    if (reload) {
-      this.finishAudio.load()
-    }
-    if (pause) {
-      this.finishAudio.pause()
-    } else {
-      this.finishAudio.play()
-    }
-  }
-
-  background() {
-    new Background()
-  }
-
-  gisapiaAnimation() {
-    new GisapiaAnimation()
+    reload && this.finishAudio.load()
+    pause ? this.finishAudio.pause() : this.finishAudio.play()
   }
 
   getCharMemory(category) {
@@ -172,8 +160,14 @@ class Memory {
   }
 
   setLanguage(lng) {
-    this.language = lng
-    localStorage.setItem(common.language.name, lng)
+    if (lng) {
+      this.language = lng
+      localStorage.setItem(common.language.name, lng)
+    } else {
+      return (
+        localStorage.getItem(common.language.name) || common.language.pl.small
+      )
+    }
   }
 
   getLanguage() {
@@ -184,19 +178,19 @@ class Memory {
     this.lngSubscribers.push(cb)
   }
 
-  changeLanguage() {
+  callLngSubscribers() {
     this.lngSubscribers.map((cb) => {
       cb(this.language)
     })
   }
 
   restart() {
-    this.talkingStep = 0
     this.character = null
     this.userMessage = null
     this.isCallCharTalkingAgain = false
     this.isCharListening = false
     this.isCharTalkingFinish = false
+    this.talkingStep = 0
   }
 }
 

@@ -1,6 +1,8 @@
 import {
   createElementFn,
   appendElementsToContainerFn,
+  changeLanguageFn,
+  setPropsFn,
 } from '/scripts/helpers/index.js'
 import {
   classNames,
@@ -15,16 +17,36 @@ class MessengerInterface {
   constructor(container, memory) {
     this.containerSent = document.querySelector(container)
     this.memory = memory
-    this.memory.lngSubscribe((lng) => this.changeLanguage(lng))
-    const messengerInterfaceElements = this.createMessengerInterfaceElements()
     this.inputValue = ''
     this.subscribers = []
 
-    appendElementsToContainerFn(messengerInterfaceElements, this.containerSent)
+    this.createElements()
+    this.createLists()
+    this.memoryLngSubscribe()
+
+    appendElementsToContainerFn(this.allElementsList, this.containerSent)
   }
 
-  createMessengerInterfaceElements() {
+  memoryLngSubscribe() {
+    this.memory.lngSubscribe((lng) =>
+      changeLanguageFn(
+        [
+          {
+            element: this.button,
+            props: {
+              name: 'textContent',
+              value: commands.send,
+            },
+          },
+        ],
+        lng
+      )
+    )
+  }
+
+  createElements() {
     const lng = this.memory.getLanguage()
+
     this.input = createElementFn({
       element: common.elements.input,
       disabled: true,
@@ -32,19 +54,11 @@ class MessengerInterface {
       listeners: [
         {
           event: common.elements.input,
-          cb: (e) => {
-            this.inputValue = e.target.value
-          },
+          cb: (e) => (this.inputValue = e.target.value),
         },
         {
           event: common.events.keypress,
-          cb: (e) => {
-            if (e.key === common.keys.Enter) {
-              if (this.isCorrectInputValue()) {
-                this.callSubscribers()
-              }
-            }
-          },
+          cb: (e) => this.handleInputKeypress(e),
         },
       ],
     })
@@ -63,22 +77,46 @@ class MessengerInterface {
       listeners: [
         {
           event: common.events.click,
-          cb: () => {
-            if (this.isCorrectInputValue()) {
-              this.callSubscribers()
-            }
-          },
+          cb: () => this.handleButtonClick(),
         },
       ],
     })
 
     this.spinner = this.createSpinner()
-
-    return [this.input, this.button, this.spinner]
   }
 
-  emailValidation(email) {
-    return emailValidationReg.test(email)
+  handleInputKeypress(e) {
+    if (e.key === common.keys.Enter) {
+      if (this.isCorrectInputValue()) {
+        this.callSubscribers()
+      }
+    }
+  }
+
+  handleButtonClick() {
+    if (this.isCorrectInputValue()) {
+      this.callSubscribers()
+    }
+  }
+
+  createSpinner() {
+    const formSpinnerContainer = createElementFn({
+      element: common.elements.div,
+      classes: [classNames.messenger.spinnerContainer],
+    })
+
+    const formSpinner = createElementFn({
+      element: common.elements.div,
+      classes: [classNames.messenger.spinner],
+    })
+
+    formSpinnerContainer.appendChild(formSpinner)
+
+    return formSpinnerContainer
+  }
+
+  createLists() {
+    this.allElementsList = [this.input, this.button, this.spinner]
   }
 
   isCorrectInputValue() {
@@ -92,20 +130,6 @@ class MessengerInterface {
     }
 
     return true
-  }
-
-  callSubscribers() {
-    this.subscribers.map((subscriber) => subscriber(this.inputValue))
-  }
-
-  toggleActivePanel(toggle) {
-    this.input.disabled = toggle === common.toggle.on ? false : true
-    this.button.disabled = toggle === common.toggle.on ? false : true
-    this.button.style.pointerEvents =
-      toggle === common.toggle.on
-        ? common.styleProps.values.auto
-        : common.styleProps.values.none
-    this.clearInput()
   }
 
   clearInput({ withTimeouts } = false) {
@@ -128,12 +152,9 @@ class MessengerInterface {
     }
   }
 
-  subscribe(subscriber) {
-    this.subscribers.push(subscriber)
-  }
-
   addWaitMessagesToInput({ firstDelay, secondDelay, thirdDelay }) {
     const lng = this.memory.getLanguage()
+
     this.firstInputTimeout = setTimeout(() => {
       this.input.value = messages.sending[lng]
     }, firstDelay)
@@ -147,34 +168,71 @@ class MessengerInterface {
     }, thirdDelay)
   }
 
-  changeLanguage(lng) {
-    this.button.textContent = commands.send[lng]
+  toggleActivePanel(toggle) {
+    setPropsFn([
+      {
+        elements: [this.button],
+        styleProps: [
+          {
+            name: 'pointerEvents',
+            value:
+              toggle === common.toggle.on
+                ? common.styleProps.values.auto
+                : common.styleProps.values.none,
+          },
+          ,
+        ],
+      },
+      {
+        elements: [this.input, this.button],
+        props: [
+          {
+            name: 'disabled',
+            value: toggle === common.toggle.on ? false : true,
+          },
+          ,
+        ],
+      },
+    ])
+
+    this.clearInput()
   }
 
-  createSpinner() {
-    this.formSpinnerContainer = createElementFn({
-      element: common.elements.div,
-      classes: [classNames.messenger.spinnerContainer],
-    })
-
-    this.formSpinner = createElementFn({
-      element: common.elements.div,
-      classes: [classNames.messenger.spinner],
-    })
-
-    this.formSpinnerContainer.appendChild(this.formSpinner)
-
-    return this.formSpinnerContainer
+  showSpinnerInsteadBtn({ invert } = false) {
+    setPropsFn([
+      {
+        elements: [this.button],
+        styleProps: [
+          {
+            name: 'display',
+            value: invert ? 'block' : 'none',
+          },
+          ,
+        ],
+      },
+      {
+        elements: [this.spinner],
+        styleProps: [
+          {
+            name: 'display',
+            value: invert ? 'none' : 'flex',
+          },
+          ,
+        ],
+      },
+    ])
   }
 
-  showSpinnerInsteadBtn() {
-    this.button.style.display = common.styleProps.values.none
-    this.spinner.style.display = common.styleProps.values.flex
+  emailValidation(email) {
+    return emailValidationReg.test(email)
   }
 
-  showBtnInsteadSpinner() {
-    this.button.style.display = common.styleProps.values.block
-    this.spinner.style.display = common.styleProps.values.none
+  subscribe(subscriber) {
+    this.subscribers.push(subscriber)
+  }
+
+  callSubscribers() {
+    this.subscribers.map((subscriber) => subscriber(this.inputValue))
   }
 }
 

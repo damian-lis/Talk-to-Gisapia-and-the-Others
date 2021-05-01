@@ -1,21 +1,66 @@
 import {
   createElementFn,
   appendElementsToContainerFn,
+  changeLanguageFn,
+  toggleReadyFn,
+  setActiveFn,
+  setPropsFn,
 } from '/scripts/helpers/index.js'
 import { classNames, commands, common, src } from '/data/main.js'
 
 class SelectCharUI {
   constructor(charNames, container, memory) {
     this.containerSent = document.querySelector(container)
+    this.charNames = charNames
     this.memory = memory
-    this.memory.lngSubscribe((lng) => this.changeLanguage(lng))
-    const selectCharUIElements = this.createSelectCharUIElements(charNames)
     this.subscribers = {}
 
-    appendElementsToContainerFn(selectCharUIElements, this.containerSent)
+    this.createElements()
+    this.createLists()
+    this.memoryLngSubscribe()
+
+    appendElementsToContainerFn(this.allElementsList, this.containerSent)
   }
 
-  createSelectCharUIElements(charNames) {
+  memoryLngSubscribe() {
+    this.memory.lngSubscribe((lng) =>
+      changeLanguageFn(
+        [
+          {
+            element: this.headline,
+            props: {
+              name: 'textContent',
+              value: commands.chooseCharacter,
+            },
+          },
+          {
+            element: this.startButton,
+            props: {
+              name: 'textContent',
+              value: commands.startTalking,
+            },
+          },
+          {
+            element: this.talkAgainButton,
+            props: {
+              name: 'textContent',
+              value: commands.talkAgain,
+            },
+          },
+          {
+            element: this.privatePolicyLink,
+            props: {
+              name: 'textContent',
+              value: common.privatePolicy,
+            },
+          },
+        ],
+        lng
+      )
+    )
+  }
+
+  createElements() {
     const lng = this.memory.getLanguage()
 
     this.headline = createElementFn({
@@ -24,7 +69,7 @@ class SelectCharUI {
       classes: [classNames.selectCharUI.headline],
     })
 
-    this.charButtons = Object.entries(charNames).map((charName) =>
+    this.charButtons = Object.entries(this.charNames).map((charName) =>
       createElementFn({
         element: common.elements.button,
         textContent: charName[1],
@@ -32,15 +77,7 @@ class SelectCharUI {
         listeners: [
           {
             event: common.events.click,
-            cb: (e) => {
-              this.subscribers[common.selectChar](charName[1])
-              this.removeActives(
-                this.charButtons,
-                classNames.selectCharUI.selectBtnActive
-              )
-              this.setActive(e.target, classNames.selectCharUI.selectBtnActive)
-              this.memory.playClickAudio()
-            },
+            cb: (e) => handleCharButtonsClick({ target: e.target }),
           },
         ],
       })
@@ -54,12 +91,7 @@ class SelectCharUI {
       listeners: [
         {
           event: common.events.click,
-          cb: () => {
-            this.memory.playFallDownAudio()
-            this.memory.playBackgroundAudio()
-            this.memory.playClickAudio()
-            this.subscribers[common.startTalking]()
-          },
+          cb: () => this.handlestartButtonClick(),
         },
       ],
     })
@@ -80,20 +112,7 @@ class SelectCharUI {
       listeners: [
         {
           event: common.events.click,
-          cb: () => {
-            this.memory.restart()
-            this.memory.playFinishAudio({ pause: true, reload: true })
-            this.memory.playBackgroundAudio({ reload: true })
-            this.memory.playClickAudio()
-            this.messagesComponent.remove()
-            this.changeDisplay({ initialSettings: true })
-            this.removeActives(
-              this.charButtons,
-              classNames.selectCharUI.selectBtnActive
-            )
-            this.toggleReadyStartCharTalkingBtn(common.toggle.off)
-            this.toggleShowLanguageBtns(common.toggle.on)
-          },
+          cb: () => this.handletalkAgainButtonClick(),
         },
       ],
     })
@@ -113,18 +132,11 @@ class SelectCharUI {
       listeners: [
         {
           event: common.events.click,
-          cb: (e) => {
-            this.memory.setLanguage(common.language.pl.small)
-            this.memory.changeLanguage()
-            this.memory.playClickAudio()
-            this.removeActives(
-              [this.plLngBtn, this.engLngBtn],
-              classNames.selectCharUI.lngBtnActive
-            )
-            this.setActive(e.target, classNames.selectCharUI.lngBtnActive)
-            this.removeDisableds([this.engLngBtn, this.plLngBtn])
-            this.setDisabled(e.target)
-          },
+          cb: (e) =>
+            this.handleLngButtonsClick({
+              lng: common.language.pl.small,
+              target: e.target,
+            }),
         },
       ],
     })
@@ -143,49 +155,65 @@ class SelectCharUI {
       listeners: [
         {
           event: common.events.click,
-          cb: (e) => {
-            this.memory.setLanguage(common.language.eng.small)
-            this.memory.changeLanguage()
-            this.memory.playClickAudio()
-            this.removeActives(
-              [this.plLngBtn, this.engLngBtn],
-              classNames.selectCharUI.lngBtnActive
-            )
-            this.setActive(e.target, classNames.selectCharUI.lngBtnActive)
-            this.removeDisableds([this.engLngBtn, this.plLngBtn])
-            this.setDisabled(e.target)
-          },
+          cb: (e) =>
+            this.handleLngButtonsClick({
+              lng: common.language.eng.small,
+              target: e.target,
+            }),
         },
       ],
     })
 
     this.privatePolicy = this.createPrivatePolicy()
-
-    return [
-      this.plLngBtn,
-      this.engLngBtn,
-      this.headline,
-      ...this.charButtons,
-      this.startButton,
-      this.talkAgainButton,
-      this.privatePolicy,
-    ]
   }
 
-  getCharButtons() {
-    return this.charButtons
+  handleCharButtonsClick({ target }) {
+    setActiveFn({
+      setOn: target,
+      removeFrom: this.charButtons,
+      classes: [classNames.selectCharUI.selectBtnActive],
+    })
+    this.callSubscribers({
+      type: common.selectChar,
+      element: charName[1],
+    })
+    this.memory.playClickAudio()
   }
 
-  changeLanguage(lng) {
-    this.headline.textContent = commands.chooseCharacter[lng]
-    this.startButton.textContent = commands.startTalking[lng]
-    this.talkAgainButton.textContent = commands.talkAgain[lng]
-    this.privatePolicyLink.textContent = common.privatePolicy[lng]
+  handlestartButtonClick() {
+    this.memory.playFallDownAudio()
+    this.memory.playBackgroundAudio()
+    this.memory.playClickAudio()
+    this.callSubscribers({ type: common.startTalking })
+  }
+
+  handletalkAgainButtonClick() {
+    this.memory.restart()
+    this.memory.playFinishAudio({ pause: true, reload: true })
+    this.memory.playBackgroundAudio({ reload: true })
+    this.memory.playClickAudio()
+    this.messagesComponent.remove()
+
+    this.changeUI()
+    this.removeCharButtonsActive()
+    this.toggleReadyStartCharTalkingBtn(common.toggle.off)
+  }
+
+  handleLngButtonsClick({ lng, target }) {
+    this.memory.setLanguage(lng)
+    this.memory.callLngSubscribers()
+    this.memory.playClickAudio()
+
+    setActiveFn({
+      setOn: target,
+      removeFrom: this.lngButtonsList,
+      classes: [classNames.selectCharUI.lngBtnActive],
+    })
   }
 
   createPrivatePolicy() {
     const lng = this.memory.getLanguage()
-    this.privatePolicyLinkContainer = createElementFn({
+    const privatePolicyLinkContainer = createElementFn({
       element: common.elements.div,
       classes: [classNames.privatePolicy.linkContainer],
     })
@@ -197,24 +225,8 @@ class SelectCharUI {
       classes: [classNames.privatePolicy.link],
     })
 
-    this.privatePolicyLinkContainer.appendChild(this.privatePolicyLink)
-    return this.privatePolicyLinkContainer
-  }
-
-  toggleReadyStartCharTalkingBtn(toggle) {
-    if (toggle === common.toggle.on) {
-      this.startButton.disabled = false
-      this.startButton.classList.add(classNames.selectCharUI.startBtnReady)
-    } else {
-      this.startButton.disabled = true
-      this.startButton.classList.remove(classNames.selectCharUI.startBtnReady)
-    }
-  }
-
-  handleFinishAudio() {
-    this.memory.playFallDownAudio()
-    this.memory.playFinishAudio()
-    this.memory.playBackgroundAudio({ pause: true })
+    privatePolicyLinkContainer.appendChild(this.privatePolicyLink)
+    return privatePolicyLinkContainer
   }
 
   createMessagesComponent(messages) {
@@ -237,58 +249,70 @@ class SelectCharUI {
     return msgContainer
   }
 
-  showFinishMessages(messages) {
-    this.messagesComponent = this.createMessagesComponent(messages)
-    this.containerSent.prepend(this.messagesComponent)
-    this.changeDisplay()
-    this.handleFinishAudio()
-    this.toggleShowLanguageBtns(common.toggle.off)
+  createLists() {
+    this.allElementsList = [
+      this.plLngBtn,
+      this.engLngBtn,
+      this.headline,
+      ...this.charButtons,
+      this.startButton,
+      this.talkAgainButton,
+      this.privatePolicy,
+    ]
+    this.mainElementsList = [
+      ...this.charButtons,
+      this.startButton,
+      this.headline,
+    ]
+    this.lngButtonsList = [this.engLngBtn, this.plLngBtn]
   }
 
-  toggleShowLanguageBtns(toggle) {
-    ;[this.plLngBtn, this.engLngBtn].map((icon) => {
-      icon.style.display =
-        toggle === common.toggle.on
-          ? common.styleProps.values.block
-          : common.styleProps.values.none
+  toggleReadyStartCharTalkingBtn(toggle) {
+    toggleReadyFn({
+      toggle,
+      elements: [this.startButton],
+      classes: [classNames.selectCharUI.startBtnReady],
     })
   }
 
-  setDisabled(element) {
-    element.disabled = true
-  }
+  changeUI(messages) {
+    if (messages) {
+      this.messagesComponent = this.createMessagesComponent(messages)
+      this.containerSent.prepend(this.messagesComponent)
+    }
 
-  removeDisableds(elements) {
-    elements.map((element) => {
-      element.disabled = false
+    setPropsFn([
+      {
+        elements: this.mainElementsList,
+        styleProps: [{ name: 'display', value: messages ? 'none' : 'block' }],
+      },
+      {
+        elements: [this.talkAgainButton],
+        styleProps: [{ name: 'display', value: messages ? 'block' : 'none' }],
+      },
+      {
+        elements: this.lngButtonsList,
+        styleProps: [{ name: 'display', value: messages ? 'none' : 'block' }],
+      },
+    ])
+  }
+  removeCharButtonsActive() {
+    setActiveFn({
+      removeFrom: this.charButtons,
+      classes: [classNames.selectCharUI.selectBtnActive],
     })
-  }
-
-  changeDisplay({ initialSettings } = false) {
-    ;[...this.charButtons, this.startButton, this.headline].map((element) => {
-      element.style.display = initialSettings
-        ? common.styleProps.values.block
-        : common.styleProps.values.none
-    })
-    this.talkAgainButton.style.display = initialSettings
-      ? common.styleProps.values.none
-      : common.styleProps.values.block
-  }
-
-  removeActives(elements, clsName) {
-    elements.map((btn) => btn.classList.remove(clsName))
   }
 
   getCharButtons() {
     return this.charButtons
   }
 
-  setActive(element, clsName) {
-    element.classList.add(clsName)
-  }
-
   subscribe(subscriber, name) {
     this.subscribers[name] = subscriber
+  }
+
+  callSubscribers({ type, element = null }) {
+    element ? this.subscribers[type](element) : this.subscribers[type]()
   }
 }
 

@@ -2,6 +2,8 @@ import {
   createElementFn,
   appendElementsToContainerFn,
   runElementsFn,
+  setPropsFn,
+  removeElAmongElsFn,
 } from '/scripts/helpers/index.js'
 
 import {
@@ -18,22 +20,15 @@ class MessengerScreen {
     this.selectCharUI = selectCharUI
     this.messengerInterface = messengerInterface
     this.containerSent = document.querySelector(container)
-    this.messengerScreenElements = this.createMessengerScreenElements()
     this.charMessagesPart = 0
 
-    this.connectMessengerScreenElements(
-      this.messengerScreenElements,
-      this.containerSent
-    )
+    this.createElements()
+    this.createLists()
+
+    appendElementsToContainerFn(this.allElementsList, this.containerSent)
   }
 
-  connectMessengerScreenElements(elements, container) {
-    const [screen, backBtn] = elements
-    this.containerSent.appendChild(backBtn)
-    appendElementsToContainerFn([screen], container)
-  }
-
-  createMessengerScreenElements() {
+  createElements() {
     this.screen = createElementFn({
       element: common.elements.div,
       classes: [classNames.messenger.screenInner],
@@ -46,41 +41,30 @@ class MessengerScreen {
       listeners: [
         {
           event: common.events.click,
-          cb: () => {
-            this.memory.restart()
-            this.memory.playFallDownAudio()
-            this.memory.playClickAudio()
-            this.selectCharUI.removeActives(
-              this.selectCharUI.getCharButtons(),
-              classNames.selectCharUI.selectBtnActive
-            )
-            this.selectCharUI.toggleReadyStartCharTalkingBtn(common.toggle.off)
-            this.messengerInterface.toggleActivePanel(common.toggle.off)
-            this.toggleShowBackBtn(common.toggle.off)
-            runElementsFn([
-              {
-                element: classReferences.selectCharUI.main,
-                animation: animationSettings.selectCharUI.end,
-              },
-              {
-                element: classReferences.messenger.main,
-                animation: animationSettings.messenger.end,
-              },
-            ])
-          },
+          cb: () => this.handleBackIconClick,
         },
       ],
     })
-
-    return [this.screen, this.backIcon]
   }
 
-  setTypingOn() {
-    this.typing = true
-  }
-
-  increaseCharMessagesPart() {
-    this.charMessagesPart++
+  handleBackIconClick() {
+    this.memory.restart()
+    this.memory.playFallDownAudio()
+    this.memory.playClickAudio()
+    this.selectCharUI.removeCharButtonsActive()
+    this.selectCharUI.toggleReadyStartCharTalkingBtn(common.toggle.off)
+    this.messengerInterface.toggleActivePanel(common.toggle.off)
+    this.toggleShowBackBtn(common.toggle.off)
+    runElementsFn([
+      {
+        element: classReferences.selectCharUI.main,
+        animation: animationSettings.selectCharUI.end,
+      },
+      {
+        element: classReferences.messenger.main,
+        animation: animationSettings.messenger.end,
+      },
+    ])
   }
 
   createChatBubble(text, whoTalking) {
@@ -113,36 +97,17 @@ class MessengerScreen {
         src: avatarImage,
         classes: [classNames.messenger.avatar],
       })
-      this.removeImgAmongImgs({
+      removeElAmongElsFn({
         element: common.elements.img,
-        search: `[${common.messagesPart}="${this.charMessagesPart}"]`,
+        elementsName: `[${common.messagesPart}="${this.charMessagesPart}"]`,
       })
       messageContainer.appendChild(avatar)
     }
-    this.memory.playChatBubbleAudio()
+
     messageContainer.appendChild(message)
+    this.memory.playChatBubbleAudio()
 
     return messageContainer
-  }
-
-  removeImgAmongImgs({ element, search }) {
-    let searchEls = search
-    if (typeof search === common.types.string) {
-      searchEls = document.querySelectorAll(search)
-    }
-
-    searchEls[searchEls.length - 1] &&
-      searchEls[searchEls.length - 1].querySelector(element).remove()
-  }
-
-  scrollMessengerScreenContainer() {
-    const valueToScroll =
-      this.containerSent.scrollHeight - this.containerSent.clientHeight
-    this.containerSent.scroll(0, valueToScroll)
-  }
-
-  attachToMessengerScreen(element) {
-    this.screen.appendChild(element)
   }
 
   createLoader(charName) {
@@ -166,29 +131,54 @@ class MessengerScreen {
     return circleContainer
   }
 
-  removeLoader(loader) {
-    loader.remove()
+  createLists() {
+    this.allElementsList = [this.backIcon, this.screen]
+  }
+
+  toggleShowBackBtn(toggle) {
+    setPropsFn([
+      {
+        elements: [this.backIcon],
+        styleProps: [
+          {
+            name: 'visibility',
+            value: toggle === common.toggle.on ? 'visible' : 'hidden',
+          },
+          { name: 'opacity', value: toggle === common.toggle.on ? 1 : 0 },
+        ],
+      },
+    ])
   }
 
   showTyping(time, charName) {
     this.memory.playTypingAudio()
     const loader = this.createLoader(charName)
     this.attachToMessengerScreen(loader)
-    this.scrollMessengerScreenContainer()
+    this.scrollMessengerScreen()
     setTimeout(() => this.removeLoader(loader), time)
     return new Promise((resolve) => setTimeout(resolve, time))
   }
 
-  removeChatBubbles() {
-    this.screen.innerHTML = ''
+  increaseCharMessagesPart() {
+    this.charMessagesPart++
   }
 
-  toggleShowBackBtn(toggle) {
-    this.backIcon.style.visibility =
-      toggle === common.toggle.on
-        ? common.styleProps.values.visible
-        : common.styleProps.values.hidden
-    this.backIcon.style.opacity = toggle === common.toggle.on ? 1 : 0
+  scrollMessengerScreen() {
+    const valueToScroll =
+      this.containerSent.scrollHeight - this.containerSent.clientHeight
+    this.containerSent.scroll(0, valueToScroll)
+  }
+
+  attachToMessengerScreen(element) {
+    this.screen.appendChild(element)
+  }
+
+  removeLoader(loader) {
+    loader.remove()
+  }
+
+  removeChatBubbles() {
+    this.screen.innerHTML = ''
   }
 }
 

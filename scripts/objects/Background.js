@@ -36,7 +36,6 @@ class Background {
     setInterval(() => {
       this.cxt.fillStyle = 'rgba(0,0,0,0.05)'
       this.cxt.fillRect(0, 0, this.canvas.width, this.canvas.height)
-
       this.cxt.fillStyle = 'rgb(132, 42, 86)'
       this.cxt.font = this.font_size + 'px arial'
 
@@ -53,7 +52,6 @@ class Background {
           Math.random() > 0.975
         )
           this.drops[i] = 0
-
         this.drops[i]++
       }
     }, time)
