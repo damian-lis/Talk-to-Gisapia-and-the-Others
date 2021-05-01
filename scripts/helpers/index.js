@@ -7,6 +7,7 @@ import changeLanguageFn from './changeLanguageFn.js'
 import toggleReadyFn from './toggleReadyFn.js'
 import setActiveFn from './setActiveFn.js'
 import setPropsFn from './setPropsFn.js'
+import removeElAmongElsFn from './removeElAmongElsFn.js'
 
 export {
   setUpperLetterFn,
@@ -18,4 +19,5 @@ export {
   toggleReadyFn,
   setActiveFn,
   setPropsFn,
+  removeElAmongElsFn,
 }
