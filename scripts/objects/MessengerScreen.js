@@ -41,7 +41,7 @@ class MessengerScreen {
       listeners: [
         {
           event: common.events.click,
-          cb: () => this.handleBackIconClick,
+          cb: () => this.handleBackIconClick(),
         },
       ],
     })

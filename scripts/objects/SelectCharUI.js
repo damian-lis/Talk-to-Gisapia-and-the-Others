@@ -77,7 +77,8 @@ class SelectCharUI {
         listeners: [
           {
             event: common.events.click,
-            cb: (e) => handleCharButtonsClick({ target: e.target }),
+            cb: (e) =>
+              this.handleCharButtonsClick({ target: e.target, charName }),
           },
         ],
       })
@@ -167,7 +168,7 @@ class SelectCharUI {
     this.privatePolicy = this.createPrivatePolicy()
   }
 
-  handleCharButtonsClick({ target }) {
+  handleCharButtonsClick({ target, charName }) {
     setActiveFn({
       setOn: target,
       removeFrom: this.charButtons,
