@@ -1,4 +1,4 @@
-import { Gisapia, NullCharacter, Hookin, Reduxon } from './index.js'
+import { Gisapia, Hookin, Reduxon } from './index.js'
 import {
   gisapiaScriptTalk,
   gisapiaEmail,
@@ -15,7 +15,6 @@ class CharsFactory {
     this.gisapia = new Gisapia(gisapiaScriptTalk, gisapiaEmail, memory)
     this.hookin = new Hookin(hookinScriptTalk, hookinEmail, memory)
     this.reduxon = new Reduxon(reduxonScriptTalk, reduxonEmail, memory)
-    this.nullCharacter = new NullCharacter()
   }
 
   getChar(charName) {
@@ -27,7 +26,7 @@ class CharsFactory {
       case common.charNames.Reduxon:
         return this.reduxon
       default:
-        return this.nullCharacter
+        break
     }
   }
 }

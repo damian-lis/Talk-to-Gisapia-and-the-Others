@@ -7,7 +7,6 @@ import MessengerScreen from './MessengerScreen.js'
 import SelectCharUI from './SelectCharUI.js'
 import Character from './Character.js'
 import Gisapia from './characters/Gisapia.js'
-import NullCharacter from './characters/NullCharacter.js'
 import Hookin from './characters/Hookin.js'
 import Reduxon from './characters/Reduxon.js'
 
@@ -21,7 +20,6 @@ export {
   SelectCharUI,
   Character,
   Gisapia,
-  NullCharacter,
   Hookin,
   Reduxon,
 }
