@@ -5,9 +5,9 @@ export default (objs) => {
         obj.styleProps.map((prop) => {
           element.style[prop.name] = prop.value
         })
-      } else {
+      } else if (obj.props) {
         obj.props.map((prop) => {
-          element.style[prop.name] = prop.value
+          element[prop.name] = prop.value
         })
       }
     })

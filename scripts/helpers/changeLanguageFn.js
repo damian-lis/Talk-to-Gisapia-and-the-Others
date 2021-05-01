@@ -1,5 +1,5 @@
-export default ({ objs, lng }) => {
-  objs.map((obj) => {
-    obj.element[obj.prop] = obj.value[lng]
+export default (list, lng) => {
+  list.map((item) => {
+    item.element[item.props.name] = item.props.value[lng]
   })
 }
