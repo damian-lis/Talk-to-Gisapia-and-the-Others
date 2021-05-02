@@ -2,6 +2,7 @@ import Background from './Background.js'
 import GisapiaAnimation from './GisapiaAnimation.js'
 import memory from './Memory.js'
 import CharsFactory from './CharsFactory.js'
+import Messenger from './Messenger.js'
 import MessengerInterface from './MessengerInterface.js'
 import MessengerScreen from './MessengerScreen.js'
 import SelectCharUI from './SelectCharUI.js'
@@ -15,6 +16,7 @@ export {
   GisapiaAnimation,
   memory,
   CharsFactory,
+  Messenger,
   MessengerInterface,
   MessengerScreen,
   SelectCharUI,
