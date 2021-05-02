@@ -155,7 +155,6 @@ class Character {
     })
 
     this.modifiedEmail.to = recipient
-    console.log(this.modifiedEmail)
   }
 
   getCurrentScriptTalkCategory(conversationStep) {
