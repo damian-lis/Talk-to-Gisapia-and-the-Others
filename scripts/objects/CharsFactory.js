@@ -1,14 +1,13 @@
 import { Gisapia, Hookin, Reduxon } from './index.js'
+import { common } from '/data/main.js'
 import {
   gisapiaScriptTalk,
   gisapiaEmail,
-} from '/data/characters/gisapia/index.js'
-import { hookinScriptTalk, hookinEmail } from '/data/characters/hookin/index.js'
-import {
+  hookinScriptTalk,
+  hookinEmail,
   reduxonScriptTalk,
   reduxonEmail,
-} from '/data/characters/reduxon/index.js'
-import { common } from '/data/main.js'
+} from '/data/characters/index.js'
 
 class CharsFactory {
   constructor(memory) {

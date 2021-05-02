@@ -6,12 +6,10 @@ import {
 import Background from './Background.js'
 import GisapiaAnimation from './GisapiaAnimation.js'
 import memory from './Memory.js'
+import Character from './Character.js'
 import CharsFactory from './CharsFactory.js'
 import SelectCharUI from './SelectCharUI.js'
-import Character from './Character.js'
-import Gisapia from './characters/Gisapia.js'
-import Hookin from './characters/Hookin.js'
-import Reduxon from './characters/Reduxon.js'
+import { Gisapia, Hookin, Reduxon } from './characters/index.js'
 
 export {
   Background,

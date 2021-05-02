@@ -1,6 +1,6 @@
 import { GisapiaAnimation, Background } from './index.js'
 import { createElementFn, setUpperLetterFn } from '/scripts/helpers/index.js'
-import charMemory from '/data/characters/charMemory.js'
+import { charMemory } from '/data/characters/index.js'
 import { src, common } from '/data/main.js'
 
 class Memory {
