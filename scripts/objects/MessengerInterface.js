@@ -3,6 +3,7 @@ import {
   appendElementsToContainerFn,
   changeLanguageFn,
   setPropsFn,
+  setClassesFn,
 } from '/scripts/helpers/index.js'
 import {
   classNames,
@@ -14,38 +15,28 @@ import {
 } from '/data/main.js'
 
 class MessengerInterface {
-  constructor(container, memory) {
-    this.containerSent = document.querySelector(container)
+  constructor(messenger, memory) {
     this.memory = memory
     this.inputValue = ''
     this.subscribers = []
 
     this.createElements()
-    this.createLists()
+    this.createComponents()
     this.memoryLngSubscribe()
 
-    appendElementsToContainerFn(this.allElementsList, this.containerSent)
-  }
-
-  memoryLngSubscribe() {
-    this.memory.lngSubscribe((lng) =>
-      changeLanguageFn(
-        [
-          {
-            element: this.button,
-            props: {
-              name: 'textContent',
-              value: commands.send,
-            },
-          },
-        ],
-        lng
-      )
+    appendElementsToContainerFn(
+      [this.mainComponent],
+      messenger.getContainerInner()
     )
   }
 
   createElements() {
     const lng = this.memory.getLanguage()
+
+    this.container = createElementFn({
+      element: common.elements.div,
+      classes: [classNames.messenger.interface],
+    })
 
     this.input = createElementFn({
       element: common.elements.input,
@@ -82,7 +73,27 @@ class MessengerInterface {
       ],
     })
 
-    this.spinner = this.createSpinner()
+    this.spinnerContainer = createElementFn({
+      element: common.elements.div,
+      classes: [classNames.messenger.spinnerContainer],
+    })
+
+    this.spinner = createElementFn({
+      element: common.elements.div,
+      classes: [classNames.messenger.spinner],
+    })
+  }
+
+  createComponents() {
+    this.spinnerComponent = appendElementsToContainerFn(
+      [this.spinner],
+      this.spinnerContainer
+    )
+
+    this.mainComponent = appendElementsToContainerFn(
+      [this.input, this.button, this.spinnerComponent],
+      this.container
+    )
   }
 
   handleInputKeypress(e) {
@@ -99,24 +110,21 @@ class MessengerInterface {
     }
   }
 
-  createSpinner() {
-    const formSpinnerContainer = createElementFn({
-      element: common.elements.div,
-      classes: [classNames.messenger.spinnerContainer],
-    })
-
-    const formSpinner = createElementFn({
-      element: common.elements.div,
-      classes: [classNames.messenger.spinner],
-    })
-
-    formSpinnerContainer.appendChild(formSpinner)
-
-    return formSpinnerContainer
-  }
-
-  createLists() {
-    this.allElementsList = [this.input, this.button, this.spinner]
+  memoryLngSubscribe() {
+    this.memory.lngSubscribe((lng) =>
+      changeLanguageFn(
+        [
+          {
+            element: this.button,
+            props: {
+              name: common.props.names.textContent,
+              value: commands.send,
+            },
+          },
+        ],
+        lng
+      )
+    )
   }
 
   isCorrectInputValue() {
@@ -174,7 +182,7 @@ class MessengerInterface {
         elements: [this.button],
         styleProps: [
           {
-            name: 'pointerEvents',
+            name: common.styleProps.names.pointerEvents,
             value:
               toggle === common.toggle.on
                 ? common.styleProps.values.auto
@@ -187,7 +195,7 @@ class MessengerInterface {
         elements: [this.input, this.button],
         props: [
           {
-            name: 'disabled',
+            name: common.props.names.disabled,
             value: toggle === common.toggle.on ? false : true,
           },
           ,
@@ -204,18 +212,22 @@ class MessengerInterface {
         elements: [this.button],
         styleProps: [
           {
-            name: 'display',
-            value: invert ? 'block' : 'none',
+            name: common.styleProps.names.display,
+            value: invert
+              ? common.styleProps.values.block
+              : common.styleProps.values.none,
           },
           ,
         ],
       },
       {
-        elements: [this.spinner],
+        elements: [this.spinnerComponent],
         styleProps: [
           {
-            name: 'display',
-            value: invert ? 'none' : 'flex',
+            name: common.styleProps.names.display,
+            value: invert
+              ? common.styleProps.values.none
+              : common.styleProps.values.flex,
           },
           ,
         ],
@@ -233,6 +245,26 @@ class MessengerInterface {
 
   callSubscribers() {
     this.subscribers.map((subscriber) => subscriber(this.inputValue))
+  }
+
+  changeColor(chosenChar) {
+    setClassesFn([
+      {
+        elements: [this.button],
+        initialClass: classNames.messenger.interfaceBtn,
+        classesToAdd: [`${chosenChar.name.toLowerCase()}-${common.second}`],
+      },
+      {
+        elements: [this.input],
+        initialClass: classNames.messenger.interfaceInput,
+        classesToAdd: [`${chosenChar.name.toLowerCase()}-${common.second}`],
+      },
+      {
+        elements: [this.spinnerContainer],
+        initialClass: classNames.messenger.spinnerContainer,
+        classesToAdd: [`${chosenChar.name.toLowerCase()}-${common.second}`],
+      },
+    ])
   }
 }
 

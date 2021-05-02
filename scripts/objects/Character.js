@@ -31,10 +31,6 @@ class Character {
       return this.modifiedScriptTalk[category][common.answers][type]
   }
 
-  getCurrentScriptTalkCategory(conversationStep) {
-    return Object.keys(this.modifiedScriptTalk)[conversationStep]
-  }
-
   getScriptTalkCategories() {
     const categories = {}
     Object.keys(this.modifiedScriptTalk).map(
@@ -42,16 +38,6 @@ class Character {
     )
 
     return categories
-  }
-
-  mustThink(time) {
-    return new Promise((resolve) => setTimeout(resolve, time))
-  }
-
-  checkUserMessageInMemory(scriptCategory, message) {
-    return this.memory
-      .getCharMemory(scriptCategory)
-      .find((word) => message.toLowerCase().includes(word.toLowerCase()))
   }
 
   countTypingQuantity(textLength) {
@@ -66,12 +52,6 @@ class Character {
     }
 
     return result
-  }
-
-  countTimeForTyping(textLength, speed) {
-    const result = textLength * speed
-
-    return result > 2500 ? 2500 : result < 1000 ? 1000 : result
   }
 
   setScriptTalkMessages(scriptTalk) {
@@ -173,7 +153,29 @@ class Character {
       wordsSets: wordsToSearchAndReplace,
       texts: emailCopy,
     })
+
     this.modifiedEmail.to = recipient
+    console.log(this.modifiedEmail)
+  }
+
+  getCurrentScriptTalkCategory(conversationStep) {
+    return Object.keys(this.modifiedScriptTalk)[conversationStep]
+  }
+
+  mustThink(time) {
+    return new Promise((resolve) => setTimeout(resolve, time))
+  }
+
+  checkUserMessageInMemory(scriptCategory, message) {
+    return this.memory
+      .getCharMemory(scriptCategory)
+      .find((word) => message.toLowerCase().includes(word.toLowerCase()))
+  }
+
+  countTimeForTyping(textLength, speed) {
+    const result = textLength * speed
+
+    return result > 2500 ? 2500 : result < 1000 ? 1000 : result
   }
 
   getEmail() {

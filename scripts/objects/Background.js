@@ -37,7 +37,7 @@ class Background {
       this.cxt.fillStyle = 'rgba(0,0,0,0.05)'
       this.cxt.fillRect(0, 0, this.canvas.width, this.canvas.height)
       this.cxt.fillStyle = 'rgb(132, 42, 86)'
-      this.cxt.font = this.font_size + 'px arial'
+      this.cxt.font = `${this.font_size}px ${common.fonts.arial}`
 
       for (let i = 0; i < this.drops.length; i++) {
         let text = this.chinese[Math.floor(Math.random() * this.chinese.length)]
