@@ -1,11 +1,26 @@
 export const common = {
+  listeners: 'listeners',
+  attributes: 'attributes',
+  classes: 'classes',
+  styles: 'styles',
+  string: 'string',
+  animation: 'animation',
   messages: 'messages',
   answers: 'answers',
   language: 'language',
   selectChar: 'selectChar',
   startTalking: 'startTalking',
   messagesPart: 'messagesPart',
+  toBottomHide: 'toBottomHide:',
+  fromBottomShow: 'fromBottomShow',
+  fallFromTop: 'fallFromTop',
+  BackToTheTop: 'BackToTheTop',
   startAnimation: 'startAnimation',
+
+  fonts: {
+    arial: 'arial',
+  },
+
   regexp: {
     modifiers: {
       gi: 'gi',
@@ -87,10 +102,18 @@ export const common = {
     string: 'string',
     object: 'object',
   },
+  props: {
+    names: {
+      textContent: 'textContent',
+      disabled: 'disabled',
+    },
+  },
   styleProps: {
     names: {
       display: 'display',
       pointerEvents: 'pointerEvents',
+      visibility: 'visibility',
+      opacity: 'opacity',
     },
     values: {
       none: 'none',
@@ -99,6 +122,8 @@ export const common = {
       hidden: 'hidden',
       auto: 'auto',
       flex: 'flex',
+      visible: 'visible',
+      hidden: 'hidden',
     },
   },
   charNames: {
@@ -117,12 +142,12 @@ export const chineseString =
 
 export const animationSettings = {
   selectCharUI: {
-    start: 'toBottomHide forwards 1s',
-    end: 'fromBottomShow 2s forwards',
+    toBottomHide: 'toBottomHide forwards 1s',
+    fromBottomShow: 'fromBottomShow 2s forwards',
   },
   messenger: {
-    start: 'fallFromTop 1s forwards',
-    end: 'backToTheTop 2s forwards',
+    fallFromTop: 'fallFromTop 1s forwards',
+    BackToTheTop: 'backToTheTop 2s forwards',
   },
 }
 
@@ -246,6 +271,10 @@ export const classNames = {
 }
 
 export const classReferences = {
+  helpers: {
+    wrapper: '.wrapper',
+  },
+
   messenger: {
     main: '.messenger',
     inner: '.messenger-inner',
