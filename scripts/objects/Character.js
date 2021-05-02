@@ -25,10 +25,14 @@ class Character {
   }
 
   getScriptTalkMessages({ category, from, type }) {
-    if (from === common.messages)
-      return this.modifiedScriptTalk[category][common.messages]
-    if (from === common.answers)
-      return this.modifiedScriptTalk[category][common.answers][type]
+    switch (from) {
+      case common.messages:
+        return this.modifiedScriptTalk[category][common.messages]
+      case common.answers:
+        return this.modifiedScriptTalk[category][common.answers][type]
+      default:
+        break
+    }
   }
 
   getScriptTalkCategories() {
@@ -78,6 +82,15 @@ class Character {
     return scriptTalk
   }
 
+  setWordsToSearchAndReplace() {
+    return Object.keys(this.memory.getAboutUser()).map((category) => {
+      return {
+        search: `-${common.user}${setUpperLetterFn(category)}-`,
+        replace: this.memory.getAboutUser(category),
+      }
+    })
+  }
+
   findWordAndReplace({ wordsSets, texts }) {
     if (typeof texts === common.types.object) {
       let textsCopy = texts
@@ -111,15 +124,6 @@ class Character {
 
       return textsCopy
     }
-  }
-
-  setWordsToSearchAndReplace() {
-    return Object.keys(this.memory.getAboutUser()).map((category) => {
-      return {
-        search: `-${common.user}${setUpperLetterFn(category)}-`,
-        replace: this.memory.getAboutUser(category),
-      }
-    })
   }
 
   changeScriptTalkMessages({ category, from, type }) {

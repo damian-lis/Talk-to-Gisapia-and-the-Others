@@ -16,98 +16,31 @@ export const common = {
   fallFromTop: 'fallFromTop',
   BackToTheTop: 'BackToTheTop',
   startAnimation: 'startAnimation',
-
-  fonts: {
-    arial: 'arial',
-  },
-
-  regexp: {
-    modifiers: {
-      gi: 'gi',
-    },
-  },
   id: 'id',
   main: 'main',
   second: 'second',
   ball: 'ball',
   user: 'user',
-  keys: {
-    Enter: 'Enter',
-  },
-  toggle: {
-    on: 'on',
-    off: 'off',
-  },
-  language: {
-    name: 'language',
-    pl: {
-      large: 'PL',
-      small: 'pl',
-    },
-    eng: {
-      large: 'ENG',
-      small: 'eng',
-    },
-  },
-  privatePolicy: {
-    pl: 'Polityka prywatności',
-    eng: 'Private policy',
-  },
-  answerTypes: {
-    isInMemory: 'isInMemory',
-    isNotInMemory: 'isNotInMemory',
-    isAddedToMemory: 'isAddedToMemory',
-  },
-  categories: {
-    name: 'name',
-    origin: 'origin',
-    hobby: 'hobby',
-    summary: 'summary',
-  },
-  elements: {
-    canvas: 'canvas',
-    div: 'div',
-    button: 'button',
-    input: 'input',
-    img: 'img',
-    audio: 'audio',
-    h1: 'h1',
-    a: 'a',
-    p: 'p',
-  },
-  fetch: {
-    methods: {
-      POST: 'POST',
-    },
-    headers: {
-      props: {
-        ContentType: 'Content-Type',
-      },
-      values: {
-        applicationJson: 'application/json',
-      },
-    },
-  },
+
   events: {
     click: 'click',
     keypress: 'keypress',
     resize: 'resize',
     DOMContentLoaded: 'DOMContentLoaded',
   },
+
   types: {
-    boolean: {
-      true: 'true',
-      false: 'false',
-    },
     string: 'string',
     object: 'object',
   },
+
   props: {
     names: {
       textContent: 'textContent',
       disabled: 'disabled',
     },
   },
+
   styleProps: {
     names: {
       display: 'display',
@@ -126,6 +59,82 @@ export const common = {
       hidden: 'hidden',
     },
   },
+
+  fonts: {
+    arial: 'arial',
+  },
+
+  regexp: {
+    modifiers: {
+      gi: 'gi',
+    },
+  },
+
+  keys: {
+    Enter: 'Enter',
+  },
+
+  toggle: {
+    on: 'on',
+    off: 'off',
+  },
+
+  language: {
+    name: 'language',
+    pl: {
+      large: 'PL',
+      small: 'pl',
+    },
+    eng: {
+      large: 'ENG',
+      small: 'eng',
+    },
+  },
+
+  privatePolicy: {
+    pl: 'Polityka prywatności',
+    eng: 'Private policy',
+  },
+
+  answerTypes: {
+    isInMemory: 'isInMemory',
+    isNotInMemory: 'isNotInMemory',
+    isAddedToMemory: 'isAddedToMemory',
+  },
+
+  categories: {
+    name: 'name',
+    origin: 'origin',
+    hobby: 'hobby',
+    summary: 'summary',
+  },
+
+  elements: {
+    canvas: 'canvas',
+    div: 'div',
+    button: 'button',
+    input: 'input',
+    img: 'img',
+    audio: 'audio',
+    h1: 'h1',
+    a: 'a',
+    p: 'p',
+  },
+
+  fetch: {
+    methods: {
+      POST: 'POST',
+    },
+    headers: {
+      props: {
+        ContentType: 'Content-Type',
+      },
+      values: {
+        applicationJson: 'application/json',
+      },
+    },
+  },
+
   charNames: {
     Gisapia: 'Gisapia',
     Hookin: 'Hookin',
@@ -152,6 +161,16 @@ export const animationSettings = {
 }
 
 export const messages = {
+  mailSent: {
+    pl: [`Mail wysłany, sprawdź! 😋`],
+    eng: [`Mail sent, check it! 😋`],
+  },
+
+  withoutMail: {
+    pl: ['Maila nie wysyłam,', 'dzięki za rozmowę 😉'],
+    eng: [`I don't send the e-mail,`, `thanks for the interview! 😉`],
+  },
+
   noConnection: {
     pl: [
       `Maila niestety nie otrzymasz bo nie ma połączenia z serwerem... 😕`,
@@ -162,14 +181,7 @@ export const messages = {
       `I'm going to check it out ... In the meantime, thanks for the interview! 😉`,
     ],
   },
-  withoutMail: {
-    pl: ['Maila nie wysyłam,', 'dzięki za rozmowę 😉'],
-    eng: [`I don't send the e-mail,`, `thanks for the interview! 😉`],
-  },
-  mailSent: {
-    pl: [`Mail wysłany, sprawdź! 😋`],
-    eng: [`Mail sent, check it! 😋`],
-  },
+
   problemWithServer: {
     pl: [
       `Mail niestety nie został wysłany...`,

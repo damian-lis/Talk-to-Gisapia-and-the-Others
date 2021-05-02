@@ -62,12 +62,12 @@ class SelectCharUI {
     this.startButton = createElementFn({
       element: common.elements.button,
       textContent: commands.startTalking[lng],
-      disabled: common.types.boolean.true,
+      disabled: true,
       classes: [classNames.selectCharUI.startBtn],
       listeners: [
         {
           event: common.events.click,
-          cb: () => this.handlestartButtonClick(),
+          cb: () => this.handleStartButtonClick(),
         },
       ],
     })
@@ -186,7 +186,7 @@ class SelectCharUI {
     this.memory.playClickAudio()
   }
 
-  handlestartButtonClick() {
+  handleStartButtonClick() {
     this.memory.playFallDownAudio()
     this.memory.playBackgroundAudio()
     this.memory.playClickAudio()
