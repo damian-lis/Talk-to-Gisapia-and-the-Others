@@ -1,10 +1,12 @@
+import { common } from '/data/main.js'
+
 export default ({ element, ...rest }) => {
   const createdElement = document.createElement(element)
 
   if (Object.keys(rest).length) {
     for (const propEl in rest) {
       switch (propEl) {
-        case 'listeners':
+        case common.listeners:
           rest[propEl].map((listener) => {
             const { event, cb } = listener
             createdElement.addEventListener(event, (e) => {
@@ -13,7 +15,7 @@ export default ({ element, ...rest }) => {
           })
           break
 
-        case 'attributes':
+        case common.attributes:
           rest[propEl].map((attribute) => {
             createdElement.setAttribute(
               `${attribute.type}`,
@@ -22,11 +24,11 @@ export default ({ element, ...rest }) => {
           })
           break
 
-        case 'classes':
+        case common.classes:
           createdElement.classList.add(...rest[propEl])
           break
 
-        case 'styles':
+        case common.styles:
           rest[propEl].map((styleObj) => {
             createdElement.style[styleObj.name] = styleObj.value
           })
