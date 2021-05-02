@@ -271,10 +271,6 @@ export const classNames = {
 }
 
 export const classReferences = {
-  helpers: {
-    wrapper: '.wrapper',
-  },
-
   messenger: {
     main: '.messenger',
     inner: '.messenger-inner',
@@ -323,6 +319,9 @@ export const ideReferences = {
     hair: '#hair',
     eyes: '#eyes',
     main: '#gisapia',
+  },
+  global: {
+    app: '#app',
   },
 }
 
