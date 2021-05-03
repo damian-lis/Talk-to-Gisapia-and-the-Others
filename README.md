@@ -14,8 +14,6 @@ Mobile version:
 
 ![](images/readme/introMobile.gif)
 
-<br/>
-
 ### Live version is available [here](https://talktogisapiaandtheothers.pl/).
 
 <br/>
@@ -81,15 +79,13 @@ Most of the project is built in oop javascript for a very in-depth understanding
 
 ## 3.1. General
 
-<br/>
-
 ### 3.1.1. String values in variables
 
 In the project, almost all string values have been assigned to variables (objects properties) to avoid unwanted errors by typos. Naming such values is longer, but more secure and predictable.
 
 <br/>
 
-In the example below, we can see the different categories of variables (data/main.js):
+In the example below, we can see the different categories of variables (data/names.js):
 
 ```
 export const common = {
@@ -178,7 +174,7 @@ The function that plays the biggest role in the project is createElementFn.js, w
 Below is the code example (helpers/createElementFn.js):
 
 ```
-import { common } from '/data/main.js'
+import { common } from '/data/names.js'
 
 export default ({ element, ...rest }) => {
   const createdElement = document.createElement(element)
@@ -365,7 +361,7 @@ import {
   setClassesFn,
   setPropsFn,
 } from '/scripts/helpers/index.js'
-import { common, classNames, animationSettings } from '/data/main.js'
+import { common, classNames, animationSettings } from '/data/names.js'
 
 class Messenger {
   constructor(container) {
@@ -416,7 +412,7 @@ import {
   setClassesFn,
 } from '/scripts/helpers/index.js'
 
-import { classNames, common, src } from '/data/main.js'
+import { classNames, common, src } from '/data/names.js'
 
 class MessengerScreen {
   constructor(container, selectCharUI, messengerInterface, memory) {
@@ -614,7 +610,7 @@ Below is a visual example of this solution:
 In order to be able to get the phenomenon shown in the example above, the Background object with many methods was created (objects/Background.js):
 
 ```
-import { common, chineseString } from '/data/main.js'
+import { common, chineseString } from '/data/names.js'
 
 class Background {
   constructor() {
@@ -732,7 +728,7 @@ There are 3 characters in the app that we can chat with. Due to the very high si
 Below is an example of this global character class (objects/characters/Character.js):
 
 ```
-import { common } from '/data/main.js'
+import { common } from '/data/names.js'
 import { setUpperLetterFn } from '/scripts/helpers/index.js'
 
 class Character {
@@ -783,7 +779,7 @@ Below is an example of inheritance by a Gisapia character (objects/characters/Gi
 
 ```
 import { Character } from '/scripts/objects/index.js'
-import { common, src } from '/data/main.js'
+import { common, src } from '/data/names.js'
 
 class Gisapia extends Character {
   constructor(scriptTalk, email, memory) {
@@ -809,7 +805,7 @@ The example below shows this solution (objects/CharsFactory.js):
 
 ```
 import { Gisapia, Hookin, Reduxon } from './index.js'
-import { common } from '/data/main.js'
+import { common } from '/data/names.js'
 import {
   gisapiaScriptTalk,
   gisapiaEmail,
@@ -876,7 +872,7 @@ Below is an example of this design pattern (objects/Memory.js):
 import { GisapiaAnimation, Background } from './index.js'
 import { createElementFn, setUpperLetterFn } from '/scripts/helpers/index.js'
 import { charMemory } from '/data/characters/index.js'
-import { src, common } from '/data/main.js'
+import { src, common } from '/data/names.js'
 
 class Memory {
   constructor() {
@@ -1579,7 +1575,7 @@ It is also worth adding that saving user data is done through the addDataToAbout
 import { GisapiaAnimation, Background } from './index.js'
 import { createElementFn, setUpperLetterFn } from '/scripts/helpers/index.js'
 import { charMemory } from '/data/characters/index.js'
-import { src, common } from '/data/main.js'
+import { src, common } from '/data/names.js'
 
 class Memory {
   constructor() {
@@ -1643,7 +1639,7 @@ As we can see above, depending on the response status, we have different message
 
 <br/>
 
-Sample answers (PL/ENG) (data/main.js):
+Sample answers (PL/ENG) (data/names.js):
 
 ```
 export const messages = {
