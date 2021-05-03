@@ -242,8 +242,8 @@ document.addEventListener(common.events.DOMContentLoaded, () => {
       messengerInterface.showSpinnerInsteadBtn()
       messengerInterface.addWaitMessagesToInput({
         firstDelay: 4000,
-        secondDelay: 8000,
-        thirdDelay: 12000,
+        secondDelay: 12000,
+        thirdDelay: 18000,
       })
       const lng = memory.getLanguage()
       chosenChar.addUserDataToEmail({
@@ -254,10 +254,10 @@ document.addEventListener(common.events.DOMContentLoaded, () => {
 
       await handleCharTalkingDuringSendData(charEmail)
       messengerInterface.clearInput({ withTimeouts: true })
-      return messengerInterface.showSpinnerInsteadBtn({ invert: true })
+      messengerInterface.showSpinnerInsteadBtn({ invert: true })
     } else {
       handleFinishAnimation({ delay: 1000 })
-      return selectCharUI.changeUI({ messages: messages.withoutMail })
+      selectCharUI.changeUI({ messages: messages.withoutMail })
     }
   }
 
