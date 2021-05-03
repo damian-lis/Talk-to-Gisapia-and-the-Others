@@ -171,7 +171,7 @@ export default {
       answers: {
         isInMemory: [
           [
-            `-userName-? Really -userName - ??? My friend's name is that! 😋`,
+            `-userName-? Really -userName- ??? My friend's name is that! 😋`,
             `eh ... we had a bit of a fight lately 😐, but it's rather temporary! 😉`,
             `okay, there was no topic because I'll talk to you!`,
           ],
@@ -301,7 +301,7 @@ export default {
           `your name is -userName-! 😊`,
           'Let me tell you it sounds really cool! 😏 ',
           ` you come from the town of ...`,
-          `from town -userOrigin -... Yes -userOrigin-! 😎`,
+          `from town -userOrigin-... Yes -userOrigin-! 😎`,
           `your hobby is -userHobby-`,
           `I'm glad that I could meet you`,
           'Unfortunately, due to other responsibilities I have to leave ... 😓',

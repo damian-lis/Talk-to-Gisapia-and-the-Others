@@ -2,7 +2,10 @@ export default {
   pl: {
     name: {
       messages: [
-        ['Witam', `z kim będę miał przyjemność rozmawiać? Jak Ci na imię? 🧐 `],
+        [
+          'Witam, mówią na mnie Hookin',
+          `z kim będę miał przyjemność rozmawiać? Jak Ci na imię? 🧐 `,
+        ],
         [
           'Witaj Nieznajomy 🧐',
           'w kręgu, w którym się obracam, mówią na mnie Hookin. Tobie jak na imię? 🙂',
