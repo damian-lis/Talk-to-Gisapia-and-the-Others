@@ -4,7 +4,7 @@ import {
   setClassesFn,
   setPropsFn,
 } from '/scripts/helpers/index.js'
-import { common, classNames, animationSettings } from '/data/main.js'
+import { common, classNames, animationSettings } from '/data/names.js'
 
 class Messenger {
   constructor(container) {

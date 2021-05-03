@@ -1,5 +1,5 @@
 import { Character } from '/scripts/objects/index.js'
-import { common, src } from '/data/main.js'
+import { common, src } from '/data/names.js'
 
 class Reduxon extends Character {
   constructor(scriptTalk, email, memory) {

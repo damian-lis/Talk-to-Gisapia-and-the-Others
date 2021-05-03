@@ -6,7 +6,7 @@ import {
   setClassesFn,
 } from '/scripts/helpers/index.js'
 
-import { classNames, common, src } from '/data/main.js'
+import { classNames, common, src } from '/data/names.js'
 
 class MessengerScreen {
   constructor(container, selectCharUI, messengerInterface, memory) {

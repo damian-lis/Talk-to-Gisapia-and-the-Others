@@ -1,4 +1,4 @@
-import { common } from '/data/main.js'
+import { common } from '/data/names.js'
 
 export default ({ element, ...rest }) => {
   const createdElement = document.createElement(element)

@@ -1,4 +1,4 @@
-import { common, chineseString } from '/data/main.js'
+import { common, chineseString } from '/data/names.js'
 
 class Background {
   constructor() {

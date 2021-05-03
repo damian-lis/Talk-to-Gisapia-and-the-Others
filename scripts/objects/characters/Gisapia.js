@@ -1,5 +1,5 @@
 import { Character } from '/scripts/objects/index.js'
-import { common, src } from '/data/main.js'
+import { common, src } from '/data/names.js'
 
 class Gisapia extends Character {
   constructor(scriptTalk, email, memory) {

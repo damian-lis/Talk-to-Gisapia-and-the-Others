@@ -5,7 +5,7 @@ import {
   charNameList,
   mailEndPoint,
   ideReferences,
-} from '/data/main.js'
+} from '/data/names.js'
 import {
   memory,
   SelectCharUI,

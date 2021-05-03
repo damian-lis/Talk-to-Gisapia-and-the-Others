@@ -1,4 +1,4 @@
-import { common } from '/data/main.js'
+import { common } from '/data/names.js'
 
 export default (objects) => {
   objects.map((object) => {

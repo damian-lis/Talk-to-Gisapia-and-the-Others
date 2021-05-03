@@ -1,4 +1,4 @@
-import { common, ideReferences } from '/data/main.js'
+import { common, ideReferences } from '/data/names.js'
 
 class GisapiaAnimation {
   constructor() {

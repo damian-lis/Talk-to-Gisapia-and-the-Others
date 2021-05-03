@@ -12,7 +12,7 @@ import {
   commands,
   common,
   src,
-} from '/data/main.js'
+} from '/data/names.js'
 
 class SelectCharUI {
   constructor(charNames, container, memory) {

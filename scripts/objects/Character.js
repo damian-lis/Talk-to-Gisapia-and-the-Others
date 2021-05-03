@@ -1,4 +1,4 @@
-import { common } from '/data/main.js'
+import { common } from '/data/names.js'
 import { setUpperLetterFn } from '/scripts/helpers/index.js'
 
 class Character {

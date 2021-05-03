@@ -12,7 +12,7 @@ import {
   messages,
   common,
   emailValidationReg,
-} from '/data/main.js'
+} from '/data/names.js'
 
 class MessengerInterface {
   constructor(messenger, memory) {
