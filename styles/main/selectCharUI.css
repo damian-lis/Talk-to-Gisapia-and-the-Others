@@ -84,17 +84,18 @@
 
 .selectCharUI-plLngBtn,
 .selectCharUI-engLngBtn {
-  width: 42px;
-  height: 42px;
+  width: 45px;
+  height: 45px;
   padding: 3px;
   border-radius: 50%;
   background-color: var(--selectCharUISecondColor);
   color: #fff;
+  font-size: 14px;
 }
 
 .selectCharUI-engLngBtn {
   right: 42px;
-  margin-left: 10px;
+  margin-left: 14px;
 }
 
 .selectCharUI-lngBtn-active {
@@ -120,13 +121,6 @@
   .selectCharUI-message {
     font-size: 19px;
     line-height: 35px;
-  }
-
-  .selectCharUI-plLngBtn,
-  .selectCharUI-engLngBtn {
-    width: 35px;
-    height: 35px;
-    font-size: 10px;
   }
 
   .selectCharUI-startBtn {
