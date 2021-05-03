@@ -114,13 +114,13 @@ class MessengerScreen {
 
   createLoaderComponent(charName) {
     const circleContainer = createElementFn({
-      element: common.elenets.div,
+      element: common.elements.div,
       classes: [classNames.messenger.loaderContainer],
     })
 
     for (let i = 0; i < 3; i++) {
       const circle = createElementFn({
-        element: common.elenets.div,
+        element: common.elements.div,
         attributes: [{ type: common.id, name: `${common.ball}-${i + 1}` }],
         classes: [
           classNames.messenger.loader,
