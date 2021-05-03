@@ -6,7 +6,7 @@ The application allows you to write in two languages (PL / ENG) with 3 different
 
 Desktop version:
 
-![](images/readme/intro.gif)
+![](images/readme/introDesktop.gif)
 
 <br/>
 
@@ -80,6 +80,8 @@ Most of the project is built in oop javascript for a very in-depth understanding
 <br/>
 
 ## 3.1. General
+
+<br/>
 
 ### 3.1.1. String values in variables
 
@@ -159,6 +161,7 @@ export const common = {
 ```
 
 <br/>
+<br/>
 
 ### 3.1.2. Helper functions
 
@@ -166,9 +169,7 @@ Due to the fact that most of the operations in the code are repeated, functions 
 
 Here are structure of helper functions:
 
-<!-- PRZYKŁAD HELPERÓW -->
-
-<br/>
+![](images/readme/helpersStructure.jpg)
 
 The function that plays the biggest role in the project is createElementFn.js, which is responsible for creating html elements with all properties in js classes.
 
@@ -275,6 +276,8 @@ export default (objs) => {
 }
 ```
 
+<br/>
+
 The following is an example of using setPropsFn in toggleShowBackBtn method when setting the visibility and opacity style properties depending on the value of toggle (objects/messenger/MessengerScreen.js):
 
 ```
@@ -300,6 +303,9 @@ toggleShowBackBtn(toggle) {
 }
 ```
 
+<br/>
+<br/>
+
 ### 3.1.3. The structure of styles
 
 The styles have been grouped into two folders: main, in which there are styles for individual components on the page, and global, in which there are styles that are global and serve the entire application.
@@ -308,7 +314,9 @@ The styles have been grouped into two folders: main, in which there are styles f
 
 Below is an example of the style structure:
 
-<!-- PRZYKŁAD STRUKTURY STYLI -->
+![](images/readme/stylesStructure.jpg)
+
+<br/>
 
 Main styles are defined in the variables.css file, which are then dynamically used in the application by the classes defined in the helpers.css file.
 
@@ -332,22 +340,23 @@ Due to the optimization of loading css files, their loading was placed in the he
 ```
 
 <br/>
+<br/>
 
 ### 3.1.4. The structure of js objects and their methods
 
 Due to the fact that most of the code was written in an object-oriented way, the structure of js files looks like this:
 
-<!-- PRZYKŁAD STRUKTURY PLIKÓW JS -->
-
-Each file (except scripts/index.js) corresponds to a specific class (some have been grouped for better readability) that contains properties and methods that are used in the main js file named index.js.
+![](images/readme/jsStructure.jpg)
 
 <br/>
+
+Each file (except scripts/index.js) corresponds to a specific class (some have been grouped for better readability) that contains properties and methods that are used in the main js file named index.js.
 
 In the case of the structure of the methods of given classes is very similar, which facilitates its development and maintenance.
 
 Below are two examples of the structure of the methods:
 
-(objects/messenger/Messenger.js):
+(objects/messenger/Messenger.js)
 
 ```
 import {
@@ -396,7 +405,7 @@ export default Messenger
 
 <br/>
 
-(objects/messenger/MessengerScreen.js):
+(objects/messenger/MessengerScreen.js)
 
 ```
 import {
@@ -484,10 +493,13 @@ Below is an example of the main html file (index.html):
 As we can see above, only the characters component is placed in the main html file within an element with id app (this facilitates character animation, which will be discussed later).
 
 <br/>
+<br/>
 
 ### 3.1.5. The structure of the app logic
 
 The entire application mechanism has been divided into individual stages in which the methods of various objects are performed.
+
+<br/>
 
 Below is an example of the main function (handleCharTalkingMain) that contains the character's talking logic (scripts/index.js):
 
@@ -583,6 +595,7 @@ It should also be mentioned that the code responsible for the various stages of 
 
 <br/>
 <br/>
+<br/>
 
 ## 3.2. Specific
 
@@ -646,10 +659,13 @@ The whole above solution is based on infinitely creating characters (on created 
 Due to the possible change of the screen width when using the application, a method resize has been created that starts the character creation process from the beginning to avoid resolution distortions.
 
 <br/>
+<br/>
 
 ### 3.2.2. GSAP for Gisapia animation
 
 The project uses GSAP animation to animate Gisapia svg image to enhance user experiene.
+
+<br/>
 
 Below is a visual representation of this solution:
 
@@ -702,10 +718,9 @@ class GisapiaAnimation {
 export default GisapiaAnimation
 ```
 
-<br/>
-
 We can see in the example above many methods (which use the TimelineMax object with methods) that are responsible for the looping movement of individual parts of the character. Animation involves the movement of the lips, hair, right hand and hair.
 
+<br/>
 <br/>
 
 ### 3.2.3. Inheritance of traits by any character
@@ -760,8 +775,6 @@ class Character {
 export default Character
 ```
 
-<br/>
-
 As we can see in the example above, we have many methods that are used by each character. For this reason, I decided to use inheritance to avoid unnecessary code duplication.
 
 <br/>
@@ -783,6 +796,7 @@ class Gisapia extends Character {
 export default Gisapia
 ```
 
+<br/>
 <br/>
 
 ### 3.2.4. Factory design pattern when selecting a character
@@ -831,6 +845,8 @@ export default CharsFactory
 
 As we can see in the above example, each character receives initial data in the form of a script talk, global memory(singleton - described later) and email (finally sent to the user).
 
+<br/>
+
 The getChar method of CharsFactory that passes a given character is shown below in handleCharSelect function (scripts/index.js):
 
 ```
@@ -843,6 +859,7 @@ const handleCharSelect = (charName) => {
 
 As we can see above, thanks to the getChar method we pass the received character to memory by setSelectedChar method to set the user's character choice.
 
+<br/>
 <br/>
 
 ### 3.2.5. Singleton design pattern while saving the settings
@@ -941,8 +958,6 @@ const memory = new Memory()
 export default memory
 ```
 
-<br/>
-
 In the example above, we can see that an instance of the Memory class can only be created once. Thanks to this, we can use such solutions as global memory for saving various application states and settings.
 
 To use memory globally we have simple methods that allow to override the settings and can pass these settings to the entire application.
@@ -969,7 +984,7 @@ It's worth mentioning that the Memory object is also responsible for creating so
 
 <br/>
 
-Below is a brief example of use in a handleStartButtonClick method of SelectCharUI (scrtips/objects/SelectCharUI):
+Below is a brief example of use in a handleStartButtonClick method of SelectCharUI (objects/SelectCharUI):
 
 ```
 handleStartButtonClick() {
@@ -980,6 +995,7 @@ handleStartButtonClick() {
 }
 ```
 
+<br/>
 <br/>
 
 ### 3.2.6. Observer design pattern during various events
@@ -1035,6 +1051,7 @@ messengerInterface.subscribe(handleUserTalking)
 We can see that the function handleUserTalking when called via the callSubscribers method takes the value of input (userMessage), thanks to which further processes in the application can appear.
 
 </br>
+</br>
 
 ### 3.2.7. Character talk script and email templates
 
@@ -1042,7 +1059,7 @@ Each character in the application has its own talk script and email template in 
 
 <br/>
 
-Below is a short fragment of the Gisapia talk script template (PL) (data/characters/gisapia/scriptTalk.js):
+Below is a short fragment of the Gisapia talk script template (PL) with messages and answers to the user's response (data/characters/gisapia/scriptTalk.js):
 
 ```
 export default {
@@ -1105,7 +1122,7 @@ export default {
 
 <br/>
 
-Also below is a short fragment of the email template which is finally sent to the [Emails Handler](https://github.com/damian-lis/Emails-handler) backend application (data/characters/gisapia/email.js):
+Also below is a short fragment of the email template (PL/ENG) which is finally sent to the [Emails Handler](https://github.com/damian-lis/Emails-handler) backend application (data/characters/gisapia/email.js):
 
 ```
 export default {
@@ -1143,8 +1160,6 @@ export default {
   },
 }
 ```
-
-<br/>
 
 In the character talk script template example, first of all we can see messages appear in two arrays. Thanks to this, each character who starts a conversation can draw different messages for themselves.
 
@@ -1297,6 +1312,7 @@ Below are two visual examples of the changed email messages (Gisapia (PL)/Reduxo
 ![](images/readme/reduxonMail.jpg)
 
 <br/>
+<br/>
 
 ### 3.2.8. The way of writing a message
 
@@ -1370,9 +1386,7 @@ At the end of the handleCharTyping function after the balls animation, a chatBub
 
 <br/>
 
-In the case of composing a message by a user, some of the solutions are the same, except for delaying sending the message.
-
-Below is an example of a function that is called when the user sends a message (scripts/index.js):
+In the case of composing a message by a user, some of the solutions are the same, except for delaying sending the message.Below is an example of a function that is called when the user sends a message (scripts/index.js):
 
 ```
 const handleUserTalking = (userMessage) => {
@@ -1392,14 +1406,13 @@ const handleUserTalking = (userMessage) => {
 As we can see in the example above, the handleUserTalking function uses similar solutions.
 
 <br/>
+<br/>
 
 ### 3.2.9. Adding words to character memory
 
-<!--  -->
-
 After characters monologue, each of them asks a question that the user has to answer in some way.
 
-If in the user's response a given character finds a word that is stored in its memory, it will display a message that it knows the word (it will also add this word to the memory as information about the user)
+If in the user's response a given character finds a word that is stored in its memory, it will display a message that it knows the word (it will also add this word to the memory as information about the user).
 
 <br/>
 
@@ -1417,7 +1430,7 @@ Below is an visual example how it works:
 
 <br/>
 
-The following is a example of collection of various data that the characters use when analyzing user responses (characters/gisapia/memory.js):
+The following is a example of collection of various data that the characters use when analyzing user responses (data/characters/gisapia/memory.js):
 
 ```
 export default {
@@ -1468,8 +1481,6 @@ export default {
 </br>
 
 On the logic side of the application, it looks like we have several variants of answers that are activated depending on whether a message has been sent from the user or not, whether a given word has been found in the character's memory or not and whether the character is currently listening to a message from the user or not.
-
-<br/>
 
 An example of this logic is below and is part of the handleCharTalkingMain function (scripts/index.js):
 
@@ -1532,6 +1543,8 @@ const handleCharTalkingMain = async () => {
   //more code...
 ```
 
+<br/>
+
 In the example above, we can see several functions that support many variant of the conversation logic. An example of one of them is shown below (scripts/index.js):
 
 ```
@@ -1585,6 +1598,7 @@ class Memory {
 }
 ```
 
+<br/>
 <br/>
 
 ### 3.2.10. Sending user data to user by e-mail of selected character
@@ -1673,6 +1687,7 @@ Below is a visual examples of this answers:
 ![](images/readme/noConnection.jpg)
 
 <br/>
+<br/>
 
 ### 3.2.11. Messages while waiting for a response from the server while sending email
 
@@ -1684,7 +1699,7 @@ Therefore, several messages have been created that keep the user informed about 
 
 Below is a visual example of the messages a user sees while waiting for a response from the server:
 
-<!-- PRZYKŁAD WIADOMOŚCI PODCZAS WYSYŁANIA MAILI -->
+![](images/readme/waitingMessages.gif)
 
 <br/>
 
@@ -1765,10 +1780,11 @@ In addition, in the example above, we can see that before sending the query to t
 In the above example, in the handleCharTalkingFinish function, you can also notice that when the user does not provide the e-mail through input, the screens (messenger and selectCharUI) will be animated after 1 second and the appropriate information will be displayed to the user.
 
 <br/>
+<br/>
 
 ### 3.2.12. The ability to change characters during the conversation
 
-During the conversation, we have the option of changing a given character to another.
+During the conversation, we have the option of changing a given character to another at every stage when the user responds.
 
 <br/>
 
@@ -1817,6 +1833,7 @@ handleBackIconClick() {
 In the example above, we see the handleBackIconClick method, which contains the logic after call is responsible for resetting most application settings and returning to the characters selection component (selectCharUI).
 
 <br/>
+<br/>
 
 ### 3.2.13. Opportunity to talk again with characters
 
@@ -1828,7 +1845,9 @@ Below is a visual example of this solution:
 
 ![](images/readme/talkAgain.gif)
 
-The solution in the code is very similar to the one used in the above point (3.2.11.) and is presented below (ojects/SelectCharUI.js):
+<br/>
+
+The solution in the code is very similar to the one used in the above point (3.2.11.) and is presented below (objects/SelectCharUI.js):
 
 ```
 createElements(){
