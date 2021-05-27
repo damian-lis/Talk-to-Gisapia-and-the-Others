@@ -1,8 +1,8 @@
-import { common, chineseString } from '/data/names.js'
+import { fonts, elements, events, chineseString } from '/data/names.js'
 
 class Background {
   constructor() {
-    this.canvas = document.getElementById(common.elements.canvas)
+    this.canvas = document.getElementById(elements.canvas)
     this.cxt = canvas.getContext('2d')
     this.canvas.width = window.innerWidth
     this.canvas.height = window.innerHeight
@@ -16,7 +16,7 @@ class Background {
   }
 
   resize() {
-    window.addEventListener(common.events.resize, () => {
+    window.addEventListener(events.resize, () => {
       this.canvas.width = window.innerWidth
       this.canvas.height = window.innerHeight
       this.columns = this.canvas.width / this.font_size
@@ -37,7 +37,7 @@ class Background {
       this.cxt.fillStyle = 'rgba(0,0,0,0.05)'
       this.cxt.fillRect(0, 0, this.canvas.width, this.canvas.height)
       this.cxt.fillStyle = 'rgb(132, 42, 86)'
-      this.cxt.font = `${this.font_size}px ${common.fonts.arial}`
+      this.cxt.font = `${this.font_size}px ${fonts.arial}`
 
       for (let i = 0; i < this.drops.length; i++) {
         let text = this.chinese[Math.floor(Math.random() * this.chinese.length)]

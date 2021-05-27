@@ -6,7 +6,14 @@ import {
   setClassesFn,
 } from '/scripts/helpers/index.js'
 
-import { classNames, common, src } from '/data/names.js'
+import {
+  classNames,
+  common,
+  src,
+  elements,
+  events,
+  styleProps,
+} from '/data/names.js'
 
 class MessengerScreen {
   constructor(container, selectCharUI, messengerInterface, memory) {
@@ -27,22 +34,22 @@ class MessengerScreen {
 
   createElements() {
     this.container = createElementFn({
-      element: common.elements.div,
+      element: elements.div,
       classes: [classNames.messenger.screen],
     })
 
     this.screen = createElementFn({
-      element: common.elements.div,
+      element: elements.div,
       classes: [classNames.messenger.screenInner],
     })
 
     this.backIcon = createElementFn({
-      element: common.elements.img,
+      element: elements.img,
       classes: [classNames.messenger.backIcon],
       src: src.messenger.backIcon,
       listeners: [
         {
-          event: common.events.click,
+          event: events.click,
           cb: () => this.handleBackIconClick(),
         },
       ],
@@ -61,11 +68,11 @@ class MessengerScreen {
     this.memory.playFallDownAudio()
     this.memory.playClickAudio()
     this.selectCharUI.removeCharButtonsActive()
-    this.selectCharUI.toggleReadyStartCharTalkingBtn(common.toggle.off)
-    this.messengerInterface.toggleActivePanel(common.toggle.off)
+    this.selectCharUI.toggleReadyStartCharTalkingBtn(common.off)
+    this.messengerInterface.toggleActivePanel(common.off)
     this.selectCharUI.move({ type: common.fromBottomShow })
     this.parent.move({ type: common.BackToTheTop })
-    this.toggleShowBackBtn(common.toggle.off)
+    this.toggleShowBackBtn(common.off)
   }
 
   createChatBubbleComponent(text, whoTalking) {
@@ -74,19 +81,19 @@ class MessengerScreen {
     const messageContainer =
       name !== common.user
         ? createElementFn({
-            element: common.elements.div,
+            element: elements.div,
             classes: [classNames.messenger.messageContainer],
             attributes: [
               { type: common.messagesPart, name: this.charMessagesPart },
             ],
           })
         : createElementFn({
-            element: common.elements.div,
+            element: elements.div,
             classes: [classNames.messenger.messageContainer],
           })
 
     const message = createElementFn({
-      element: common.elements.p,
+      element: elements.p,
       innerHTML: text,
       classes: [
         classNames.messenger.message,
@@ -95,12 +102,12 @@ class MessengerScreen {
     })
     if (name !== common.user) {
       const avatar = createElementFn({
-        element: common.elements.img,
+        element: elements.img,
         src: avatarImage,
         classes: [classNames.messenger.avatar],
       })
       removeElAmongElsFn({
-        element: common.elements.img,
+        element: elements.img,
         elementsName: `[${common.messagesPart}="${this.charMessagesPart}"]`,
       })
       messageContainer.appendChild(avatar)
@@ -114,13 +121,13 @@ class MessengerScreen {
 
   createLoaderComponent(charName) {
     const circleContainer = createElementFn({
-      element: common.elements.div,
+      element: elements.div,
       classes: [classNames.messenger.loaderContainer],
     })
 
     for (let i = 0; i < 3; i++) {
       const circle = createElementFn({
-        element: common.elements.div,
+        element: elements.div,
         attributes: [{ type: common.id, name: `${common.ball}-${i + 1}` }],
         classes: [
           classNames.messenger.loader,
@@ -139,15 +146,15 @@ class MessengerScreen {
         elements: [this.backIcon],
         styleProps: [
           {
-            name: common.styleProps.names.visibility,
+            name: styleProps.names.visibility,
             value:
-              toggle === common.toggle.on
-                ? common.styleProps.values.visible
-                : common.styleProps.values.hidden,
+              toggle === common.on
+                ? styleProps.values.visible
+                : styleProps.values.hidden,
           },
           {
-            name: common.styleProps.names.opacity,
-            value: toggle === common.toggle.on ? 1 : 0,
+            name: styleProps.names.opacity,
+            value: toggle === common.on ? 1 : 0,
           },
         ],
       },

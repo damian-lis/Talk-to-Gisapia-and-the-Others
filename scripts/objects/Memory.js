@@ -1,7 +1,7 @@
 import { GisapiaAnimation, Background } from './index.js'
 import { createElementFn, setUpperLetterFn } from '/scripts/helpers/index.js'
 import { charMemory } from '/data/characters/index.js'
-import { src, common } from '/data/names.js'
+import { src, elements, categories, language } from '/data/names.js'
 
 class Memory {
   constructor() {
@@ -36,32 +36,32 @@ class Memory {
 
   createAudio() {
     this.typingAudio = createElementFn({
-      element: common.elements.audio,
+      element: elements.audio,
       src: src.audio.typing,
     })
 
     this.chatBubbleAudio = createElementFn({
-      element: common.elements.audio,
+      element: elements.audio,
       src: src.audio.chatBubble,
     })
 
     this.fallDownAudio = createElementFn({
-      element: common.elements.audio,
+      element: elements.audio,
       src: src.audio.throw,
     })
 
     this.backgroundAudio = createElementFn({
-      element: common.elements.audio,
+      element: elements.audio,
       src: src.audio.background,
     })
 
     this.finishAudio = createElementFn({
-      element: common.elements.audio,
+      element: elements.audio,
       src: src.audio.finish,
     })
 
     this.clickAudio = createElementFn({
-      element: common.elements.audio,
+      element: elements.audio,
       src: src.audio.click,
     })
   }
@@ -97,7 +97,7 @@ class Memory {
   }
 
   addDataToAboutUser(scriptCategory, word) {
-    if (scriptCategory !== common.categories.hobby) {
+    if (scriptCategory !== categories.hobby) {
       word = setUpperLetterFn(word)
     }
     this.aboutUser[scriptCategory] = word
@@ -162,11 +162,9 @@ class Memory {
   setLanguage(lng) {
     if (lng) {
       this.language = lng
-      localStorage.setItem(common.language.name, lng)
+      localStorage.setItem(language.name, lng)
     } else {
-      return (
-        localStorage.getItem(common.language.name) || common.language.pl.small
-      )
+      return localStorage.getItem(language.name) || language.pl.small
     }
   }
 

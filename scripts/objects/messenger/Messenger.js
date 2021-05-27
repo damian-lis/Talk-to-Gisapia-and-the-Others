@@ -4,7 +4,7 @@ import {
   setClassesFn,
   setPropsFn,
 } from '/scripts/helpers/index.js'
-import { common, classNames, animationSettings } from '/data/names.js'
+import { common, elements, classNames, animationSettings } from '/data/names.js'
 
 class Messenger {
   constructor(container) {
@@ -19,12 +19,12 @@ class Messenger {
 
   createElements() {
     this.container = createElementFn({
-      element: common.elements.div,
+      element: elements.div,
       classes: [classNames.messenger.main],
     })
 
     this.containerInner = createElementFn({
-      element: common.elements.div,
+      element: elements.div,
       classes: [classNames.messenger.inner],
     })
   }

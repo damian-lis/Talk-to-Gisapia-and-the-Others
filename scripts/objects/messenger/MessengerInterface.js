@@ -11,6 +11,10 @@ import {
   alerts,
   messages,
   common,
+  events,
+  styleProps,
+  elementProps,
+  elements,
   emailValidationReg,
 } from '/data/names.js'
 
@@ -34,52 +38,52 @@ class MessengerInterface {
     const lng = this.memory.getLanguage()
 
     this.container = createElementFn({
-      element: common.elements.div,
+      element: elements.div,
       classes: [classNames.messenger.interface],
     })
 
     this.input = createElementFn({
-      element: common.elements.input,
+      element: elements.input,
       disabled: true,
       classes: [classNames.messenger.interfaceInput],
       listeners: [
         {
-          event: common.elements.input,
+          event: elements.input,
           cb: (e) => (this.inputValue = e.target.value),
         },
         {
-          event: common.events.keypress,
+          event: events.keypress,
           cb: (e) => this.handleInputKeypress(e),
         },
       ],
     })
 
     this.button = createElementFn({
-      element: common.elements.button,
+      element: elements.button,
       textContent: commands.send[lng],
       disabled: true,
       classes: [classNames.messenger.interfaceBtn],
       styles: [
         {
-          name: common.styleProps.names.pointerEvents,
-          value: common.styleProps.values.none,
+          name: styleProps.names.pointerEvents,
+          value: styleProps.values.none,
         },
       ],
       listeners: [
         {
-          event: common.events.click,
+          event: events.click,
           cb: () => this.handleButtonClick(),
         },
       ],
     })
 
     this.spinnerContainer = createElementFn({
-      element: common.elements.div,
+      element: elements.div,
       classes: [classNames.messenger.spinnerContainer],
     })
 
     this.spinner = createElementFn({
-      element: common.elements.div,
+      element: elements.div,
       classes: [classNames.messenger.spinner],
     })
   }
@@ -97,7 +101,7 @@ class MessengerInterface {
   }
 
   handleInputKeypress(e) {
-    if (e.key === common.keys.Enter) {
+    if (e.key === common.Enter) {
       if (this.isCorrectInputValue()) {
         this.callSubscribers()
       }
@@ -117,7 +121,7 @@ class MessengerInterface {
           {
             element: this.button,
             props: {
-              name: common.props.names.textContent,
+              name: elementProps.names.textContent,
               value: commands.send,
             },
           },
@@ -182,11 +186,11 @@ class MessengerInterface {
         elements: [this.button],
         styleProps: [
           {
-            name: common.styleProps.names.pointerEvents,
+            name: styleProps.names.pointerEvents,
             value:
-              toggle === common.toggle.on
-                ? common.styleProps.values.auto
-                : common.styleProps.values.none,
+              toggle === common.on
+                ? styleProps.values.auto
+                : styleProps.values.none,
           },
           ,
         ],
@@ -195,8 +199,8 @@ class MessengerInterface {
         elements: [this.input, this.button],
         props: [
           {
-            name: common.props.names.disabled,
-            value: toggle === common.toggle.on ? false : true,
+            name: elementProps.names.disabled,
+            value: toggle === common.on ? false : true,
           },
           ,
         ],
@@ -212,10 +216,8 @@ class MessengerInterface {
         elements: [this.button],
         styleProps: [
           {
-            name: common.styleProps.names.display,
-            value: invert
-              ? common.styleProps.values.block
-              : common.styleProps.values.none,
+            name: styleProps.names.display,
+            value: invert ? styleProps.values.block : styleProps.values.none,
           },
           ,
         ],
@@ -224,10 +226,8 @@ class MessengerInterface {
         elements: [this.spinnerComponent],
         styleProps: [
           {
-            name: common.styleProps.names.display,
-            value: invert
-              ? common.styleProps.values.none
-              : common.styleProps.values.flex,
+            name: styleProps.names.display,
+            value: invert ? styleProps.values.none : styleProps.values.flex,
           },
           ,
         ],

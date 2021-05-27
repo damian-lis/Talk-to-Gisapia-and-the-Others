@@ -1,4 +1,4 @@
-import { common } from '/data/names.js'
+import { common, types, reg } from '/data/names.js'
 import { setUpperLetterFn } from '/scripts/helpers/index.js'
 
 class Character {
@@ -92,15 +92,12 @@ class Character {
   }
 
   findWordAndReplace({ wordsSets, texts }) {
-    if (typeof texts === common.types.object) {
+    if (typeof texts === types.object) {
       let textsCopy = texts
       for (const text in textsCopy) {
         wordsSets.forEach((wordSet) => {
           if (textsCopy[text].includes(wordSet.search)) {
-            const regexp = new RegExp(
-              wordSet.search,
-              common.regexp.modifiers.gi
-            )
+            const regexp = new RegExp(wordSet.search, reg.modifiers.gi)
             textsCopy[text] = textsCopy[text].replace(regexp, wordSet.replace)
           }
         })
@@ -112,10 +109,7 @@ class Character {
       textsCopy.map((text) => {
         wordsSets.forEach((wordSet) => {
           if (text.includes(wordSet.search)) {
-            const regexp = new RegExp(
-              wordSet.search,
-              common.regexp.modifiers.gi
-            )
+            const regexp = new RegExp(wordSet.search, reg.modifiers.gi)
             text = text.replace(regexp, wordSet.replace)
           }
         })

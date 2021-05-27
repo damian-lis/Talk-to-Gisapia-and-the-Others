@@ -1,5 +1,5 @@
 import { Gisapia, Hookin, Reduxon } from './index.js'
-import { common } from '/data/names.js'
+import { charNames } from '/data/names.js'
 import {
   gisapiaScriptTalk,
   gisapiaEmail,
@@ -18,11 +18,11 @@ class CharsFactory {
 
   getChar(charName) {
     switch (charName) {
-      case common.charNames.Gisapia:
+      case charNames.Gisapia:
         return this.gisapia
-      case common.charNames.Hookin:
+      case charNames.Hookin:
         return this.hookin
-      case common.charNames.Reduxon:
+      case charNames.Reduxon:
         return this.reduxon
       default:
         break

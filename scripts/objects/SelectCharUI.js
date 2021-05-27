@@ -11,6 +11,12 @@ import {
   classNames,
   commands,
   common,
+  privacyPolicy,
+  language,
+  styleProps,
+  elementProps,
+  elements,
+  events,
   src,
 } from '/data/names.js'
 
@@ -34,24 +40,24 @@ class SelectCharUI {
     const lng = this.memory.getLanguage()
 
     this.container = createElementFn({
-      element: common.elements.div,
+      element: elements.div,
       classes: [classNames.selectCharUI.main],
     })
 
     this.headline = createElementFn({
-      element: common.elements.h1,
+      element: elements.h1,
       textContent: commands.chooseCharacter[lng],
       classes: [classNames.selectCharUI.headline],
     })
 
     this.charButtons = Object.entries(this.charNames).map((charName) =>
       createElementFn({
-        element: common.elements.button,
+        element: elements.button,
         textContent: charName[1],
         classes: [classNames.selectCharUI.selectBtn],
         listeners: [
           {
-            event: common.events.click,
+            event: events.click,
             cb: (e) =>
               this.handleCharButtonsClick({ target: e.target, charName }),
           },
@@ -60,20 +66,20 @@ class SelectCharUI {
     )
 
     this.startButton = createElementFn({
-      element: common.elements.button,
+      element: elements.button,
       textContent: commands.startTalking[lng],
       disabled: true,
       classes: [classNames.selectCharUI.startBtn],
       listeners: [
         {
-          event: common.events.click,
+          event: events.click,
           cb: () => this.handleStartButtonClick(),
         },
       ],
     })
 
     this.talkAgainButton = createElementFn({
-      element: common.elements.button,
+      element: elements.button,
       textContent: commands.talkAgain[lng],
       classes: [
         classNames.selectCharUI.startBtn,
@@ -81,24 +87,24 @@ class SelectCharUI {
       ],
       styles: [
         {
-          name: common.styleProps.names.display,
-          value: common.styleProps.values.none,
+          name: styleProps.names.display,
+          value: styleProps.values.none,
         },
       ],
       listeners: [
         {
-          event: common.events.click,
+          event: events.click,
           cb: () => this.handletalkAgainButtonClick(),
         },
       ],
     })
 
     this.plLngBtn = createElementFn({
-      element: common.elements.button,
-      textContent: common.language.pl.large,
-      disabled: lng === common.language.pl.small ? true : false,
+      element: elements.button,
+      textContent: language.pl.large,
+      disabled: lng === language.pl.small ? true : false,
       classes:
-        lng === common.language.pl.small
+        lng === language.pl.small
           ? [
               classNames.selectCharUI.plLngBtn,
               classNames.selectCharUI.lngBtnActive,
@@ -107,21 +113,21 @@ class SelectCharUI {
 
       listeners: [
         {
-          event: common.events.click,
+          event: events.click,
           cb: (e) =>
             this.handleLngButtonsClick({
-              lng: common.language.pl.small,
+              lng: language.pl.small,
               target: e.target,
             }),
         },
       ],
     })
     this.engLngBtn = createElementFn({
-      element: common.elements.button,
-      textContent: common.language.eng.large,
-      disabled: lng === common.language.eng.small ? true : false,
+      element: elements.button,
+      textContent: language.eng.large,
+      disabled: lng === language.eng.small ? true : false,
       classes:
-        lng === common.language.eng.small
+        lng === language.eng.small
           ? [
               classNames.selectCharUI.engLngBtn,
               classNames.selectCharUI.lngBtnActive,
@@ -130,33 +136,33 @@ class SelectCharUI {
 
       listeners: [
         {
-          event: common.events.click,
+          event: events.click,
           cb: (e) =>
             this.handleLngButtonsClick({
-              lng: common.language.eng.small,
+              lng: language.eng.small,
               target: e.target,
             }),
         },
       ],
     })
 
-    this.privatePolicyLinkContainer = createElementFn({
-      element: common.elements.div,
-      classes: [classNames.privatePolicy.linkContainer],
+    this.privacyPolicyLinkContainer = createElementFn({
+      element: elements.div,
+      classes: [classNames.privacyPolicy.linkContainer],
     })
 
-    this.privatePolicyLink = createElementFn({
-      element: common.elements.a,
-      textContent: common.privatePolicy[lng],
-      href: src.privatePolicy.site,
-      classes: [classNames.privatePolicy.link],
+    this.privacyPolicyLink = createElementFn({
+      element: elements.a,
+      textContent: privacyPolicy[lng],
+      href: src.privacyPolicy.site,
+      classes: [classNames.privacyPolicy.link],
     })
   }
 
   createComponents() {
-    this.privatePolicyComponent = appendElementsToContainerFn(
-      [this.privatePolicyLink],
-      this.privatePolicyLinkContainer
+    this.privacyPolicyComponent = appendElementsToContainerFn(
+      [this.privacyPolicyLink],
+      this.privacyPolicyLinkContainer
     )
 
     this.mainComponent = appendElementsToContainerFn(
@@ -167,7 +173,7 @@ class SelectCharUI {
         ...this.charButtons,
         this.startButton,
         this.talkAgainButton,
-        this.privatePolicyComponent,
+        this.privacyPolicyComponent,
       ],
       this.container
     )
@@ -202,7 +208,7 @@ class SelectCharUI {
 
     this.changeUI()
     this.removeCharButtonsActive()
-    this.toggleReadyStartCharTalkingBtn(common.toggle.off)
+    this.toggleReadyStartCharTalkingBtn(common.off)
   }
 
   handleLngButtonsClick({ lng, target }) {
@@ -221,13 +227,13 @@ class SelectCharUI {
     const lng = this.memory.getLanguage()
     const msgsInCorrectLng = messages[lng]
     const msgContainer = createElementFn({
-      element: common.elements.div,
+      element: elements.div,
       classes: [classNames.selectCharUI.messageContainer],
     })
 
     msgsInCorrectLng.map((message) => {
       const msg = createElementFn({
-        element: common.elements.p,
+        element: elements.p,
         innerHTML: message,
         classes: [classNames.selectCharUI.message],
       })
@@ -244,29 +250,29 @@ class SelectCharUI {
           {
             element: this.headline,
             props: {
-              name: common.props.names.textContent,
+              name: elementProps.names.textContent,
               value: commands.chooseCharacter,
             },
           },
           {
             element: this.startButton,
             props: {
-              name: common.props.names.textContent,
+              name: elementProps.names.textContent,
               value: commands.startTalking,
             },
           },
           {
             element: this.talkAgainButton,
             props: {
-              name: common.props.names.textContent,
+              name: elementProps.names.textContent,
               value: commands.talkAgain,
             },
           },
           {
-            element: this.privatePolicyLink,
+            element: this.privacyPolicyLink,
             props: {
-              name: common.props.names.textContent,
-              value: common.privatePolicy,
+              name: elementProps.names.textContent,
+              value: privacyPolicy,
             },
           },
         ],
@@ -293,10 +299,8 @@ class SelectCharUI {
         elements: [...this.charButtons, this.startButton, this.headline],
         styleProps: [
           {
-            name: common.styleProps.names.display,
-            value: messages
-              ? common.styleProps.values.none
-              : common.styleProps.values.block,
+            name: styleProps.names.display,
+            value: messages ? styleProps.values.none : styleProps.values.block,
           },
         ],
       },
@@ -304,10 +308,8 @@ class SelectCharUI {
         elements: [this.talkAgainButton],
         styleProps: [
           {
-            name: common.styleProps.names.display,
-            value: messages
-              ? common.styleProps.values.block
-              : common.styleProps.values.none,
+            name: styleProps.names.display,
+            value: messages ? styleProps.values.block : styleProps.values.none,
           },
         ],
       },
@@ -315,10 +317,8 @@ class SelectCharUI {
         elements: [this.engLngBtn, this.plLngBtn],
         styleProps: [
           {
-            name: common.styleProps.names.display,
-            value: messages
-              ? common.styleProps.values.none
-              : common.styleProps.values.block,
+            name: styleProps.names.display,
+            value: messages ? styleProps.values.none : styleProps.values.block,
           },
         ],
       },

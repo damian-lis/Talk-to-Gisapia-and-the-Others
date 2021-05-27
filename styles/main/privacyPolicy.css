@@ -1,4 +1,4 @@
-.privatePolicy {
+.privacyPolicy {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -20,33 +20,33 @@
   overflow: auto;
 }
 
-.privatePolicy-link-container {
+.privacyPolicy-link-container {
   width: 100%;
   margin-top: 25px;
 }
 
-.privatePolicy-link {
+.privacyPolicy-link {
   margin: 10px auto;
   font-size: 15px;
   color: rgb(253, 229, 229);
   text-decoration: none;
 }
 
-.privatePolicy-link:hover {
+.privacyPolicy-link:hover {
   text-decoration: underline;
   color: rgb(241, 161, 12);
 }
 
-.privatePolicy-headline {
+.privacyPolicy-headline {
   margin-top: 20px;
 }
 
-.privatePolicy-paragraph {
+.privacyPolicy-paragraph {
   margin: 15px 0;
 }
 
 @media (max-width: 600px) {
-  .privatePolicy {
+  .privacyPolicy {
     max-height: 95%;
     text-align: left;
   }

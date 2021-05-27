@@ -1,10 +1,13 @@
 import {
   common,
+  events,
+  answerTypes,
   commands,
   messages,
   charNameList,
   mailEndPoint,
   ideReferences,
+  fetchProps,
 } from '/data/names.js'
 import {
   memory,
@@ -15,7 +18,7 @@ import {
   MessengerScreen,
 } from '/scripts/objects/index.js'
 
-document.addEventListener(common.events.DOMContentLoaded, () => {
+document.addEventListener(events.DOMContentLoaded, () => {
   const charsFactory = new CharsFactory(memory)
   const selectCharUI = new SelectCharUI(
     charNameList,
@@ -34,7 +37,7 @@ document.addEventListener(common.events.DOMContentLoaded, () => {
   const handleCharSelect = (charName) => {
     const chosenChar = charsFactory.getChar(charName)
     memory.setSelectedChar(chosenChar)
-    selectCharUI.toggleReadyStartCharTalkingBtn(common.toggle.on)
+    selectCharUI.toggleReadyStartCharTalkingBtn(common.on)
   }
 
   const handleCharTalkingStart = () => {
@@ -97,7 +100,7 @@ document.addEventListener(common.events.DOMContentLoaded, () => {
         )
         scriptTalkMessages = chosenChar.getScriptTalkMessages({
           from: common.answers,
-          type: common.answerTypes.isInMemory,
+          type: answerTypes.isInMemory,
           category: currentScriptTalkCategory,
         })
       } else if (memory.getIsCharListening()) {
@@ -109,7 +112,7 @@ document.addEventListener(common.events.DOMContentLoaded, () => {
         )
         scriptTalkMessages = chosenChar.getScriptTalkMessages({
           from: common.answers,
-          type: common.answerTypes.isAddedToMemory,
+          type: answerTypes.isAddedToMemory,
           category: currentScriptTalkCategory,
         })
       } else {
@@ -120,7 +123,7 @@ document.addEventListener(common.events.DOMContentLoaded, () => {
         )
         scriptTalkMessages = chosenChar.getScriptTalkMessages({
           from: common.answers,
-          type: common.answerTypes.isNotInMemory,
+          type: answerTypes.isNotInMemory,
           category: currentScriptTalkCategory,
         })
       }
@@ -147,8 +150,8 @@ document.addEventListener(common.events.DOMContentLoaded, () => {
       memory.increaseTalkingStep()
       handleCharTalkingMain()
     } else {
-      messengerInterface.toggleActivePanel(common.toggle.on)
-      messengerScreen.toggleShowBackBtn(common.toggle.on)
+      messengerInterface.toggleActivePanel(common.on)
+      messengerScreen.toggleShowBackBtn(common.on)
     }
   }
 
@@ -164,7 +167,7 @@ document.addEventListener(common.events.DOMContentLoaded, () => {
     memory.addDataToAboutUser(currentScriptTalkCategory, userMessage)
     chosenChar.changeScriptTalkMessages({
       from: common.answers,
-      type: common.answerTypes.isAddedToMemory,
+      type: answerTypes.isAddedToMemory,
       category: currentScriptTalkCategory,
     })
   }
@@ -180,7 +183,7 @@ document.addEventListener(common.events.DOMContentLoaded, () => {
     memory.addDataToAboutUser(currentScriptTalkCategory, foundWordInCharMemory)
     chosenChar.changeScriptTalkMessages({
       from: common.answers,
-      type: common.answerTypes.isInMemory,
+      type: answerTypes.isInMemory,
       category: currentScriptTalkCategory,
     })
   }
@@ -194,7 +197,7 @@ document.addEventListener(common.events.DOMContentLoaded, () => {
     chosenChar.changeScriptTalkMessages({
       from: common.answers,
       category: currentScriptTalkCategory,
-      type: common.answerTypes.isNotInMemory,
+      type: answerTypes.isNotInMemory,
     })
   }
 
@@ -263,10 +266,10 @@ document.addEventListener(common.events.DOMContentLoaded, () => {
 
   const handleCharTalkingDuringSendData = async (data) => {
     return await fetch(mailEndPoint, {
-      method: common.fetch.methods.POST,
+      method: fetchProps.methods.POST,
       headers: {
-        [common.fetch.headers.props.ContentType]:
-          common.fetch.headers.values.applicationJson,
+        [fetchProps.headers.props.ContentType]:
+          fetchProps.headers.values.applicationJson,
       },
 
       body: JSON.stringify(data),
@@ -290,7 +293,7 @@ document.addEventListener(common.events.DOMContentLoaded, () => {
   const handleFinishAnimation = ({ delay } = 0) => {
     return setTimeout(() => {
       selectCharUI.move({ type: common.fromBottomShow })
-      messenger.move({ type: common.BackToTheTop })
+      messenger.move({ type: common.backToTheTop })
       memory.playFallDownAudio()
       memory.playFinishAudio()
       memory.playBackgroundAudio({ pause: true })
@@ -305,8 +308,8 @@ document.addEventListener(common.events.DOMContentLoaded, () => {
     messengerScreen.attachToMessengerScreen(chatBubble)
     messengerScreen.scrollMessengerScreen()
     messengerScreen.increaseCharMessagesPart()
-    messengerScreen.toggleShowBackBtn(common.toggle.off)
-    messengerInterface.toggleActivePanel(common.toggle.off)
+    messengerScreen.toggleShowBackBtn(common.off)
+    messengerInterface.toggleActivePanel(common.off)
     handleCharTalkingMain()
   }
 
