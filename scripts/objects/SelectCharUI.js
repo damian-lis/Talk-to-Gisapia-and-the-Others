@@ -2,7 +2,6 @@ import {
   createElementFn,
   appendElementsToContainerFn,
   changeLanguageFn,
-  toggleReadyFn,
   setPropsFn,
   setClassesFn,
 } from '/scripts/helpers/index.js'
@@ -290,10 +289,14 @@ class SelectCharUI {
   }
 
   toggleReadyStartCharTalkingBtn(toggle) {
-    toggleReadyFn({
+    setClassesFn({
       toggle,
-      elements: [this.startButton],
-      classes: [classNames.selectCharUI.startBtnReady],
+      objs: [
+        {
+          elements: [this.startButton],
+          classes: [classNames.selectCharUI.startBtnReady],
+        },
+      ],
     })
   }
 

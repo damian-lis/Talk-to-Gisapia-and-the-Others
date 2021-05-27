@@ -3,7 +3,6 @@ import setClassesFn from './setClassesFn.js'
 import appendElementsToContainerFn from './appendElementsToContainerFn.js'
 import setUpperLetterFn from './setUpperLetterFn.js'
 import changeLanguageFn from './changeLanguageFn.js'
-import toggleReadyFn from './toggleReadyFn.js'
 import setPropsFn from './setPropsFn.js'
 import removeElAmongElsFn from './removeElAmongElsFn.js'
 
@@ -13,7 +12,6 @@ export {
   setClassesFn,
   appendElementsToContainerFn,
   changeLanguageFn,
-  toggleReadyFn,
   setPropsFn,
   removeElAmongElsFn,
 }

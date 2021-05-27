@@ -1,4 +1,4 @@
-import { types } from '/data/names.js'
+import { types, common } from '/data/names.js'
 
 export default ({ toggle, objs = [], delay }) => {
   const helperLogic = () =>
@@ -20,14 +20,25 @@ export default ({ toggle, objs = [], delay }) => {
                     removeFromEl.disabled = false
                   })
 
-                toggle && toggle === types.on
-                  ? element.classList.add(classEl)
-                  : element.classList.remove(classEl)
+                switch (toggle) {
+                  case common.on:
+                    element.classList.add(classEl)
+                    element.disabled = false
+                    break
+                  case common.off:
+                    element.classList.remove(classEl)
+                    element.disabled = true
+                    break
+
+                  default:
+                    break
+                }
 
                 if (obj.initialClass) {
                   element.className = obj.initialClass
                 }
-                element && element.classList.add(classEl)
+
+                !toggle && element.classList.add(classEl)
               })
           })
         : obj.classes &&
