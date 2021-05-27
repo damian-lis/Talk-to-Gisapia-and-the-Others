@@ -3,8 +3,8 @@ import {
   appendElementsToContainerFn,
   changeLanguageFn,
   toggleReadyFn,
-  setActiveFn,
   setPropsFn,
+  setClassesFn,
 } from '/scripts/helpers/index.js'
 import {
   animationSettings,
@@ -94,7 +94,7 @@ class SelectCharUI {
       listeners: [
         {
           event: events.click,
-          cb: () => this.handletalkAgainButtonClick(),
+          cb: () => this.handleTalkAgainButtonClick(),
         },
       ],
     })
@@ -180,10 +180,14 @@ class SelectCharUI {
   }
 
   handleCharButtonsClick({ target, charName }) {
-    setActiveFn({
-      setOn: target,
-      removeFrom: this.charButtons,
-      classes: [classNames.selectCharUI.selectBtnActive],
+    setClassesFn({
+      objs: [
+        {
+          elements: [target],
+          removeFromEls: this.charButtons,
+          classes: [classNames.selectCharUI.selectBtnActive],
+        },
+      ],
     })
     this.callSubscribers({
       type: common.selectChar,
@@ -199,7 +203,7 @@ class SelectCharUI {
     this.callSubscribers({ type: common.startTalking })
   }
 
-  handletalkAgainButtonClick() {
+  handleTalkAgainButtonClick() {
     this.memory.restart()
     this.memory.playFinishAudio({ pause: true, reload: true })
     this.memory.playBackgroundAudio({ reload: true })
@@ -353,9 +357,13 @@ class SelectCharUI {
   }
 
   removeCharButtonsActive() {
-    setActiveFn({
-      removeFrom: this.charButtons,
-      classes: [classNames.selectCharUI.selectBtnActive],
+    setClassesFn({
+      objs: [
+        {
+          removeFromEls: this.charButtons,
+          classes: [classNames.selectCharUI.selectBtnActive],
+        },
+      ],
     })
   }
 
