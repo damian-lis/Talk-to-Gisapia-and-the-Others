@@ -11,10 +11,10 @@ class Messenger {
     this.createElements()
     this.createComponents()
 
-    appendElementsToContainerFn(
-      [this.mainComponent],
-      document.querySelector(container)
-    )
+    appendElementsToContainerFn({
+      elements: [this.mainComponent],
+      container: document.querySelector(container),
+    })
   }
 
   createElements() {
@@ -30,10 +30,10 @@ class Messenger {
   }
 
   createComponents() {
-    this.mainComponent = appendElementsToContainerFn(
-      [this.containerInner],
-      this.container
-    )
+    this.mainComponent = appendElementsToContainerFn({
+      elements: [this.containerInner],
+      container: this.container,
+    })
   }
 
   move({ type }) {

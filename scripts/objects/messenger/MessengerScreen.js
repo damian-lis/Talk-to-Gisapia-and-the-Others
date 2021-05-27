@@ -26,10 +26,10 @@ class MessengerScreen {
     this.createElements()
     this.createComponents()
 
-    appendElementsToContainerFn(
-      [this.mainComponent],
-      this.parent.getContainerInner()
-    )
+    appendElementsToContainerFn({
+      elements: [this.mainComponent],
+      container: this.parent.getContainerInner(),
+    })
   }
 
   createElements() {
@@ -57,10 +57,10 @@ class MessengerScreen {
   }
 
   createComponents() {
-    this.mainComponent = appendElementsToContainerFn(
-      [this.screen, this.backIcon],
-      this.container
-    )
+    this.mainComponent = appendElementsToContainerFn({
+      elements: [this.screen, this.backIcon],
+      container: this.container,
+    })
   }
 
   handleBackIconClick() {

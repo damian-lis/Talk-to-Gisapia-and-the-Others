@@ -30,10 +30,10 @@ class SelectCharUI {
     this.createComponents()
     this.memoryLngSubscribe()
 
-    appendElementsToContainerFn(
-      [this.mainComponent],
-      document.querySelector(container)
-    )
+    appendElementsToContainerFn({
+      elements: [this.mainComponent],
+      container: document.querySelector(container),
+    })
   }
 
   createElements() {
@@ -160,13 +160,13 @@ class SelectCharUI {
   }
 
   createComponents() {
-    this.privacyPolicyComponent = appendElementsToContainerFn(
-      [this.privacyPolicyLink],
-      this.privacyPolicyLinkContainer
-    )
+    this.privacyPolicyComponent = appendElementsToContainerFn({
+      elements: [this.privacyPolicyLink],
+      container: this.privacyPolicyLinkContainer,
+    })
 
-    this.mainComponent = appendElementsToContainerFn(
-      [
+    this.mainComponent = appendElementsToContainerFn({
+      elements: [
         this.plLngBtn,
         this.engLngBtn,
         this.headline,
@@ -175,8 +175,8 @@ class SelectCharUI {
         this.talkAgainButton,
         this.privacyPolicyComponent,
       ],
-      this.container
-    )
+      container: this.container,
+    })
   }
 
   handleCharButtonsClick({ target, charName }) {

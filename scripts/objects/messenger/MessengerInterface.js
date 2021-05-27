@@ -28,10 +28,10 @@ class MessengerInterface {
     this.createComponents()
     this.memoryLngSubscribe()
 
-    appendElementsToContainerFn(
-      [this.mainComponent],
-      messenger.getContainerInner()
-    )
+    appendElementsToContainerFn({
+      elements: [this.mainComponent],
+      container: messenger.getContainerInner(),
+    })
   }
 
   createElements() {
@@ -89,15 +89,15 @@ class MessengerInterface {
   }
 
   createComponents() {
-    this.spinnerComponent = appendElementsToContainerFn(
-      [this.spinner],
-      this.spinnerContainer
-    )
+    this.spinnerComponent = appendElementsToContainerFn({
+      elements: [this.spinner],
+      container: this.spinnerContainer,
+    })
 
-    this.mainComponent = appendElementsToContainerFn(
-      [this.input, this.button, this.spinnerComponent],
-      this.container
-    )
+    this.mainComponent = appendElementsToContainerFn({
+      elements: [this.input, this.button, this.spinnerComponent],
+      container: this.container,
+    })
   }
 
   handleInputKeypress(e) {
