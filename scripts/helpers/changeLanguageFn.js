@@ -1,11 +1,11 @@
-import { common } from '/data/names.js'
+import { types } from '/data/names.js'
 
 export default ({ objs = [], lng }) =>
   objs.length &&
   objs.map((obj) => {
     let element = obj.element
 
-    if (typeof el === common.string) {
+    if (typeof el === types.string) {
       element = document.querySelector(obj.element)
     }
 

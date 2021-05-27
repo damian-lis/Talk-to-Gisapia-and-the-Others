@@ -1,11 +1,11 @@
-import { common } from '/data/names.js'
+import { types } from '/data/names.js'
 
 export default ({ elements = [], container }) => {
   if (!container) return
 
   let containerEl = container
 
-  if (typeof container === common.string) {
+  if (typeof container === types.string) {
     containerEl = document.querySelector(container)
   }
 
@@ -13,7 +13,7 @@ export default ({ elements = [], container }) => {
     elements.map((element) => {
       let el = element
 
-      if (typeof el === common.string) {
+      if (typeof el === types.string) {
         el = document.querySelector(innerEl)
       }
 
@@ -22,7 +22,7 @@ export default ({ elements = [], container }) => {
         innerEls.map((innerElement) => {
           let innerEl = innerElement
 
-          if (typeof el === common.string) {
+          if (typeof el === types.string) {
             innerEl = document.querySelector(innerElement)
           }
           containerEl.appendChild(innerEl)
