@@ -1,16 +1,37 @@
 import { types } from '/data/names.js'
 
-export default (objects) => {
-  objects.map((object) => {
-    object.elements.map((element) => {
-      let el = element
+export default ({ toggle, objs = [], delay }) => {
+  const helperLogic = () =>
+    objs.length &&
+    objs.map(
+      (obj) =>
+        obj.elements &&
+        obj.elements.map((el) => {
+          let element = el
 
-      if (typeof element === types.string) {
-        el = document.querySelector(`.${element}`)
-      }
+          if (typeof el === types.string) {
+            element = document.querySelector(el)
+          }
 
-      el.className = object.initialClass
-      el.classList.add(...object.classesToAdd)
-    })
-  })
+          obj.classes &&
+            obj.classes.map((classEl) => {
+              obj.removeFromEls &&
+                obj.removeFromEls.map((removeFromEl) => {
+                  removeFromEl.classList.remove(classEl)
+                  removeFromEl.disabled = false
+                })
+
+              toggle && toggle === types.on
+                ? element.classList.add(classEl)
+                : element.classList.remove(classEl)
+
+              if (obj.initialClass) {
+                element.className = obj.initialClass
+              }
+              element.classList.add(classEl)
+            })
+        })
+    )
+  if (delay) return setTimeout(helperLogic, delay)
+  helperLogic()
 }

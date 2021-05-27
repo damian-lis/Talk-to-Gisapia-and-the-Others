@@ -248,23 +248,25 @@ class MessengerInterface {
   }
 
   changeColor(chosenChar) {
-    setClassesFn([
-      {
-        elements: [this.button],
-        initialClass: classNames.messenger.interfaceBtn,
-        classesToAdd: [`${chosenChar.name.toLowerCase()}-${common.second}`],
-      },
-      {
-        elements: [this.input],
-        initialClass: classNames.messenger.interfaceInput,
-        classesToAdd: [`${chosenChar.name.toLowerCase()}-${common.second}`],
-      },
-      {
-        elements: [this.spinnerContainer],
-        initialClass: classNames.messenger.spinnerContainer,
-        classesToAdd: [`${chosenChar.name.toLowerCase()}-${common.second}`],
-      },
-    ])
+    setClassesFn({
+      objs: [
+        {
+          elements: [this.button],
+          initialClass: classNames.messenger.interfaceBtn,
+          classes: [`${chosenChar.name.toLowerCase()}-${common.second}`],
+        },
+        {
+          elements: [this.input],
+          initialClass: classNames.messenger.interfaceInput,
+          classes: [`${chosenChar.name.toLowerCase()}-${common.second}`],
+        },
+        {
+          elements: [this.spinnerContainer],
+          initialClass: classNames.messenger.spinnerContainer,
+          classes: [`${chosenChar.name.toLowerCase()}-${common.second}`],
+        },
+      ],
+    })
   }
 }
 

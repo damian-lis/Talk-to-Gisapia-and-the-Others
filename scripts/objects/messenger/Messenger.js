@@ -54,13 +54,15 @@ class Messenger {
   }
 
   changeColor(chosenChar) {
-    setClassesFn([
-      {
-        elements: [this.container],
-        initialClass: classNames.messenger.main,
-        classesToAdd: [`${chosenChar.name.toLowerCase()}-${common.main}`],
-      },
-    ])
+    setClassesFn({
+      objs: [
+        {
+          elements: [this.container],
+          initialClass: classNames.messenger.main,
+          classes: [`${chosenChar.name.toLowerCase()}-${common.main}`],
+        },
+      ],
+    })
   }
 
   getContainerInner() {

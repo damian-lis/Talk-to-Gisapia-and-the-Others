@@ -171,18 +171,20 @@ class MessengerScreen {
   }
 
   changeColor(chosenChar) {
-    setClassesFn([
-      {
-        elements: [this.container],
-        initialClass: classNames.messenger.screen,
-        classesToAdd: [`${chosenChar.name.toLowerCase()}-${common.second}`],
-      },
-      {
-        elements: [this.backIcon],
-        initialClass: classNames.messenger.backIcon,
-        classesToAdd: [`${chosenChar.name.toLowerCase()}-${common.main}`],
-      },
-    ])
+    setClassesFn({
+      objs: [
+        {
+          elements: [this.container],
+          initialClass: classNames.messenger.screen,
+          classes: [`${chosenChar.name.toLowerCase()}-${common.second}`],
+        },
+        {
+          elements: [this.backIcon],
+          initialClass: classNames.messenger.backIcon,
+          classes: [`${chosenChar.name.toLowerCase()}-${common.main}`],
+        },
+      ],
+    })
   }
 
   scrollMessengerScreen() {
