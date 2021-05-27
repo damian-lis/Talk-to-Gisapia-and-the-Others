@@ -116,8 +116,8 @@ class MessengerInterface {
 
   memoryLngSubscribe() {
     this.memory.lngSubscribe((lng) =>
-      changeLanguageFn(
-        [
+      changeLanguageFn({
+        objs: [
           {
             element: this.button,
             props: {
@@ -126,8 +126,8 @@ class MessengerInterface {
             },
           },
         ],
-        lng
-      )
+        lng,
+      })
     )
   }
 

@@ -245,8 +245,8 @@ class SelectCharUI {
 
   memoryLngSubscribe() {
     this.memory.lngSubscribe((lng) =>
-      changeLanguageFn(
-        [
+      changeLanguageFn({
+        objs: [
           {
             element: this.headline,
             props: {
@@ -276,8 +276,8 @@ class SelectCharUI {
             },
           },
         ],
-        lng
-      )
+        lng,
+      })
     )
   }
 
