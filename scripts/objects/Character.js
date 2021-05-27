@@ -85,7 +85,7 @@ class Character {
   setWordsToSearchAndReplace() {
     return Object.keys(this.memory.getAboutUser()).map((category) => {
       return {
-        search: `-${common.user}${setUpperLetterFn(category)}-`,
+        search: `-${common.user}${setUpperLetterFn({ text: category })}-`,
         replace: this.memory.getAboutUser(category),
       }
     })

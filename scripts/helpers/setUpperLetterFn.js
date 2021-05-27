@@ -1,3 +1,3 @@
-export default (message) => {
-  return message.charAt(0).toUpperCase() + message.slice(1)
+export default ({ text }) => {
+  if (text) return text.charAt(0).toUpperCase() + text.slice(1)
 }

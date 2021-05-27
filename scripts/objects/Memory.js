@@ -98,7 +98,7 @@ class Memory {
 
   addDataToAboutUser(scriptCategory, word) {
     if (scriptCategory !== categories.hobby) {
-      word = setUpperLetterFn(word)
+      word = setUpperLetterFn({ text: word })
     }
     this.aboutUser[scriptCategory] = word
   }
