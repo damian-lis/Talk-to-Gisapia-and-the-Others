@@ -220,10 +220,14 @@ class SelectCharUI {
     this.memory.callLngSubscribers()
     this.memory.playClickAudio()
 
-    setActiveFn({
-      setOn: target,
-      removeFrom: [this.engLngBtn, this.plLngBtn],
-      classes: [classNames.selectCharUI.lngBtnActive],
+    setClassesFn({
+      objs: [
+        {
+          elements: [target],
+          removeFromEls: [this.engLngBtn, this.plLngBtn],
+          classes: [classNames.selectCharUI.lngBtnActive],
+        },
+      ],
     })
   }
 
