@@ -13,7 +13,7 @@ export const common = {
   toBottomHide: 'toBottomHide:',
   fromBottomShow: 'fromBottomShow',
   fallFromTop: 'fallFromTop',
-  BackToTheTop: 'BackToTheTop',
+  backToTheTop: 'backToTheTop',
   startAnimation: 'startAnimation',
   id: 'id',
   main: 'main',
@@ -74,7 +74,6 @@ export const fonts = {
   arial: 'arial',
 }
 
-
 export const types = {
   string: 'string',
   object: 'object',
@@ -90,9 +89,9 @@ export const language = {
     large: 'ENG',
     small: 'eng',
   },
-},
+}
 
-export const fetchProps =  {
+export const fetchProps = {
   methods: {
     POST: 'POST',
   },
@@ -110,12 +109,12 @@ export const answerTypes = {
   isInMemory: 'isInMemory',
   isNotInMemory: 'isNotInMemory',
   isAddedToMemory: 'isAddedToMemory',
-},
+}
 
-export const  privatePolicy = {
+export const privacyPolicy = {
   pl: 'Polityka prywatności',
-  eng: 'Private policy',
-},
+  eng: 'Privacy policy',
+}
 
 export const categories = {
   name: 'name',
@@ -124,17 +123,17 @@ export const categories = {
   summary: 'summary',
 }
 
-export const charNames= {
+export const charNames = {
   Gisapia: 'Gisapia',
   Hookin: 'Hookin',
   Reduxon: 'Reduxon',
-},
+}
 
-export const regexp = {
+export const reg = {
   modifiers: {
     gi: 'gi',
   },
-},
+}
 
 export const emailValidationReg = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 
@@ -267,12 +266,12 @@ export const classNames = {
     lngBtnActive: 'selectCharUI-lngBtn-active',
   },
 
-  privatePolicy: {
-    main: 'privatePolicy',
-    linkContainer: 'privatePolicy-link-container',
-    link: 'privatePolicy-link',
-    headline: 'privatePolicy-headline',
-    paragraph: 'privatePolicy-paragraph',
+  privacyPolicy: {
+    main: 'privacyPolicy',
+    linkContainer: 'privacyPolicy-link-container',
+    link: 'privacyPolicy-link',
+    headline: 'privacyPolicy-headline',
+    paragraph: 'privacyPolicy-paragraph',
   },
 }
 
@@ -309,12 +308,12 @@ export const classReferences = {
     lngBtnActive: '.selectCharUI-lngBtn-active',
   },
 
-  privatePolicy: {
-    main: '.privatePolicy',
-    linkContainer: '.privatePolicy-link-container',
-    link: '.privatePolicy-link',
-    headline: '.privatePolicy-headline',
-    paragraph: '.privatePolicy-paragraph',
+  privacyPolicy: {
+    main: '.privacyPolicy',
+    linkContainer: '.privacyPolicy-link-container',
+    link: '.privacyPolicy-link',
+    headline: '.privacyPolicy-headline',
+    paragraph: '.privacyPolicy-paragraph',
   },
 }
 
@@ -354,8 +353,8 @@ export const src = {
   messenger: {
     backIcon: '/images/icons/back.svg',
   },
-  privatePolicy: {
-    site: '/privatePolicy.html',
+  privacyPolicy: {
+    site: '/privacyPolicy.html',
   },
   selectCharUI: {
     plIcon: `/images/icons/pl.svg`,
