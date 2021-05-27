@@ -1,6 +1,8 @@
 import { common } from '/data/names.js'
 
 export default ({ element, ...rest }) => {
+  if (!element && !rest.length) return
+
   const createdElement = document.createElement(element)
 
   if (Object.keys(rest).length) {
@@ -9,19 +11,17 @@ export default ({ element, ...rest }) => {
         case common.listeners:
           rest[propEl].map((listener) => {
             const { event, cb } = listener
-            createdElement.addEventListener(event, (e) => {
-              cb(e)
-            })
+            createdElement.addEventListener(event, (e) => cb(e))
           })
           break
 
         case common.attributes:
-          rest[propEl].map((attribute) => {
+          rest[propEl].map((attribute) =>
             createdElement.setAttribute(
-              `${attribute.type}`,
-              `${attribute.name}`
+              `${attribute.name}`,
+              `${attribute.value}`
             )
-          })
+          )
           break
 
         case common.classes:
@@ -29,14 +29,18 @@ export default ({ element, ...rest }) => {
           break
 
         case common.styles:
-          rest[propEl].map((styleObj) => {
-            createdElement.style[styleObj.name] = styleObj.value
-          })
+          rest[propEl].map(
+            (styleObj) => (createdElement.style[styleObj.name] = styleObj.value)
+          )
           break
 
         default:
+          if (
+            createdElement.tagName === common.TEXTAREA &&
+            propEl === common.type
+          )
+            break
           createdElement[propEl] = rest[propEl]
-          break
       }
     }
   }

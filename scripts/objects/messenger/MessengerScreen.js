@@ -84,7 +84,7 @@ class MessengerScreen {
             element: elements.div,
             classes: [classNames.messenger.messageContainer],
             attributes: [
-              { type: common.messagesPart, name: this.charMessagesPart },
+              { name: common.messagesPart, value: this.charMessagesPart },
             ],
           })
         : createElementFn({
