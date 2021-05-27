@@ -294,52 +294,62 @@ class SelectCharUI {
       this.messagesComponent = this.createMessagesComponent(messages)
       this.container.prepend(this.messagesComponent)
     }
-    setPropsFn([
-      {
-        elements: [...this.charButtons, this.startButton, this.headline],
-        styleProps: [
-          {
-            name: styleProps.names.display,
-            value: messages ? styleProps.values.none : styleProps.values.block,
-          },
-        ],
-      },
-      {
-        elements: [this.talkAgainButton],
-        styleProps: [
-          {
-            name: styleProps.names.display,
-            value: messages ? styleProps.values.block : styleProps.values.none,
-          },
-        ],
-      },
-      {
-        elements: [this.engLngBtn, this.plLngBtn],
-        styleProps: [
-          {
-            name: styleProps.names.display,
-            value: messages ? styleProps.values.none : styleProps.values.block,
-          },
-        ],
-      },
-    ])
+    setPropsFn({
+      objs: [
+        {
+          elements: [...this.charButtons, this.startButton, this.headline],
+          styleProps: [
+            {
+              name: styleProps.names.display,
+              value: messages
+                ? styleProps.values.none
+                : styleProps.values.block,
+            },
+          ],
+        },
+        {
+          elements: [this.talkAgainButton],
+          styleProps: [
+            {
+              name: styleProps.names.display,
+              value: messages
+                ? styleProps.values.block
+                : styleProps.values.none,
+            },
+          ],
+        },
+        {
+          elements: [this.engLngBtn, this.plLngBtn],
+          styleProps: [
+            {
+              name: styleProps.names.display,
+              value: messages
+                ? styleProps.values.none
+                : styleProps.values.block,
+            },
+          ],
+        },
+      ],
+    })
   }
 
   move({ type }) {
-    setPropsFn([
-      {
-        elements: [this.container],
-        styleProps: [
-          {
-            name: common.animation,
-            value:
-              type === common.toBottomHide
-                ? animationSettings.selectCharUI.toBottomHide
-                : animationSettings.selectCharUI.fromBottomShow,
-          },
-        ],
-      },
-    ])
+    setPropsFn({
+      objs: [
+        {
+          elements: [this.container],
+          styleProps: [
+            {
+              name: common.animation,
+              value:
+                type === common.toBottomHide
+                  ? animationSettings.selectCharUI.toBottomHide
+                  : animationSettings.selectCharUI.fromBottomShow,
+            },
+          ],
+        },
+      ],
+    })
   }
 
   removeCharButtonsActive() {

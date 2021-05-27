@@ -141,24 +141,26 @@ class MessengerScreen {
   }
 
   toggleShowBackBtn(toggle) {
-    setPropsFn([
-      {
-        elements: [this.backIcon],
-        styleProps: [
-          {
-            name: styleProps.names.visibility,
-            value:
-              toggle === common.on
-                ? styleProps.values.visible
-                : styleProps.values.hidden,
-          },
-          {
-            name: styleProps.names.opacity,
-            value: toggle === common.on ? 1 : 0,
-          },
-        ],
-      },
-    ])
+    setPropsFn({
+      objs: [
+        {
+          elements: [this.backIcon],
+          styleProps: [
+            {
+              name: styleProps.names.visibility,
+              value:
+                toggle === common.on
+                  ? styleProps.values.visible
+                  : styleProps.values.hidden,
+            },
+            {
+              name: styleProps.names.opacity,
+              value: toggle === common.on ? 1 : 0,
+            },
+          ],
+        },
+      ],
+    })
   }
 
   showTyping(time, charName) {

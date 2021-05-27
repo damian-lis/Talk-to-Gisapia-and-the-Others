@@ -37,20 +37,22 @@ class Messenger {
   }
 
   move({ type }) {
-    setPropsFn([
-      {
-        elements: [this.container],
-        styleProps: [
-          {
-            name: common.animation,
-            value:
-              type === common.fallFromTop
-                ? animationSettings.messenger.fallFromTop
-                : animationSettings.messenger.BackToTheTop,
-          },
-        ],
-      },
-    ])
+    setPropsFn({
+      objs: [
+        {
+          elements: [this.container],
+          styleProps: [
+            {
+              name: common.animation,
+              value:
+                type === common.fallFromTop
+                  ? animationSettings.messenger.fallFromTop
+                  : animationSettings.messenger.BackToTheTop,
+            },
+          ],
+        },
+      ],
+    })
   }
 
   changeColor(chosenChar) {

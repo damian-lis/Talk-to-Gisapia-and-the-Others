@@ -181,58 +181,62 @@ class MessengerInterface {
   }
 
   toggleActivePanel(toggle) {
-    setPropsFn([
-      {
-        elements: [this.button],
-        styleProps: [
-          {
-            name: styleProps.names.pointerEvents,
-            value:
-              toggle === common.on
-                ? styleProps.values.auto
-                : styleProps.values.none,
-          },
-          ,
-        ],
-      },
-      {
-        elements: [this.input, this.button],
-        props: [
-          {
-            name: elementProps.names.disabled,
-            value: toggle === common.on ? false : true,
-          },
-          ,
-        ],
-      },
-    ])
+    setPropsFn({
+      objs: [
+        {
+          elements: [this.button],
+          styleProps: [
+            {
+              name: styleProps.names.pointerEvents,
+              value:
+                toggle === common.on
+                  ? styleProps.values.auto
+                  : styleProps.values.none,
+            },
+            ,
+          ],
+        },
+        {
+          elements: [this.input, this.button],
+          props: [
+            {
+              name: elementProps.names.disabled,
+              value: toggle === common.on ? false : true,
+            },
+            ,
+          ],
+        },
+      ],
+    })
 
     this.clearInput()
   }
 
   showSpinnerInsteadBtn({ invert } = false) {
-    setPropsFn([
-      {
-        elements: [this.button],
-        styleProps: [
-          {
-            name: styleProps.names.display,
-            value: invert ? styleProps.values.block : styleProps.values.none,
-          },
-          ,
-        ],
-      },
-      {
-        elements: [this.spinnerComponent],
-        styleProps: [
-          {
-            name: styleProps.names.display,
-            value: invert ? styleProps.values.none : styleProps.values.flex,
-          },
-          ,
-        ],
-      },
-    ])
+    setPropsFn({
+      objs: [
+        {
+          elements: [this.button],
+          styleProps: [
+            {
+              name: styleProps.names.display,
+              value: invert ? styleProps.values.block : styleProps.values.none,
+            },
+            ,
+          ],
+        },
+        {
+          elements: [this.spinnerComponent],
+          styleProps: [
+            {
+              name: styleProps.names.display,
+              value: invert ? styleProps.values.none : styleProps.values.flex,
+            },
+            ,
+          ],
+        },
+      ],
+    })
   }
 
   emailValidation(email) {
