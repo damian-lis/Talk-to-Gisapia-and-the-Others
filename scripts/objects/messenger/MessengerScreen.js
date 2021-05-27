@@ -107,8 +107,8 @@ class MessengerScreen {
         classes: [classNames.messenger.avatar],
       })
       removeElAmongElsFn({
-        element: elements.img,
-        elementsName: `[${common.messagesPart}="${this.charMessagesPart}"]`,
+        elementToRemove: elements.img,
+        removeFromElements: `[${common.messagesPart}="${this.charMessagesPart}"]`,
       })
       messageContainer.appendChild(avatar)
     }
