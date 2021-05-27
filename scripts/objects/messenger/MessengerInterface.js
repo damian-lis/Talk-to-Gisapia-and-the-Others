@@ -1,7 +1,6 @@
 import {
   createElementFn,
   appendElementsToContainerFn,
-  changeLanguageFn,
   setPropsFn,
   setClassesFn,
 } from '/scripts/helpers/index.js'
@@ -116,17 +115,18 @@ class MessengerInterface {
 
   memoryLngSubscribe() {
     this.memory.lngSubscribe((lng) =>
-      changeLanguageFn({
+      setPropsFn({
         objs: [
           {
-            element: this.button,
-            props: {
-              name: elementProps.names.textContent,
-              value: commands.send,
-            },
+            elements: [this.button],
+            props: [
+              {
+                name: elementProps.names.textContent,
+                value: commands.send[lng],
+              },
+            ],
           },
         ],
-        lng,
       })
     )
   }

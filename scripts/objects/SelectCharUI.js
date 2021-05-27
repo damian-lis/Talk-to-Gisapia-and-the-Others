@@ -1,7 +1,6 @@
 import {
   createElementFn,
   appendElementsToContainerFn,
-  changeLanguageFn,
   setPropsFn,
   setClassesFn,
 } from '/scripts/helpers/index.js'
@@ -252,38 +251,45 @@ class SelectCharUI {
 
   memoryLngSubscribe() {
     this.memory.lngSubscribe((lng) =>
-      changeLanguageFn({
+      setPropsFn({
         objs: [
           {
-            element: this.headline,
-            props: {
-              name: elementProps.names.textContent,
-              value: commands.chooseCharacter,
-            },
+            elements: [this.headline],
+            props: [
+              {
+                name: elementProps.names.textContent,
+                value: commands.chooseCharacter[lng],
+              },
+            ],
           },
           {
-            element: this.startButton,
-            props: {
-              name: elementProps.names.textContent,
-              value: commands.startTalking,
-            },
+            elements: [this.startButton],
+            props: [
+              {
+                name: elementProps.names.textContent,
+                value: commands.startTalking[lng],
+              },
+            ],
           },
           {
-            element: this.talkAgainButton,
-            props: {
-              name: elementProps.names.textContent,
-              value: commands.talkAgain,
-            },
+            elements: [this.talkAgainButton],
+            props: [
+              {
+                name: elementProps.names.textContent,
+                value: commands.talkAgain[lng],
+              },
+            ],
           },
           {
-            element: this.privacyPolicyLink,
-            props: {
-              name: elementProps.names.textContent,
-              value: privacyPolicy,
-            },
+            elements: [this.privacyPolicyLink],
+            props: [
+              {
+                name: elementProps.names.textContent,
+                value: privacyPolicy[lng],
+              },
+            ],
           },
         ],
-        lng,
       })
     )
   }
