@@ -3,7 +3,6 @@ export const common = {
   attributes: 'attributes',
   classes: 'classes',
   styles: 'styles',
-  string: 'string',
   animation: 'animation',
   messages: 'messages',
   answers: 'answers',
@@ -21,126 +20,121 @@ export const common = {
   second: 'second',
   ball: 'ball',
   user: 'user',
+  Enter: 'Enter',
+  on: 'on',
+  off: 'off',
+}
 
-  events: {
-    click: 'click',
-    keypress: 'keypress',
-    resize: 'resize',
-    DOMContentLoaded: 'DOMContentLoaded',
-  },
+export const elements = {
+  canvas: 'canvas',
+  div: 'div',
+  button: 'button',
+  input: 'input',
+  img: 'img',
+  audio: 'audio',
+  h1: 'h1',
+  a: 'a',
+  p: 'p',
+}
 
-  types: {
-    string: 'string',
-    object: 'object',
-  },
-
-  props: {
-    names: {
-      textContent: 'textContent',
-      disabled: 'disabled',
-    },
-  },
-
-  styleProps: {
-    names: {
-      display: 'display',
-      pointerEvents: 'pointerEvents',
-      visibility: 'visibility',
-      opacity: 'opacity',
-    },
-    values: {
-      none: 'none',
-      block: 'block',
-      visible: 'visible',
-      hidden: 'hidden',
-      auto: 'auto',
-      flex: 'flex',
-      visible: 'visible',
-      hidden: 'hidden',
-    },
-  },
-
-  fonts: {
-    arial: 'arial',
-  },
-
-  regexp: {
-    modifiers: {
-      gi: 'gi',
-    },
-  },
-
-  keys: {
-    Enter: 'Enter',
-  },
-
-  toggle: {
-    on: 'on',
-    off: 'off',
-  },
-
-  language: {
-    name: 'language',
-    pl: {
-      large: 'PL',
-      small: 'pl',
-    },
-    eng: {
-      large: 'ENG',
-      small: 'eng',
-    },
-  },
-
-  privatePolicy: {
-    pl: 'Polityka prywatności',
-    eng: 'Private policy',
-  },
-
-  answerTypes: {
-    isInMemory: 'isInMemory',
-    isNotInMemory: 'isNotInMemory',
-    isAddedToMemory: 'isAddedToMemory',
-  },
-
-  categories: {
-    name: 'name',
-    origin: 'origin',
-    hobby: 'hobby',
-    summary: 'summary',
-  },
-
-  elements: {
-    canvas: 'canvas',
-    div: 'div',
-    button: 'button',
-    input: 'input',
-    img: 'img',
-    audio: 'audio',
-    h1: 'h1',
-    a: 'a',
-    p: 'p',
-  },
-
-  fetch: {
-    methods: {
-      POST: 'POST',
-    },
-    headers: {
-      props: {
-        ContentType: 'Content-Type',
-      },
-      values: {
-        applicationJson: 'application/json',
-      },
-    },
-  },
-
-  charNames: {
-    Gisapia: 'Gisapia',
-    Hookin: 'Hookin',
-    Reduxon: 'Reduxon',
+export const elementProps = {
+  names: {
+    textContent: 'textContent',
+    disabled: 'disabled',
   },
 }
+
+export const styleProps = {
+  names: {
+    display: 'display',
+    pointerEvents: 'pointerEvents',
+    visibility: 'visibility',
+    opacity: 'opacity',
+  },
+  values: {
+    none: 'none',
+    block: 'block',
+    visible: 'visible',
+    hidden: 'hidden',
+    auto: 'auto',
+    flex: 'flex',
+    visible: 'visible',
+    hidden: 'hidden',
+  },
+}
+
+export const events = {
+  click: 'click',
+  keypress: 'keypress',
+  resize: 'resize',
+  DOMContentLoaded: 'DOMContentLoaded',
+}
+
+export const fonts = {
+  arial: 'arial',
+}
+
+
+export const types = {
+  string: 'string',
+  object: 'object',
+}
+
+export const language = {
+  name: 'language',
+  pl: {
+    large: 'PL',
+    small: 'pl',
+  },
+  eng: {
+    large: 'ENG',
+    small: 'eng',
+  },
+},
+
+export const fetchProps =  {
+  methods: {
+    POST: 'POST',
+  },
+  headers: {
+    props: {
+      ContentType: 'Content-Type',
+    },
+    values: {
+      applicationJson: 'application/json',
+    },
+  },
+}
+
+export const answerTypes = {
+  isInMemory: 'isInMemory',
+  isNotInMemory: 'isNotInMemory',
+  isAddedToMemory: 'isAddedToMemory',
+},
+
+export const  privatePolicy = {
+  pl: 'Polityka prywatności',
+  eng: 'Private policy',
+},
+
+export const categories = {
+  name: 'name',
+  origin: 'origin',
+  hobby: 'hobby',
+  summary: 'summary',
+}
+
+export const charNames= {
+  Gisapia: 'Gisapia',
+  Hookin: 'Hookin',
+  Reduxon: 'Reduxon',
+},
+
+export const regexp = {
+  modifiers: {
+    gi: 'gi',
+  },
+},
 
 export const emailValidationReg = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 
