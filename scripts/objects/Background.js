@@ -1,4 +1,4 @@
-import { fonts, elements, events, chineseString } from '/data/names.js'
+import { fonts, elements, events, chineseString, colors } from '/data/names.js'
 
 class Background {
   constructor() {
@@ -11,7 +11,8 @@ class Background {
     this.font_size = 20
     this.columns = this.canvas.width / this.font_size
     this.drops = this.addDrops()
-    this.draw()
+
+    this.draw({ time: 33 })
     this.resize()
   }
 
@@ -32,11 +33,11 @@ class Background {
     return drops
   }
 
-  draw(time = 33) {
+  draw({ time }) {
     setInterval(() => {
-      this.cxt.fillStyle = 'rgba(0,0,0,0.05)'
+      this.cxt.fillStyle = colors.animationBackground
       this.cxt.fillRect(0, 0, this.canvas.width, this.canvas.height)
-      this.cxt.fillStyle = 'rgb(132, 42, 86)'
+      this.cxt.fillStyle = colors.animationCharacters
       this.cxt.font = `${this.font_size}px ${fonts.arial}`
 
       for (let i = 0; i < this.drops.length; i++) {

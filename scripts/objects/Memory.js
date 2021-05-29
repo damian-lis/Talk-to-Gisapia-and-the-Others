@@ -1,7 +1,14 @@
 import { GisapiaAnimation, Background } from './index.js'
 import { createElementFn, setUpperLetterFn } from '/scripts/helpers/index.js'
 import { charMemory } from '/data/characters/index.js'
-import { src, elements, categories, language } from '/data/names.js'
+import {
+  common,
+  src,
+  elements,
+  categories,
+  languages,
+  size,
+} from '/data/names.js'
 
 class Memory {
   constructor() {
@@ -23,6 +30,7 @@ class Memory {
 
       Memory.instance = this
     }
+
     return Memory.instance
   }
 
@@ -92,19 +100,19 @@ class Memory {
     pause ? this.finishAudio.pause() : this.finishAudio.play()
   }
 
-  getCharMemory(category) {
-    return this.charMemory[category]
+  getCharMemory({ scriptCategory }) {
+    return this.charMemory[scriptCategory]
   }
 
-  addDataToAboutUser(scriptCategory, word) {
+  addDataToAboutUser({ scriptCategory, word }) {
     if (scriptCategory !== categories.hobby) {
       word = setUpperLetterFn({ text: word })
     }
     this.aboutUser[scriptCategory] = word
   }
 
-  getAboutUser(category) {
-    return category ? this.aboutUser[category] : this.aboutUser
+  getAboutUser({ scriptCategory } = '') {
+    return scriptCategory ? this.aboutUser[scriptCategory] : this.aboutUser
   }
 
   deleteDataAboutUser() {
@@ -162,10 +170,9 @@ class Memory {
   setLanguage(lng) {
     if (lng) {
       this.language = lng
-      localStorage.setItem(language.name, lng)
-    } else {
-      return localStorage.getItem(language.name) || language.pl.small
-    }
+      localStorage.setItem(common.language, lng)
+    } else
+      return localStorage.getItem(common.language) || languages.pl[size.small]
   }
 
   getLanguage() {

@@ -10,10 +10,10 @@ import {
 } from '/data/characters/index.js'
 
 class CharsFactory {
-  constructor(memory) {
-    this.gisapia = new Gisapia(gisapiaScriptTalk, gisapiaEmail, memory)
-    this.hookin = new Hookin(hookinScriptTalk, hookinEmail, memory)
-    this.reduxon = new Reduxon(reduxonScriptTalk, reduxonEmail, memory)
+  constructor({ objects }) {
+    this.gisapia = new Gisapia(gisapiaScriptTalk, gisapiaEmail, objects.memory)
+    this.hookin = new Hookin(hookinScriptTalk, hookinEmail, objects.memory)
+    this.reduxon = new Reduxon(reduxonScriptTalk, reduxonEmail, objects.memory)
   }
 
   getChar(charName) {

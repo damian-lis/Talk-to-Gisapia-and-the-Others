@@ -1,4 +1,4 @@
-import { common, types } from '/data//names.js'
+import { toggleValue, types } from '/data//names.js'
 
 export default ({ toggle, objs = [], delay }) => {
   const helperLogic = () =>
@@ -23,7 +23,7 @@ export default ({ toggle, objs = [], delay }) => {
             obj.styleProps.map((prop) => {
               if (toggle) {
                 element.style[prop.name] =
-                  toggle === common.on ? prop.values.on : prop.values.off
+                  toggle === toggleValue.on ? prop.values.on : prop.values.off
               } else element.style[prop.name] = prop.value
             })
 
@@ -31,7 +31,7 @@ export default ({ toggle, objs = [], delay }) => {
             obj.props.map((prop) => {
               if (toggle) {
                 element[prop.name] =
-                  toggle === common.on ? prop.values.on : prop.values.off
+                  toggle === toggleValue.on ? prop.values.on : prop.values.off
               } else element[prop.name] = prop.value
             })
         })

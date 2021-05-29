@@ -18,10 +18,11 @@ import {
 } from '/data/names.js'
 
 class MessengerInterface {
-  constructor(messenger, memory) {
-    this.memory = memory
+  constructor({ container, objects }) {
+    this.memory = objects.memory
     this.inputValue = ''
     this.subscribers = []
+    this.delayMessagesTimeouts = []
 
     this.createElements()
     this.createComponents()
@@ -29,14 +30,14 @@ class MessengerInterface {
 
     appendElementsToContainerFn({
       elements: [this.mainComponent],
-      container: messenger.getContainerInner(),
+      container: container.getMainContainerInner(),
     })
   }
 
   createElements() {
     const lng = this.memory.getLanguage()
 
-    this.container = createElementFn({
+    this.mainContainer = createElementFn({
       element: elements.div,
       classes: [classNames.messenger.interface],
     })
@@ -48,7 +49,7 @@ class MessengerInterface {
       listeners: [
         {
           event: elements.input,
-          cb: (e) => (this.inputValue = e.target.value),
+          cb: (e) => this.handleInputTyping(e),
         },
         {
           event: events.keypress,
@@ -95,22 +96,22 @@ class MessengerInterface {
 
     this.mainComponent = appendElementsToContainerFn({
       elements: [this.input, this.button, this.spinnerComponent],
-      container: this.container,
+      container: this.mainContainer,
     })
   }
 
+  handleInputTyping(e) {
+    this.inputValue = e.target.value
+  }
+
   handleInputKeypress(e) {
-    if (e.key === common.Enter) {
-      if (this.isCorrectInputValue()) {
-        this.callSubscribers()
-      }
-    }
+    e.key === common.Enter &&
+      this.isCorrectInputValue() &&
+      this.callSubscribers()
   }
 
   handleButtonClick() {
-    if (this.isCorrectInputValue()) {
-      this.callSubscribers()
-    }
+    this.isCorrectInputValue() && this.callSubscribers()
   }
 
   memoryLngSubscribe() {
@@ -133,13 +134,13 @@ class MessengerInterface {
 
   isCorrectInputValue() {
     const lng = this.memory.getLanguage()
-    if (this.inputValue === '') {
-      return alert(alerts.mustWritingSomething[lng])
-    }
-    if (this.inputValue.includes('@')) {
-      if (!this.emailValidation(this.inputValue))
-        return alert(alerts.correctMailFormat[lng])
-    }
+    if (this.inputValue === '') return alert(alerts.mustWritingSomething[lng])
+
+    if (
+      this.inputValue.includes('@') &&
+      !this.emailValidation({ email: this.inputValue })
+    )
+      return alert(alerts.correctMailFormat[lng])
 
     return true
   }
@@ -147,51 +148,43 @@ class MessengerInterface {
   clearInput({ withTimeouts } = false) {
     this.input.value = ''
     this.inputValue = ''
-    if (withTimeouts) {
-      this.clearInputTimeouts()
-    }
+    withTimeouts && this.clearInputTimeouts()
   }
+
+  // Tutaj
 
   clearInputTimeouts() {
-    if (this.firstInputTimeout) {
-      clearTimeout(this.firstInputTimeout)
-    }
-    if (this.secondInputTimeout) {
-      clearTimeout(this.secondInputTimeout)
-    }
-    if (this.thirdInputTimeout) {
-      clearTimeout(this.thirdInputTimeout)
-    }
+    this.delayMessagesTimeouts.map((delayMessageTimeout) =>
+      clearTimeout(delayMessageTimeout)
+    )
   }
 
-  addWaitMessagesToInput({ firstDelay, secondDelay, thirdDelay }) {
+  addDelayMessagesToInput({ delay }) {
     const lng = this.memory.getLanguage()
 
-    this.firstInputTimeout = setTimeout(() => {
-      this.input.value = messages.sending[lng]
-    }, firstDelay)
+    Object.entries(messages.delay).map((delayMessage, index) => {
+      const delayMessageTimeout = setTimeout(
+        () => (this.input.value = delayMessage[1][lng]),
+        index === 0 ? 1000 : delay * index
+      )
 
-    this.secondInputTimeout = setTimeout(() => {
-      this.input.value = messages.oneMoreMoment[lng]
-    }, secondDelay)
-
-    this.thirdInputTimeout = setTimeout(() => {
-      this.input.value = messages.secondMoreMoment[lng]
-    }, thirdDelay)
+      this.delayMessagesTimeouts.push(delayMessageTimeout)
+    })
   }
 
   toggleActivePanel(toggle) {
     setPropsFn({
+      toggle,
       objs: [
         {
           elements: [this.button],
           styleProps: [
             {
               name: styleProps.names.pointerEvents,
-              value:
-                toggle === common.on
-                  ? styleProps.values.auto
-                  : styleProps.values.none,
+              values: {
+                on: styleProps.values.auto,
+                off: styleProps.values.none,
+              },
             },
             ,
           ],
@@ -201,7 +194,7 @@ class MessengerInterface {
           props: [
             {
               name: elementProps.names.disabled,
-              value: toggle === common.on ? false : true,
+              values: { on: false, off: true },
             },
             ,
           ],
@@ -239,11 +232,11 @@ class MessengerInterface {
     })
   }
 
-  emailValidation(email) {
+  emailValidation({ email }) {
     return emailValidationReg.test(email)
   }
 
-  subscribe(subscriber) {
+  subscribe({ subscriber }) {
     this.subscribers.push(subscriber)
   }
 
@@ -251,23 +244,23 @@ class MessengerInterface {
     this.subscribers.map((subscriber) => subscriber(this.inputValue))
   }
 
-  changeColor(chosenChar) {
+  changeColor({ char }) {
     setClassesFn({
       objs: [
         {
           elements: [this.button],
           initialClass: classNames.messenger.interfaceBtn,
-          classes: [`${chosenChar.name.toLowerCase()}-${common.second}`],
+          classes: [`${char.name.toLowerCase()}-${common.second}`],
         },
         {
           elements: [this.input],
           initialClass: classNames.messenger.interfaceInput,
-          classes: [`${chosenChar.name.toLowerCase()}-${common.second}`],
+          classes: [`${char.name.toLowerCase()}-${common.second}`],
         },
         {
           elements: [this.spinnerContainer],
           initialClass: classNames.messenger.spinnerContainer,
-          classes: [`${chosenChar.name.toLowerCase()}-${common.second}`],
+          classes: [`${char.name.toLowerCase()}-${common.second}`],
         },
       ],
     })

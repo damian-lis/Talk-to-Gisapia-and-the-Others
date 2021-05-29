@@ -7,23 +7,23 @@ import {
 import { common, elements, classNames, animationSettings } from '/data/names.js'
 
 class Messenger {
-  constructor(container) {
+  constructor({ container }) {
     this.createElements()
     this.createComponents()
 
     appendElementsToContainerFn({
       elements: [this.mainComponent],
-      container: document.querySelector(container),
+      container,
     })
   }
 
   createElements() {
-    this.container = createElementFn({
+    this.mainContainer = createElementFn({
       element: elements.div,
       classes: [classNames.messenger.main],
     })
 
-    this.containerInner = createElementFn({
+    this.mainContainerInner = createElementFn({
       element: elements.div,
       classes: [classNames.messenger.inner],
     })
@@ -31,8 +31,8 @@ class Messenger {
 
   createComponents() {
     this.mainComponent = appendElementsToContainerFn({
-      elements: [this.containerInner],
-      container: this.container,
+      elements: [this.mainContainerInner],
+      container: this.mainContainer,
     })
   }
 
@@ -40,14 +40,11 @@ class Messenger {
     setPropsFn({
       objs: [
         {
-          elements: [this.container],
+          elements: [this.mainContainer],
           styleProps: [
             {
               name: common.animation,
-              value:
-                type === common.fallFromTop
-                  ? animationSettings.messenger.fallFromTop
-                  : animationSettings.messenger.BackToTheTop,
+              value: type,
             },
           ],
         },
@@ -55,20 +52,20 @@ class Messenger {
     })
   }
 
-  changeColor(chosenChar) {
+  changeColor({ char }) {
     setClassesFn({
       objs: [
         {
-          elements: [this.container],
+          elements: [this.mainContainer],
           initialClass: classNames.messenger.main,
-          classes: [`${chosenChar.name.toLowerCase()}-${common.main}`],
+          classes: [`${char.name.toLowerCase()}-${common.main}`],
         },
       ],
     })
   }
 
-  getContainerInner() {
-    return this.containerInner
+  getMainContainerInner() {
+    return this.mainContainerInner
   }
 }
 

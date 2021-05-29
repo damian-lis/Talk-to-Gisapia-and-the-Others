@@ -4,22 +4,24 @@ import { setUpperLetterFn } from '/scripts/helpers/index.js'
 class Character {
   constructor(scriptTalk, email, memory) {
     this.scriptTalk = scriptTalk
-    this.modifiedScriptTalk = {}
     this.email = email
-    this.modifiedEmail = {}
     this.memory = memory
+    this.modifiedScriptTalk = {}
+    this.modifiedEmail = {}
   }
 
   setScriptTalk() {
     const lng = this.memory.getLanguage()
 
     let scriptTalkCopy = JSON.parse(JSON.stringify(this.scriptTalk))
+
     this.modifiedScriptTalk = this.setScriptTalkMessages(scriptTalkCopy[lng])
+    console.log(this.modifiedScriptTalk)
   }
 
-  changeTimeForTyping(timeForTyping) {
+  changeTimeForTyping(time) {
     const timeForReduceTyping = 100 * Math.floor(Math.random() * 10 + 5)
-    const result = timeForTyping - timeForReduceTyping
+    const result = time - timeForReduceTyping
 
     return result < 1000 ? 1000 : result
   }
@@ -44,12 +46,12 @@ class Character {
     return categories
   }
 
-  countTypingQuantity(textLength) {
+  countTypingQuantity({ messageLength }) {
     let result
 
-    if (textLength < 20) {
+    if (messageLength < 20) {
       result = 1
-    } else if (textLength < 80) {
+    } else if (messageLength < 80) {
       result = 2
     } else {
       result = 3
@@ -83,41 +85,44 @@ class Character {
   }
 
   setWordsToSearchAndReplace() {
-    return Object.keys(this.memory.getAboutUser()).map((category) => {
+    return Object.keys(this.memory.getAboutUser()).map((scriptCategory) => {
       return {
-        search: `-${common.user}${setUpperLetterFn({ text: category })}-`,
-        replace: this.memory.getAboutUser(category),
+        search: `-${common.user}${setUpperLetterFn({ text: scriptCategory })}-`,
+        replace: this.memory.getAboutUser({ scriptCategory }),
       }
     })
   }
 
   findWordAndReplace({ wordsSets, texts }) {
-    if (typeof texts === types.object) {
-      let textsCopy = texts
-      for (const text in textsCopy) {
-        wordsSets.forEach((wordSet) => {
-          if (textsCopy[text].includes(wordSet.search)) {
-            const regexp = new RegExp(wordSet.search, reg.modifiers.gi)
-            textsCopy[text] = textsCopy[text].replace(regexp, wordSet.replace)
-          }
-        })
-      }
+    const textsCopy = texts
 
-      return textsCopy
-    } else {
-      let textsCopy = texts
-      textsCopy.map((text) => {
-        wordsSets.forEach((wordSet) => {
-          if (text.includes(wordSet.search)) {
-            const regexp = new RegExp(wordSet.search, reg.modifiers.gi)
-            text = text.replace(regexp, wordSet.replace)
-          }
-        })
-        return text
-      })
+    switch (typeof texts) {
+      case types.object:
+        for (const text in textsCopy) {
+          wordsSets.forEach((wordSet) => {
+            if (textsCopy[text].includes(wordSet.search)) {
+              const regexp = new RegExp(wordSet.search, reg.modifiers.gi)
+              textsCopy[text] = textsCopy[text].replace(regexp, wordSet.replace)
+            }
+          })
+        }
 
-      return textsCopy
+        break
+      default:
+        textsCopy.map((text) => {
+          wordsSets.forEach((wordSet) => {
+            if (text.includes(wordSet.search)) {
+              const regexp = new RegExp(wordSet.search, reg.modifiers.gi)
+              text = text.replace(regexp, wordSet.replace)
+            }
+          })
+          return text
+        })
+
+        break
     }
+
+    return textsCopy
   }
 
   changeScriptTalkMessages({ category, from, type }) {
@@ -125,22 +130,26 @@ class Character {
 
     if (wordsToSearchAndReplace.length === 0) return
 
-    if (from === common.messages) {
-      this.modifiedScriptTalk[category][
-        common.messages
-      ] = this.findWordAndReplace({
-        wordsSets: wordsToSearchAndReplace,
-        texts: this.modifiedScriptTalk[category][common.messages],
-      })
-    }
+    switch (from) {
+      case common.messages:
+        this.modifiedScriptTalk[category][
+          common.messages
+        ] = this.findWordAndReplace({
+          wordsSets: wordsToSearchAndReplace,
+          texts: this.modifiedScriptTalk[category][common.messages],
+        })
+        break
 
-    if (from === common.answers) {
-      this.modifiedScriptTalk[category][common.answers][
-        type
-      ] = this.findWordAndReplace({
-        wordsSets: wordsToSearchAndReplace,
-        texts: this.modifiedScriptTalk[category][common.answers][type],
-      })
+      case common.answers:
+        this.modifiedScriptTalk[category][common.answers][
+          type
+        ] = this.findWordAndReplace({
+          wordsSets: wordsToSearchAndReplace,
+          texts: this.modifiedScriptTalk[category][common.answers][type],
+        })
+
+      default:
+        break
     }
   }
 
@@ -155,22 +164,23 @@ class Character {
     this.modifiedEmail.to = recipient
   }
 
-  getCurrentScriptTalkCategory(conversationStep) {
+  getCurrentScriptTalkCategory({ conversationStep }) {
+    console.log(this.modifiedScriptTalk)
     return Object.keys(this.modifiedScriptTalk)[conversationStep]
   }
 
-  mustThink(time) {
+  mustThink({ time }) {
     return new Promise((resolve) => setTimeout(resolve, time))
   }
 
-  checkUserMessageInMemory(scriptCategory, message) {
+  checkUserMessageInMemory({ scriptCategory, message }) {
     return this.memory
-      .getCharMemory(scriptCategory)
+      .getCharMemory({ scriptCategory })
       .find((word) => message.toLowerCase().includes(word.toLowerCase()))
   }
 
-  countTimeForTyping(textLength, speed) {
-    const result = textLength * speed
+  countTimeForTyping({ messageLength, speed }) {
+    const result = messageLength * speed
 
     return result > 2500 ? 2500 : result < 1000 ? 1000 : result
   }

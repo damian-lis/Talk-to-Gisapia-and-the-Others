@@ -1,4 +1,4 @@
-import { types, common } from '/data/names.js'
+import { types, toggleValue } from '/data/names.js'
 
 export default ({ toggle, objs = [], delay }) => {
   const helperLogic = () =>
@@ -21,11 +21,11 @@ export default ({ toggle, objs = [], delay }) => {
                   })
 
                 switch (toggle) {
-                  case common.on:
+                  case toggleValue.on:
                     element.classList.add(classEl)
                     element.disabled = false
                     break
-                  case common.off:
+                  case toggleValue.off:
                     element.classList.remove(classEl)
                     element.disabled = true
                     break

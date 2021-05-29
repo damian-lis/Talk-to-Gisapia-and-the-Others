@@ -5,23 +5,25 @@ import {
   setClassesFn,
 } from '/scripts/helpers/index.js'
 import {
-  animationSettings,
   classNames,
   commands,
   common,
   privacyPolicy,
-  language,
+  languages,
   styleProps,
   elementProps,
   elements,
   events,
   src,
+  size,
+  toggleValue,
+  subscriberNames,
 } from '/data/names.js'
 
 class SelectCharUI {
-  constructor(charNames, container, memory) {
+  constructor({ container, charNames, objects }) {
     this.charNames = charNames
-    this.memory = memory
+    this.memory = objects.memory
     this.subscribers = {}
 
     this.createElements()
@@ -30,14 +32,14 @@ class SelectCharUI {
 
     appendElementsToContainerFn({
       elements: [this.mainComponent],
-      container: document.querySelector(container),
+      container,
     })
   }
 
   createElements() {
     const lng = this.memory.getLanguage()
 
-    this.container = createElementFn({
+    this.mainContainer = createElementFn({
       element: elements.div,
       classes: [classNames.selectCharUI.main],
     })
@@ -97,52 +99,31 @@ class SelectCharUI {
       ],
     })
 
-    this.plLngBtn = createElementFn({
-      element: elements.button,
-      textContent: language.pl.large,
-      disabled: lng === language.pl.small ? true : false,
-      classes:
-        lng === language.pl.small
-          ? [
-              classNames.selectCharUI.plLngBtn,
-              classNames.selectCharUI.lngBtnActive,
-            ]
-          : [classNames.selectCharUI.plLngBtn],
+    this.lngButtons = Object.entries(languages).map((language) =>
+      createElementFn({
+        element: elements.button,
+        textContent: languages[language[0]][size.large],
+        disabled: lng === languages[language[0]][size.small] ? true : false,
+        classes:
+          lng === languages[language[0]][size.small]
+            ? [
+                classNames.selectCharUI[`${language[0]}LngBtn`],
+                classNames.selectCharUI.lngBtnActive,
+              ]
+            : [classNames.selectCharUI[`${language[0]}LngBtn`]],
 
-      listeners: [
-        {
-          event: events.click,
-          cb: (e) =>
-            this.handleLngButtonsClick({
-              lng: language.pl.small,
-              target: e.target,
-            }),
-        },
-      ],
-    })
-    this.engLngBtn = createElementFn({
-      element: elements.button,
-      textContent: language.eng.large,
-      disabled: lng === language.eng.small ? true : false,
-      classes:
-        lng === language.eng.small
-          ? [
-              classNames.selectCharUI.engLngBtn,
-              classNames.selectCharUI.lngBtnActive,
-            ]
-          : [classNames.selectCharUI.engLngBtn],
-
-      listeners: [
-        {
-          event: events.click,
-          cb: (e) =>
-            this.handleLngButtonsClick({
-              lng: language.eng.small,
-              target: e.target,
-            }),
-        },
-      ],
-    })
+        listeners: [
+          {
+            event: events.click,
+            cb: (e) =>
+              this.handleLngButtonsClick({
+                lng: languages[language[0]][size.small],
+                target: e.target,
+              }),
+          },
+        ],
+      })
+    )
 
     this.privacyPolicyLinkContainer = createElementFn({
       element: elements.div,
@@ -165,15 +146,14 @@ class SelectCharUI {
 
     this.mainComponent = appendElementsToContainerFn({
       elements: [
-        this.plLngBtn,
-        this.engLngBtn,
+        ...this.lngButtons,
         this.headline,
         ...this.charButtons,
         this.startButton,
         this.talkAgainButton,
         this.privacyPolicyComponent,
       ],
-      container: this.container,
+      container: this.mainContainer,
     })
   }
 
@@ -187,10 +167,12 @@ class SelectCharUI {
         },
       ],
     })
+
     this.callSubscribers({
-      type: common.selectChar,
-      element: charName[1],
+      subscriberName: subscriberNames.selectChar,
+      charName: charName[1],
     })
+
     this.memory.playClickAudio()
   }
 
@@ -198,7 +180,7 @@ class SelectCharUI {
     this.memory.playFallDownAudio()
     this.memory.playBackgroundAudio()
     this.memory.playClickAudio()
-    this.callSubscribers({ type: common.startTalking })
+    this.callSubscribers({ subscriberName: subscriberNames.startTalking })
   }
 
   handleTalkAgainButtonClick() {
@@ -210,7 +192,7 @@ class SelectCharUI {
 
     this.changeUI()
     this.removeCharButtonsActive()
-    this.toggleReadyStartCharTalkingBtn(common.off)
+    this.toggleReadyStartCharTalkingBtn(toggleValue.off)
   }
 
   handleLngButtonsClick({ lng, target }) {
@@ -222,16 +204,16 @@ class SelectCharUI {
       objs: [
         {
           elements: [target],
-          removeFromEls: [this.engLngBtn, this.plLngBtn],
+          removeFromEls: this.lngButtons,
           classes: [classNames.selectCharUI.lngBtnActive],
         },
       ],
     })
   }
 
-  createMessagesComponent(messages) {
+  createMessageComponent({ message: msg }) {
     const lng = this.memory.getLanguage()
-    const msgsInCorrectLng = messages[lng]
+    const msgsInCorrectLng = msg[lng]
     const msgContainer = createElementFn({
       element: elements.div,
       classes: [classNames.selectCharUI.messageContainer],
@@ -306,11 +288,12 @@ class SelectCharUI {
     })
   }
 
-  changeUI({ messages } = '') {
-    if (messages) {
-      this.messagesComponent = this.createMessagesComponent(messages)
-      this.container.prepend(this.messagesComponent)
+  changeUI({ message } = '') {
+    if (message) {
+      this.messagesComponent = this.createMessageComponent({ message })
+      this.mainContainer.prepend(this.messagesComponent)
     }
+
     setPropsFn({
       objs: [
         {
@@ -318,9 +301,7 @@ class SelectCharUI {
           styleProps: [
             {
               name: styleProps.names.display,
-              value: messages
-                ? styleProps.values.none
-                : styleProps.values.block,
+              value: message ? styleProps.values.none : styleProps.values.block,
             },
           ],
         },
@@ -329,20 +310,16 @@ class SelectCharUI {
           styleProps: [
             {
               name: styleProps.names.display,
-              value: messages
-                ? styleProps.values.block
-                : styleProps.values.none,
+              value: message ? styleProps.values.block : styleProps.values.none,
             },
           ],
         },
         {
-          elements: [this.engLngBtn, this.plLngBtn],
+          elements: this.lngButtons,
           styleProps: [
             {
               name: styleProps.names.display,
-              value: messages
-                ? styleProps.values.none
-                : styleProps.values.block,
+              value: message ? styleProps.values.none : styleProps.values.block,
             },
           ],
         },
@@ -354,14 +331,11 @@ class SelectCharUI {
     setPropsFn({
       objs: [
         {
-          elements: [this.container],
+          elements: [this.mainContainer],
           styleProps: [
             {
               name: common.animation,
-              value:
-                type === common.toBottomHide
-                  ? animationSettings.selectCharUI.toBottomHide
-                  : animationSettings.selectCharUI.fromBottomShow,
+              value: type,
             },
           ],
         },
@@ -384,12 +358,15 @@ class SelectCharUI {
     return this.charButtons
   }
 
-  subscribe(subscriber, name) {
-    this.subscribers[name] = subscriber
+  subscribe({ subscriber, subscriberName }) {
+    console.log(subscriberName)
+    this.subscribers[subscriberName] = subscriber
   }
 
-  callSubscribers({ type, element = null }) {
-    element ? this.subscribers[type](element) : this.subscribers[type]()
+  callSubscribers({ subscriberName, charName = null }) {
+    charName
+      ? this.subscribers[subscriberName](charName)
+      : this.subscribers[subscriberName]()
   }
 }
 

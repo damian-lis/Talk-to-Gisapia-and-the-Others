@@ -9,6 +9,7 @@ class GisapiaAnimation {
     )
     this.hair = this.gisapiaObject.querySelector(ideReferences.gisapia.hair)
     this.eyes = this.gisapiaObject.querySelector(ideReferences.gisapia.eyes)
+
     this.animation = this.startAnimation()
   }
 

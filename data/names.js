@@ -7,13 +7,7 @@ export const common = {
   messages: 'messages',
   answers: 'answers',
   language: 'language',
-  selectChar: 'selectChar',
-  startTalking: 'startTalking',
   messagesPart: 'messagesPart',
-  toBottomHide: 'toBottomHide:',
-  fromBottomShow: 'fromBottomShow',
-  fallFromTop: 'fallFromTop',
-  backToTheTop: 'backToTheTop',
   startAnimation: 'startAnimation',
   id: 'id',
   main: 'main',
@@ -21,8 +15,28 @@ export const common = {
   ball: 'ball',
   user: 'user',
   Enter: 'Enter',
+}
+
+export const subscriberNames = {
+  selectChar: 'selectChar',
+  startTalking: 'startTalking',
+}
+
+export const toggleValue = {
   on: 'on',
   off: 'off',
+}
+
+export const size = {
+  large: 'large',
+  small: 'small',
+}
+
+export const animations = {
+  toBottomHide: 'toBottomHide:',
+  fromBottomShow: 'fromBottomShow',
+  fallFromTop: 'fallFromTop',
+  backToTheTop: 'backToTheTop',
 }
 
 export const elements = {
@@ -79,8 +93,7 @@ export const types = {
   object: 'object',
 }
 
-export const language = {
-  name: 'language',
+export const languages = {
   pl: {
     large: 'PL',
     small: 'pl',
@@ -149,57 +162,62 @@ export const animationSettings = {
   },
   messenger: {
     fallFromTop: 'fallFromTop 1s forwards',
-    BackToTheTop: 'backToTheTop 2s forwards',
+    backToTheTop: 'backToTheTop 2s forwards',
   },
 }
 
 export const messages = {
-  mailSent: {
-    pl: [`Mail wysłany, sprawdź! 😋`],
-    eng: [`Mail sent, check it! 😋`],
+  finish: {
+    mailSent: {
+      pl: [`Mail wysłany, sprawdź! 😋`],
+      eng: [`Mail sent, check it! 😋`],
+    },
+
+    withoutMail: {
+      pl: ['Maila nie wysyłam,', 'dzięki za rozmowę 😉'],
+      eng: [`I don't send the e-mail,`, `thanks for the interview! 😉`],
+    },
+
+    noConnection: {
+      pl: [
+        `Maila niestety nie otrzymasz bo nie ma połączenia z serwerem... 😕`,
+        `Idę to sprawdzić... Tymczasem dzięki za rozmowę! 😉`,
+      ],
+      eng: [
+        `Unfortunately you will not receive e-mail because there is no connection to the server ...`,
+        `I'm going to check it out ... In the meantime, thanks for the interview! 😉`,
+      ],
+    },
+
+    problemWithServer: {
+      pl: [
+        `Mail niestety nie został wysłany...`,
+        `Jakiś problem z serwerem... 😓`,
+        `Idę to sprawdzić...`,
+        `Tymczasem dzięki za rozmowę! 😉`,
+      ],
+      eng: [
+        ` Mail was unfortunately not sent ... `,
+        `Some problem with the server ... 😓`,
+        ` I'm going to check it out ... `,
+        ` In the meantime, thanks for the interview! 😉`,
+      ],
+    },
   },
 
-  withoutMail: {
-    pl: ['Maila nie wysyłam,', 'dzięki za rozmowę 😉'],
-    eng: [`I don't send the e-mail,`, `thanks for the interview! 😉`],
-  },
-
-  noConnection: {
-    pl: [
-      `Maila niestety nie otrzymasz bo nie ma połączenia z serwerem... 😕`,
-      `Idę to sprawdzić... Tymczasem dzięki za rozmowę! 😉`,
-    ],
-    eng: [
-      `Unfortunately you will not receive e-mail because there is no connection to the server ...`,
-      `I'm going to check it out ... In the meantime, thanks for the interview! 😉`,
-    ],
-  },
-
-  problemWithServer: {
-    pl: [
-      `Mail niestety nie został wysłany...`,
-      `Jakiś problem z serwerem... 😓`,
-      `Idę to sprawdzić...`,
-      `Tymczasem dzięki za rozmowę! 😉`,
-    ],
-    eng: [
-      ` Mail was unfortunately not sent ... `,
-      `Some problem with the server ... 😓`,
-      ` I'm going to check it out ... `,
-      ` In the meantime, thanks for the interview! 😉`,
-    ],
-  },
-  sending: {
-    pl: 'Już wysyłam! 😎',
-    eng: "I'm sending! 😎",
-  },
-  oneMoreMoment: {
-    pl: 'jeszcze naprawdę chwilkę! 😏',
-    eng: 'one more moment! 😏',
-  },
-  secondMoreMoment: {
-    pl: 'już, już, prawie! 😎',
-    eng: 'already, already, almost!! 😎',
+  delay: {
+    sending: {
+      pl: 'Już wysyłam! 😎',
+      eng: "I'm sending! 😎",
+    },
+    oneMoreMoment: {
+      pl: 'jeszcze naprawdę chwilkę! 😏',
+      eng: 'one more moment! 😏',
+    },
+    secondMoreMoment: {
+      pl: 'już, już, prawie! 😎',
+      eng: 'already, already, almost!! 😎',
+    },
   },
 }
 
@@ -231,6 +249,11 @@ export const alerts = {
     pl: 'Podaj właściwy format maila',
     eng: 'Write the correct mail format',
   },
+}
+
+export const colors = {
+  animationBackground: 'rgba(0,0,0,0.05)',
+  animationCharacters: 'rgb(132, 42, 86)',
 }
 
 export const classNames = {
