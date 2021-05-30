@@ -1,55 +1,22 @@
 import { types, toggleValue } from '/data/names.js'
 
-export default ({ toggle, objs = [], delay }) => {
-  const helperLogic = () =>
-    objs.length &&
-    objs.map((obj) =>
-      obj.elements
-        ? obj.elements.map((element) => {
-            let el = element
+export default ({ toggle, objs, delay }) => {
+  if (!objs) return
 
-            if (typeof element === types.string) {
-              el = document.querySelector(element)
-            }
+  const helperLogic = () => {
+    objs.map((obj) => {
+      if (!obj.classes) return
 
-            obj.classes &&
-              obj.classes.map((classEl) => {
-                obj.removeFromElements &&
-                  obj.removeFromElements.map((removeFromElement) => {
-                    let removeFromEl = removeFromElement
+      if (obj.elements) {
+        obj.elements.map((element) => {
+          let el = element
 
-                    if (typeof removeFromElement === types.string) {
-                      removeFromEl = document.querySelector(element)
-                    }
+          if (typeof element === types.string) {
+            el = document.querySelector(element)
+          }
 
-                    removeFromEl.classList.remove(classEl)
-                    removeFromEl.disabled = false
-                  })
-
-                switch (toggle) {
-                  case toggleValue.on:
-                    el.classList.add(classEl)
-                    el.disabled = false
-                    break
-                  case toggleValue.off:
-                    el.classList.remove(classEl)
-                    el.disabled = true
-                    break
-
-                  default:
-                    break
-                }
-
-                if (obj.initialClass) {
-                  el.className = obj.initialClass
-                }
-
-                !toggle && el.classList.add(classEl)
-              })
-          })
-        : obj.classes &&
           obj.classes.map((classEl) => {
-            obj.removeFromElements &&
+            if (obj.removeFromElements) {
               obj.removeFromElements.map((removeFromElement) => {
                 let removeFromEl = removeFromElement
 
@@ -60,8 +27,50 @@ export default ({ toggle, objs = [], delay }) => {
                 removeFromEl.classList.remove(classEl)
                 removeFromEl.disabled = false
               })
+            }
+
+            if (obj.initialClass) {
+              el.className = obj.initialClass
+            }
+
+            if (toggle) {
+              switch (toggle) {
+                case toggleValue.on:
+                  el.classList.add(classEl)
+                  el.disabled = false
+                  break
+                case toggleValue.off:
+                  el.classList.remove(classEl)
+                  el.disabled = true
+                  break
+
+                default:
+                  break
+              }
+            } else {
+              el.classList.add(classEl)
+            }
           })
-    )
+        })
+      } else {
+        obj.classes.map((classEl) => {
+          if (obj.removeFromElements) {
+            obj.removeFromElements.map((removeFromElement) => {
+              let removeFromEl = removeFromElement
+
+              if (typeof removeFromElement === types.string) {
+                removeFromEl = document.querySelector(element)
+              }
+
+              removeFromEl.classList.remove(classEl)
+              removeFromEl.disabled = false
+            })
+          }
+        })
+      }
+    })
+  }
+
   if (delay) return setTimeout(helperLogic, delay)
   helperLogic()
 }

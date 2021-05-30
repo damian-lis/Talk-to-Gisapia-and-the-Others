@@ -1,6 +1,8 @@
 import { types } from '/data/names.js'
 
 export default ({ elementToRemove, removeFromElements }) => {
+  if (!elementToRemove || !removeFromElements) return
+
   let elToRemove = elementToRemove
   let removeFromEls = removeFromElements
 
