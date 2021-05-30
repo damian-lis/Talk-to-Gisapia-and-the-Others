@@ -1,7 +1,7 @@
 import { common } from '/data/names.js'
 
 export default ({ element, ...rest }) => {
-  if (!element && !rest.length) return
+  if (!element) return
 
   const createdElement = document.createElement(element)
 

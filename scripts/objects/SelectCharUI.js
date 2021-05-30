@@ -162,7 +162,7 @@ class SelectCharUI {
       objs: [
         {
           elements: [target],
-          removeFromEls: this.charButtons,
+          removeFromElements: this.charButtons,
           classes: [classNames.selectCharUI.selectBtnActive],
         },
       ],
@@ -204,7 +204,7 @@ class SelectCharUI {
       objs: [
         {
           elements: [target],
-          removeFromEls: this.lngButtons,
+          removeFromElements: this.lngButtons,
           classes: [classNames.selectCharUI.lngBtnActive],
         },
       ],
@@ -347,7 +347,7 @@ class SelectCharUI {
     setClassesFn({
       objs: [
         {
-          removeFromEls: this.charButtons,
+          removeFromElements: this.charButtons,
           classes: [classNames.selectCharUI.selectBtnActive],
         },
       ],

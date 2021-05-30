@@ -13,7 +13,7 @@ export default ({ elements = [], container }) => {
     elements.map((element) => {
       let el = element
 
-      if (typeof el === types.string) {
+      if (typeof element === types.string) {
         el = document.querySelector(innerEl)
       }
 
@@ -22,7 +22,7 @@ export default ({ elements = [], container }) => {
         innerEls.map((innerElement) => {
           let innerEl = innerElement
 
-          if (typeof el === types.string) {
+          if (typeof innerElement === types.string) {
             innerEl = document.querySelector(innerElement)
           }
           containerEl.appendChild(innerEl)
