@@ -4,13 +4,13 @@ The application allows You to write messages in two languages (PL/ENG) with 3 di
 
 <br/>
 
-Desktop version:
+## Desktop version:
 
 ![](images/readme/introDesktop.gif)
 
 <br/>
 
-Mobile version:
+## Mobile version:
 
 ![](images/readme/introMobile.gif)
 
@@ -33,10 +33,10 @@ The following technologies were used in the project:
 
 - HTML
 - CSS
-- Javascript (OOP)
+- Javascript (OOP with design patterns)
 - GSAP
 
-  <br/>
+<br/>
 
 ## 2. Setup
 
@@ -48,37 +48,53 @@ You don't need any commands to run this project
 
 Most of the project is built in oop javascript for a very in-depth understanding of the language. The list of the most interesting solutions is presented below:
 
-### &nbsp; &nbsp; 3.1. General: <br/>
+<br/>
 
-&nbsp; &nbsp; &nbsp; &nbsp; 3.1.1. String values in variables <br/>
-&nbsp; &nbsp; &nbsp; &nbsp; 3.1.2. Helper functions <br/>
-&nbsp; &nbsp; &nbsp; &nbsp; 3.1.3. The structure of styles <br/>
-&nbsp; &nbsp; &nbsp; &nbsp; 3.1.4. The structure of js objects and their methods <br/>
-&nbsp; &nbsp; &nbsp; &nbsp; 3.1.5. The structure of the app logic <br/>
+### 3.1. General:
+
+&nbsp; 3.1.1. String values in variables
+
+&nbsp; 3.1.2. Helper functions
+
+&nbsp; 3.1.3. The structure of styles
+
+&nbsp; 3.1.4. The structure of js objects and their methods
+
+&nbsp; 3.1.5. The structure of the app logic
 
 <br/>
 
-### &nbsp; &nbsp; 3.2. Specific: <br/>
+### 3.2. Specific:
 
-&nbsp; &nbsp; &nbsp; &nbsp; 3.2.1. Matrix background <br/>
-&nbsp; &nbsp; &nbsp; &nbsp; 3.2.2. GSAP for Gisapia animation <br/>
-&nbsp; &nbsp; &nbsp; &nbsp; 3.2.3. Inheritance of traits by any character <br/>
-&nbsp; &nbsp; &nbsp; &nbsp; 3.2.4. Factory design pattern when selecting a character <br/>
-&nbsp; &nbsp; &nbsp; &nbsp; 3.2.5. Singleton design pattern while saving the settings <br/>
-&nbsp; &nbsp; &nbsp; &nbsp; 3.2.6. Observer design pattern during various events <br/>
-&nbsp; &nbsp; &nbsp; &nbsp; 3.2.7. Character talk script and email templates <br/>
-&nbsp; &nbsp; &nbsp; &nbsp; 3.2.8. The way of writing a message <br/>
-&nbsp; &nbsp; &nbsp; &nbsp; 3.2.9. Adding words to character memory <br/>
-&nbsp; &nbsp; &nbsp; &nbsp; 3.2.10. Sending user data to user by e-mail of selected character <br/>
-&nbsp; &nbsp; &nbsp; &nbsp; 3.2.11. The ability to change characters during the conversation <br/>
-&nbsp; &nbsp; &nbsp; &nbsp; 3.2.12. Opportunity to talk again with characters <br/>
+&nbsp; 3.2.1. Matrix background
 
-<br/>
+&nbsp; 3.2.2. GSAP for Gisapia animation
+
+&nbsp; 3.2.3. Inheritance of traits by any character
+
+&nbsp; 3.2.4. **FACTORY DESIGN PATTERN** when selecting a character
+
+&nbsp; 3.2.5. **SINGLETON DESIGN PATTERN** while saving the settings
+
+&nbsp; 3.2.6. **OBSERVER DESIGN PATTERN** during various events
+
+&nbsp; 3.2.7. Character talk script and email templates
+
+&nbsp; 3.2.8. The way of writing a message
+
+&nbsp; 3.2.9. Adding words to character memory
+
+&nbsp; 3.2.10. Sending user data to user by e-mail of selected character
+
+&nbsp; 3.2.11. The ability to change characters during the conversation
+
+&nbsp; 3.2.12. Opportunity to talk again with characters
+
 <br/>
 
 ## 3.1. General
 
-In this section, I would like to describe the general elements of the application that will allow a better understanding of the application architecture and logic that will be discussed in the sepcific section.
+In this section, I would like to describe the general elements of the app that will allow a better understanding of the application architecture and logic that will be discussed in the sepcific section.
 
 <br/>
 
@@ -88,9 +104,11 @@ In the project, almost all string values have been assigned to various variables
 
 <br/>
 
-In the example below, we can see the different categories of variables (data/names.js):
+In the example below, we can see the different categories of variables:
 
 ```
+//data/names.js file:
+
 export const common = {
   listeners: 'listeners',
   attributes: 'attributes',
@@ -175,11 +193,12 @@ export const styleProps = {
 ```
 
 <br/>
-<br/>
 
 ### 3.1.2. Helper functions
 
 All the so-called helper functions are in the helpers folder (scripts/helpers) which contains files with functions that are responsible for specific logic and are reusable throughout the project (they can also be used in other projects). They play the role of support functions that increase the readability of the code and the developer experience.
+
+<br/>
 
 Below is an example of the helpers folder structure:
 
@@ -189,24 +208,35 @@ Below is an example of the helpers folder structure:
 
 To better understand the logic of the app, which I will describe in the section named specific, I would like to briefly explain the logic of each of the helpers.
 
+<br/>
+
 Helpers list:
 
-&nbsp; &nbsp; &nbsp; &nbsp; 1.1. appendElementsToContainerFn <br/>
-&nbsp; &nbsp; &nbsp; &nbsp; 1.2. createElementFn <br/>
-&nbsp; &nbsp; &nbsp; &nbsp; 1.3. removeElAmongElsFn <br/>
-&nbsp; &nbsp; &nbsp; &nbsp; 1.4. setClassesFn <br/>
-&nbsp; &nbsp; &nbsp; &nbsp; 1.5. setPropsFn <br/>
-&nbsp; &nbsp; &nbsp; &nbsp; 1.6. setUpperLetterFn <br/>
+&nbsp; 1. appendElementsToContainerFn
+
+&nbsp; 2. createElementFn
+
+&nbsp; 3. removeElAmongElsFn
+
+&nbsp; 4. setClassesFn
+
+&nbsp; 5. setPropsFn
+
+&nbsp; 6. setUpperLetterFn
 
 <br/>
 
-#### 1.1 appendElementsToContainerFn
+### 1. appendElementsToContainerFn
 
 The first helper in the order is appendElementsToContainerFn which is responsible for attaching elements to the container.
 
-Its implementation is shown below (scripts/helpers/appendElementsToContainerFn.js):
+<br/>
+
+Its implementation is shown below:
 
 ```
+//scripts/helpers/appendElementsToContainerFn.js file:
+
 import { types } from '/data/names.js'
 
 export default ({ elements, container }) => {
@@ -253,13 +283,15 @@ In the body of a function we have a logic in which:
 
 - the passed values are checked (without them, the function will not execute its logic),
 - when references have been passed to the function, appropriate elements are searched for in the DOM structure on their basis,
-- the elements are attached to the container element based on the map method
+- the elements are attached to the container element based on the map method.
 
 <br/>
 
-To understand how to use this helper in practice, below is an example of its use in createComponents method of SelectCharUI object (scripts/objects/SelectCharUI.js):
+To understand how to use this helper in practice, below is an example of its use in createComponents method of SelectCharUI object:
 
 ```
+//scripts/objects/SelectCharUI.js file:
+
     this.mainComponent = appendElementsToContainerFn({
       elements: [
         ...this.lngButtons,
@@ -277,15 +309,17 @@ As we can see in the above example, we pass to the helper function an object wit
 
 <br/>
 
-#### 1.2. createElementFn
+### 1.2. createElementFn
 
-Another helper that I would like to briefly describe is createElementFn, which is used most often within the logic of the app and is used to create any html element with various properties.
+Next helper that I would like to briefly describe is createElementFn, which is used most often within the logic of the app and is used to create any html element with various properties.
 
 <br/>
 
-Its implementation is shown below (scripts/helpers/createElementFn.js):
+Its implementation is shown below:
 
 ```
+//scripts/helpers/createElementFn.js file:
+
 import { common } from '/data/names.js'
 
 export default ({ element, ...rest }) => {
@@ -346,14 +380,16 @@ As we can see in the above example, the function destructs the passed object int
 In the body of a function we have a logic in which:
 
 - the passed element reference is checked (if not sent, the function is returned) and then created element on their basis,
-- a switch statement is used so that we can easily assign the passed properties to the created element in an appropriate way
-- at the end, the created element with its properties is returned
+- a switch statement is used so that we can easily assign the passed properties to the created element in an appropriate way,
+- at the end, the created element with its properties is returned.
 
 <br/>
 
-To understand how to use this helper in practice, below is an example of its use in createElements method of SelectCharUI object (scripts/objects/SelectCharUI.js):
+To understand how to use this helper in practice, below is an example of its use in createElements method of SelectCharUI object:
 
 ```
+//scripts/objects/SelectCharUI.js file:
+
     this.talkAgainButton = createElementFn({
       element: elements.button,
       textContent: commands.talkAgain[lng],
@@ -382,19 +418,21 @@ As we can see in the above example, we pass to this helper an object with:
 - textContent property which contains talk again message/command (which will be set on created element),
 - appropriate class refeferences (class reference name which will be set on created element),
 - style properties (name and value which will be set on created element),
-- listeners (event and cb which will be set on created element)
+- listeners (event and cb which will be set on created element).
 
 <br/>
 
-#### 1.3. removeElAmongElsFn
+### 1.3. removeElAmongElsFn
 
 The next helper in the sequence is called removeElAmongElsFn for remove the selected element from among other specified elements.
 
 <br/>
 
-Its implementation is shown below (scripts/helpers/removeElAmongElsFn.js):
+Its implementation is shown below:
 
 ```
+//scripts/helpers/removeElAmongElsFn.js file:
+
 import { types } from '/data/names.js'
 
 export default ({ elementToRemove, removeFromElements }) => {
@@ -429,13 +467,15 @@ In the body of a function we have a logic in which:
 
 - the passed values are checked (without them, the function will not execute its logic),
 - a DOM elements are searched if the passed elements are a reference,
-- at the very end, a specific element is searched among others and removed (when there are at least two elements in set)
+- at the very end, a specific element is searched among others and removed (when there are at least two elements in set).
 
 <br/>
 
-To understand how to use this helper in practice, below is an example of its use in createElements method of MessengerScreen object (scripts/objects/MessengerScreen.js):
+To understand how to use this helper in practice, below is an example of its use in createElements method of MessengerScreen object:
 
 ```
+//scripts/objects/MessengerScreen.js file:
+
       removeElAmongElsFn({
         elementToRemove: elements.img,
         removeFromElements: `[${common.messagesPart}="${this.charMessagesPart}"]`,
@@ -445,17 +485,19 @@ To understand how to use this helper in practice, below is an example of its use
 As we can see in the above example, we pass to this helper an object with:
 
 - element to remove (in this case img element),
-- elements from which the above-mentioned element will be removed (in this case, these elements will be searched in the helper function by the attribute name and value)
+- elements from which the above-mentioned element will be removed (in this case, these elements will be searched in the helper function by the attribute name and value).
 
 <br/>
 
-#### 1.4. setClassesFn
+### 1.4. setClassesFn
 
 The next helper in the order is setClassesFn which is responsible for setting different classes for different elements.
 
-Its implementation is shown below (scripts/helpers/setClassesFn.js):
+Its implementation is shown below:
 
 ```
+//scripts/helpers/setClassesFn.js file:
+
 import { types, toggleValue } from '/data/names.js'
 
 export default ({ toggle, objs, delay }) => {
@@ -544,16 +586,18 @@ As we can see in the above example, the function destructs the passed object int
 
 In the body of a function we have a logic in which:
 
-- the passed objs is checked ((if not sent, the function is returned))
+- the passed objs is checked ((if not sent, the function is returned)),
 - a DOM elements are searched if the passed elements are a reference,
 - the helperLogic function is created, in which, classes on the elements are added or removed depending on the arguments passed to helper,
 - at the very end, when the delay value has been passed to the function, the setTimeout function is called with created helperLogic function and returned in the helper (because of the setTimeout specific id that it returns), if delay value is not passed, the helperLogic function itself is called.
 
 <br/>
 
-To understand how to use this helper in practice, below is an example of its use in changeColor method of SelectCharUI object (scripts/objects/SelectCharUI.js):
+To understand how to use this helper in practice, below is an example of its use in changeColor method of SelectCharUI object:
 
 ```
+//scripts/objects/SelectCharUI.js file:
+
     setClassesFn({
       toggle,
       objs: [
@@ -567,20 +611,24 @@ To understand how to use this helper in practice, below is an example of its use
 
 As we can see in the above example, to the helper an object is passed with:
 
-- a toggle value ("on"/"off") (thanks to this, we decide whether we want to add classes to elements or not)
+- a toggle value ("on"/"off") (thanks to this, we decide whether we want to add classes to elements or not),
 - objs as array of objects with elements (in this case only this.startButton element) and a classes (in this case class that gives the orange color suggesting activating to the passed button to start the conversation with choosen character).
 
-Before going further, I would like to add that the toggle parameter does not need to be passed to the helper (without it, by the default classes will only be set to elements)
+Before going further, I would like to add that the toggle parameter does not need to be passed to the helper (without it, by the default classes will only be set to elements).
 
 <br/>
 
-#### 1.5. setPropsFn
+### 1.5. setPropsFn
 
 The penultimate helper in the sequence is called setPropsFn, whose logic is very similar to the previous setClassesFn helper and differs only in that instead of setting or removing classes on the passed elements, it sets various properties (also style properties).
 
-Its implementation is shown below (scripts/helpers/setPropsFn.js):
+<br/>
+
+Its implementation is shown below:
 
 ```
+//scripts/helpers/setPropsFn.js file:
+
 import { types, toggleValue } from '/data/names.js'
 
 export default ({ toggle, objs, delay }) => {
@@ -663,9 +711,11 @@ Due to the very similarity of logic to the previous helper, I will not focus on 
 
 <br/>
 
-To understand how to use this helper in practice, below is an example of its use in move method of Messenger object (scripts/objects/Messenger.js):
+To understand how to use this helper in practice, below is an example of its use in move method of Messenger object:
 
 ```
+//scripts/objects/Messenger.js file:
+
     setPropsFn({
       objs: [
         {
@@ -685,13 +735,17 @@ As we can see above, the use of this helper is also very similar to the setClass
 
 <br/>
 
-#### 1.6. setUpperLetterFn
+### 1.6. setUpperLetterFn
 
 The last helper in the heleprs folder is setUpperLetterFn helper which is responsible for changing the first letter of the passed text to uppercase.
 
-Its implementation is shown below (scripts/helpers/setUpperLetterFn.js):
+<br/>
+
+Its implementation is shown below:
 
 ```
+//scripts/helpers/setUpperLetterFn.js file:
+
 export default ({ text }) => {
   if (text) return text.charAt(0).toUpperCase() + text.slice(1)
 }
@@ -699,7 +753,6 @@ export default ({ text }) => {
 
 As we can see above, this is a simple function that destructs an object into a text and, through a little logic, changing the first letter of this text to uppercase (if nothing was passed to the function, the logic would not execute).
 
-<br/>
 <br/>
 
 ### 3.1.3. The structure of styles
@@ -716,9 +769,13 @@ Below is an example of the style structure:
 
 Main styles are defined in the variables.css file (in global folder), which are then dynamically used in the application by the classes defined in the helpers.css file (in global folder).
 
-Due to the optimization of loading css files, their loading was placed in the head section in html files (index.html):
+<br/>
+
+Due to the optimization of loading css files, their loading was placed in the head section in html files:
 
 ```
+<!-- index.html file: -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -736,7 +793,6 @@ Due to the optimization of loading css files, their loading was placed in the he
 ```
 
 <br/>
-<br/>
 
 ### 3.1.4. The structure of js objects and their methods
 
@@ -748,13 +804,13 @@ Due to the fact that most of the code was written in an object-oriented way, the
 
 Each file (except scripts/index.js) corresponds to a specific class (some have been grouped for better readability) that contains properties and methods that are used mostly in the main js file named index.js.
 
-In the case of the structure of the methods of given classes is very similar, which facilitates its development and maintenance.
+<br/>
 
-Below are examples of two objects:
-
-Messenger (objects/messenger/Messenger.js):
+In the case of the structure of the methods of given classes is very similar, which facilitates its development and maintenance. Below are code examples of two objects:
 
 ```
+//objects/messenger/Messenger.js file:
+
 class Messenger {
   constructor({ container }) {
     this.createElements()
@@ -793,9 +849,9 @@ export default Messenger
 
 <br/>
 
-MessengerScreen (objects/messenger/MessengerScreen.js):
-
 ```
+//objects/messenger/MessengerScreen.js file:
+
 class MessengerScreen {
   constructor({ container, objects }) {
     this.memory = objects.memory
@@ -852,15 +908,15 @@ export default MessengerScreen
 
 The above examples show the similarity of the constructors structure, and in methods like createElements (which uses a createElementFn helper to create elements) and createComponents (which uses an appendElementsToContainerFn helper which combines previously created elements into components) of presented objects,
 
-<br/>
-
 It is also worth mentioning that individual components that we see on the page (messenger and selectCharUI) are attached to the main container element with app id through appropriate objects (Messenger, MessengerInterface, MessengerScreen and SelectCharUI) methods.
 
 <br/>
 
-Below is an example of the main html file with main container element (index.html):
+Below is an example of the main html file with main container element:
 
 ```
+<!-- index.html file: -->
+
 <div id="app" class="wrapper">
     <div class="characters">
             <object data="/images/characters/gisapia/character.svg" type="image/svg+xml" id="gisapia" ></object>
@@ -871,15 +927,14 @@ Below is an example of the main html file with main container element (index.htm
 As we can see above, only the element with characters class containing object element is placed inside the container element with app id due to easier handling of animations which will be discussed later.
 
 <br/>
-<br/>
 
 ### 3.1.5. The structure of the app logic
 
-Most of the app logic has been designed to make it easy to understand how it works. To illustrate the app structure, below is an example of the function handleCharTalkingMain, which is the main function in index.js that contains the character's talking logic (scripts/index.js):
-
-<br/>
+Most of the app logic has been designed to make it easy to understand how it works. To illustrate the app structure, below is an example of the function handleCharTalkingMain, which is the main function in index.js that contains the character's talking logic:
 
 ```
+//scripts/index.js file:
+
   const handleCharTalkingMain = async () => {
     const chosenChar = memory.getChar()
     const talkingStep = memory.getTalkingStep()
@@ -971,11 +1026,12 @@ As we can see above, it is quite a large function which, in addition to the sequ
 
 <br/>
 <br/>
-<br/>
 
 ## 3.2. Specific
 
 In this section, I would like to focus on describing the most important logic that occurs in the app.
+
+<br/>
 
 ### 3.2.1. Matrix background
 
@@ -989,9 +1045,11 @@ Below is a visual example of this solution:
 
 <br/>
 
-In order to be able to get the phenomenon shown in the example above, the Background object with many methods was created (objects/Background.js):
+In order to be able to get the phenomenon shown in the example above, the Background object with many methods was created:
 
 ```
+//objects/Background.js file:
+
 class Background {
   constructor() {
     this.canvas = document.getElementById(elements.canvas)
@@ -1059,7 +1117,6 @@ The whole above solution is based on infinitely creating characters (on created 
 Due to the possible change of the screen width when using the apps, a method resize has been created that starts the character creation process from the beginning during changing screen to avoid resolution distortions.
 
 <br/>
-<br/>
 
 ### 3.2.2. GSAP for Gisapia animation
 
@@ -1073,9 +1130,11 @@ Below is a visual representation of this solution:
 
 <br/>
 
-The code-side solution looks like this (objects/GisapiaAnimation.js):
+The code-side solution looks like this:
 
 ```
+//objects/GisapiaAnimation.js file:
+
 class GisapiaAnimation {
   constructor() {
     this.gisapiaObject = this.getObjectContent()
@@ -1163,7 +1222,6 @@ export default GisapiaAnimation
 We can see in the example above many methods (which use the TimelineMax object with methods) that are responsible for the looping movement of individual parts of the character. Animation involves the movement of the lips, hair, right hand and hair.
 
 <br/>
-<br/>
 
 ### 3.2.3. Inheritance of traits by any character
 
@@ -1171,9 +1229,11 @@ There are 3 characters in the app that we can chat with. Due to the very high si
 
 <br/>
 
-The following is an example of a partial implementation of a Character object (objects/characters/Character.js):
+The following is an example of a partial implementation of a Character object:
 
 ```
+//objects/characters/Character.js file:
+
 class Character {
   constructor(scriptTalk, email, memory) {
     this.scriptTalk = scriptTalk
@@ -1241,9 +1301,11 @@ The solutions used in the discussed object appear in each of the available chara
 
 <br/>
 
-Below is an example of inheritance by a Gisapia object (objects/characters/Gisapia.js):
+Below is an example of inheritance by a Gisapia object:
 
 ```
+//objects/characters/Gisapia.js file:
+
 class Gisapia extends Character {
   constructor(scriptTalk, email, memory) {
     super(scriptTalk, email, memory)
@@ -1258,17 +1320,18 @@ export default Gisapia
 As we can see above, it is a simple object that only contains the properties associated with the Gisapia character.
 
 <br/>
-<br/>
 
-### 3.2.4. Factory design pattern when selecting a character
+### 3.2.4. **FACTORY DESIGN PATTERN** when selecting a character
 
 Each character object in the app is created when creating an instance of the CharsFactory object and passed outside using the getChar method when the character is selected by the user.
 
 <br/>
 
-The example below shows discussed object (objects/CharsFactory.js):
+The example below shows discussed object:
 
 ```
+//objects/CharsFactory.js file:
+
 class CharsFactory {
   constructor({ objects }) {
     this.gisapia = new Gisapia(gisapiaScriptTalk, gisapiaEmail, objects.memory)
@@ -1296,16 +1359,20 @@ export default CharsFactory
 As we can see in the above example, each character receives:
 
 - initial data in the form of a script talk template (used during character talking),
-- email template (finally sent to the user email) ,
+- email template (finally sent to the user email),
 - global memory (singleton to save data).
+
+<br/>
 
 Each of the objects passed into the Characters object instance will be discussed later.
 
 <br/>
 
-The use of getChar method of CharsFactory that returns the appropriate character object instance on the basis of character name is shown below in handleCharSelect function in main js file (scripts/index.js):
+The use of getChar method of CharsFactory that returns the appropriate character object instance on the basis of character name is shown below in handleCharSelect function in main js file:
 
 ```
+//scripts/index.js file:
+
 const handleCharSelect = (charName) => {
     const chosenChar = charsFactory.getChar(charName)
     memory.setSelectedChar(chosenChar)
@@ -1315,21 +1382,24 @@ const handleCharSelect = (charName) => {
 
 As we can see above, the returned value (instance of the character object) of the getChar method of charsFactory object is assigned to the chosenChar variable. Then, as we can see from the example, this instance can be passed on global memory by setSelectedChar method of memory object.
 
+<br/>
+
 Summarizing, thanks to this design pattern, we can easily and in legible way obtain specific data (in this case instance of the character object), which we then use within the app.
 
 <br/>
-<br/>
 
-### 3.2.5. Singleton design pattern while saving the settings
+### 3.2.5. **SINGLETON DESIGN PATTERN** while saving the settings
 
 To handle data and settings throughout the entire project, the Singleton design pattern was used.
 Thanks to this, we have one place that stores data (one instance of object) related to the use of the app.
 
 <br/>
 
-Below is an example of this solutionn in a fragment of the Memory object (objects/Memory.js):
+Below is an example of this solutionn in a fragment of the Memory object:
 
 ```
+//objects/Memory.js file:
+
 class Memory {
   constructor() {
     if (Memory.instance == null) {
@@ -1434,9 +1504,11 @@ Also in the example shown, we can see that various audio elements are created by
 
 <br/>
 
-Below is an example of using Memory object methods in a fragment of handleCharTalkingDuringCharListening function (scripts/index.js):
+Below is an example of using Memory object methods in a fragment of handleCharTalkingDuringCharListening function:
 
 ```
+//scripts/index.js file:
+
   const handleCharTalkingDuringCharListening = ({
     chosenChar,
     currentScriptTalkCategory,
@@ -1457,17 +1529,16 @@ As we can see in the above example in the handleCharTalkingDuringCharListening f
 
 - the value entered by the user is cleared (by setUserMessage method),
 - the option of restarting the conversation function is set to true (by setIsCallCharTalkingAgain method),
-- listening by the character is set to false (by setIsCharListening method)
-- the appropriate user data has been added (by addDataToAboutUser method)
+- listening by the character is set to false (by setIsCharListening method),
+- the appropriate user data has been added (by addDataToAboutUser method).
 
 <br/>
 
 Summarizing, the role of the memory object (singleton) is to save and store various app settings.
 
 <br/>
-<br/>
 
-### 3.2.6. Observer design pattern during various events
+### 3.2.6. **OBSERVER DESIGN PATTERN** during various events
 
 Due to the possibility of choosing several options, the design pattern called Observer was introduced in the project.
 
@@ -1475,10 +1546,10 @@ The app logic subscribe for events such as the character selection, specific lan
 
 <br/>
 
-To illustrate exactly how this design pattern works, below is a fragment of scripts/index.js file, in which there is a function that is subscribed by one of the methods of the MessengerInterface object and the entire implementation responsible for the logic (methods of the MessengerInterface object) related to calling a given subscriber (scripts/index.js and objects/MessengerInterface.js):
+To illustrate exactly how this design pattern works, below is a fragment of scripts/index.js file, in which there is a function that is subscribed by one of the methods of the MessengerInterface object and the entire implementation responsible for the logic (methods of the MessengerInterface object) related to calling a given subscriber:
 
 ```
-//scripts/index.js:
+//scripts/index.js file:
 
   const handleUserTalking = (userMessage) => {
     const chatBubble = messengerScreen.createChatBubbleComponent({
@@ -1498,7 +1569,7 @@ To illustrate exactly how this design pattern works, below is a fragment of scri
 
 
 
-//objects/MessengerInterface.js:
+//objects/MessengerInterface.js file:
 
 class MessengerInterface {
    constructor({ container, objects }) {
@@ -1562,8 +1633,6 @@ class MessengerInterface {
   }
 ```
 
-<br/>
-
 As we can see above, first the handleUserTalking function is subscribed to the subscribe method of the MessengerInterface object.
 
 Next, in the case of the MessengerInterface object, the subscribe method adds mentioned function to the this.subscribers array in the object's constructor.
@@ -1573,7 +1642,6 @@ Through the event keypress set on the created this.input element or the event cl
 Thanks to this solution, the sent user message goes to the handleUserTalking function, where it is used for further app logic.
 
 </br>
-</br>
 
 ### 3.2.7. Character talk script and email templates
 
@@ -1581,9 +1649,11 @@ Each character (Gisapia, Hookin, Reduxon) in the app has its own talk script and
 
 <br/>
 
-Below is a fragment of the Gisapia talk script template (PL/ENG) with messages and answers to the user's (data/characters/gisapia/scriptTalk.js):
+Below is a fragment of the Gisapia talk script template (PL/ENG) with messages and answers to the user's:
 
 ```
+//data/characters/gisapia/scriptTalk.js file:
+
 export default {
   pl: {
     name: {
@@ -1700,9 +1770,11 @@ export default {
 
 <br/>
 
-Also below is a fragment of the email template (PL/ENG) which is finally sent by my backend application [Emails Handler](https://github.com/damian-lis/Emails-handler) to the user's email (data/characters/gisapia/email.js):
+Also below is a fragment of the email template (PL/ENG) which is finally sent by my backend application [Emails Handler](https://github.com/damian-lis/Emails-handler) to the user's email:
 
 ```
+//data/characters/gisapia/email.js file:
+
 export default {
   pl: {
     from: 'gisapiaJS@gmail.com',
@@ -1739,15 +1811,15 @@ export default {
 }
 ```
 
-<br/>
-
 In the first example regarding to gisapia talk script template example, first of all we can see messages appear in two arrays. Thanks to this, each character who starts a conversation can draw different messages for themselves (so that the conversation is not the same).
 
 <br/>
 
-The discussed process of drawing messages is done by the setScriptTalkMessages method of Character object when user starting a conversation with a choosen character (objects/Character.js):
+The discussed process of drawing messages is done by the setScriptTalkMessages method of Character object when user starting a conversation with a choosen character:
 
 ```
+//objects/Character.js file:
+
   setScriptTalkMessages(scriptTalk) {
     for (const category in scriptTalk) {
       const messageNumber = Math.floor(
@@ -1777,17 +1849,17 @@ As we can see above, thanks to the use of arrays in script talk template, by the
 
 <br/>
 
-Below is an example of using above method in the setScriptTalk method of Character object, which is called by handleInitialSettings function (only a fragment of this function is presented below) in scripts/index.js. (scripts/index.js and objects/Character.js):
+Below is an example of using above method in the setScriptTalk method of Character object, which is called by handleInitialSettings function (only a fragment of this function is presented below):
 
 ```
-  //scripts/index.js:
+  //scripts/index.js file:
 
   const handleInitialSettings = () => {
     chosenChar.setScriptTalk()
   }
 
 
-  //objects/Character.js:
+  //objects/Character.js file:
 
   setScriptTalk() {
     const lng = this.memory.getLanguage()
@@ -1799,9 +1871,9 @@ Below is an example of using above method in the setScriptTalk method of Charact
 
 As we see in the above example:
 
-- the handleInitialSettings function calls the setScriptTalk method of Character object.
+- the handleInitialSettings function calls the setScriptTalk method of Character object,
 - the selected language by the user is returned (via the getLanguage method of Memory object),
-- a copy of the original script is created (scriptTalkCopy)
+- a copy of the original script is created (scriptTalkCopy),
 - this copy is randomly set (in choosen language) by mentioned earlier setScriptTalkMessages method (so as not to overwrite the original - this.scriptTalk).
 
 <br/>
@@ -1810,9 +1882,11 @@ Another thing You could see in the talk script and email template is that some w
 
 <br/>
 
-Below is an example of a changeScriptTalkMessages method with accompanying methods of Character object which allows to dynamically change script talk template based on user data (objects/Character.js):
+Below is an example of a changeScriptTalkMessages method with accompanying methods of Character object which allows to dynamically change script talk template based on user data:
 
 ```
+//objects/Character.js file:
+
 changeScriptTalkMessages({ category, from, type }) {
   const wordsToSearchAndReplace = this.setWordsToSearchAndReplace()
 
@@ -1891,11 +1965,11 @@ If the given words are not created then the entire method is returned. Otherwise
 
 <br/>
 
-When modifying the email template, the addUserDataToEmail method was created which works in a similar way to the changeScriptTalkMessages method.
-
-Below is an example of the mentioned methods (objects/Character.js):
+When modifying the email template, the addUserDataToEmail method was created which works in a similar way to the changeScriptTalkMessages method. Below is an example of the mentioned methods:
 
 ```
+//objects/Character.js file:
+
   addUserDataToEmail({ lng, recipient }) {
     let emailCopy = JSON.parse(JSON.stringify(this.email[lng]))
     const wordsToSearchAndReplace = this.setWordsToSearchAndReplace()
@@ -1939,7 +2013,6 @@ Below are two visual examples of the changed email template messages (Gisapia (P
 ![](images/readme/reduxonMail.jpg)
 
 <br/>
-<br/>
 
 ### 3.2.8. The way of writing a message
 
@@ -1955,9 +2028,13 @@ Below is a visual example of this feature:
 
 This solution is supported by function handleCharTalkingDuringCharTyping with various methods of Character and MessengerScreen objects.
 
-The implementation of this function is shown below (scripts/index.js):
+<br/>
+
+The implementation of this function is shown below:
 
 ```
+//scripts/index.js file:
+
   const handleCharTalkingDuringCharTyping = async ({
     chosenChar,
     scriptTalkMessages,
@@ -2002,9 +2079,11 @@ The length of the animation (timeForTyping variable) and its quantity (typingQua
 
 <br/>
 
-Below is an example of a method that displays animated balls that imitate character writing (objects/MessengerScreen.js):
+Below is an example of a method that displays animated balls that imitate character writing:
 
 ```
+//objects/MessengerScreen.js file:
+
   async showTyping({ time, charName }) {
     this.memory.playTypingAudio()
     const loader = this.createLoaderComponent({ charName })
@@ -2019,15 +2098,15 @@ In the example above, you can see that the balls are in the form of a loader tha
 
 The whole solution related to stopping the handleCharTalkingDuringCharTyping function mentioned earlier is possible thanks to the introduction of the so-called waiting for promise resolve after a certain time (duration of animated jumping balls) in discussed method.
 
-At the end of the handleCharTalkingDuringCharTyping function after the balls animation, a chatBubble (the appearance of the chat depends on the interlocutor) is created (by createChatBubbleComponent method), this chatBubble is attached to the messenger screen (by attachToMessengerScreen method) and messenger screen is scroll down (scrollMessengerScreen method)).
+At the end of the handleCharTalkingDuringCharTyping function after the balls animation, a chatBubble (the appearance of the chat depends on the interlocutor) is created (by createChatBubbleComponent method), this chatBubble is attached to the messenger screen (by attachToMessengerScreen method) and messenger screen is scroll down (scrollMessengerScreen method).
 
 <br/>
 
-In the case of creating a message by a user, some of the solutions are the same, except for delaying sending the message.
-
-Below is an example of a function that is called when the user sends a message (this example was discussed when discussing the observer design pattern) (scripts/index.js):
+In the case of creating a message by a user, some of the solutions are the same, except for delaying sending the message. Below is an example of a function that is called when the user sends a message (this example was discussed when discussing the observer design pattern):
 
 ```
+//scripts/index.js file:
+
 const handleUserTalking = (userMessage) => {
     const chatBubble = messengerScreen.createChatBubble(userMessage, {
       name: 'user',
@@ -2044,7 +2123,6 @@ const handleUserTalking = (userMessage) => {
 
 As we can see in the example above, the handleUserTalking function uses similar solutions.
 
-<br/>
 <br/>
 
 ### 3.2.9. Adding words to character memory
@@ -2069,9 +2147,11 @@ Below is an visual example how it works:
 
 <br/>
 
-The following is a example of collection of various data that the characters use when analyzing user responses (data/characters/gisapia/memory.js):
+The following is a example of collection of various data that the characters use when analyzing user responses:
 
 ```
+//data/characters/gisapia/memory.js file:
+
 export default {
   name: [
     'Anna',
@@ -2114,7 +2194,6 @@ export default {
 //more code...
   ],
 }
-
 ```
 
 As we can see in the above example, it is a collection of certain data in various categories (name, origin and hobby).
@@ -2123,9 +2202,13 @@ As we can see in the above example, it is a collection of certain data in variou
 
 On the logic side of the app, it looks like we have several variants of answers that are activated depending on whether a message has been sent from the user or not, whether a given word has been found in the character's memory or not and whether the character is currently listening to a message from the user or not.
 
-An example of this logic is below and it is part of the handleCharTalkingMain function (scripts/index.js):
+<br/>
+
+An example of this logic is below and it is part of the handleCharTalkingMain function:
 
 ```
+//scripts/index.js file:
+
 const handleCharTalkingMain = async () => {s
 let scriptTalkMessages
 
@@ -2185,9 +2268,11 @@ let scriptTalkMessages
 
 <br/>
 
-In the example above, we can see several functions that support many variant of the conversation logic. An example of one of them is shown and described below (scripts/index.js):
+In the example above, we can see several functions that support many variant of the conversation logic. An example of one of them is shown and described below:
 
 ```
+//scripts/index.js file:
+
   const handleCharTalkingWhenCharFoundWord = ({
     chosenChar,
     currentScriptTalkCategory,
@@ -2210,16 +2295,19 @@ In the example above, we can see several functions that support many variant of 
 
 The handleCharTalkingWhenCharFoundWord function shown that is executed when the word in the character's memory matches the word found in the user message (checking the condition of foundWordInCharMemory variable in the handleCharTalkingMain function).
 
+<br/>
+
 In the logic of discussed function we can see that it is responsible for:
 
 - clearing the memory regarding the user's message (by simply setUserMessage method of Memory object),
 - setting the option to call the main function again (by simply setIsCallCharTalkingAgain method of Memory object),
-- adding the found word to the user memory with related script template category (by simply addDataToAboutUser method of Memory object)
+- adding the found word to the user memory with related script template category (by simply addDataToAboutUser method of Memory object),
 - changing the script template by adding the appropriate word to the right place in the script template (by changeScriptTalkMessages method of Character object which was explained in 3.2.7. subsection).
+
+<br/>
 
 At the moment when a given variant of the logic of the handleCharTalkingMain function is executed (after calling the appropriate functions, e.g. handleCharTalkingWhenCharFoundWord discussed above), the changed script template is returned by simple getScriptTalkMessages method of Character object and assigned to the scriptTalkMessages variable, which is then used to compose the message (handleCharTalkingDuringCharTyping function which was explained in 3.2.8. subsection).
 
-<br/>
 <br/>
 
 ### 3.2.10. Sending user data to user by e-mail of selected character
@@ -2228,9 +2316,11 @@ During the conversation, the characters collect data about the user. Depending o
 
 <br/>
 
-Below is an implementation of the handleCharTalkingFinish function which calls the handleCharTalkingDuringSendData async function (also below is an implementation) responsible for sending the email (scripts/index.js):
+Below is an implementation of the handleCharTalkingFinish function which calls the handleCharTalkingDuringSendData async function (also below is an implementation) responsible for sending the email:
 
 ```
+//scripts/index.js file:
+
   const handleCharTalkingFinish = async ({ userMessage, chosenChar }) => {
     let messageToSend
     let delayToSend
@@ -2289,6 +2379,8 @@ Due to the fact that the handleCharTalkingDuringSendData async function responsi
 
 First of all, if the user passes a message to the handleCharTalkingFinish function containing the @ character, the logic related to sending the email will be executed with support various methods and functions.
 
+<br/>
+
 Below is a chronological description of the logic that is executed when a message containing the @ character is passed to the handleCharTalkingFinish function:
 
 - the button for sending messages is replaced with a spinner that imitates loading by showSpinnerInsteadBtn method of MessengerInterface object,
@@ -2299,7 +2391,9 @@ Below is a chronological description of the logic that is executed when a messag
 - user data is sent to the server by handleCharTalkingDuringSendData function, which, as we can see in the example above, uses the fetch function with the POST method and returns several possible responses from server (when the mail was sent, when there was a problem with the server and when there is no connection to the server) and a delay value that will be used in the function associated with the final animation,
 - the values returned from the handleCharTalkingDuringSendData function are assigned to the messageToSend and delayToSend variables,
 - the input value is removed along with clearing the setTimeout function, which may not have been performed yet (by clearInput method of Messenger Interface object),
-- the spinner is replaced with a button for sending messages by showSpinnerInsteadBtn method of MessengerInterface object which works the opposite of the previous call (invert: true argument)
+- the spinner is replaced with a button for sending messages by showSpinnerInsteadBtn method of MessengerInterface object which works the opposite of the previous call (invert: true argument).
+
+<br/>
 
 Otherwise, if the message sent to the function handleCharTalkingFinish does not contain the @ character, the message related to information for the user about the unsent e-mail is assigned to the messageToSend variable and the value of 1000 to delayToSend variable (Same process as in the previously discussed case).
 
@@ -2307,9 +2401,11 @@ At the very end of the handleCharTalkingFinish function when the appropriate dat
 
 <br/>
 
-Below are some examples of messages the user may receive at the end of the conversation (PL/ENG)(data/names.js):
+Below are some examples of messages the user may receive at the end of the conversation (PL/ENG):
 
 ```
+//data/names.js file:
+
 export const messages = {
   finish: {
     mailSent: {
@@ -2369,7 +2465,6 @@ Below is a visual examples of this answers:
 ![](images/readme/serverProblem.jpg)
 
 <br/>
-<br/>
 
 ### 3.2.11. The ability to change characters during the conversation
 
@@ -2385,9 +2480,11 @@ In code, this is done by resetting many parameters so that the user can start a 
 
 <br/>
 
-Below is a example of method that is responsible for the possibility of character re-selection and example of the element through which this method is being called in MessengerScreen object (objects/MessengerScreen.js):
+Below is a example of method that is responsible for the possibility of character re-selection and example of the element through which this method is being called in MessengerScreen object:
 
 ```
+//objects/MessengerScreen.js file:
+
     this.backIcon = createElementFn({
       element: common.elements.img,
       classes: [classNames.messenger.backIcon],
@@ -2417,9 +2514,8 @@ Below is a example of method that is responsible for the possibility of characte
     }
 ```
 
-As we can see above, the handleBackIconClick method calls on the event of a click on the this.backIcon element and this method mainly based on restoring the initial settings of various objects (due to the simple methods occurring in this method, I will not describe them in detail)
+As we can see above, the handleBackIconClick method calls on the event of a click on the this.backIcon element and this method mainly based on restoring the initial settings of various objects (due to the simple methods occurring in this method, I will not describe them in detail).
 
-<br/>
 <br/>
 
 ### 3.2.12. Opportunity to talk again with characters
@@ -2434,9 +2530,11 @@ Below is a visual example of this solution:
 
 <br/>
 
-Below is a example of method that allows to start a conversation again and example of the element through which this method is being called in SelectCharUi object (objects/SelectCharUI.js):
+Below is a example of method that allows to start a conversation again and example of the element through which this method is being called in SelectCharUi object:
 
 ```
+//objects/SelectCharUI.js file:
+
   this.talkAgainButton = createElementFn({
     element: common.elements.button,
     textContent: commands.talkAgain[lng],
