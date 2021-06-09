@@ -106,7 +106,7 @@ In the project, almost all string values have been assigned to various variables
 
 In the example below, we can see the different categories of variables:
 
-```
+```js
 //data/names.js file:
 
 export const common = {
@@ -234,7 +234,7 @@ The first helper in the order is appendElementsToContainerFn which is responsibl
 
 Its implementation is shown below:
 
-```
+```js
 //scripts/helpers/appendElementsToContainerFn.js file:
 
 import { types } from '/data/names.js'
@@ -289,20 +289,20 @@ In the body of a function we have a logic in which:
 
 To understand how to use this helper in practice, below is an example of its use in createComponents method of SelectCharUI object:
 
-```
+```js
 //scripts/objects/SelectCharUI.js file:
 
-    this.mainComponent = appendElementsToContainerFn({
-      elements: [
-        ...this.lngButtons,
-        this.headline,
-        ...this.charButtons,
-        this.startButton,
-        this.talkAgainButton,
-        this.privacyPolicyComponent,
-      ],
-      container: this.mainContainer,
-    })
+this.mainComponent = appendElementsToContainerFn({
+  elements: [
+    ...this.lngButtons,
+    this.headline,
+    ...this.charButtons,
+    this.startButton,
+    this.talkAgainButton,
+    this.privacyPolicyComponent,
+  ],
+  container: this.mainContainer,
+})
 ```
 
 As we can see in the above example, we pass to the helper function an object with elements (this.lngButtons, this.headline, this.charButtons, this.startButton, this.talkAgainButton, this.privacyPolicyComponent) to be attached to container and a container (this.mainContainer) to which we want to attach these elements.
@@ -317,7 +317,7 @@ Next helper that I would like to briefly describe is createElementFn, which is u
 
 Its implementation is shown below:
 
-```
+```js
 //scripts/helpers/createElementFn.js file:
 
 import { common } from '/data/names.js'
@@ -387,29 +387,29 @@ In the body of a function we have a logic in which:
 
 To understand how to use this helper in practice, below is an example of its use in createElements method of SelectCharUI object:
 
-```
+```js
 //scripts/objects/SelectCharUI.js file:
 
-    this.talkAgainButton = createElementFn({
-      element: elements.button,
-      textContent: commands.talkAgain[lng],
-      classes: [
-        classNames.selectCharUI.startBtn,
-        classNames.selectCharUI.startBtnReady,
-      ],
-      styles: [
-        {
-          name: styleProps.names.display,
-          value: styleProps.values.none,
-        },
-      ],
-      listeners: [
-        {
-          event: events.click,
-          cb: () => this.handleTalkAgainButtonClick(),
-        },
-      ],
-    })
+this.talkAgainButton = createElementFn({
+  element: elements.button,
+  textContent: commands.talkAgain[lng],
+  classes: [
+    classNames.selectCharUI.startBtn,
+    classNames.selectCharUI.startBtnReady,
+  ],
+  styles: [
+    {
+      name: styleProps.names.display,
+      value: styleProps.values.none,
+    },
+  ],
+  listeners: [
+    {
+      event: events.click,
+      cb: () => this.handleTalkAgainButtonClick(),
+    },
+  ],
+})
 ```
 
 As we can see in the above example, we pass to this helper an object with:
@@ -430,7 +430,7 @@ The next helper in the sequence is called removeElAmongElsFn for remove the sele
 
 Its implementation is shown below:
 
-```
+```js
 //scripts/helpers/removeElAmongElsFn.js file:
 
 import { types } from '/data/names.js'
@@ -473,13 +473,13 @@ In the body of a function we have a logic in which:
 
 To understand how to use this helper in practice, below is an example of its use in createElements method of MessengerScreen object:
 
-```
+```js
 //scripts/objects/MessengerScreen.js file:
 
-      removeElAmongElsFn({
-        elementToRemove: elements.img,
-        removeFromElements: `[${common.messagesPart}="${this.charMessagesPart}"]`,
-      })
+removeElAmongElsFn({
+  elementToRemove: elements.img,
+  removeFromElements: `[${common.messagesPart}="${this.charMessagesPart}"]`,
+})
 ```
 
 As we can see in the above example, we pass to this helper an object with:
@@ -495,7 +495,7 @@ The next helper in the order is setClassesFn which is responsible for setting di
 
 Its implementation is shown below:
 
-```
+```js
 //scripts/helpers/setClassesFn.js file:
 
 import { types, toggleValue } from '/data/names.js'
@@ -595,18 +595,18 @@ In the body of a function we have a logic in which:
 
 To understand how to use this helper in practice, below is an example of its use in changeColor method of SelectCharUI object:
 
-```
+```js
 //scripts/objects/SelectCharUI.js file:
 
-    setClassesFn({
-      toggle,
-      objs: [
-        {
-          elements: [this.startButton],
-          classes: [classNames.selectCharUI.startBtnReady],
-        },
-      ],
-    })
+setClassesFn({
+  toggle,
+  objs: [
+    {
+      elements: [this.startButton],
+      classes: [classNames.selectCharUI.startBtnReady],
+    },
+  ],
+})
 ```
 
 As we can see in the above example, to the helper an object is passed with:
@@ -626,7 +626,7 @@ The penultimate helper in the sequence is called setPropsFn, whose logic is very
 
 Its implementation is shown below:
 
-```
+```js
 //scripts/helpers/setPropsFn.js file:
 
 import { types, toggleValue } from '/data/names.js'
@@ -713,22 +713,22 @@ Due to the very similarity of logic to the previous helper, I will not focus on 
 
 To understand how to use this helper in practice, below is an example of its use in move method of Messenger object:
 
-```
+```js
 //scripts/objects/Messenger.js file:
 
-    setPropsFn({
-      objs: [
+setPropsFn({
+  objs: [
+    {
+      elements: [this.mainContainer],
+      styleProps: [
         {
-          elements: [this.mainContainer],
-          styleProps: [
-            {
-              name: common.animation,
-              value: type,
-            },
-          ],
+          name: common.animation,
+          value: type,
         },
       ],
-    })
+    },
+  ],
+})
 ```
 
 As we can see above, the use of this helper is also very similar to the setClassesFn helper (for example, in this case, we are not passing the toggle parameter). The difference is that instead of classes, we list here various properties (in this case style properties) specifying the property name and its value to be set on the elements.
@@ -743,7 +743,7 @@ The last helper in the heleprs folder is setUpperLetterFn helper which is respon
 
 Its implementation is shown below:
 
-```
+```js
 //scripts/helpers/setUpperLetterFn.js file:
 
 export default ({ text }) => {
@@ -773,22 +773,22 @@ Main styles are defined in the variables.css file (in global folder), which are 
 
 Due to the optimization of loading css files, their loading was placed in the head section in html files:
 
-```
+```html
 <!-- index.html file: -->
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Talking to Gisapia and the Others</title>
-    <link rel="stylesheet" href="styles/global/helpers.css">
-    <link rel="stylesheet" href="styles/global/keyframes.css">
-    <link rel="stylesheet" href="styles/global/normalize.css">
-    <link rel="stylesheet" href="styles/global/variables.css">
-    <link rel="stylesheet" href="styles/main/background.css">
-    <link rel="stylesheet" href="styles/main/characters.css">
-    <link rel="stylesheet" href="styles/main/messenger.css">
-    <link rel="stylesheet" href="styles/main/privatePolicy.css">
-    <link rel="stylesheet" href="styles/main/selectCharUI.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Talking to Gisapia and the Others</title>
+  <link rel="stylesheet" href="styles/global/helpers.css" />
+  <link rel="stylesheet" href="styles/global/keyframes.css" />
+  <link rel="stylesheet" href="styles/global/normalize.css" />
+  <link rel="stylesheet" href="styles/global/variables.css" />
+  <link rel="stylesheet" href="styles/main/background.css" />
+  <link rel="stylesheet" href="styles/main/characters.css" />
+  <link rel="stylesheet" href="styles/main/messenger.css" />
+  <link rel="stylesheet" href="styles/main/privatePolicy.css" />
+  <link rel="stylesheet" href="styles/main/selectCharUI.css" />
 </head>
 ```
 
@@ -808,7 +808,7 @@ Each file (except scripts/index.js) corresponds to a specific class (some have b
 
 In the case of the structure of the methods of given classes is very similar, which facilitates its development and maintenance. Below are code examples of two objects:
 
-```
+```js
 //objects/messenger/Messenger.js file:
 
 class Messenger {
@@ -849,7 +849,7 @@ export default Messenger
 
 <br/>
 
-```
+```js
 //objects/messenger/MessengerScreen.js file:
 
 class MessengerScreen {
@@ -914,13 +914,17 @@ It is also worth mentioning that individual components that we see on the page (
 
 Below is an example of the main html file with main container element:
 
-```
+```html
 <!-- index.html file: -->
 
 <div id="app" class="wrapper">
-    <div class="characters">
-            <object data="/images/characters/gisapia/character.svg" type="image/svg+xml" id="gisapia" ></object>
-    </div>
+  <div class="characters">
+    <object
+      data="/images/characters/gisapia/character.svg"
+      type="image/svg+xml"
+      id="gisapia"
+    ></object>
+  </div>
 </div>
 ```
 
@@ -932,94 +936,94 @@ As we can see above, only the element with characters class containing object el
 
 Most of the app logic has been designed to make it easy to understand how it works. To illustrate the app structure, below is an example of the function handleCharTalkingMain, which is the main function in index.js that contains the character's talking logic:
 
-```
+```js
 //scripts/index.js file:
 
-  const handleCharTalkingMain = async () => {
-    const chosenChar = memory.getChar()
-    const talkingStep = memory.getTalkingStep()
-    const currentScriptTalkCategory = chosenChar.getCurrentScriptTalkCategory({
-      conversationStep: talkingStep,
+const handleCharTalkingMain = async () => {
+  const chosenChar = memory.getChar()
+  const talkingStep = memory.getTalkingStep()
+  const currentScriptTalkCategory = chosenChar.getCurrentScriptTalkCategory({
+    conversationStep: talkingStep,
+  })
+  const scriptTalkCategories = chosenChar.getScriptTalkCategories()
+  let userMessage = memory.getUserMessage()
+
+  if (memory.getIsCharTalkingFinish())
+    return await handleCharTalkingFinish({ userMessage, chosenChar })
+
+  let scriptTalkMessages
+
+  if (userMessage) {
+    const foundWordInCharMemory = chosenChar.checkUserMessageInMemory({
+      scriptCategory: currentScriptTalkCategory,
+      message: userMessage,
     })
-    const scriptTalkCategories = chosenChar.getScriptTalkCategories()
-    let userMessage = memory.getUserMessage()
-
-    if (memory.getIsCharTalkingFinish())
-      return await handleCharTalkingFinish({ userMessage, chosenChar })
-
-    let scriptTalkMessages
-
-    if (userMessage) {
-      const foundWordInCharMemory = chosenChar.checkUserMessageInMemory({
-        scriptCategory: currentScriptTalkCategory,
-        message: userMessage,
-      })
-      if (foundWordInCharMemory) {
-        handleCharTalkingWhenCharFoundWord({
-          chosenChar,
-          currentScriptTalkCategory,
-          memory,
-          foundWordInCharMemory,
-        })
-        scriptTalkMessages = chosenChar.getScriptTalkMessages({
-          from: common.answers,
-          type: answerTypes.isInMemory,
-          category: currentScriptTalkCategory,
-        })
-      } else if (memory.getIsCharListening()) {
-        handleCharTalkingDuringCharListening({
-          chosenChar,
-          currentScriptTalkCategory,
-          memory,
-          userMessage,
-        })
-        scriptTalkMessages = chosenChar.getScriptTalkMessages({
-          from: common.answers,
-          type: answerTypes.isAddedToMemory,
-          category: currentScriptTalkCategory,
-        })
-      } else {
-        handleCharTalkingWhenCharNotFoundWord({
-          chosenChar,
-          currentScriptTalkCategory,
-          memory,
-        })
-        scriptTalkMessages = chosenChar.getScriptTalkMessages({
-          from: common.answers,
-          type: answerTypes.isNotInMemory,
-          category: currentScriptTalkCategory,
-        })
-      }
-    } else {
-      handleCharTalkingWithoutUserMessage({
+    if (foundWordInCharMemory) {
+      handleCharTalkingWhenCharFoundWord({
         chosenChar,
         currentScriptTalkCategory,
+        memory,
+        foundWordInCharMemory,
       })
       scriptTalkMessages = chosenChar.getScriptTalkMessages({
-        from: common.messages,
+        from: common.answers,
+        type: answerTypes.isInMemory,
+        category: currentScriptTalkCategory,
+      })
+    } else if (memory.getIsCharListening()) {
+      handleCharTalkingDuringCharListening({
+        chosenChar,
+        currentScriptTalkCategory,
+        memory,
+        userMessage,
+      })
+      scriptTalkMessages = chosenChar.getScriptTalkMessages({
+        from: common.answers,
+        type: answerTypes.isAddedToMemory,
+        category: currentScriptTalkCategory,
+      })
+    } else {
+      handleCharTalkingWhenCharNotFoundWord({
+        chosenChar,
+        currentScriptTalkCategory,
+        memory,
+      })
+      scriptTalkMessages = chosenChar.getScriptTalkMessages({
+        from: common.answers,
+        type: answerTypes.isNotInMemory,
         category: currentScriptTalkCategory,
       })
     }
-
-    await handleCharTalkingDuringCharTyping({
+  } else {
+    handleCharTalkingWithoutUserMessage({
       chosenChar,
-      scriptTalkMessages,
-      messengerScreen,
+      currentScriptTalkCategory,
     })
-
-    if (currentScriptTalkCategory === scriptTalkCategories.summary) {
-      memory.setIsCharTalkingFinish(true)
-    }
-
-    if (memory.getIsCallCharTalkingAgain()) {
-      memory.setIsCallCharTalkingAgain(false)
-      memory.increaseTalkingStep()
-      handleCharTalkingMain()
-    } else {
-      messengerInterface.toggleActivePanel(toggleValue.on)
-      messengerScreen.toggleShowBackIcon(toggleValue.on)
-    }
+    scriptTalkMessages = chosenChar.getScriptTalkMessages({
+      from: common.messages,
+      category: currentScriptTalkCategory,
+    })
   }
+
+  await handleCharTalkingDuringCharTyping({
+    chosenChar,
+    scriptTalkMessages,
+    messengerScreen,
+  })
+
+  if (currentScriptTalkCategory === scriptTalkCategories.summary) {
+    memory.setIsCharTalkingFinish(true)
+  }
+
+  if (memory.getIsCallCharTalkingAgain()) {
+    memory.setIsCallCharTalkingAgain(false)
+    memory.increaseTalkingStep()
+    handleCharTalkingMain()
+  } else {
+    messengerInterface.toggleActivePanel(toggleValue.on)
+    messengerScreen.toggleShowBackIcon(toggleValue.on)
+  }
+}
 ```
 
 As we can see above, it is quite a large function which, in addition to the sequence of appropriate methods of various objects, contains functions that divide the logic of the function in question into smaller parts (for better readability). In the section named specific, some of the logic presented will be explained in more detail.
@@ -1047,7 +1051,7 @@ Below is a visual example of this solution:
 
 In order to be able to get the phenomenon shown in the example above, the Background object with many methods was created:
 
-```
+```js
 //objects/Background.js file:
 
 class Background {
@@ -1132,7 +1136,7 @@ Below is a visual representation of this solution:
 
 The code-side solution looks like this:
 
-```
+```js
 //objects/GisapiaAnimation.js file:
 
 class GisapiaAnimation {
@@ -1231,7 +1235,7 @@ There are 3 characters in the app that we can chat with. Due to the very high si
 
 The following is an example of a partial implementation of a Character object:
 
-```
+```js
 //objects/characters/Character.js file:
 
 class Character {
@@ -1303,7 +1307,7 @@ The solutions used in the discussed object appear in each of the available chara
 
 Below is an example of inheritance by a Gisapia object:
 
-```
+```js
 //objects/characters/Gisapia.js file:
 
 class Gisapia extends Character {
@@ -1329,7 +1333,7 @@ Each character object in the app is created when creating an instance of the Cha
 
 The example below shows discussed object:
 
-```
+```js
 //objects/CharsFactory.js file:
 
 class CharsFactory {
@@ -1370,14 +1374,14 @@ Each of the objects passed into the Characters object instance will be discussed
 
 The use of getChar method of CharsFactory that returns the appropriate character object instance on the basis of character name is shown below in handleCharSelect function in main js file:
 
-```
+```js
 //scripts/index.js file:
 
 const handleCharSelect = (charName) => {
-    const chosenChar = charsFactory.getChar(charName)
-    memory.setSelectedChar(chosenChar)
-    selectCharUI.toggleReadyStartCharTalkingBtn(common.toggle.on)
-  }
+  const chosenChar = charsFactory.getChar(charName)
+  memory.setSelectedChar(chosenChar)
+  selectCharUI.toggleReadyStartCharTalkingBtn(common.toggle.on)
+}
 ```
 
 As we can see above, the returned value (instance of the character object) of the getChar method of charsFactory object is assigned to the chosenChar variable. Then, as we can see from the example, this instance can be passed on global memory by setSelectedChar method of memory object.
@@ -1397,7 +1401,7 @@ Thanks to this, we have one place that stores data (one instance of object) rela
 
 Below is an example of this solutionn in a fragment of the Memory object:
 
-```
+```js
 //objects/Memory.js file:
 
 class Memory {
@@ -1506,23 +1510,23 @@ Also in the example shown, we can see that various audio elements are created by
 
 Below is an example of using Memory object methods in a fragment of handleCharTalkingDuringCharListening function:
 
-```
+```js
 //scripts/index.js file:
 
-  const handleCharTalkingDuringCharListening = ({
-    chosenChar,
-    currentScriptTalkCategory,
-    memory,
-    userMessage,
-  }) => {
-    memory.setUserMessage('')
-    memory.setIsCallCharTalkingAgain(true)
-    memory.setIsCharListening(false)
-    memory.addDataToAboutUser({
-      scriptCategory: currentScriptTalkCategory,
-      word: userMessage,
-    })
-  }
+const handleCharTalkingDuringCharListening = ({
+  chosenChar,
+  currentScriptTalkCategory,
+  memory,
+  userMessage,
+}) => {
+  memory.setUserMessage('')
+  memory.setIsCallCharTalkingAgain(true)
+  memory.setIsCharListening(false)
+  memory.addDataToAboutUser({
+    scriptCategory: currentScriptTalkCategory,
+    word: userMessage,
+  })
+}
 ```
 
 As we can see in the above example in the handleCharTalkingDuringCharListening function:
@@ -1548,7 +1552,7 @@ The app logic subscribe for events such as the character selection, specific lan
 
 To illustrate exactly how this design pattern works, below is a fragment of scripts/index.js file, in which there is a function that is subscribed by one of the methods of the MessengerInterface object and the entire implementation responsible for the logic (methods of the MessengerInterface object) related to calling a given subscriber:
 
-```
+```js
 //scripts/index.js file:
 
   const handleUserTalking = (userMessage) => {
@@ -1651,7 +1655,7 @@ Each character (Gisapia, Hookin, Reduxon) in the app has its own talk script and
 
 Below is a fragment of the Gisapia talk script template (PL/ENG) with messages and answers to the user's:
 
-```
+```js
 //data/characters/gisapia/scriptTalk.js file:
 
 export default {
@@ -1772,7 +1776,7 @@ export default {
 
 Also below is a fragment of the email template (PL/ENG) which is finally sent by my backend application [Emails Handler](https://github.com/damian-lis/Emails-handler) to the user's email:
 
-```
+```js
 //data/characters/gisapia/email.js file:
 
 export default {
@@ -1817,7 +1821,7 @@ In the first example regarding to gisapia talk script template example, first of
 
 The discussed process of drawing messages is done by the setScriptTalkMessages method of Character object when user starting a conversation with a choosen character:
 
-```
+```js
 //objects/Character.js file:
 
   setScriptTalkMessages(scriptTalk) {
@@ -1851,7 +1855,7 @@ As we can see above, thanks to the use of arrays in script talk template, by the
 
 Below is an example of using above method in the setScriptTalk method of Character object, which is called by handleInitialSettings function (only a fragment of this function is presented below):
 
-```
+```js
   //scripts/index.js file:
 
   const handleInitialSettings = () => {
@@ -1884,7 +1888,7 @@ Another thing You could see in the talk script and email template is that some w
 
 Below is an example of a changeScriptTalkMessages method with accompanying methods of Character object which allows to dynamically change script talk template based on user data:
 
-```
+```js
 //objects/Character.js file:
 
 changeScriptTalkMessages({ category, from, type }) {
@@ -1967,7 +1971,7 @@ If the given words are not created then the entire method is returned. Otherwise
 
 When modifying the email template, the addUserDataToEmail method was created which works in a similar way to the changeScriptTalkMessages method. Below is an example of the mentioned methods:
 
-```
+```js
 //objects/Character.js file:
 
   addUserDataToEmail({ lng, recipient }) {
@@ -2032,45 +2036,45 @@ This solution is supported by function handleCharTalkingDuringCharTyping with va
 
 The implementation of this function is shown below:
 
-```
+```js
 //scripts/index.js file:
 
-  const handleCharTalkingDuringCharTyping = async ({
-    chosenChar,
-    scriptTalkMessages,
-    messengerScreen,
-  }) => {
-    for (let i = 0; i < scriptTalkMessages.length; i++) {
-      const charMessage = scriptTalkMessages[i]
-      let timeForTyping = chosenChar.countTimeForTyping({
-        messageLength: charMessage.length,
-        speed: 80,
-      })
-      const typingQuantity = chosenChar.countTypingQuantity({
-        messageLength: charMessage.length,
-      })
+const handleCharTalkingDuringCharTyping = async ({
+  chosenChar,
+  scriptTalkMessages,
+  messengerScreen,
+}) => {
+  for (let i = 0; i < scriptTalkMessages.length; i++) {
+    const charMessage = scriptTalkMessages[i]
+    let timeForTyping = chosenChar.countTimeForTyping({
+      messageLength: charMessage.length,
+      speed: 80,
+    })
+    const typingQuantity = chosenChar.countTypingQuantity({
+      messageLength: charMessage.length,
+    })
 
-      for (let i = 0; i < typingQuantity; i++) {
-        if (i >= 1) {
-          timeForTyping = chosenChar.changeTimeForTyping(timeForTyping)
-        }
-
-        await chosenChar.mustThink({ time: 1000 })
-        await messengerScreen.showTyping({
-          time: timeForTyping,
-          charName: chosenChar.name,
-        })
+    for (let i = 0; i < typingQuantity; i++) {
+      if (i >= 1) {
+        timeForTyping = chosenChar.changeTimeForTyping(timeForTyping)
       }
 
-      const chatBubble = messengerScreen.createChatBubbleComponent({
-        message: charMessage,
-        whoTalking: chosenChar,
+      await chosenChar.mustThink({ time: 1000 })
+      await messengerScreen.showTyping({
+        time: timeForTyping,
+        charName: chosenChar.name,
       })
-
-      messengerScreen.attachToMessengerScreen(chatBubble)
-      messengerScreen.scrollMessengerScreen()
     }
+
+    const chatBubble = messengerScreen.createChatBubbleComponent({
+      message: charMessage,
+      whoTalking: chosenChar,
+    })
+
+    messengerScreen.attachToMessengerScreen(chatBubble)
+    messengerScreen.scrollMessengerScreen()
   }
+}
 ```
 
 As we can see in the above example in this function, each creation of a specific message based on the talk script (by createChatBubbleComponent method of MessengerScreen object) is delayed by imitating the character's thinking (by mustThink method of Character object)and animating jumping dots (by showTyping method of MessengerScreen object).
@@ -2081,7 +2085,7 @@ The length of the animation (timeForTyping variable) and its quantity (typingQua
 
 Below is an example of a method that displays animated balls that imitate character writing:
 
-```
+```js
 //objects/MessengerScreen.js file:
 
   async showTyping({ time, charName }) {
@@ -2104,21 +2108,21 @@ At the end of the handleCharTalkingDuringCharTyping function after the balls ani
 
 In the case of creating a message by a user, some of the solutions are the same, except for delaying sending the message. Below is an example of a function that is called when the user sends a message (this example was discussed when discussing the observer design pattern):
 
-```
+```js
 //scripts/index.js file:
 
 const handleUserTalking = (userMessage) => {
-    const chatBubble = messengerScreen.createChatBubble(userMessage, {
-      name: 'user',
-    })
-    memory.setUserMessage(userMessage)
-    messengerScreen.attachToMessengerScreen(chatBubble)
-    messengerScreen.scrollMessengerScreenContainer()
-    messengerScreen.increaseCharMessagesPart()
-    messengerScreen.toggleShowBackBtn('off')
-    messengerInterface.toggleActivePanel('off')
-    handleCharTalking()
-  }
+  const chatBubble = messengerScreen.createChatBubble(userMessage, {
+    name: 'user',
+  })
+  memory.setUserMessage(userMessage)
+  messengerScreen.attachToMessengerScreen(chatBubble)
+  messengerScreen.scrollMessengerScreenContainer()
+  messengerScreen.increaseCharMessagesPart()
+  messengerScreen.toggleShowBackBtn('off')
+  messengerInterface.toggleActivePanel('off')
+  handleCharTalking()
+}
 ```
 
 As we can see in the example above, the handleUserTalking function uses similar solutions.
@@ -2149,7 +2153,7 @@ Below is an visual example how it works:
 
 The following is a example of collection of various data that the characters use when analyzing user responses:
 
-```
+```js
 //data/characters/gisapia/memory.js file:
 
 export default {
@@ -2162,7 +2166,7 @@ export default {
     'Małgorzata',
     'Małgosia',
     'Agnieszka',
-//more code...
+    //more code...
   ],
 
   origin: [
@@ -2171,7 +2175,7 @@ export default {
     'Kraków',
     'Krakowa',
     'Łódź',
-//more code...
+    //more code...
   ],
 
   hobby: [
@@ -2191,7 +2195,7 @@ export default {
     'DIY',
     'modeling',
     'modeling',
-//more code...
+    //more code...
   ],
 }
 ```
@@ -2206,63 +2210,64 @@ On the logic side of the app, it looks like we have several variants of answers 
 
 An example of this logic is below and it is part of the handleCharTalkingMain function:
 
-```
+```js
 //scripts/index.js file:
 
-const handleCharTalkingMain = async () => {s
-let scriptTalkMessages
+const handleCharTalkingMain = async () => {
+  s
+  let scriptTalkMessages
 
-    if (userMessage) {
-      const foundWordInCharMemory = chosenChar.checkUserMessageInMemory({
-        scriptCategory: currentScriptTalkCategory,
-        message: userMessage,
-      })
-      if (foundWordInCharMemory) {
-        handleCharTalkingWhenCharFoundWord({
-          chosenChar,
-          currentScriptTalkCategory,
-          memory,
-          foundWordInCharMemory,
-        })
-        scriptTalkMessages = chosenChar.getScriptTalkMessages({
-          from: common.answers,
-          type: answerTypes.isInMemory,
-          category: currentScriptTalkCategory,
-        })
-      } else if (memory.getIsCharListening()) {
-        handleCharTalkingDuringCharListening({
-          chosenChar,
-          currentScriptTalkCategory,
-          memory,
-          userMessage,
-        })
-        scriptTalkMessages = chosenChar.getScriptTalkMessages({
-          from: common.answers,
-          type: answerTypes.isAddedToMemory,
-          category: currentScriptTalkCategory,
-        })
-      } else {
-        handleCharTalkingWhenCharNotFoundWord({
-          chosenChar,
-          currentScriptTalkCategory,
-          memory,
-        })
-        scriptTalkMessages = chosenChar.getScriptTalkMessages({
-          from: common.answers,
-          type: answerTypes.isNotInMemory,
-          category: currentScriptTalkCategory,
-        })
-      }
-    } else {
-      handleCharTalkingWithoutUserMessage({
+  if (userMessage) {
+    const foundWordInCharMemory = chosenChar.checkUserMessageInMemory({
+      scriptCategory: currentScriptTalkCategory,
+      message: userMessage,
+    })
+    if (foundWordInCharMemory) {
+      handleCharTalkingWhenCharFoundWord({
         chosenChar,
         currentScriptTalkCategory,
+        memory,
+        foundWordInCharMemory,
       })
       scriptTalkMessages = chosenChar.getScriptTalkMessages({
-        from: common.messages,
+        from: common.answers,
+        type: answerTypes.isInMemory,
+        category: currentScriptTalkCategory,
+      })
+    } else if (memory.getIsCharListening()) {
+      handleCharTalkingDuringCharListening({
+        chosenChar,
+        currentScriptTalkCategory,
+        memory,
+        userMessage,
+      })
+      scriptTalkMessages = chosenChar.getScriptTalkMessages({
+        from: common.answers,
+        type: answerTypes.isAddedToMemory,
+        category: currentScriptTalkCategory,
+      })
+    } else {
+      handleCharTalkingWhenCharNotFoundWord({
+        chosenChar,
+        currentScriptTalkCategory,
+        memory,
+      })
+      scriptTalkMessages = chosenChar.getScriptTalkMessages({
+        from: common.answers,
+        type: answerTypes.isNotInMemory,
         category: currentScriptTalkCategory,
       })
     }
+  } else {
+    handleCharTalkingWithoutUserMessage({
+      chosenChar,
+      currentScriptTalkCategory,
+    })
+    scriptTalkMessages = chosenChar.getScriptTalkMessages({
+      from: common.messages,
+      category: currentScriptTalkCategory,
+    })
+  }
 }
 ```
 
@@ -2270,27 +2275,27 @@ let scriptTalkMessages
 
 In the example above, we can see several functions that support many variant of the conversation logic. An example of one of them is shown and described below:
 
-```
+```js
 //scripts/index.js file:
 
-  const handleCharTalkingWhenCharFoundWord = ({
-    chosenChar,
-    currentScriptTalkCategory,
-    memory,
-    foundWordInCharMemory,
-  }) => {
-    memory.setUserMessage('')
-    memory.setIsCallCharTalkingAgain(true)
-    memory.addDataToAboutUser({
-      scriptCategory: currentScriptTalkCategory,
-      word: foundWordInCharMemory,
-    })
-    chosenChar.changeScriptTalkMessages({
-      from: common.answers,
-      type: answerTypes.isInMemory,
-      category: currentScriptTalkCategory,
-    })
-  }
+const handleCharTalkingWhenCharFoundWord = ({
+  chosenChar,
+  currentScriptTalkCategory,
+  memory,
+  foundWordInCharMemory,
+}) => {
+  memory.setUserMessage('')
+  memory.setIsCallCharTalkingAgain(true)
+  memory.addDataToAboutUser({
+    scriptCategory: currentScriptTalkCategory,
+    word: foundWordInCharMemory,
+  })
+  chosenChar.changeScriptTalkMessages({
+    from: common.answers,
+    type: answerTypes.isInMemory,
+    category: currentScriptTalkCategory,
+  })
+}
 ```
 
 The handleCharTalkingWhenCharFoundWord function shown that is executed when the word in the character's memory matches the word found in the user message (checking the condition of foundWordInCharMemory variable in the handleCharTalkingMain function).
@@ -2318,61 +2323,61 @@ During the conversation, the characters collect data about the user. Depending o
 
 Below is an implementation of the handleCharTalkingFinish function which calls the handleCharTalkingDuringSendData async function (also below is an implementation) responsible for sending the email:
 
-```
+```js
 //scripts/index.js file:
 
-  const handleCharTalkingFinish = async ({ userMessage, chosenChar }) => {
-    let messageToSend
-    let delayToSend
+const handleCharTalkingFinish = async ({ userMessage, chosenChar }) => {
+  let messageToSend
+  let delayToSend
 
-    if (userMessage.includes('@')) {
-      messengerInterface.showSpinnerInsteadBtn()
-      messengerInterface.addDelayMessagesToInput({
-        delay: 5000,
-      })
-      const lng = memory.getLanguage()
-      chosenChar.addUserDataToEmail({
-        lng,
-        recipient: userMessage,
-      })
-      const charEmail = chosenChar.getEmail()
-
-      const { message, delay } = await handleCharTalkingDuringSendData({
-        data: charEmail,
-      })
-      messageToSend = message
-      delayToSend = delay
-      messengerInterface.clearInput({ withTimeouts: true })
-      messengerInterface.showSpinnerInsteadBtn({ invert: true })
-    } else {
-      messageToSend = messages.finish.withoutMail
-      delayToSend = 1000
-    }
-
-    handleFinishAnimation({ delay: delayToSend })
-    selectCharUI.changeUI({ message: messageToSend })
-  }
-
-  const handleCharTalkingDuringSendData = async ({ data }) => {
-    return await fetch(mailEndPoint, {
-      method: fetchProps.methods.POST,
-      headers: {
-        [fetchProps.headers.props.ContentType]:
-          fetchProps.headers.values.applicationJson,
-      },
-
-      body: JSON.stringify(data),
+  if (userMessage.includes('@')) {
+    messengerInterface.showSpinnerInsteadBtn()
+    messengerInterface.addDelayMessagesToInput({
+      delay: 5000,
     })
-      .then((response) => response.json())
-      .then((data) =>
-        data.success
-          ? { message: messages.finish.mailSent, delay: 0 }
-          : { message: messages.finish.problemWithServer, delay: 1000 }
-      )
-      .catch(() => {
-        return { message: messages.finish.noConnection, delay: 1000 }
-      })
+    const lng = memory.getLanguage()
+    chosenChar.addUserDataToEmail({
+      lng,
+      recipient: userMessage,
+    })
+    const charEmail = chosenChar.getEmail()
+
+    const { message, delay } = await handleCharTalkingDuringSendData({
+      data: charEmail,
+    })
+    messageToSend = message
+    delayToSend = delay
+    messengerInterface.clearInput({ withTimeouts: true })
+    messengerInterface.showSpinnerInsteadBtn({ invert: true })
+  } else {
+    messageToSend = messages.finish.withoutMail
+    delayToSend = 1000
   }
+
+  handleFinishAnimation({ delay: delayToSend })
+  selectCharUI.changeUI({ message: messageToSend })
+}
+
+const handleCharTalkingDuringSendData = async ({ data }) => {
+  return await fetch(mailEndPoint, {
+    method: fetchProps.methods.POST,
+    headers: {
+      [fetchProps.headers.props.ContentType]:
+        fetchProps.headers.values.applicationJson,
+    },
+
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((data) =>
+      data.success
+        ? { message: messages.finish.mailSent, delay: 0 }
+        : { message: messages.finish.problemWithServer, delay: 1000 }
+    )
+    .catch(() => {
+      return { message: messages.finish.noConnection, delay: 1000 }
+    })
+}
 ```
 
 Due to the fact that the handleCharTalkingDuringSendData async function responsible for sending the e-mail is related to the logic of the handleCharTalkingFinish function, below is a short description of it to understand the whole process.
@@ -2403,7 +2408,7 @@ At the very end of the handleCharTalkingFinish function when the appropriate dat
 
 Below are some examples of messages the user may receive at the end of the conversation (PL/ENG):
 
-```
+```js
 //data/names.js file:
 
 export const messages = {
@@ -2482,7 +2487,7 @@ In code, this is done by resetting many parameters so that the user can start a 
 
 Below is a example of method that is responsible for the possibility of character re-selection and example of the element through which this method is being called in MessengerScreen object:
 
-```
+```js
 //objects/MessengerScreen.js file:
 
     this.backIcon = createElementFn({
@@ -2532,7 +2537,7 @@ Below is a visual example of this solution:
 
 Below is a example of method that allows to start a conversation again and example of the element through which this method is being called in SelectCharUi object:
 
-```
+```js
 //objects/SelectCharUI.js file:
 
   this.talkAgainButton = createElementFn({
