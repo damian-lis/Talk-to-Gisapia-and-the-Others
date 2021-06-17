@@ -2,6 +2,8 @@
 
 The application allows You to write messages in two languages (PL/ENG) with 3 different characters who can collect information provided via the messenger by user, use them data during the conversation and send in an interesting form to the user e-mail.
 
+_To facilitate navigation within the description, each section title links to the corresponding section. However, through the arrow ⬆ in the title of a specific section, you can refer to the closest list of specific sections._
+
 <br/>
 
 ## Desktop version:
@@ -19,7 +21,7 @@ The application allows You to write messages in two languages (PL/ENG) with 3 di
 <br/>
 <br/>
 
-## Table of Contents
+<h2 id="table-of-contents">Table of contents</h2>
 
 1. [Technologies](#technologies)
 2. [Setup](#setup)
@@ -27,7 +29,7 @@ The application allows You to write messages in two languages (PL/ENG) with 3 di
 
 <br/>
 
-<h2 id="technologies">1. Technologies</h2>
+<h2 id="technologies">1. Technologies <a href="#table-of-contents">⬆</a></h2>
 
 The following technologies were used in the project:
 
@@ -38,19 +40,19 @@ The following technologies were used in the project:
 
 <br/>
 
-<h2 id="setup">2. Setup</h2>
+<h2 id="setup">2. Setup <a href="#table-of-contents">⬆</a></h2>
 
 You don't need any commands to run this project
 
 <br/>
 
-<h2 id="solutions">3. Solutions</h2>
+<h2 id="solutions">3. Solutions <a href="#table-of-contents">⬆</a></h2>
 
 Most of the project is built in oop javascript for a very in-depth understanding of the language. The list of the most interesting solutions is presented below:
 
 <br/>
 
-### 3.1. [General](#general)
+<h3 id="general-main">3.1.<a href="#general"> General</a></h3>
 
 &nbsp; 3.1.1. [String values in variables](#string-variables)
 
@@ -64,7 +66,7 @@ Most of the project is built in oop javascript for a very in-depth understanding
 
 <br/>
 
-### 3.2. [Specific](#specific)
+<h3 id="specific-main">3.2.<a href="#specific"> Specific</a></h3>
 
 &nbsp; 3.2.1. [Matrix background](#matrix-background)
 
@@ -92,13 +94,13 @@ Most of the project is built in oop javascript for a very in-depth understanding
 
 <br/>
 
-<h2 id="general">3.1. General</h2>
+<h2 id="general">3.1. General <a href="#general-main">⬆</a></h2>
 
 In this section, I would like to describe the general elements of the app that will allow a better understanding of the application architecture and logic that will be discussed in the sepcific section.
 
 <br/>
 
-<h3 id="string-variables">3.1.1. String values in variables</h3>
+<h3 id="string-variables">3.1.1. String values in variables <a href="#general-main">⬆</a></h3>
 
 In the project, almost all string values have been assigned to various variables to avoid unwanted errors by typos. Naming such values in the code is longer, but more secure and predictable.
 
@@ -194,7 +196,7 @@ export const styleProps = {
 
 <br/>
 
-<h3 id="helper-functions">3.1.2. Helper functions</h3>
+<h3 id="helper-functions">3.1.2. Helper functions <a href="#general-main">⬆</a></h3>
 
 All the so-called helper functions are in the helpers folder (scripts/helpers) which contains files with functions that are responsible for specific logic and are reusable throughout the project (they can also be used in other projects). They play the role of support functions that increase the readability of the code and the developer experience.
 
@@ -210,7 +212,7 @@ To better understand the logic of the app, which I will describe in the section 
 
 <br/>
 
-Helpers list:
+<p id="helpers-list">Helpers list:</p>
 
 &nbsp; 1. [appendElementsToContainerFn](#appendelementstocontainerfn)
 
@@ -226,7 +228,7 @@ Helpers list:
 
 <br/>
 
-<h3 id="appendelementstocontainerfn">1. appendElementsToContainerFn</h3>
+<h3 id="appendelementstocontainerfn">1. appendElementsToContainerFn <a href="#helpers-list">⬆</a></h3>
 
 The first helper in the order is appendElementsToContainerFn which is responsible for attaching elements to the container.
 
@@ -309,7 +311,7 @@ As we can see in the above example, we pass to the helper function an object wit
 
 <br/>
 
-<h3 id="createelementfn">2. createElementFn</h3>
+<h3 id="createelementfn">2. createElementFn <a href="#helpers-list">⬆</a></h3>
 
 Next helper that I would like to briefly describe is createElementFn, which is used most often within the logic of the app and is used to create any html element with various properties.
 
@@ -422,7 +424,7 @@ As we can see in the above example, we pass to this helper an object with:
 
 <br/>
 
-<h3 id="removeelamongelsfn">3. removeElAmongElsFn</h3>
+<h3 id="removeelamongelsfn">3. removeElAmongElsFn <a href="#helpers-list">⬆</a></h3>
 
 The next helper in the sequence is called removeElAmongElsFn for remove the selected element from among other specified elements.
 
@@ -489,7 +491,7 @@ As we can see in the above example, we pass to this helper an object with:
 
 <br/>
 
-<h3 id="setclassesfn">4. setClassesFn</h3>
+<h3 id="setclassesfn">4. setClassesFn <a href="#helpers-list">⬆</a></h3>
 
 The next helper in the order is setClassesFn which is responsible for setting different classes for different elements.
 
@@ -618,7 +620,7 @@ Before going further, I would like to add that the toggle parameter does not nee
 
 <br/>
 
-<h3 id="setpropsfn">5. setPropsFn</h3>
+<h3 id="setpropsfn">5. setPropsFn <a href="#helpers-list">⬆</a></h3>
 
 The penultimate helper in the sequence is called setPropsFn, whose logic is very similar to the previous setClassesFn helper and differs only in that instead of setting or removing classes on the passed elements, it sets various properties (also style properties).
 
@@ -735,7 +737,7 @@ As we can see above, the use of this helper is also very similar to the setClass
 
 <br/>
 
-<h3 id="setupperletterfn">6. setUpperLetterFn</h3>
+<h3 id="setupperletterfn">6. setUpperLetterFn <a href="#helpers-list">⬆</a></h3>
 
 The last helper in the heleprs folder is setUpperLetterFn helper which is responsible for changing the first letter of the passed text to uppercase.
 
@@ -755,7 +757,7 @@ As we can see above, this is a simple function that destructs an object into a t
 
 <br/>
 
-<h3 id="styles-structure">3.1.3. The structure of styles</h3>
+<h3 id="styles-structure">3.1.3. The structure of styles <a href="#general-main">⬆</a></h3>
 
 The styles (folder) have been grouped into two folders: main, in which there are styles for individual components on the page, and global, in which there are styles that are global for app.
 
@@ -794,7 +796,7 @@ Due to the optimization of loading css files, their loading was placed in the he
 
 <br/>
 
-<h3 id="objects-structure">3.1.4. The structure of js objects and their methods</h3>
+<h3 id="objects-structure">3.1.4. The structure of js objects and their methods <a href="#general-main">⬆</a></h3>
 
 Due to the fact that most of the code was written in an object-oriented way, the structure of js files looks like this:
 
@@ -932,7 +934,7 @@ As we can see above, only the element with characters class containing object el
 
 <br/>
 
-<h3 id="app-logic-structure">3.1.5. The structure of the app logic</h3>
+<h3 id="app-logic-structure">3.1.5. The structure of the app logic <a href="#general-main">⬆</a></h3>
 
 Most of the app logic has been designed to make it easy to understand how it works. To illustrate the app structure, below is an example of the function handleCharTalkingMain, which is the main function in index.js that contains the character's talking logic:
 
@@ -1031,13 +1033,13 @@ As we can see above, it is quite a large function which, in addition to the sequ
 <br/>
 <br/>
 
-<h2 id="specific">3.2. Specific</h2>
+<h2 id="specific">3.2. Specific <a href="#specific-main">⬆</a></h2>
 
 In this section, I would like to focus on describing the most important logic that occurs in the app.
 
 <br/>
 
-<h3 id="matrix-background">3.2.1. Matrix background</h3>
+<h3 id="matrix-background">3.2.1. Matrix background <a href="#specific-main">⬆</a></h3>
 
 In the project, to increase the user experience, a background was created that imitates the background of the matrix film in a slightly different color.
 
@@ -1122,7 +1124,7 @@ Due to the possible change of the screen width when using the apps, a method res
 
 <br/>
 
-<h3 id="gisapia-animation">3.2.2. GSAP for Gisapia animation</h3>
+<h3 id="gisapia-animation">3.2.2. GSAP for Gisapia animation <a href="#specific-main">⬆</a></h3>
 
 The app uses GSAP animation to animate Gisapia svg image (one of the characters to talk to) to enhance user experiene.
 
@@ -1227,7 +1229,7 @@ We can see in the example above many methods (which use the TimelineMax object w
 
 <br/>
 
-<h3 id="traits-inheritance">3.2.3. Inheritance of traits by any character</h3>
+<h3 id="traits-inheritance">3.2.3. Inheritance of traits by any character <a href="#specific-main">⬆</a></h3>
 
 There are 3 characters in the app that we can chat with. Due to the very high similarity of character traits, a general object called Character was created, from which each character inherits the traits.
 
@@ -1325,7 +1327,7 @@ As we can see above, it is a simple object that only contains the properties ass
 
 <br/>
 
-<h3 id="factory-design-pattern">3.2.4. FACTORY DESIGN PATTERN when selecting a character</h3>
+<h3 id="factory-design-pattern">3.2.4. FACTORY DESIGN PATTERN when selecting a character <a href="#specific-main">⬆</a></h3>
 
 Each character object in the app is created when creating an instance of the CharsFactory object and passed outside using the getChar method when the character is selected by the user.
 
@@ -1392,7 +1394,7 @@ Summarizing, thanks to this design pattern, we can easily and in legible way obt
 
 <br/>
 
-<h3 id="singleton-design-pattern">3.2.5. SINGLETON DESIGN PATTERN while saving the settings</h3>
+<h3 id="singleton-design-pattern">3.2.5. SINGLETON DESIGN PATTERN while saving the settings <a href="#specific-main">⬆</a></h3>
 
 To handle data and settings throughout the entire project, the Singleton design pattern was used.
 Thanks to this, we have one place that stores data (one instance of object) related to the use of the app.
@@ -1542,7 +1544,7 @@ Summarizing, the role of the memory object (singleton) is to save and store vari
 
 <br/>
 
-<h3 id="observer-design-pattern">3.2.6. OBSERVER DESIGN PATTERN during various events</h3>
+<h3 id="observer-design-pattern">3.2.6. OBSERVER DESIGN PATTERN during various events <a href="#specific-main">⬆</a></h3>
 
 Due to the possibility of choosing several options, the design pattern called Observer was introduced in the project.
 
@@ -1647,7 +1649,7 @@ Thanks to this solution, the sent user message goes to the handleUserTalking fun
 
 </br>
 
-<h3 id="character-scripts">3.2.7. Character talk script and email templates</h3>
+<h3 id="character-scripts">3.2.7. Character talk script and email templates <a href="#specific-main">⬆</a></h3>
 
 Each character (Gisapia, Hookin, Reduxon) in the app has its own talk script and email template in two languages (PL/ENG).
 
@@ -2018,7 +2020,7 @@ Below are two visual examples of the changed email template messages (Gisapia (P
 
 <br/>
 
-<h3 id="writing-message">3.2.8. The way of writing a message</h3>
+<h3 id="writing-message">3.2.8. The way of writing a message <a href="#specific-main">⬆</a></h3>
 
 In the app introduced a feature that allows each character to imitate writing in the form of an animation of jumping dots which delays the display of the character's message.
 
@@ -2129,7 +2131,7 @@ As we can see in the example above, the handleUserTalking function uses similar 
 
 <br/>
 
-<h3 id="character-memory">3.2.9. Adding words to character memory</h3>
+<h3 id="character-memory">3.2.9. Adding words to character memory <a href="#specific-main">⬆</a></h3>
 
 After characters monologue, each of them asks a question that the user has to answer in some way.
 
@@ -2315,7 +2317,7 @@ At the moment when a given variant of the logic of the handleCharTalkingMain fun
 
 <br/>
 
-<h3 id="sending-email">3.2.10. Sending user data to user by e-mail of selected character</h3>
+<h3 id="sending-email">3.2.10. Sending user data to user by e-mail of selected character <a href="#specific-main">⬆</a></h3>
 
 During the conversation, the characters collect data about the user. Depending on whether the user wishes, such data can be sent to the given e-mail via my backend [Emails Handler](https://github.com/damian-lis/Emails-handler) app, which supports the Sendgrid service.
 
@@ -2471,7 +2473,7 @@ Below is a visual examples of this answers:
 
 <br/>
 
-<h3 id="change-characters">3.2.11. The ability to change characters during the conversation</h3>
+<h3 id="change-characters">3.2.11. The ability to change characters during the conversation <a href="#specific-main">⬆</a></h3>
 
 During the conversation, we have the option of changing a given character to another at every stage while the user has the option of writing a message.
 
@@ -2523,7 +2525,7 @@ As we can see above, the handleBackIconClick method calls on the event of a clic
 
 <br/>
 
-<h3 id="talk-again">3.2.12. Opportunity to talk again with characters</h3>
+<h3 id="talk-again">3.2.12. Opportunity to talk again with characters <a href="#specific-main">⬆</a></h3>
 
 After the whole conversation with a choosen character, we have the opportunity to talk to any character again.
 
