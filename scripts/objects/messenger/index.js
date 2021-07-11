@@ -1,5 +1,5 @@
-import Messenger from './Messenger.js'
-import MessengerInterface from './MessengerInterface.js'
-import MessengerScreen from './MessengerScreen.js'
+import Messenger from './Messenger.js';
+import MessengerInterface from './MessengerInterface.js';
+import MessengerScreen from './MessengerScreen.js';
 
-export { Messenger, MessengerInterface, MessengerScreen }
+export { Messenger, MessengerInterface, MessengerScreen };

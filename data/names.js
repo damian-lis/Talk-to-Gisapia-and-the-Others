@@ -15,29 +15,29 @@ export const common = {
   ball: 'ball',
   user: 'user',
   Enter: 'Enter',
-}
+};
 
 export const subscriberNames = {
   selectChar: 'selectChar',
   startTalking: 'startTalking',
-}
+};
 
 export const toggleValue = {
   on: 'on',
   off: 'off',
-}
+};
 
 export const size = {
   large: 'large',
   small: 'small',
-}
+};
 
 export const animations = {
   toBottomHide: 'toBottomHide:',
   fromBottomShow: 'fromBottomShow',
   fallFromTop: 'fallFromTop',
   backToTheTop: 'backToTheTop',
-}
+};
 
 export const elements = {
   canvas: 'canvas',
@@ -49,14 +49,14 @@ export const elements = {
   h1: 'h1',
   a: 'a',
   p: 'p',
-}
+};
 
 export const elementProps = {
   names: {
     textContent: 'textContent',
     disabled: 'disabled',
   },
-}
+};
 
 export const styleProps = {
   names: {
@@ -75,23 +75,23 @@ export const styleProps = {
     visible: 'visible',
     hidden: 'hidden',
   },
-}
+};
 
 export const events = {
   click: 'click',
   keypress: 'keypress',
   resize: 'resize',
   DOMContentLoaded: 'DOMContentLoaded',
-}
+};
 
 export const fonts = {
   arial: 'arial',
-}
+};
 
 export const types = {
   string: 'string',
   object: 'object',
-}
+};
 
 export const languages = {
   pl: {
@@ -102,7 +102,7 @@ export const languages = {
     large: 'ENG',
     small: 'eng',
   },
-}
+};
 
 export const fetchProps = {
   methods: {
@@ -116,44 +116,44 @@ export const fetchProps = {
       applicationJson: 'application/json',
     },
   },
-}
+};
 
 export const answerTypes = {
   isInMemory: 'isInMemory',
   isNotInMemory: 'isNotInMemory',
   isAddedToMemory: 'isAddedToMemory',
-}
+};
 
 export const privacyPolicy = {
   pl: 'Polityka prywatności',
   eng: 'Privacy policy',
-}
+};
 
 export const categories = {
   name: 'name',
   origin: 'origin',
   hobby: 'hobby',
   summary: 'summary',
-}
+};
 
 export const charNames = {
   Gisapia: 'Gisapia',
   Hookin: 'Hookin',
   Reduxon: 'Reduxon',
-}
+};
 
 export const reg = {
   modifiers: {
     gi: 'gi',
   },
-}
+};
 
-export const emailValidationReg = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+export const emailValidationReg = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-export const charNameList = ['Gisapia', 'Hookin', 'Reduxon']
+export const charNameList = ['Gisapia', 'Hookin', 'Reduxon'];
 
 export const chineseString =
-  '田由甲申甴电甶男甸甹町画甼甽甾甿畀畁畂畃畄畅畆畇畈畉畊畋界畍畎畏畐畑'
+  '田由甲申甴电甶男甸甹町画甼甽甾甿畀畁畂畃畄畅畆畇畈畉畊畋界畍畎畏畐畑';
 
 export const animationSettings = {
   selectCharUI: {
@@ -164,7 +164,7 @@ export const animationSettings = {
     fallFromTop: 'fallFromTop 1s forwards',
     backToTheTop: 'backToTheTop 2s forwards',
   },
-}
+};
 
 export const messages = {
   finish: {
@@ -219,7 +219,7 @@ export const messages = {
       eng: 'already, already, almost!! 😎',
     },
   },
-}
+};
 
 export const commands = {
   chooseCharacter: {
@@ -238,7 +238,7 @@ export const commands = {
     pl: 'Wyślij',
     eng: 'Send',
   },
-}
+};
 
 export const alerts = {
   mustWritingSomething: {
@@ -249,12 +249,12 @@ export const alerts = {
     pl: 'Podaj właściwy format maila',
     eng: 'Write the correct mail format',
   },
-}
+};
 
 export const colors = {
   animationBackground: 'rgba(0,0,0,0.05)',
   animationCharacters: 'rgb(132, 42, 86)',
-}
+};
 
 export const classNames = {
   messenger: {
@@ -296,7 +296,7 @@ export const classNames = {
     headline: 'privacyPolicy-headline',
     paragraph: 'privacyPolicy-paragraph',
   },
-}
+};
 
 export const classReferences = {
   messenger: {
@@ -338,7 +338,7 @@ export const classReferences = {
     headline: '.privacyPolicy-headline',
     paragraph: '.privacyPolicy-paragraph',
   },
-}
+};
 
 export const ideReferences = {
   gisapia: {
@@ -351,7 +351,7 @@ export const ideReferences = {
   global: {
     app: '#app',
   },
-}
+};
 
 export const src = {
   audio: {
@@ -383,6 +383,6 @@ export const src = {
     plIcon: `/images/icons/pl.svg`,
     engIcon: `/images/icons/eng.svg`,
   },
-}
+};
 
-export const mailEndPoint = 'https://dirt-ten-risk.glitch.me/api/mail/gisapia'
+export const mailEndPoint = 'https://dirt-ten-risk.glitch.me/api/mail/gisapia';

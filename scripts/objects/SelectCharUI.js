@@ -3,7 +3,7 @@ import {
   appendElementsToContainerFn,
   setPropsFn,
   setClassesFn,
-} from '/scripts/helpers/index.js'
+} from '/scripts/helpers/index.js';
 import {
   classNames,
   commands,
@@ -18,37 +18,37 @@ import {
   size,
   toggleValue,
   subscriberNames,
-} from '/data/names.js'
+} from '/data/names.js';
 
 class SelectCharUI {
   constructor({ container, charNames, objects }) {
-    this.charNames = charNames
-    this.memory = objects.memory
-    this.subscribers = {}
+    this.charNames = charNames;
+    this.memory = objects.memory;
+    this.subscribers = {};
 
-    this.createElements()
-    this.createComponents()
-    this.memoryLngSubscribe()
+    this.createElements();
+    this.createComponents();
+    this.memoryLngSubscribe();
 
     appendElementsToContainerFn({
       elements: [this.mainComponent],
       container,
-    })
+    });
   }
 
   createElements() {
-    const lng = this.memory.getLanguage()
+    const lng = this.memory.getLanguage();
 
     this.mainContainer = createElementFn({
       element: elements.div,
       classes: [classNames.selectCharUI.main],
-    })
+    });
 
     this.headline = createElementFn({
       element: elements.h1,
       textContent: commands.chooseCharacter[lng],
       classes: [classNames.selectCharUI.headline],
-    })
+    });
 
     this.charButtons = Object.entries(this.charNames).map((charName) =>
       createElementFn({
@@ -63,7 +63,7 @@ class SelectCharUI {
           },
         ],
       })
-    )
+    );
 
     this.startButton = createElementFn({
       element: elements.button,
@@ -76,7 +76,7 @@ class SelectCharUI {
           cb: () => this.handleStartButtonClick(),
         },
       ],
-    })
+    });
 
     this.talkAgainButton = createElementFn({
       element: elements.button,
@@ -97,7 +97,7 @@ class SelectCharUI {
           cb: () => this.handleTalkAgainButtonClick(),
         },
       ],
-    })
+    });
 
     this.lngButtons = Object.entries(languages).map((language) =>
       createElementFn({
@@ -123,26 +123,26 @@ class SelectCharUI {
           },
         ],
       })
-    )
+    );
 
     this.privacyPolicyLinkContainer = createElementFn({
       element: elements.div,
       classes: [classNames.privacyPolicy.linkContainer],
-    })
+    });
 
     this.privacyPolicyLink = createElementFn({
       element: elements.a,
       textContent: privacyPolicy[lng],
       href: src.privacyPolicy.site,
       classes: [classNames.privacyPolicy.link],
-    })
+    });
   }
 
   createComponents() {
     this.privacyPolicyComponent = appendElementsToContainerFn({
       elements: [this.privacyPolicyLink],
       container: this.privacyPolicyLinkContainer,
-    })
+    });
 
     this.mainComponent = appendElementsToContainerFn({
       elements: [
@@ -154,7 +154,7 @@ class SelectCharUI {
         this.privacyPolicyComponent,
       ],
       container: this.mainContainer,
-    })
+    });
   }
 
   handleCharButtonsClick({ target, charName }) {
@@ -166,39 +166,39 @@ class SelectCharUI {
           classes: [classNames.selectCharUI.selectBtnActive],
         },
       ],
-    })
+    });
 
     this.callSubscribers({
       subscriberName: subscriberNames.selectChar,
       charName: charName[1],
-    })
+    });
 
-    this.memory.playClickAudio()
+    this.memory.playClickAudio();
   }
 
   handleStartButtonClick() {
-    this.memory.playFallDownAudio()
-    this.memory.playBackgroundAudio()
-    this.memory.playClickAudio()
-    this.callSubscribers({ subscriberName: subscriberNames.startTalking })
+    this.memory.playFallDownAudio();
+    this.memory.playBackgroundAudio();
+    this.memory.playClickAudio();
+    this.callSubscribers({ subscriberName: subscriberNames.startTalking });
   }
 
   handleTalkAgainButtonClick() {
-    this.memory.restart()
-    this.memory.playFinishAudio({ pause: true, reload: true })
-    this.memory.playBackgroundAudio({ reload: true })
-    this.memory.playClickAudio()
-    this.messagesComponent.remove()
+    this.memory.restart();
+    this.memory.playFinishAudio({ pause: true, reload: true });
+    this.memory.playBackgroundAudio({ reload: true });
+    this.memory.playClickAudio();
+    this.messagesComponent.remove();
 
-    this.changeUI()
-    this.removeCharButtonsActive()
-    this.toggleReadyStartCharTalkingBtn(toggleValue.off)
+    this.changeUI();
+    this.removeCharButtonsActive();
+    this.toggleReadyStartCharTalkingBtn(toggleValue.off);
   }
 
   handleLngButtonsClick({ lng, target }) {
-    this.memory.setLanguage(lng)
-    this.memory.callLngSubscribers()
-    this.memory.playClickAudio()
+    this.memory.setLanguage(lng);
+    this.memory.callLngSubscribers();
+    this.memory.playClickAudio();
 
     setClassesFn({
       objs: [
@@ -208,27 +208,27 @@ class SelectCharUI {
           classes: [classNames.selectCharUI.lngBtnActive],
         },
       ],
-    })
+    });
   }
 
   createMessageComponent({ message: msg }) {
-    const lng = this.memory.getLanguage()
-    const msgsInCorrectLng = msg[lng]
+    const lng = this.memory.getLanguage();
+    const msgsInCorrectLng = msg[lng];
     const msgContainer = createElementFn({
       element: elements.div,
       classes: [classNames.selectCharUI.messageContainer],
-    })
+    });
 
     msgsInCorrectLng.map((message) => {
       const msg = createElementFn({
         element: elements.p,
         innerHTML: message,
         classes: [classNames.selectCharUI.message],
-      })
-      msgContainer.appendChild(msg)
-    })
+      });
+      msgContainer.appendChild(msg);
+    });
 
-    return msgContainer
+    return msgContainer;
   }
 
   memoryLngSubscribe() {
@@ -273,7 +273,7 @@ class SelectCharUI {
           },
         ],
       })
-    )
+    );
   }
 
   toggleReadyStartCharTalkingBtn(toggle) {
@@ -285,13 +285,13 @@ class SelectCharUI {
           classes: [classNames.selectCharUI.startBtnReady],
         },
       ],
-    })
+    });
   }
 
   changeUI({ message } = '') {
     if (message) {
-      this.messagesComponent = this.createMessageComponent({ message })
-      this.mainContainer.prepend(this.messagesComponent)
+      this.messagesComponent = this.createMessageComponent({ message });
+      this.mainContainer.prepend(this.messagesComponent);
     }
 
     setPropsFn({
@@ -324,7 +324,7 @@ class SelectCharUI {
           ],
         },
       ],
-    })
+    });
   }
 
   move({ type }) {
@@ -340,7 +340,7 @@ class SelectCharUI {
           ],
         },
       ],
-    })
+    });
   }
 
   removeCharButtonsActive() {
@@ -351,23 +351,23 @@ class SelectCharUI {
           classes: [classNames.selectCharUI.selectBtnActive],
         },
       ],
-    })
+    });
   }
 
   getCharButtons() {
-    return this.charButtons
+    return this.charButtons;
   }
 
   subscribe({ subscriber, subscriberName }) {
-    console.log(subscriberName)
-    this.subscribers[subscriberName] = subscriber
+    console.log(subscriberName);
+    this.subscribers[subscriberName] = subscriber;
   }
 
   callSubscribers({ subscriberName, charName = null }) {
     charName
       ? this.subscribers[subscriberName](charName)
-      : this.subscribers[subscriberName]()
+      : this.subscribers[subscriberName]();
   }
 }
 
-export default SelectCharUI
+export default SelectCharUI;

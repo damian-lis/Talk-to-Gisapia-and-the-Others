@@ -3,37 +3,42 @@ import {
   appendElementsToContainerFn,
   setClassesFn,
   setPropsFn,
-} from '/scripts/helpers/index.js'
-import { common, elements, classNames, animationSettings } from '/data/names.js'
+} from '/scripts/helpers/index.js';
+import {
+  common,
+  elements,
+  classNames,
+  animationSettings,
+} from '/data/names.js';
 
 class Messenger {
   constructor({ container }) {
-    this.createElements()
-    this.createComponents()
+    this.createElements();
+    this.createComponents();
 
     appendElementsToContainerFn({
       elements: [this.mainComponent],
       container,
-    })
+    });
   }
 
   createElements() {
     this.mainContainer = createElementFn({
       element: elements.div,
       classes: [classNames.messenger.main],
-    })
+    });
 
     this.mainContainerInner = createElementFn({
       element: elements.div,
       classes: [classNames.messenger.inner],
-    })
+    });
   }
 
   createComponents() {
     this.mainComponent = appendElementsToContainerFn({
       elements: [this.mainContainerInner],
       container: this.mainContainer,
-    })
+    });
   }
 
   move({ type }) {
@@ -49,7 +54,7 @@ class Messenger {
           ],
         },
       ],
-    })
+    });
   }
 
   changeColor({ char }) {
@@ -61,12 +66,12 @@ class Messenger {
           classes: [`${char.name.toLowerCase()}-${common.main}`],
         },
       ],
-    })
+    });
   }
 
   getMainContainerInner() {
-    return this.mainContainerInner
+    return this.mainContainerInner;
   }
 }
 
-export default Messenger
+export default Messenger;

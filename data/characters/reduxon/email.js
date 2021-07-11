@@ -31,4 +31,4 @@ export default {
             <p>I hope You too 😋!</p>
             `,
   },
-}
+};

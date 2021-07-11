@@ -3,7 +3,7 @@ import {
   appendElementsToContainerFn,
   setPropsFn,
   setClassesFn,
-} from '/scripts/helpers/index.js'
+} from '/scripts/helpers/index.js';
 import {
   classNames,
   commands,
@@ -15,32 +15,32 @@ import {
   elementProps,
   elements,
   emailValidationReg,
-} from '/data/names.js'
+} from '/data/names.js';
 
 class MessengerInterface {
   constructor({ container, objects }) {
-    this.memory = objects.memory
-    this.inputValue = ''
-    this.subscribers = []
-    this.delayMessagesTimeouts = []
+    this.memory = objects.memory;
+    this.inputValue = '';
+    this.subscribers = [];
+    this.delayMessagesTimeouts = [];
 
-    this.createElements()
-    this.createComponents()
-    this.memoryLngSubscribe()
+    this.createElements();
+    this.createComponents();
+    this.memoryLngSubscribe();
 
     appendElementsToContainerFn({
       elements: [this.mainComponent],
       container: container.getMainContainerInner(),
-    })
+    });
   }
 
   createElements() {
-    const lng = this.memory.getLanguage()
+    const lng = this.memory.getLanguage();
 
     this.mainContainer = createElementFn({
       element: elements.div,
       classes: [classNames.messenger.interface],
-    })
+    });
 
     this.input = createElementFn({
       element: elements.input,
@@ -56,7 +56,7 @@ class MessengerInterface {
           cb: (e) => this.handleInputKeypress(e),
         },
       ],
-    })
+    });
 
     this.button = createElementFn({
       element: elements.button,
@@ -75,43 +75,43 @@ class MessengerInterface {
           cb: () => this.handleButtonClick(),
         },
       ],
-    })
+    });
 
     this.spinnerContainer = createElementFn({
       element: elements.div,
       classes: [classNames.messenger.spinnerContainer],
-    })
+    });
 
     this.spinner = createElementFn({
       element: elements.div,
       classes: [classNames.messenger.spinner],
-    })
+    });
   }
 
   createComponents() {
     this.spinnerComponent = appendElementsToContainerFn({
       elements: [this.spinner],
       container: this.spinnerContainer,
-    })
+    });
 
     this.mainComponent = appendElementsToContainerFn({
       elements: [this.input, this.button, this.spinnerComponent],
       container: this.mainContainer,
-    })
+    });
   }
 
   handleInputTyping(e) {
-    this.inputValue = e.target.value
+    this.inputValue = e.target.value;
   }
 
   handleInputKeypress(e) {
     e.key === common.Enter &&
       this.isCorrectInputValue() &&
-      this.callSubscribers()
+      this.callSubscribers();
   }
 
   handleButtonClick() {
-    this.isCorrectInputValue() && this.callSubscribers()
+    this.isCorrectInputValue() && this.callSubscribers();
   }
 
   memoryLngSubscribe() {
@@ -129,26 +129,26 @@ class MessengerInterface {
           },
         ],
       })
-    )
+    );
   }
 
   isCorrectInputValue() {
-    const lng = this.memory.getLanguage()
-    if (this.inputValue === '') return alert(alerts.mustWritingSomething[lng])
+    const lng = this.memory.getLanguage();
+    if (this.inputValue === '') return alert(alerts.mustWritingSomething[lng]);
 
     if (
       this.inputValue.includes('@') &&
       !this.emailValidation({ email: this.inputValue })
     )
-      return alert(alerts.correctMailFormat[lng])
+      return alert(alerts.correctMailFormat[lng]);
 
-    return true
+    return true;
   }
 
   clearInput({ withTimeouts } = false) {
-    this.input.value = ''
-    this.inputValue = ''
-    withTimeouts && this.clearInputTimeouts()
+    this.input.value = '';
+    this.inputValue = '';
+    withTimeouts && this.clearInputTimeouts();
   }
 
   // Tutaj
@@ -156,20 +156,20 @@ class MessengerInterface {
   clearInputTimeouts() {
     this.delayMessagesTimeouts.map((delayMessageTimeout) =>
       clearTimeout(delayMessageTimeout)
-    )
+    );
   }
 
   addDelayMessagesToInput({ delay }) {
-    const lng = this.memory.getLanguage()
+    const lng = this.memory.getLanguage();
 
     Object.entries(messages.delay).map((delayMessage, index) => {
       const delayMessageTimeout = setTimeout(
         () => (this.input.value = delayMessage[1][lng]),
         index === 0 ? 1000 : delay * index
-      )
+      );
 
-      this.delayMessagesTimeouts.push(delayMessageTimeout)
-    })
+      this.delayMessagesTimeouts.push(delayMessageTimeout);
+    });
   }
 
   toggleActivePanel(toggle) {
@@ -200,9 +200,9 @@ class MessengerInterface {
           ],
         },
       ],
-    })
+    });
 
-    this.clearInput()
+    this.clearInput();
   }
 
   showSpinnerInsteadBtn({ invert } = false) {
@@ -229,19 +229,19 @@ class MessengerInterface {
           ],
         },
       ],
-    })
+    });
   }
 
   emailValidation({ email }) {
-    return emailValidationReg.test(email)
+    return emailValidationReg.test(email);
   }
 
   subscribe({ subscriber }) {
-    this.subscribers.push(subscriber)
+    this.subscribers.push(subscriber);
   }
 
   callSubscribers() {
-    this.subscribers.map((subscriber) => subscriber(this.inputValue))
+    this.subscribers.map((subscriber) => subscriber(this.inputValue));
   }
 
   changeColor({ char }) {
@@ -263,8 +263,8 @@ class MessengerInterface {
           classes: [`${char.name.toLowerCase()}-${common.second}`],
         },
       ],
-    })
+    });
   }
 }
 
-export default MessengerInterface
+export default MessengerInterface;

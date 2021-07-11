@@ -122,4 +122,4 @@ export default {
     'play games',
     'play on the computer',
   ],
-}
+};
